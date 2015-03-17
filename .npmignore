@@ -1,0 +1,11 @@
+## just in .npmignore
+.jshint*
+.jsbeautifyrc
+.travis.yml
+CHANGELOG.md
+CONTRIBUTING.md
+docs/
+grunt/
+Gruntfile.js
+scripts/
+test/

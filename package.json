@@ -1,0 +1,25 @@
+{
+  "name": "effektif-api",
+  "version": "1.0.0",
+  "description": "Unofficial node effektif api wrapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "lab -v"
+  },
+  "keywords": [
+    "effektif",
+    "api"
+  ],
+  "author": "Pål Edman <pal.edman@outlook.com>",
+  "license": "BSD",
+  "dependencies": {
+    "joi": "^6.0.4",
+    "lodash": "^3.5.0",
+    "request": "^2.53.0"
+  },
+  "devDependencies": {
+    "code": "^1.3.0",
+    "lab": "^5.4.0",
+    "nock": "^1.1.0"
+  }
+}
