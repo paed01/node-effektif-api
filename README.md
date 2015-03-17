@@ -13,23 +13,23 @@ This module autogenerates modules from the [json-endpoint][3] of the effektif ap
 
 Since the api is autognerated from the effiktif-api-doc the names have to be generated as well. The function names are generated from the endpoint path. E.g:
 
-`POST /{organizationKey}/tasks` is renamed to `createTask`.
+`POST /{organizationKey}/tasks`, hence it is named `createTask`.
 
 The plural ending is removed if it is not followed by a path parameter, e.g:
 
-`DELETE /{organizationKey}/processes/{processId}` is renamed to `deleteProcess`.
+`DELETE /{organizationKey}/processes/{processId}` name is `deleteProcess`.
 
 # Function callback
 
-The function takes a callback as final argument. The callback is the same as the request-module callback, i.e:
+All functions takes a callback as final argument. The callback has the same signature as the [request-module](https://www.npmjs.com/package/request) callback, i.e:
 
 ```javascript
-function(err, httpResponse, body) {}
+function(error, response, body) {}
 ```
 
 # Interface
 
-All Api-endpoints are represented. To initialise a new endpoint handler create one with new.
+All Api-endpoints are represented. Since most endpoints requires an authorization header the token is passed as an option when creating the endpoint handler.
 
 ## Tasks
 
@@ -44,8 +44,11 @@ var tasks = new Tasks({
 tasks.createTasks('test-org', { processId: '1' }, function(err, resp, body) {
   if (err) console.log(err);    
 });
-
 ```
+
+# Notes
+
+Not all endpoints in the effektif api are tested by this module. That goes for the naming of functions as well. Feel free to PR to improve the module or even the function names.
 
 [1]: http://www.effektif.com/
 [2]: https://app.effektif.com/api-docs/index.html
