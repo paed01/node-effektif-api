@@ -4,6 +4,6 @@ node_js:
 addons:
   code_climate:
     repo_token:
-      secure: ohb+aIiBRqpcVMHKuziWZJP8PUJqnkw3p+CwDn2VaBSesd5MmF2R8QEf5rhkVyeMYWtP+r1NLGeNztekFUKXgERwIFn35OMJ4XzvJZShXjNi3/Hqrj1vOj6w48eQXAI3Ya256+oVFY1PDKzhQiw0jpjXzV1NfeYAa3ip1zWYhzs=
+      secure: mJWeypXw2zKQeyMRSDQVeWTem7R/rBgJuQuVTYRCZm1sPHbsfB4tNQ9uUwLEdBVfzEvNTFy4tp4leH66MSgSviU64o2kHS+inJxidYWvKdDoryTY+cUmAHByOJt2xMVc4VTgWR3XmYAbl6/tMdrwD68JHpFvgg4QnmWSqXg9w3g=
 after_script:
 - cat coverage.lcov | codeclimate
