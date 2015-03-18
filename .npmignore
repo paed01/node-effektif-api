@@ -9,3 +9,4 @@ grunt/
 Gruntfile.js
 scripts/
 test/
+Makefile

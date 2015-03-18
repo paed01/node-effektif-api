@@ -1,9 +1,9 @@
 language: node_js
 node_js:
-- 0.10
+- 0.12
 addons:
   code_climate:
     repo_token:
-      secure: gnpmh05SCdybzUpPPUmw+qEAaeldD/mhdV/1QuGVwPy/hs8SsiTzhspwJdPKtzoT12M6qXR9P8xh3yyiVegH/qsIONuAc7hSXJYd+PgFEYG4TcT9CxFoFVPKDkD6blYtzj8ty1ME6LFswqEghyTP6+xucqAu+isSkpbay5Jlemc=
+      secure: ohb+aIiBRqpcVMHKuziWZJP8PUJqnkw3p+CwDn2VaBSesd5MmF2R8QEf5rhkVyeMYWtP+r1NLGeNztekFUKXgERwIFn35OMJ4XzvJZShXjNi3/Hqrj1vOj6w48eQXAI3Ya256+oVFY1PDKzhQiw0jpjXzV1NfeYAa3ip1zWYhzs=
 after_script:
 - cat coverage.lcov | codeclimate
