@@ -8,19 +8,60 @@ var expect = Code.expect;
 var Api = require('../.');
 
 lab.experiment('Api exports', function() {
-  lab.test('User', function(done) {
-    expect(Api.User).to.be.a.function();
-    done();
+  lab.experiment('User', function() {
+    lab.test('functions', function(done) {
+      expect(Api.User).to.be.a.function();
+      done();
+    });
+
+    lab.test('ctor throws if not instantiated with new', function(done) {
+      function ctor() {
+        Api.User();
+      }
+      expect(ctor).to.throw(Error, 'User must be instantiated using new');
+      done();
+    });
+
+    lab.test('schemas', function(done) {
+      expect(Api.User.schemas).to.be.an.object();
+      done();
+    });
   });
-  lab.test('Task', function(done) {
-    expect(Api.Task).to.be.a.function();
-    done();
+
+  lab.experiment('Task', function() {
+    lab.test('functions', function(done) {
+      expect(Api.Task).to.be.a.function();
+      done();
+    });
+
+    lab.test('ctor throws if not instantiated with new', function(done) {
+      function ctor() {
+        Api.Task();
+      }
+      expect(ctor).to.throw(Error, 'Task must be instantiated using new');
+      done();
+    });
+
+    lab.test('schemas', function(done) {
+      expect(Api.Task.schemas).to.be.an.object();
+      done();
+    });
   });
+
   lab.experiment('Process', function() {
     lab.test('functions', function(done) {
       expect(Api.Process).to.be.a.function();
       done();
     });
+
+    lab.test('ctor throws if not instantiated with new', function(done) {
+      function ctor() {
+        Api.Process();
+      }
+      expect(ctor).to.throw(Error, 'Process must be instantiated using new');
+      done();
+    });
+
     lab.test('schemas', function(done) {
       expect(Api.Process.schemas).to.be.an.object();
       done();

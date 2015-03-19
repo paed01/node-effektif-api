@@ -2,8 +2,8 @@
 
 var Lab = require('lab');
 var lab = exports.lab = Lab.script();
-var Code = require('code');
-var expect = Code.expect;
+// var Code = require('code');
+// var expect = Code.expect;
 var nock = require('nock');
 
 var Users = require('../.').User;
