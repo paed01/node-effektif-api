@@ -31,17 +31,19 @@ The plural ending is removed if it isn't immediately followed by a path paramete
 
 `DELETE /{organizationKey}/processes/{processId}` name is `deleteProcess`.
 
-# Function callback
+# Interface
+
+All Api-endpoints are represented. Since most endpoints requires an authorization header the token is passed as an option when creating the endpoint handler.
+
+## Function callback
 
 All functions takes a callback as final argument. The callback has the same signature as the [request-module](https://www.npmjs.com/package/request) callback, i.e:
 
 ```javascript
-function(error, response, body) {}
+function(error, response, body) {
+	
+}
 ```
-
-# Interface
-
-All Api-endpoints are represented. Since most endpoints requires an authorization header the token is passed as an option when creating the endpoint handler.
 
 ## Tasks
 
