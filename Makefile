@@ -1,9 +1,9 @@
 test:
 	@node node_modules/lab/bin/lab
 test-cov:
-	@node node_modules/lab/bin/lab -t 97
+	@node node_modules/lab/bin/lab -cL
 test-cov-lcov:
-	@node node_modules/lab/bin/lab -t 97 -r lcov -o coverage.lcov
+	@node node_modules/lab/bin/lab -cL -r lcov -o coverage.lcov
 test-cov-html:
 	@node node_modules/lab/bin/lab -r html -o coverage.html
 

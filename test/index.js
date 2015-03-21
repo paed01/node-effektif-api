@@ -1,3 +1,4 @@
+/* eslint func-style:0 */
 'use strict';
 
 var Lab = require('lab');
@@ -64,6 +65,13 @@ lab.experiment('Api exports', function() {
 
     lab.test('schemas', function(done) {
       expect(Api.Process.schemas).to.be.an.object();
+      expect(Api.Process.schemas.getProcess.input).to.be.an.object();
+      expect(Api.Process.schemas.getProcess.output).to.be.an.object();
+      done();
+    });
+
+    lab.test('function deleteProcessActivity schema', function(done) {
+      expect(Api.Process.schemas.deleteProcessActivity).to.be.an.object();
       done();
     });
   });

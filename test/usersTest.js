@@ -11,9 +11,15 @@ var users = new Users({
   authorization: 'token'
 });
 
-nock.disableNetConnect();
-
 lab.experiment('User', function() {
+  lab.before(function(done) {
+    nock.disableNetConnect();
+    done();
+  });
+  lab.after(function(done) {
+    nock.cleanAll();
+    done();
+  });
 
   lab.experiment('#createLogin', function() {
     lab.before(function(done) {

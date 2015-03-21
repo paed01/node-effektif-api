@@ -7,13 +7,25 @@ Unofficial node [effektif][1] [api][2] wrapper.
 
 # Introduction
 
-This module autogenerates modules from the [json-endpoint][3] of the effektif api documentation.
+The api is auto-generated from the effektif documentation [json-endpoint][3].
 
 # Naming
 
-Since the api is autognerated from the effiktif-api-doc the names have to be generated as well. The function names are generated from the endpoint path. E.g:
+The module functions are generated from the api-endpoints. The name is composed of the http-operation and the api-endpoint.
 
-`POST /{organizationKey}/tasks`, hence it is named `createTask`.
+|HTTP-verb |function prefix|
+|----------|---------------|
+| `GET`    | get           |
+| `POST`   | create        |
+| `PUT`    | update        |
+| `DELETE` | delete        |
+
+Examples:
+
+|Operation |function name  |
+|----------|---------------|
+| `POST /{organizationKey}/tasks` | `createTasks` | 
+| `DELETE /{organizationKey}/processes/{processId}/activities/{activityId}` | `deleteProcessActivity` | 
 
 The plural ending is removed if it isn't immediately followed by a path parameter, e.g:
 
@@ -41,9 +53,24 @@ var tasks = new Tasks({
   authorization: 'token'
 });
 
-tasks.createTask('test-org', { processId: '1' }, function(err, resp, body) {
+tasks.createTasks('test-org', { processId: '1' }, function(err, resp, body) {
   if (err) console.log(err);    
 });
+```
+
+## Schemas
+
+The operation schemas ([joi](https://github.com/hapijs/joi)) are stored with the module.
+
+```javascript
+var Api = require('effektif-api');
+var getProcessInputSchema = Api.Process.schemas.getProcess.input;
+
+console.log("#getProcess input", getProcessInputSchema.describe());
+
+var getProcessOutputSchema = Api.Process.schemas.getProcess.output;
+
+console.log("#getProcess output", getProcessOutputSchema.describe());
 ```
 
 # Notes

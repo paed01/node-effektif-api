@@ -11,9 +11,15 @@ var processes = new Processes({
   authorization: 'token'
 });
 
-nock.disableNetConnect();
-
 lab.experiment('Process', function() {
+  lab.before(function(done) {
+    nock.disableNetConnect();
+    done();
+  });
+  lab.after(function(done) {
+    nock.cleanAll();
+    done();
+  });
 
   lab.experiment('#getProcesses', function() {
     lab.before(function(done) {

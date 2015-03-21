@@ -11,9 +11,15 @@ var tasks = new Tasks({
   authorization: 'token'
 });
 
-nock.disableNetConnect();
-
 lab.experiment('Tasks', function() {
+  lab.before(function(done) {
+    nock.disableNetConnect();
+    done();
+  });
+  lab.after(function(done) {
+    nock.cleanAll();
+    done();
+  });
 
   lab.experiment('#getTask', function() {
     lab.before(function(done) {
@@ -61,6 +67,34 @@ lab.experiment('Tasks', function() {
   });
 
   lab.experiment('#createTasks', function() {
+    lab.before(function(done) {
+      /* jshint unused:false */
+      nock(Tasks.apiDoc.basePath)
+        .filteringRequestBody(function(path) {
+          return '*';
+        })
+        .post('/test-org/tasks')
+        .reply(200, 'OK');
+      done();
+    });
+
+    lab.test('takes organizationKey and task as argument', function(done) {
+      tasks.createTasks('test-org', {
+        processId: '1'
+      }, done);
+    });
+
+    lab.test('returns error in callback if task.isPrivate is not a boolean', function(done) {
+      tasks.createTasks('test-org', {
+        isPrivate: 'nej'
+      }, function(err) {
+        expect(err).to.exist();
+        done();
+      });
+    });
+  });
+
+  lab.experiment('#updateField', function() {
     lab.before(function(done) {
       /* jshint unused:false */
       nock(Tasks.apiDoc.basePath)
