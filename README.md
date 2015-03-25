@@ -35,6 +35,21 @@ The plural ending is removed if it isn't immediately followed by a path paramete
 
 All Api-endpoints are represented. Since most endpoints requires an authorization header the token is passed as an option when creating the endpoint handler.
 
+## Schemas
+
+The operation schemas ([joi](https://github.com/hapijs/joi)) are stored with the module.
+
+```javascript
+var Api = require('effektif-api');
+var getProcessInputSchema = Api.Process.schemas.getProcess.input;
+
+console.log("#getProcess input", getProcessInputSchema.describe());
+
+var getProcessOutputSchema = Api.Process.schemas.getProcess.output;
+
+console.log("#getProcess output", getProcessOutputSchema.describe());
+```
+
 ## Function callback
 
 All functions takes a callback as final argument. The callback has the same signature as the [request-module](https://www.npmjs.com/package/request) callback, i.e:
@@ -60,19 +75,29 @@ tasks.createTasks('test-org', { processId: '1' }, function(err, resp, body) {
 });
 ```
 
-## Schemas
+### `#getFormFieldByName`
 
-The operation schemas ([joi](https://github.com/hapijs/joi)) are stored with the module.
+Utility function to get FormField by name from task data.
 
 ```javascript
 var Api = require('effektif-api');
-var getProcessInputSchema = Api.Process.schemas.getProcess.input;
 
-console.log("#getProcess input", getProcessInputSchema.describe());
+var Tasks = Api.Task;
+var tasks = new Tasks({
+  authorization: 'token'
+});
 
-var getProcessOutputSchema = Api.Process.schemas.getProcess.output;
+tasks.getTaskNext('test-org', '1', function(err, resp, nextTask) {
+  if (err) return console.log(err);
 
-console.log("#getProcess output", getProcessOutputSchema.describe());
+  var field = nextTask.getFormFieldByName(task, 'myField');
+
+  field.value = '123';
+
+  tasks.updateTaskFormField('test-org', nextTask.id, field.id, field, function(err, resp, res) {
+    console.log('success?', !!!err);
+  });
+});
 ```
 
 # Notes

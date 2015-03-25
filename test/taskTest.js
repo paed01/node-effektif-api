@@ -1,3 +1,4 @@
+/* eslint func-style:0 */
 'use strict';
 
 var Lab = require('lab');
@@ -19,6 +20,15 @@ lab.experiment('Tasks', function() {
   lab.after(function(done) {
     nock.cleanAll();
     done();
+  });
+
+  lab.test('emits error if no arguments is passed to function', function(done) {
+    tasks.once('error', function(err) {
+      expect(err).to.be.instanceof(Error);
+      done();
+    });
+
+    tasks.createTasks();
   });
 
   lab.experiment('#getTask', function() {
@@ -94,31 +104,89 @@ lab.experiment('Tasks', function() {
     });
   });
 
-  lab.experiment('#updateField', function() {
+  lab.experiment('#updateTaskFormField', function() {
+    lab.test('FormField schema complete', function(done) {
+      var input = {
+        id: '23',
+        binding: {
+          converter: 'mu'
+        },
+        value: 'new name',
+        type: {}
+      };
+
+      Tasks.models.FormField.validate(input, done);
+    });
+
+    lab.test('FormField schema value only', function(done) {
+      var input = {
+        value: 'new name'
+      };
+
+      Tasks.models.FormField.validate(input, done);
+    });
+
     lab.before(function(done) {
       /* jshint unused:false */
       nock(Tasks.apiDoc.basePath)
         .filteringRequestBody(function(path) {
           return '*';
         })
-        .post('/test-org/tasks')
-        .reply(200, 'OK');
+        .put('/test-org/tasks/1/form/fields/23')
+        .reply(200, {
+          form: {
+            fields: [{
+              id: '23',
+              name: 'Name',
+              value: 'my name',
+              type: {}
+            }]
+          }
+        });
       done();
     });
 
-    lab.test('takes organizationKey and task as argument', function(done) {
-      tasks.createTasks('test-org', {
-        processId: '1'
+    lab.test('takes organizationKey, taskId, and fieldId as argument', function(done) {
+      tasks.updateTaskFormField('test-org', '1', '23', {
+        id: '23',
+        binding: {
+          converter: 'mu'
+        },
+        value: 'new name',
+        type: {}
       }, done);
     });
+  });
 
-    lab.test('returns error in callback if task.isPrivate is not a boolean', function(done) {
-      tasks.createTasks('test-org', {
-        isPrivate: 'nej'
-      }, function(err) {
-        expect(err).to.exist();
-        done();
-      });
+  lab.experiment('#getFormFieldByName', function() {
+    var taskData = {
+      form: {
+        fields: [{
+          id: '23',
+          name: 'Name',
+          value: 'my name',
+          type: {}
+        }]
+      }
+    };
+
+    lab.test('when argument is TaskXL it returns field', function(done) {
+      var f = tasks.getFormFieldByName(taskData, 'Name');
+      expect(f).to.exist();
+      expect(f.id).to.equal('23');
+      done();
+    });
+
+    lab.test('returns null if field name not found', function(done) {
+      var f = tasks.getFormFieldByName(taskData, 'no');
+      expect(f).to.equal(null);
+      done();
+    });
+
+    lab.test('returns null if task.form is undefined', function(done) {
+      var f = tasks.getFormFieldByName({}, 'no');
+      expect(f).to.equal(null);
+      done();
     });
   });
 });

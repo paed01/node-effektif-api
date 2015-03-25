@@ -47,6 +47,16 @@ lab.experiment('Api exports', function() {
       expect(Api.Task.schemas).to.be.an.object();
       done();
     });
+
+    lab.test('have utility functions', function(done) {
+      expect(Api.Task.prototype.getFormFieldByName).to.be.a.function();
+      done();
+    });
+
+    lab.test('have EventEmitter.on functions', function(done) {
+      expect(Api.Task.prototype.on).to.be.a.function();
+      done();
+    });
   });
 
   lab.experiment('Process', function() {
@@ -72,6 +82,11 @@ lab.experiment('Api exports', function() {
 
     lab.test('function deleteProcessActivity schema', function(done) {
       expect(Api.Process.schemas.deleteProcessActivity).to.be.an.object();
+      done();
+    });
+
+    lab.test('have EventEmitter.on functions', function(done) {
+      expect(Api.Process.prototype.on).to.be.a.function();
       done();
     });
   });
