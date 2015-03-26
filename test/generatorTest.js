@@ -1,3 +1,4 @@
+/* eslint func-style:0 */
 'use strict';
 
 var Lab = require('lab');
@@ -78,7 +79,9 @@ lab.experiment('Generator', function() {
         Authorization: 'token'
       });
 
-      var args = mock.applyDefaults({ organizationKey: 'test' }, Mock.schemas.getProcesses.input);
+      var args = mock.applyDefaults({
+        organizationKey: 'test'
+      }, Mock.schemas.getProcesses.input);
       expect(args).to.include(['Authorization', 'organizationKey']);
 
       done();
@@ -108,7 +111,9 @@ lab.experiment('Generator', function() {
         authorization: 'token'
       });
 
-      var args = mock.applyDefaults({ organizationKey: 'test' }, Mock.schemas.getProcesses.input);
+      var args = mock.applyDefaults({
+        organizationKey: 'test'
+      }, Mock.schemas.getProcesses.input);
       expect(args).to.include(['Authorization', 'organizationKey']);
 
       done();
@@ -255,6 +260,282 @@ lab.experiment('Generator', function() {
       var Mock = Generator('Mock', template);
       expect(Mock.schemas.getProcesses.output).to.be.an.object();
       done();
+    });
+
+    lab.test('with undefined Joi type throws', function(done) {
+      var template = {
+        apis: [{
+          path: '/{organizationKey}/processes',
+          operations: [{
+            method: 'GET',
+            type: 'UnkownType',
+            parameters: [{
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {
+          UnkownType: {
+            id: 'UnkownType',
+            properties: {
+              name: {
+                type: '_undefined-type'
+              }
+            }
+          }
+        }
+      };
+
+      function fn() {
+        Generator('Mock', template);
+      }
+      expect(fn).to.throw(Error, 'Joi type "_undefined-type" not found');
+      done();
+    });
+
+    lab.describe('array', function(done) {
+
+      lab.test('item type is validated', function(done) {
+        var template = {
+          apis: [{
+            path: '/{organizationKey}/processes',
+            operations: [{
+              method: 'GET',
+              type: 'List1',
+              parameters: [{
+                name: 'organizationKey',
+                paramType: 'path',
+                dataType: 'string'
+              }]
+            }]
+          }],
+          models: {
+            List1: {
+              id: 'List1',
+              properties: {
+                a: {
+                  type: 'array',
+                  items: {
+                    $ref: 'string'
+                  }
+                }
+              }
+            }
+          }
+        };
+        var Mock = Generator('Mock', template);
+
+        var Joi = require('joi');
+        Mock.schemas.getProcesses.output.validate({
+          a: ['test']
+        }, done);
+      });
+
+      lab.test('with invalid item type returns error', function(done) {
+        var template = {
+          apis: [{
+            path: '/{organizationKey}/processes',
+            operations: [{
+              method: 'GET',
+              type: 'List2',
+              parameters: [{
+                name: 'organizationKey',
+                paramType: 'path',
+                dataType: 'string'
+              }]
+            }]
+          }],
+          models: {
+            List2: {
+              id: 'List2',
+              properties: {
+                a: {
+                  type: 'array',
+                  items: {
+                    $ref: 'string'
+                  }
+                }
+              }
+            }
+          }
+        };
+        var Mock = Generator('Mock', template);
+        Mock.schemas.getProcesses.output.validate({
+          a: [{}]
+        }, function(err) {
+          expect(err).to.exist();
+          done();
+        });
+      });
+
+      lab.test('without item type validates to any', function(done) {
+        var template = {
+          apis: [{
+            path: '/{organizationKey}/processes',
+            operations: [{
+              method: 'GET',
+              type: 'List3',
+              parameters: [{
+                name: 'organizationKey',
+                paramType: 'path',
+                dataType: 'string'
+              }]
+            }]
+          }],
+          models: {
+            List3: {
+              id: 'List3',
+              properties: {
+                a: {
+                  type: 'array'
+                }
+              }
+            }
+          }
+        };
+        var Mock = Generator('Mock', template);
+        Mock.schemas.getProcesses.output.validate({
+          a: [{}]
+        }, done);
+      });
+
+      lab.test('with complex item type validates', function(done) {
+        var template = {
+          apis: [{
+            path: '/{organizationKey}/processes',
+            operations: [{
+              method: 'GET',
+              type: 'ComplexList1',
+              parameters: [{
+                name: 'organizationKey',
+                paramType: 'path',
+                dataType: 'string'
+              }]
+            }]
+          }],
+          models: {
+            Complex1: {
+              id: 'Complex1',
+              properties: {
+                b: {
+                  type: 'Long'
+                }
+              }
+            },
+            ComplexList1: {
+              id: 'ComplexList1',
+              properties: {
+                a: {
+                  type: 'array',
+                  items: {
+                    $ref: 'Complex1'
+                  }
+                }
+              }
+            }
+          }
+        };
+        var Mock = Generator('Mock', template);
+        Mock.schemas.getProcesses.output.validate({
+          a: [{
+            b: 1
+          }]
+        }, done);
+      });
+
+      lab.test('with complex item type validation returns error if incorrect', function(done) {
+        var template = {
+          apis: [{
+            path: '/{organizationKey}/processes',
+            operations: [{
+              method: 'GET',
+              type: 'ComplexList1',
+              parameters: [{
+                name: 'organizationKey',
+                paramType: 'path',
+                dataType: 'string'
+              }]
+            }]
+          }],
+          models: {
+            Complex1: {
+              id: 'Complex1',
+              properties: {
+                b: {
+                  type: 'Long'
+                }
+              }
+            },
+            ComplexList1: {
+              id: 'ComplexList1',
+              properties: {
+                a: {
+                  type: 'array',
+                  items: {
+                    $ref: 'Complex1'
+                  }
+                }
+              }
+            }
+          }
+        };
+        var Mock = Generator('Mock', template);
+        Mock.schemas.getProcesses.output.validate({
+          a: [{
+            b: 'NaN'
+          }]
+        }, function(err) {
+          expect(err).to.exist();
+          done();
+        });
+      });
+
+      lab.test('with circular complex item type validates any (TODO: not optimal)', function(done) {
+        var template = {
+          apis: [{
+            path: '/{organizationKey}/processes',
+            operations: [{
+              method: 'GET',
+              type: 'CircularList1',
+              parameters: [{
+                name: 'organizationKey',
+                paramType: 'path',
+                dataType: 'string'
+              }]
+            }]
+          }],
+          models: {
+            Complex2: {
+              id: 'Complex2',
+              properties: {
+                children: {
+                  type: 'Complex2'
+                }
+              }
+            },
+            CircularList1: {
+              id: 'CircularList1',
+              properties: {
+                a: {
+                  type: 'array',
+                  items: {
+                    $ref: 'Complex2'
+                  }
+                }
+              }
+            }
+          }
+        };
+        var Mock = Generator('Mock', template);
+        Mock.schemas.getProcesses.output.validate({
+          a: [{
+            children: [{}, function() {}]
+          }]
+        }, done);
+      });
+
     });
   });
 });
