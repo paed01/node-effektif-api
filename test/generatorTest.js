@@ -5,8 +5,11 @@ var Lab = require('lab');
 var lab = exports.lab = Lab.script();
 var Code = require('code');
 var expect = Code.expect;
+var nock = require('nock');
 
 var Generator = require('../lib/generator');
+
+nock.disableNetConnect();
 
 lab.experiment('Generator', function() {
 
@@ -538,4 +541,35 @@ lab.experiment('Generator', function() {
 
     });
   });
+
+  lab.test('GET that returns non-object returns body un-altered', function(done) {
+    var template = {
+      basePath: 'http://testapi',
+      apis: [{
+        path: '/{organizationKey}/status',
+        operations: [{
+          method: 'GET',
+          parameters: [{
+            name: 'organizationKey',
+            paramType: 'path',
+            dataType: 'string'
+          }]
+        }]
+      }],
+      models: {}
+    };
+    nock(template.basePath)
+      .get('/test-org/status')
+      .reply(200, 'OK');
+
+    var Mock = Generator('Mock', template);
+    var mock = new Mock();
+    mock.getStatus('test-org', function(err, resp, body) {
+      expect(err).to.not.exist();
+      expect(body).to.be.a.string();
+      expect(body).to.equal('OK');
+      done();
+    });
+  });
+
 });

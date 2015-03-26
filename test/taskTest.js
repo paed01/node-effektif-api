@@ -34,8 +34,10 @@ lab.experiment('Tasks', function() {
   lab.experiment('#getTask', function() {
     lab.before(function(done) {
       nock(Tasks.apiDoc.basePath)
-        .get('/test-org/tasks/1')
-        .reply(200, 'OK');
+        .get('/test-org/tasks/1').times(2)
+        .reply(200, {
+          id: 'unique-id'
+        });
       done();
     });
 
@@ -53,6 +55,14 @@ lab.experiment('Tasks', function() {
       newTasks.getTask('test-org', '1', function(err) {
         expect(err).to.exist();
         done();
+      });
+    });
+
+    lab.test('returns body in callback that valides output schema', function(done) {
+      tasks.getTask('test-org', '1', function(err, resp, body) {
+        expect(err).to.not.exist();
+        expect(body).to.be.an.object();
+        Tasks.schemas.getTask.output.validate(body, done);
       });
     });
   });
