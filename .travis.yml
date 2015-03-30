@@ -1,9 +1,8 @@
 language: node_js
 node_js:
 - 0.12
-addons:
-  code_climate:
-    repo_token:
-      secure: FxGSzWhfOOaaspvDjtv8x9CMgcjY0qkKuskFE9/pIKGN4g1ZeicMyTNYZacVb4lR6EUEDIY/ZDiOsDQtC28gzII50ndIRY1yzKhYv3pAroNUP81PNPA85j+F5pW9lZtD+tdzPP6X9IhyH4E7v5xYvknN6MnhLUM/ySp/wqZtuEU=
+env:
+  global:
+     - secure: bK6mlRIRM7uQM6FmOhYomgs87GR51xcPQreZRzR5YsUawpHe2NS2gi/5V6Lq6nrKZcd5lDoLF2RH4aIfav+XoADnU+nyn7qr/8UVnoEfyI4ZdgfDaDV/ICSU5UwJXD/hjODkM50ebkv60DQ9nksk0l/FTdEjGsCtvp2sKRhLG20=
 after_script:
-- cat coverage.lcov | codeclimate
+- cat coverage.lcov | ./node_modules/coveralls/bin/coveralls.js
