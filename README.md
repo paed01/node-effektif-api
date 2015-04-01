@@ -27,7 +27,7 @@ Examples:
 | `POST /{organizationKey}/tasks` | `createTasks` | 
 | `DELETE /{organizationKey}/processes/{processId}/activities/{activityId}` | `deleteProcessActivity` | 
 
-The plural ending is removed if it isn't immediately followed by a path parameter, e.g:
+The plural ending is removed if the noun is immediately followed by a path parameter, e.g:
 
 `DELETE /{organizationKey}/processes/{processId}` name is `deleteProcess`.
 

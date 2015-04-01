@@ -1,6 +1,6 @@
 {
   "name": "effektif-api",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Unofficial node effektif api wrapper",
   "repository": "git://github.com/paed01/node-effektif-api",
   "main": "index.js",
