@@ -707,4 +707,77 @@ lab.experiment('Generator', function() {
       done();
     });
   });
+
+  lab.experiment('function callback response', function() {
+    lab.test('operation without return type but responds with content-type application/json returns json as body', function(done) {
+      var template = {
+        basePath: 'http://testapi',
+        apis: [{
+          path: '/{organizationKey}/test',
+          operations: [{
+            method: 'GET',
+            parameters: [{
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {}
+      };
+
+      var Mock = Generator('Mock', template);
+      var mock = new Mock();
+
+      nock(template.basePath)
+        .get('/test-org/test')
+        .reply(200, {
+          test: true
+        }, {
+          'content-type': 'application/json'
+        });
+
+      mock.getTest('test-org', function(err, resp, body) {
+        if (err) return done(err);
+        expect(body).to.deep.equal({
+          test: true
+        });
+        done();
+      });
+
+    });
+
+    lab.test('operation responds with content-type application/json but bad json returns error', function(done) {
+      var template = {
+        basePath: 'http://testapi',
+        apis: [{
+          path: '/{organizationKey}/test',
+          operations: [{
+            method: 'GET',
+            parameters: [{
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {}
+      };
+
+      var Mock = Generator('Mock', template);
+      var mock = new Mock();
+
+      nock(template.basePath)
+        .get('/test-org/test')
+        .reply(200, 'OK', {
+          'content-type': 'application/json'
+        });
+
+      mock.getTest('test-org', function(err, resp, body) {
+        expect(err).to.exist();
+        done();
+      });
+
+    });
+  });
 });
