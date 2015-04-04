@@ -15,6 +15,6 @@
   "disallowKeywordsOnNewLine": [ "else" ],
   "disallowSpaceAfterObjectKeys": true,
   "validateLineBreaks": "LF",
-  "excludeFiles": ["**/node_modules/**"],
+  "excludeFiles": ["**/node_modules/**", "/temp/**"],
   "validateIndentation": 2
 }

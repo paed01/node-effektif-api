@@ -99,6 +99,9 @@ tasks.getTaskNext('test-org', '1', function(err, resp, nextTask) {
   });
 });
 ```
+# Debugging
+
+The module uses [debug](github.com/visionmedia/debug) so run with environment variable `DEBUG=effektif-api*`.
 
 # Notes
 

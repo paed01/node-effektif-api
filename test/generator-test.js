@@ -54,7 +54,43 @@ lab.experiment('Generator', function() {
       var Mock = Generator('Mock', template);
       expect(Mock).to.be.a.function();
       expect(Mock.prototype).to.be.an.object();
-      expect(Mock.prototype.applyDefaults).to.be.an.function();
+      expect(Mock.prototype.applyDefaults).to.be.a.function();
+      done();
+    });
+
+    lab.test('returns Module with function that contains input and output schema', function(done) {
+      var template = {
+        apis: [{
+          path: '/{organizationKey}/processes',
+          operations: [{
+            method: 'GET',
+            type: 'Simple',
+            parameters: [{
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {
+          Simple: {
+            id: 'Simple',
+            properties: {
+              name: {
+                type: 'string'
+              }
+            }
+          }
+        }
+      };
+      var Mock = Generator('Mock', template);
+      expect(Mock.prototype.getProcesses).to.be.an.function();
+      var mock = new Mock();
+
+      expect(mock.getProcesses).to.be.a.function();
+      expect(mock.getProcesses.schemas).to.be.an.object();
+      expect(mock.getProcesses.schemas.input).to.be.an.object();
+      expect(mock.getProcesses.schemas.output).to.be.an.object();
       done();
     });
 
@@ -298,7 +334,7 @@ lab.experiment('Generator', function() {
       done();
     });
 
-    lab.describe('array', function(done) {
+    lab.describe('array', function() {
 
       lab.test('item type is validated', function(done) {
         var template = {
@@ -330,7 +366,6 @@ lab.experiment('Generator', function() {
         };
         var Mock = Generator('Mock', template);
 
-        var Joi = require('joi');
         Mock.schemas.getProcesses.output.validate({
           a: ['test']
         }, done);
@@ -572,4 +607,104 @@ lab.experiment('Generator', function() {
     });
   });
 
+  lab.describe('options.log', function() {
+
+    lab.test('uses console if not defined', function(done) {
+      var template = {
+        basePath: 'http://testapi',
+        apis: [{
+          path: '/{organizationKey}/status',
+          operations: [{
+            method: 'GET',
+            parameters: [{
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {}
+      };
+
+      nock(template.basePath)
+        .get('/test-org/status')
+        .reply(200, 'OK');
+
+      var Mock = Generator('Mock', template);
+      var mock = new Mock({});
+
+      // expect(mock.log).to.equal(console);
+      done();
+    });
+
+    lab.test('sets log function on generated interface', function(done) {
+      var template = {
+        basePath: 'http://testapi',
+        apis: [{
+          path: '/{organizationKey}/status',
+          operations: [{
+            method: 'GET',
+            parameters: [{
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {}
+      };
+
+      var log = function() {
+        return 'weee';
+      };
+
+      nock(template.basePath)
+        .get('/test-org/status')
+        .reply(200, 'OK');
+
+      var Mock = Generator('Mock', template, {
+        log: log
+      });
+      var mock = new Mock();
+
+      expect(mock._debug.log()).to.equal('weee');
+      expect(mock._debugError.log()).to.equal('weee');
+      done();
+    });
+
+    lab.test('can be passed to generated interface via options', function(done) {
+      var template = {
+        basePath: 'http://testapi',
+        apis: [{
+          path: '/{organizationKey}/status',
+          operations: [{
+            method: 'GET',
+            parameters: [{
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {}
+      };
+
+      var log = function() {
+        return 'true that';
+      };
+
+      nock(template.basePath)
+        .get('/test-org/status')
+        .reply(200, 'OK');
+
+      var Mock = Generator('Mock', template);
+      var mock = new Mock({}, {
+        log: log
+      });
+
+      expect(mock._debug.log()).to.equal('true that');
+      expect(mock._debugError.log()).to.equal('true that');
+      done();
+    });
+  });
 });
