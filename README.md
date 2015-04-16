@@ -35,7 +35,7 @@ The plural ending is removed if the noun is immediately followed by a path param
 
 All Api-endpoints are represented. Since most endpoints requires an authorization header the token is passed as an option when creating the endpoint handler.
 
-## Schemas
+## Input Schemas
 
 The operation schemas ([joi](https://github.com/hapijs/joi)) are stored with the module.
 
@@ -48,6 +48,32 @@ console.log("#getProcess input", getProcessInputSchema.describe());
 var getProcessOutputSchema = Api.Process.schemas.getProcess.output;
 
 console.log("#getProcess output", getProcessOutputSchema.describe());
+```
+
+The schemas are also stored with the instance methods.
+
+```javascript
+var Api = require('effektif-api');
+var processes = new Api.Process({ authorization: 'token'});
+
+console.log(processes.getProcesses.schemas.output.describe());
+```
+
+### Path parameters
+
+The path parameters will build the method signature. They are considered required.
+
+### Query parameters
+
+The query parameters will also be appended to the method signature. They are considered optional but must be defined. Use `null` or `undefined`to leave them blank.
+
+```javascript
+var Api = require('effektif-api');
+var processes = new Api.Process({ authorization: 'token'});
+
+processes.getProcesses('test-org', null, function(err, resp, body) {
+  console.log('This should work and result in', body);
+});
 ```
 
 ## Function callback
