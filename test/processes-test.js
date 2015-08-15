@@ -1,3 +1,5 @@
+/*eslint curly:0 */
+
 'use strict';
 
 var Lab = require('lab');
@@ -10,8 +12,6 @@ var Processes = require('../.').Process;
 var processes = new Processes({
   authorization: 'token'
 });
-
-
 
 lab.experiment('Process', function() {
   var scope = nock(Processes.apiDoc.basePath);

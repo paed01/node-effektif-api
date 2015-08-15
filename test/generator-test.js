@@ -1,4 +1,4 @@
-/* eslint func-style:0 */
+/* eslint func-style:0 curly:0 */
 'use strict';
 
 var Lab = require('lab');
@@ -630,6 +630,7 @@ lab.experiment('Generator', function() {
         .get('/test-org/status')
         .reply(200, 'OK');
 
+      // jshint unused:false
       var Mock = Generator('Mock', template);
       var mock = new Mock({});
 
@@ -773,7 +774,7 @@ lab.experiment('Generator', function() {
           'content-type': 'application/json'
         });
 
-      mock.getTest('test-org', function(err, resp, body) {
+      mock.getTest('test-org', function(err) {
         expect(err).to.exist();
         done();
       });
