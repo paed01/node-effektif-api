@@ -1,4 +1,3 @@
-/* eslint func-style:0 */
 'use strict';
 
 var Lab = require('lab');
@@ -88,9 +87,8 @@ lab.experiment('Tasks', function() {
 
   lab.experiment('#createTasks', function() {
     lab.before(function(done) {
-      /* jshint unused:false */
       nock(Tasks.apiDoc.basePath)
-        .filteringRequestBody(function(path) {
+        .filteringRequestBody(function() {
           return '*';
         })
         .post('/test-org/tasks')
@@ -137,9 +135,8 @@ lab.experiment('Tasks', function() {
     });
 
     lab.before(function(done) {
-      /* jshint unused:false */
       nock(Tasks.apiDoc.basePath)
-        .filteringRequestBody(function(path) {
+        .filteringRequestBody(function() {
           return '*';
         })
         .put('/test-org/tasks/1/form/fields/23')

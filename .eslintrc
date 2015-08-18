@@ -1,0 +1,13 @@
+{
+  "env": {
+    "browser": false,
+    "node": true
+  },
+  "rules": {
+    "semi": [2, "always"],
+    "quotes": [2, "single"],
+    "strict": [2, "global"],
+    "new-cap": 0,
+    "no-shadow": 0
+  }
+}

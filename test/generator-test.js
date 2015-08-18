@@ -1,4 +1,4 @@
-/* eslint func-style:0 curly:0 */
+/* eslint no-underscore-dangle:0 curly:0 */
 'use strict';
 
 var Lab = require('lab');
@@ -630,7 +630,7 @@ lab.experiment('Generator', function() {
         .get('/test-org/status')
         .reply(200, 'OK');
 
-      // jshint unused:false
+      /* eslint no-unused-vars:0 */
       var Mock = Generator('Mock', template);
       var mock = new Mock({});
 
