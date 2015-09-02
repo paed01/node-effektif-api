@@ -25,10 +25,10 @@
     "lab": "^5.4.0",
     "nock": "^1.1.0"
   },
-  "license": "BSD",
+  "license": "BSD-3-Clause",
   "licenses": [
     {
-      "type": "BSD",
+      "type": "BSD-3-Clause",
       "url": "https://github.com/paed01/node-effektif-api/raw/master/LICENSE"
     }
   ]
