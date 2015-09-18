@@ -1,4 +1,3 @@
-/* eslint func-style:0 */
 'use strict';
 
 var Lab = require('lab');

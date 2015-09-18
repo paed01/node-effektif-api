@@ -86,6 +86,23 @@ function(error, response, body) {
 }
 ```
 
+## Constructor
+
+The interface constructor takes defaults and options.
+
+```javascript
+var Processes = require('effektif-api').Process;
+var Users = require('effektif-api').User;
+
+var processes = new Processes({authorization: 'token'}, {
+  users: new Users(),
+  user: {
+    username: 'me',
+    password: 'sup3rs3cr3t'
+  }
+});
+```
+
 ## Tasks
 
 ```javascript
@@ -125,6 +142,48 @@ tasks.getTaskNext('test-org', '1', function(err, resp, nextTask) {
   });
 });
 ```
+
+## Users
+
+```javascript
+var Api = require('effektif-api');
+
+var Tasks = Api.Task;
+var tasks = new Tasks({
+  authorization: 'token',
+  user: {
+    username: 'me',
+    password: 'sup3rs3cr3t'
+  }
+});
+
+tasks.createTasks('test-org', { processId: '1' }, function(err, resp, body) {
+  if (err) console.log(err);    
+});
+```
+
+### `#login`
+
+Utility function to perform user login.
+
+```javascript
+var Api = require('effektif-api');
+
+var users = new Api.User();
+
+users.login('test-org', '1', function(err, resp, nextTask) {
+  if (err) return console.log(err);
+
+  var field = nextTask.getFormFieldByName(task, 'myField');
+
+  field.value = '123';
+
+  tasks.updateTaskFormField('test-org', nextTask.id, field.id, field, function(err, resp, res) {
+    console.log('success?', !!!err);
+  });
+});
+```
+
 # Debugging
 
 The module uses [debug](github.com/visionmedia/debug) so run with environment variable `DEBUG=effektif-api*`.

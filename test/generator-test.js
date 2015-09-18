@@ -276,6 +276,40 @@ lab.experiment('Generator', function() {
       done();
     });
 
+    lab.test('with Authorization header returns schema with requiresAuthorization tag', function(done) {
+      var template = {
+        apis: [{
+          path: '/{organizationKey}/processes',
+          operations: [{
+            method: 'GET',
+            type: 'Simple',
+            parameters: [{
+              name: 'Authorization',
+              paramType: 'header',
+              dataType: 'string'
+            }, {
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {
+          Simple: {
+            id: 'Simple',
+            properties: {
+              name: {
+                type: 'string'
+              }
+            }
+          }
+        }
+      };
+      var Mock = Generator('Mock', template);
+      expect(Mock.schemas.getProcesses.output.describe().children).to.be.an.object();
+      done();
+    });
+
     lab.test('without properties returns Joi.object', function(done) {
       var template = {
         apis: [{
@@ -777,6 +811,202 @@ lab.experiment('Generator', function() {
       mock.getTest('test-org', function(err) {
         expect(err).to.exist();
         done();
+      });
+
+    });
+
+    lab.test('operation failure returns error in callback', function(done) {
+      var template = {
+        basePath: 'http://testapi',
+        apis: [{
+          path: '/{organizationKey}/test',
+          operations: [{
+            method: 'GET',
+            parameters: [{
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {}
+      };
+
+      var Mock = Generator('Mock', template);
+      var mock = new Mock();
+
+      mock.getTest('test-org', function(err) {
+        expect(err).to.exist();
+        done();
+      });
+    });
+  });
+
+  lab.experiment('#getUserInstance', function() {
+
+    lab.test('throws if not overridden by module', function(done) {
+      var template = {
+        basePath: 'http://testapi',
+        apis: [{
+          path: '/{organizationKey}/test',
+          operations: [{
+            method: 'GET',
+            parameters: [{
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {}
+      };
+
+      var Mock = Generator('Mock', template);
+      var mock = new Mock();
+
+      expect(function() {
+        mock.getUserInstance();
+      }).to.throw('User interface is not loaded');
+
+      done();
+    });
+
+    lab.test('takes options.users', function(done) {
+      var template = {
+        basePath: 'http://testapi',
+        apis: [{
+          path: '/{organizationKey}/test',
+          operations: [{
+            method: 'GET',
+            parameters: [{
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {}
+      };
+
+      var users = {
+        name: 'overridden users',
+        login: function() {}
+      };
+
+      var Mock = Generator('Mock', template);
+      var mock = new Mock({}, {
+        users: users
+      });
+      expect(mock.getUserInstance(), 'getUserInstance').to.equal(users);
+      done();
+    });
+
+    lab.test('throws if options.users is not an object', function(done) {
+      var template = {
+        basePath: 'http://testapi',
+        apis: [{
+          path: '/{organizationKey}/test',
+          operations: [{
+            method: 'GET',
+            parameters: [{
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {}
+      };
+
+      var users = function() {};
+
+      var Mock = Generator('Mock', template);
+
+      expect(function() {
+        new Mock({}, {
+          users: users
+        });
+      }).to.throw(/must be an object/i);
+      done();
+    });
+
+    lab.test('throws if options.users is missing login function', function(done) {
+      var template = {
+        basePath: 'http://testapi',
+        apis: [{
+          path: '/{organizationKey}/test',
+          operations: [{
+            method: 'GET',
+            parameters: [{
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {}
+      };
+
+      var users = {};
+
+      var Mock = Generator('Mock', template);
+
+      expect(function() {
+        new Mock({}, {
+          users: users
+        });
+      }).to.throw(/login/i);
+      done();
+    });
+  });
+
+  lab.experiment('#onUnauthorized', function() {
+
+    lab.test('override instance function', function(done) {
+      var template = {
+        basePath: 'http://testapi',
+        apis: [{
+          path: '/{organizationKey}/test',
+          operations: [{
+            method: 'GET',
+            parameters: [{
+              paramType: 'header',
+              name: 'Authorization',
+              description: 'The authentication token can be obtained from /users/login.',
+              dataType: 'string',
+              required: true
+            }, {
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {}
+      };
+
+      nock(template.basePath)
+        .get('/test-org/test')
+        .reply(401, 'OK');
+
+      var Mock = Generator('Mock', template);
+      var mock = new Mock({
+        authorization: 'token'
+      }, {
+        credentials: {
+          username: 'a',
+          password: 'b'
+        },
+        users: {
+          login: function() {}
+        },
+        onUnauthorized: function(reqOpt, callback) {
+          done();
+        }
+      });
+
+      mock.getTest('test-org', function(err, resp, body) {
+        expect(err).to.not.exist();
       });
 
     });
