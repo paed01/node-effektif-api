@@ -8,22 +8,23 @@ Table of contents
   - [`createLogin`](#user-createlogin)
   - [`updateLogin`](#user-updatelogin)
   - [`createRegistrations`](#user-createregistrations)
-  - [`getRegistrations`](#user-getregistrations)
-  - [`createRegistrationsActivate`](#user-createregistrationsactivate)
-  - [`getRegistrationsPicture`](#user-getregistrationspicture)
-  - [`createRegistrationsPicture`](#user-createregistrationspicture)
-  - [`createRegistrationsPictureiframe`](#user-createregistrationspictureiframe)
+  - [`getRegistration`](#user-getregistration)
+  - [`activateRegistration`](#user-activateregistration)
+  - [`getRegistrationPicture`](#user-getregistrationpicture)
+  - [`createRegistrationPicture`](#user-createregistrationpicture)
+  - [`createRegistrationPictureiframe`](#user-createregistrationpictureiframe)
   - [`createUsersConfirm`](#user-createusersconfirm)
   - [`createUsersLogin`](#user-createuserslogin)
   - [`createUsersLoginHandover`](#user-createusersloginhandover)
   - [`createUsersReset`](#user-createusersreset)
+  - [`getUser`](#user-getuser)
+  - [`updateUser`](#user-updateuser)
+  - [`createUserPicture`](#user-createuserpicture)
+  - [`createUserPictureiframe`](#user-createuserpictureiframe)
   - [`getUsers`](#user-getusers)
-  - [`updateUsers`](#user-updateusers)
-  - [`createUsersPicture`](#user-createuserspicture)
-  - [`createUsersPictureiframe`](#user-createuserspictureiframe)
-  - [`createUsersHandover`](#user-createusershandover)
-  - [`getUsersPicture`](#user-getuserspicture)
-  - [`updateUsersPreferences`](#user-updateuserspreferences)
+  - [`createUserHandover`](#user-createuserhandover)
+  - [`getUserPicture`](#user-getuserpicture)
+  - [`updateUserPreferences`](#user-updateuserpreferences)
 - [Task](#task)
   - [`onUnauthorized`](#task-onunauthorized)
   - [`getCases`](#task-getcases)
@@ -233,7 +234,7 @@ Represents call to:
 *Callback body:*
 
 
-## User getRegistrations
+## User getRegistration
 Represents call to:
 `GET /registrations/{code}`
 
@@ -268,7 +269,7 @@ Represents call to:
   - `systemAdmin`: boolean
   - `systemUser`: boolean
 
-## User createRegistrationsActivate
+## User activateRegistration
 Represents call to:
 `POST /registrations/{code}/activate`
 
@@ -306,7 +307,7 @@ Represents call to:
   - `systemUser`: boolean
 - `organizations`: array
 
-## User getRegistrationsPicture
+## User getRegistrationPicture
 Represents call to:
 `GET /registrations/{code}/picture`
 
@@ -322,7 +323,7 @@ Represents call to:
 - `contentDispositionInlineFileName`: string
 - `cacheControlMaxAgeInMillis`: number
 
-## User createRegistrationsPicture
+## User createRegistrationPicture
 Represents call to:
 `POST /registrations/{code}/picture`
 
@@ -334,7 +335,7 @@ Represents call to:
 *Callback body:*
 
 
-## User createRegistrationsPictureiframe
+## User createRegistrationPictureiframe
 Represents call to:
 `POST /registrations/{code}/pictureiframe`
 
@@ -425,7 +426,7 @@ Represents call to:
 *Callback body:*
 
 
-## User getUsers
+## User getUser
 Represents call to:
 `GET /{organizationKey}/users/{userId}`
 > Requires authorization
@@ -456,7 +457,7 @@ Represents call to:
 - `systemAdmin`: boolean
 - `systemUser`: boolean
 
-## User updateUsers
+## User updateUser
 Represents call to:
 `PUT /{organizationKey}/users/{userId}`
 
@@ -503,7 +504,7 @@ Represents call to:
 - `systemAdmin`: boolean
 - `systemUser`: boolean
 
-## User createUsersPicture
+## User createUserPicture
 Represents call to:
 `POST /{organizationKey}/users/{userId}/picture`
 
@@ -515,7 +516,7 @@ Represents call to:
 *Callback body:*
 
 
-## User createUsersPictureiframe
+## User createUserPictureiframe
 Represents call to:
 `POST /{organizationKey}/users/{userId}/pictureiframe`
 
@@ -524,7 +525,17 @@ Represents call to:
 - `userId`: required string
 - `callback`: required func - function(err, resp, body)
 
-## User createUsersHandover
+## User getUsers
+Represents call to:
+`GET /{organizationKey}/users`
+> Requires authorization
+
+*Arguments:*
+
+- `organizationKey`: required string
+- `callback`: required func - function(err, resp, body)
+
+## User createUserHandover
 Represents call to:
 `POST /{organizationKey}/users/{userId}/handover`
 > Requires authorization
@@ -547,7 +558,7 @@ Represents call to:
 - `redirectTo`: string
 - `organizationKey`: string
 
-## User getUsersPicture
+## User getUserPicture
 Represents call to:
 `GET /{organizationKey}/users/{userId}/picture`
 > Requires authorization
@@ -565,7 +576,7 @@ Represents call to:
 - `contentDispositionInlineFileName`: string
 - `cacheControlMaxAgeInMillis`: number
 
-## User updateUsersPreferences
+## User updateUserPreferences
 Represents call to:
 `PUT /{workspaceKey}/users/{userId}/preferences`
 > Requires authorization
