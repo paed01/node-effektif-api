@@ -30,6 +30,7 @@ lab.experiment('Authorization', function() {
       });
 
       scope.get('/test-org/processes?processIds=1%2C2')
+        .matchHeader('authorization', 'token')
         .reply(401, {
           message: 'Unauthorized'
         });
@@ -53,6 +54,7 @@ lab.experiment('Authorization', function() {
 
       scope
         .get('/test-org/processes?processIds=3%2C4')
+        .matchHeader('authorization', 'token')
         .reply(401, {
           message: 'Unauthorized'
         })
@@ -61,6 +63,7 @@ lab.experiment('Authorization', function() {
           token: 'new-token'
         })
         .get('/test-org/processes?processIds=3%2C4')
+        .matchHeader('authorization', 'new-token')
         .reply(200, []);
 
       processes.getProcesses('test-org', ['3', '4'], function(err, res) {
@@ -84,6 +87,7 @@ lab.experiment('Authorization', function() {
 
       scope
         .get('/test-org/processes?processIds=new%2Ctoken')
+        .matchHeader('authorization', 'token')
         .reply(401, {
           message: 'Unauthorized'
         })
@@ -92,6 +96,7 @@ lab.experiment('Authorization', function() {
           token: 'newer-token'
         })
         .get('/test-org/processes?processIds=new%2Ctoken')
+        .matchHeader('authorization', 'newer-token')
         .reply(200, []);
 
       processes.getProcesses('test-org', ['new', 'token'], function(err, res) {
@@ -114,6 +119,7 @@ lab.experiment('Authorization', function() {
       });
 
       scope.get('/test-org/processes?processIds=5%2C6')
+        .matchHeader('authorization', 'token')
         .reply(401, {
           message: 'Unauthorized'
         })
@@ -142,6 +148,7 @@ lab.experiment('Authorization', function() {
 
       scope
         .get('/test-org/processes?processIds=repeated%2Ctoken')
+        .matchHeader('authorization', 'token')
         .times(4)
         .reply(401, {
           message: 'Unauthorized'
@@ -152,6 +159,7 @@ lab.experiment('Authorization', function() {
           token: 'repeat-new-token'
         })
         .get('/test-org/processes?processIds=repeated%2Ctoken')
+        .matchHeader('authorization', 'repeat-new-token')
         .times(4)
         .reply(200, []);
 
@@ -423,7 +431,6 @@ lab.experiment('Authorization', function() {
           message: 'Unauthorized'
         })
         .post('/users/login')
-        .delay(200)
         .reply(200, {});
 
       processes.getProcesses('test-org', ['5', '6'], function(err) {
@@ -431,6 +438,42 @@ lab.experiment('Authorization', function() {
         expect(err.message).to.equal('No authorization token');
         scope.done();
         done();
+      });
+    });
+
+    lab.test('sub-sequent calls use the same token', function(done) {
+      var processes = new Processes({
+        authorization: 'token'
+      }, {
+        credentials: {
+          username: 'effektif-user',
+          password: 'effektif-passw0rd'
+        }
+      });
+
+      scope.get('/test-org/processes?processIds=5%2C6')
+        .matchHeader('authorization', 'token')
+        .reply(401, {
+          message: 'Unauthorized'
+        })
+        .post('/users/login')
+        .reply(200, {
+          token: 'brand-new-token'
+        })
+        .get('/test-org/processes?processIds=5%2C6')
+        .matchHeader('authorization', 'brand-new-token')
+        .reply(200, {})
+        .get('/test-org/processes?processIds=7%2C8')
+        .matchHeader('authorization', 'brand-new-token')
+        .reply(200, {});
+
+      processes.getProcesses('test-org', ['5', '6'], function(err) {
+        if (err) return done(err);
+        processes.getProcesses('test-org', ['7', '8'], function(err) {
+          if (err) return done(err);
+          scope.done();
+          done();
+        });
       });
     });
 
@@ -448,7 +491,6 @@ lab.experiment('Authorization', function() {
 
       scope
         .post('/users/login')
-        .delay(200)
         .reply(200, {
           token: 'brand-new-token'
         })
@@ -473,12 +515,15 @@ lab.experiment('Authorization', function() {
         done();
       });
     });
+
   });
 
   lab.experiment('Custom user instance', function() {
-    lab.test('Not inherited by EventEmitter works to', function(done) {
+
+    lab.test('not inherited by EventEmitter works to', function(done) {
       scope
         .get('/test-org/processes?processIds=custom%2Clogin')
+        .matchHeader('authorization', 'custom-token')
         .reply(200, []);
 
       var processes = new Processes({}, {
