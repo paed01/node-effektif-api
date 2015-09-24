@@ -74,7 +74,8 @@ function printFunctions() {
       if (fname !== 'log' && fname.indexOf('_') !== 0) {
         console.log('\n##', name, fname);
         if (proto.path) {
-          console.log('Represents call to:\n`%s %s`', proto.method, proto.path);
+          console.log('Represents call to:');
+          console.log('`%s %s`', proto.method, proto.path);
         }
         if (proto.requiresAuthorization) {
           console.log('> Requires authorization');

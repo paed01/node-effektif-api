@@ -115,7 +115,7 @@ var Users = require('effektif-api').User;
 
 var processes = new Processes({authorization: 'token'}, {
   users: new Users(),
-  user: {
+  credentials: {
     username: 'me',
     password: 'sup3rs3cr3t'
   }

@@ -44,7 +44,7 @@ Table of contents
   - [`getTaskDocumentsStream`](#task-gettaskdocumentsstream)
   - [`getTaskEvents`](#task-gettaskevents)
   - [`createTaskEvents`](#task-createtaskevents)
-  - [`createTaskFiles`](#task-createtaskfiles)
+  - [`createTaskFile`](#task-createtaskfile)
   - [`updateTaskFormField`](#task-updatetaskformfield)
   - [`getTaskMails`](#task-gettaskmails)
   - [`getTaskNext`](#task-gettasknext)
@@ -72,10 +72,10 @@ Table of contents
   - [`getProcessActivityFormField`](#process-getprocessactivityformfield)
   - [`updateProcessActivityFormField`](#process-updateprocessactivityformfield)
   - [`getProcessActivityParameters`](#process-getprocessactivityparameters)
-  - [`updateProcessActivityParameters`](#process-updateprocessactivityparameters)
-  - [`getProcessActivityParametersBindables`](#process-getprocessactivityparametersbindables)
-  - [`createProcessActivityParametersBindings`](#process-createprocessactivityparametersbindings)
-  - [`deleteProcessActivityParametersBindings`](#process-deleteprocessactivityparametersbindings)
+  - [`updateProcessActivityParameter`](#process-updateprocessactivityparameter)
+  - [`getProcessActivityParameterBindables`](#process-getprocessactivityparameterbindables)
+  - [`createProcessActivityParameterBindings`](#process-createprocessactivityparameterbindings)
+  - [`deleteProcessActivityParameterBinding`](#process-deleteprocessactivityparameterbinding)
   - [`createProcessActivityTest`](#process-createprocessactivitytest)
   - [`createProcessActivityVariableMappings`](#process-createprocessactivityvariablemappings)
   - [`deleteProcessActivityVariableMappings`](#process-deleteprocessactivityvariablemappings)
@@ -108,9 +108,10 @@ Table of contents
   - [`getProcessTriggerParameters`](#process-getprocesstriggerparameters)
   - [`getProcessVariables`](#process-getprocessvariables)
   - [`createProcessVariables`](#process-createprocessvariables)
-  - [`deleteProcessVariables`](#process-deleteprocessvariables)
-  - [`updateProcessVariables`](#process-updateprocessvariables)
-  - [`updateProcessVariablesType`](#process-updateprocessvariablestype)
+  - [`deleteProcessVaiable`](#process-deleteprocessvaiable)
+  - [`getProcessVaiable`](#process-getprocessvaiable)
+  - [`updateProcessVaiable`](#process-updateprocessvaiable)
+  - [`updateProcessVaiableType`](#process-updateprocessvaiabletype)
   - [`getProcessVersions`](#process-getprocessversions)
   - [`createProcessVersions`](#process-createprocessversions)
   - [`createProcessVersionPublish`](#process-createprocessversionpublish)
@@ -121,26 +122,27 @@ Table of contents
 - [Service](#service)
   - [`onUnauthorized`](#service-onunauthorized)
   - [`getOauth_callback`](#service-getoauth_callback)
-  - [`getServicesAccounts`](#service-getservicesaccounts)
-  - [`createServicesAccounts`](#service-createservicesaccounts)
-  - [`updateServicesAccounts`](#service-updateservicesaccounts)
-  - [`getServicesAccountsOptions`](#service-getservicesaccountsoptions)
-  - [`getServicesAccountsReferences`](#service-getservicesaccountsreferences)
-  - [`getServicesOptions`](#service-getservicesoptions)
+  - [`getServiceAccounts`](#service-getserviceaccounts)
+  - [`createServiceAccounts`](#service-createserviceaccounts)
+  - [`getServiceAccount`](#service-getserviceaccount)
+  - [`updateServiceAccount`](#service-updateserviceaccount)
+  - [`getServiceAccountOption`](#service-getserviceaccountoption)
+  - [`getServiceAccountReferences`](#service-getserviceaccountreferences)
+  - [`getServiceOption`](#service-getserviceoption)
   - [`getServices`](#service-getservices)
   - [`createServicesOauthStart`](#service-createservicesoauthstart)
-  - [`createServicesActionInstancesLock`](#service-createservicesactioninstanceslock)
-  - [`createServicesActionInstancesEnd`](#service-createservicesactioninstancesend)
-  - [`getServicesIcon`](#service-getservicesicon)
+  - [`createServiceActionInstancesLock`](#service-createserviceactioninstanceslock)
+  - [`createServiceActionInstancesEnd`](#service-createserviceactioninstancesend)
+  - [`getServiceIcon`](#service-getserviceicon)
 - [Search](#search)
   - [`onUnauthorized`](#search-onunauthorized)
   - [`getSearch`](#search-getsearch)
 - [File](#file)
   - [`onUnauthorized`](#file-onunauthorized)
   - [`createFiles`](#file-createfiles)
-  - [`deleteFiles`](#file-deletefiles)
-  - [`getFiles`](#file-getfiles)
-  - [`getFilesStream`](#file-getfilesstream)
+  - [`deleteFile`](#file-deletefile)
+  - [`getFile`](#file-getfile)
+  - [`getFileStream`](#file-getfilestream)
   - [`createFilesiframe`](#file-createfilesiframe)
 - [ProcessInstance](#processinstance)
   - [`onUnauthorized`](#processinstance-onunauthorized)
@@ -1361,7 +1363,7 @@ Represents call to:
 - `userId`: string
 - `message`: string
 
-## Task createTaskFiles
+## Task createTaskFile
 Represents call to:
 `POST /{organizationKey}/tasks/{taskId}/files/{fileId}`
 > Requires authorization
@@ -2406,7 +2408,7 @@ Represents call to:
 - `activityId`: required string
 - `callback`: required func - function(err, resp, body)
 
-## Process updateProcessActivityParameters
+## Process updateProcessActivityParameter
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/activities/{activityId}/parameters/{parameterKey}`
 > Requires authorization
@@ -2459,7 +2461,7 @@ Represents call to:
   - `processId`: string
   - `type`: object
 
-## Process getProcessActivityParametersBindables
+## Process getProcessActivityParameterBindables
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/activities/{activityId}/parameters/{parameterKey}/bindables`
 > Requires authorization
@@ -2472,7 +2474,7 @@ Represents call to:
 - `parameterKey`: required string
 - `callback`: required func - function(err, resp, body)
 
-## Process createProcessActivityParametersBindings
+## Process createProcessActivityParameterBindings
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/activities/{activityId}/parameters/{parameterKey}/bindings`
 > Requires authorization
@@ -2497,7 +2499,7 @@ Represents call to:
 - `fields`: array
 - `variableId`: string
 
-## Process deleteProcessActivityParametersBindings
+## Process deleteProcessActivityParameterBinding
 Represents call to:
 `DELETE /{organizationKey}/processes/{processId}/activities/{activityId}/parameters/{parameterKey}/bindings/{bindingId}`
 > Requires authorization
@@ -3481,26 +3483,14 @@ Represents call to:
 
 ## Process getProcessVariables
 Represents call to:
-`GET /{organizationKey}/processes/{processId}/variables/{variableId}`
+`GET /{organizationKey}/processes/{processId}/variables`
 > Requires authorization
 
 *Arguments:*
 
 - `organizationKey`: required string
 - `processId`: required string
-- `variableId`: required string
 - `callback`: required func - function(err, resp, body)
-
-*Callback body:*
-
-- `id`: string
-- `bpmnId`: string
-- `defaultValue`: any
-- `name`: string
-- `organizationId`: string
-- `parentId`: string
-- `processId`: string
-- `type`: object
 
 ## Process createProcessVariables
 Represents call to:
@@ -3533,7 +3523,7 @@ Represents call to:
 - `processId`: string
 - `type`: object
 
-## Process deleteProcessVariables
+## Process deleteProcessVaiable
 Represents call to:
 `DELETE /{organizationKey}/processes/{processId}/variables/{variableId}`
 > Requires authorization
@@ -3545,7 +3535,30 @@ Represents call to:
 - `variableId`: required string
 - `callback`: required func - function(err, resp, body)
 
-## Process updateProcessVariables
+## Process getProcessVaiable
+Represents call to:
+`GET /{organizationKey}/processes/{processId}/variables/{variableId}`
+> Requires authorization
+
+*Arguments:*
+
+- `organizationKey`: required string
+- `processId`: required string
+- `variableId`: required string
+- `callback`: required func - function(err, resp, body)
+
+*Callback body:*
+
+- `id`: string
+- `bpmnId`: string
+- `defaultValue`: any
+- `name`: string
+- `organizationId`: string
+- `parentId`: string
+- `processId`: string
+- `type`: object
+
+## Process updateProcessVaiable
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/variables/{variableId}`
 > Requires authorization
@@ -3577,7 +3590,7 @@ Represents call to:
 - `processId`: string
 - `type`: object
 
-## Process updateProcessVariablesType
+## Process updateProcessVaiableType
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/variables/{variableId}/type`
 > Requires authorization
@@ -3843,28 +3856,19 @@ Represents call to:
 - `error`: string
 - `callback`: required func - function(err, resp, body)
 
-## Service getServicesAccounts
+## Service getServiceAccounts
 Represents call to:
-`GET /{organizationKey}/services/{serviceKey}/accounts/{accountId}`
+`GET /{organizationKey}/services/{serviceKey}/accounts`
 > Requires authorization
 
 *Arguments:*
 
 - `organizationKey`: required string
 - `serviceKey`: required string
-- `accountId`: required string
 - `excludeOwner`: string
 - `callback`: required func - function(err, resp, body)
 
-*Callback body:*
-
-- `id`: string
-- `access`: any
-- `restricted`: boolean
-- `serviceKey`: string
-- `userId`: string
-
-## Service createServicesAccounts
+## Service createServiceAccounts
 Represents call to:
 `POST /{organizationKey}/services/{serviceKey}/accounts`
 > Requires authorization
@@ -3889,7 +3893,28 @@ Represents call to:
 - `serviceKey`: string
 - `userId`: string
 
-## Service updateServicesAccounts
+## Service getServiceAccount
+Represents call to:
+`GET /{organizationKey}/services/{serviceKey}/accounts/{accountId}`
+> Requires authorization
+
+*Arguments:*
+
+- `organizationKey`: required string
+- `serviceKey`: required string
+- `accountId`: required string
+- `excludeOwner`: string
+- `callback`: required func - function(err, resp, body)
+
+*Callback body:*
+
+- `id`: string
+- `access`: any
+- `restricted`: boolean
+- `serviceKey`: string
+- `userId`: string
+
+## Service updateServiceAccount
 Represents call to:
 `PUT /{organizationKey}/services/{serviceKey}/accounts/{accountId}`
 > Requires authorization
@@ -3915,7 +3940,7 @@ Represents call to:
 - `serviceKey`: string
 - `userId`: string
 
-## Service getServicesAccountsOptions
+## Service getServiceAccountOption
 Represents call to:
 `GET /{organizationKey}/services/{serviceKey}/accounts/{accountId}/options/{optionsKey}`
 > Requires authorization
@@ -3929,7 +3954,7 @@ Represents call to:
 - `excludeOwner`: string
 - `callback`: required func - function(err, resp, body)
 
-## Service getServicesAccountsReferences
+## Service getServiceAccountReferences
 Represents call to:
 `GET /{organizationKey}/services/{serviceKey}/accounts/{accountId}/references`
 > Requires authorization
@@ -3945,7 +3970,7 @@ Represents call to:
 - `excludeOwner`: string
 - `callback`: required func - function(err, resp, body)
 
-## Service getServicesOptions
+## Service getServiceOption
 Represents call to:
 `GET /{organizationKey}/services/{serviceKey}/options/{optionsKey}`
 > Requires authorization
@@ -3986,7 +4011,7 @@ Represents call to:
 
 - `authorizationUrl`: string
 
-## Service createServicesActionInstancesLock
+## Service createServiceActionInstancesLock
 Represents call to:
 `POST /{organizationKey}/services/{serviceKey}/actionInstances/lock`
 > Requires authorization
@@ -4021,7 +4046,7 @@ Represents call to:
 - `taskId`: string
 - `serviceKey`: string
 
-## Service createServicesActionInstancesEnd
+## Service createServiceActionInstancesEnd
 Represents call to:
 `POST /{organizationKey}/services/{serviceKey}/actionInstances/{actionInstanceId}/end`
 > Requires authorization
@@ -4038,7 +4063,7 @@ Represents call to:
 *Callback body:*
 
 
-## Service getServicesIcon
+## Service getServiceIcon
 Represents call to:
 `GET /{organizationKey}/services/{serviceKey}/icon`
 > Requires authorization
@@ -4103,7 +4128,7 @@ Represents call to:
 - `taskId`: string
 - `userId`: string
 
-## File deleteFiles
+## File deleteFile
 Represents call to:
 `DELETE /{organizationKey}/files/{fileId}`
 > Requires authorization
@@ -4114,7 +4139,7 @@ Represents call to:
 - `fileId`: required string
 - `callback`: required func - function(err, resp, body)
 
-## File getFiles
+## File getFile
 Represents call to:
 `GET /{organizationKey}/files/{fileId}`
 > Requires authorization
@@ -4139,7 +4164,7 @@ Represents call to:
 - `taskId`: string
 - `userId`: string
 
-## File getFilesStream
+## File getFileStream
 Represents call to:
 `GET /{organizationKey}/files/{fileId}/stream`
 > Requires authorization
