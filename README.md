@@ -22,14 +22,33 @@ The module functions are generated from the api-endpoints. The name is composed 
 
 Examples:
 
-|Operation |function name  |
-|----------|---------------|
-| `POST /{organizationKey}/tasks` | `createTasks` | 
-| `DELETE /{organizationKey}/processes/{processId}/activities/{activityId}` | `deleteProcessActivity` | 
+To call `POST /{organizationKey}/tasks`:
+
+```javascript
+var Api = require('effektif-api');
+var tasks = new Api.Task({authorization: 'token'});
+
+var newTask = {};
+
+tasks.createTasks(organizationKey, newTask, function(err, resp, body) {
+  console.log(err, body);  
+});
+```
+
+or `DELETE /{organizationKey}/processes/{processId}/activities/{activityId}`:
+
+```javascript
+var Api = require('effektif-api');
+var processes = new Api.Process({authorization: 'token'});
+
+processes.deleteProcessActivity(organizationKey, processId, activityId, function(err, resp, body) {
+  console.log(err, body);  
+});
+```
 
 The plural ending is removed if the noun is immediately followed by a path parameter, e.g:
 
-`DELETE /{organizationKey}/processes/{processId}` name is `deleteProcess`.
+`DELETE /{organizationKey}/processes/{processId}` function name is `deleteProcess`.
 
 # Interface
 
