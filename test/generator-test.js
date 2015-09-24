@@ -54,7 +54,7 @@ lab.experiment('Generator', function() {
       var Mock = Generator('Mock', template);
       expect(Mock).to.be.a.function();
       expect(Mock.prototype).to.be.an.object();
-      expect(Mock.prototype.applyDefaults).to.be.a.function();
+      expect(Mock.prototype._applyDefaults).to.be.a.function();
       done();
     });
 
@@ -118,7 +118,7 @@ lab.experiment('Generator', function() {
         Authorization: 'token'
       });
 
-      var args = mock.applyDefaults({
+      var args = mock._applyDefaults({
         organizationKey: 'test'
       }, Mock.schemas.getProcesses.input);
       expect(args).to.include(['Authorization', 'organizationKey']);
@@ -150,7 +150,7 @@ lab.experiment('Generator', function() {
         authorization: 'token'
       });
 
-      var args = mock.applyDefaults({
+      var args = mock._applyDefaults({
         organizationKey: 'test'
       }, Mock.schemas.getProcesses.input);
       expect(args).to.include(['Authorization', 'organizationKey']);
@@ -865,7 +865,7 @@ lab.experiment('Generator', function() {
       var mock = new Mock();
 
       expect(function() {
-        mock.getUserInstance();
+        mock._getUserInstance();
       }).to.throw('User interface is not loaded');
 
       done();
@@ -897,7 +897,7 @@ lab.experiment('Generator', function() {
       var mock = new Mock({}, {
         users: users
       });
-      expect(mock.getUserInstance(), 'getUserInstance').to.equal(users);
+      expect(mock._getUserInstance(), 'getUserInstance').to.equal(users);
       done();
     });
 

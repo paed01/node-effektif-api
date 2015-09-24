@@ -18,15 +18,8 @@ function printToc() {
 
     protos.forEach(function(fname) {
       if (fname !== 'log' && fname.indexOf('_') !== 0) {
-        console.log('  -', '[' + fname + '](#' + name.toLowerCase() + '_' + fname.toLowerCase() + ')');
+        console.log('  -', '[`' + fname + '`](#' + name.toLowerCase() + '-' + fname.toLowerCase() + ')');
       }
-      //   var proto = Intfc.prototype[fname];
-      //   console.log(name + '.' + fname, util.inspect(proto));
-
-      //   if (proto.schemas) {
-      //     var input = proto.schemas.input.describe();
-      //     console.log(input);
-      //   }
     });
   });
 }
