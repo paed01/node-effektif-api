@@ -109,6 +109,7 @@ function printFunctions() {
     console.log('**Constructor:**');
     console.log('- `options`');
     printSchema(Intfc.ctorSchema, null, null, '  ');
+    console.log('');
 
     // var inst = new Intfc();
     var protos = Object.keys(Intfc.prototype);
