@@ -106,6 +106,10 @@ function printFunctions() {
 
     var Intfc = Api[name];
 
+    console.log('**Constructor:**');
+    console.log('- `options`');
+    printSchema(Intfc.ctorSchema, null, null, '  ');
+
     // var inst = new Intfc();
     var protos = Object.keys(Intfc.prototype);
 
@@ -120,7 +124,9 @@ function printFunctions() {
           console.log('Represents call to:');
           console.log('`%s %s`', op.method, op.path);
         }
+
         if (op.requiresAuthorization) {
+          console.log('');
           console.log('> Requires authorization');
         }
         if (op.schemas) {
