@@ -1,6 +1,6 @@
 API
 ===
-Auto-generated Api documentation
+Auto-generated Api documentation.
 **Table of contents:**
 - [User](#user)
   - [`getAbout`](#user-getabout)
@@ -45,7 +45,7 @@ Auto-generated Api documentation
   - [`createTaskEvents`](#task-createtaskevents)
   - [`createTaskFile`](#task-createtaskfile)
   - [`updateTaskFormField`](#task-updatetaskformfield)
-  - [`getTaskMails`](#task-gettaskmails)
+  - [`getTaskMail`](#task-gettaskmail)
   - [`getTaskNext`](#task-gettasknext)
   - [`createTaskSubtasks`](#task-createtasksubtasks)
 - [Process](#process)
@@ -166,7 +166,7 @@ Represents call to:
 **Arguments:**
 
 - `providerKey`: required string
-- `body`: required object [ServiceLogin](#model-servicelogin-%s)
+- `body`: required object [ServiceLogin](#model-servicelogin)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -185,7 +185,7 @@ Represents call to:
 - `state`: string
 - `error`: string
 - `error_description`: string
-- `body`: required object [ServiceLogin](#model-servicelogin-%s)
+- `body`: required object [ServiceLogin](#model-servicelogin)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -199,7 +199,7 @@ Represents call to:
 
 **Arguments:**
 
-- `body`: required object [NewRegistration](#model-newregistration-%s)
+- `body`: required object [NewRegistration](#model-newregistration)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -228,7 +228,7 @@ Represents call to:
 **Arguments:**
 
 - `code`: required string
-- `body`: required object [ActivationRequest](#model-activationrequest-%s)
+- `body`: required object [ActivationRequest](#model-activationrequest)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -279,7 +279,7 @@ Represents call to:
 
 **Arguments:**
 
-- `body`: required object [PasswordResetConfirmation](#model-passwordresetconfirmation-%s)
+- `body`: required object [PasswordResetConfirmation](#model-passwordresetconfirmation)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -293,7 +293,7 @@ Represents call to:
 
 **Arguments:**
 
-- `body`: required object [LoginRequest](#model-loginrequest-%s)
+- `body`: required object [LoginRequest](#model-loginrequest)
 - `callback`: required func - function(err, resp, body)
 
 ## User createUsersLoginHandover
@@ -302,7 +302,7 @@ Represents call to:
 
 **Arguments:**
 
-- `body`: required object [HandoverLogin](#model-handoverlogin-%s)
+- `body`: required object [HandoverLogin](#model-handoverlogin)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -316,7 +316,7 @@ Represents call to:
 
 **Arguments:**
 
-- `body`: required object [UserMailAddress](#model-usermailaddress-%s)
+- `body`: required object [UserMailAddress](#model-usermailaddress)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -347,7 +347,7 @@ Represents call to:
 **Arguments:**
 
 - `userId`: required string
-- `body`: required object [User](#model-user-%s)
+- `body`: required object [User](#model-user)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -397,7 +397,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `userId`: required string
-- `body`: required object [HandoverLogin](#model-handoverlogin-%s)
+- `body`: required object [HandoverLogin](#model-handoverlogin)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -428,7 +428,7 @@ Represents call to:
 
 **Arguments:**
 
-- `body`: required object [Map](#model-map-%s)
+- `body`: required object [Map](#model-map)
 - `callback`: required func - function(err, resp, body)
 
 # Task
@@ -523,7 +523,7 @@ Represents call to:
 **Arguments:**
 
 - `organizationKey`: required string
-- `body`: required object [NewTask](#model-newtask-%s)
+- `body`: required object [NewTask](#model-newtask)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -586,7 +586,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `taskId`: required string
-- `body`: required object [Task](#model-task-%s)
+- `body`: required object [Task](#model-task)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -603,7 +603,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `taskId`: required string
-- `body`: required object [Document](#model-document-%s)
+- `body`: required object [Document](#model-document)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -685,7 +685,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `taskId`: required string
-- `body`: required object [CommentRequest](#model-commentrequest-%s)
+- `body`: required object [CommentRequest](#model-commentrequest)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -720,7 +720,7 @@ Represents call to:
 - `organizationKey`: required string
 - `taskId`: required string
 - `fieldId`: required string
-- `body`: required object [FormField](#model-formfield-%s)
+- `body`: required object [FormField](#model-formfield)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -728,7 +728,7 @@ Represents call to:
 - `response`: Http response
 - `body`: [FormField](#model-formfield)
 
-## Task getTaskMails
+## Task getTaskMail
 Represents call to:
 `GET /{organizationKey}/tasks/{taskId}/mails/{mailId}`
 > Requires authorization
@@ -765,7 +765,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `taskId`: required string
-- `body`: required object [NewTask](#model-newtask-%s)
+- `body`: required object [NewTask](#model-newtask)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -794,7 +794,7 @@ Represents call to:
 **Arguments:**
 
 - `organizationKey`: required string
-- `body`: required object [NewProcess](#model-newprocess-%s)
+- `body`: required object [NewProcess](#model-newprocess)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -810,7 +810,7 @@ Represents call to:
 **Arguments:**
 
 - `organizationKey`: required string
-- `body`: required string [string](#model-string-%s)
+- `body`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 ## Process createProcessesImportJson
@@ -821,7 +821,7 @@ Represents call to:
 **Arguments:**
 
 - `organizationKey`: required string
-- `body`: required object [Process](#model-process-%s)
+- `body`: required object [Process](#model-process)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -867,7 +867,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `processId`: required string
-- `body`: required object [Process](#model-process-%s)
+- `body`: required object [Process](#model-process)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -895,7 +895,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `processId`: required string
-- `body`: required object [Activity](#model-activity-%s)
+- `body`: required object [Activity](#model-activity)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -942,7 +942,7 @@ Represents call to:
 - `organizationKey`: required string
 - `processId`: required string
 - `activityId`: required string
-- `body`: required object [Activity](#model-activity-%s)
+- `body`: required object [Activity](#model-activity)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -961,7 +961,7 @@ Represents call to:
 - `processId`: required string
 - `activityId`: required string
 - `fieldId`: required string
-- `body`: required object [FormField](#model-formfield-%s)
+- `body`: required object [FormField](#model-formfield)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -997,7 +997,7 @@ Represents call to:
 - `organizationKey`: required string
 - `processId`: required string
 - `activityId`: required string
-- `body`: required object [Form](#model-form-%s)
+- `body`: required object [Form](#model-form)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1028,7 +1028,7 @@ Represents call to:
 - `organizationKey`: required string
 - `processId`: required string
 - `activityId`: required string
-- `body`: required object [NewFormField](#model-newformfield-%s)
+- `body`: required object [NewFormField](#model-newformfield)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1078,7 +1078,7 @@ Represents call to:
 - `processId`: required string
 - `activityId`: required string
 - `fieldId`: required string
-- `body`: required object [FormField](#model-formfield-%s)
+- `body`: required object [FormField](#model-formfield)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1109,7 +1109,7 @@ Represents call to:
 - `processId`: required string
 - `activityId`: required string
 - `parameterKey`: required string
-- `body`: required object [Parameter](#model-parameter-%s)
+- `body`: required object [Parameter](#model-parameter)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1141,7 +1141,7 @@ Represents call to:
 - `processId`: required string
 - `activityId`: required string
 - `parameterKey`: required string
-- `body`: required object [Binding](#model-binding-%s)
+- `body`: required object [Binding](#model-binding)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1190,7 +1190,7 @@ Represents call to:
 - `organizationKey`: required string
 - `processId`: required string
 - `activityId`: required string
-- `body`: required object [VariableMapping](#model-variablemapping-%s)
+- `body`: required object [VariableMapping](#model-variablemapping)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1222,7 +1222,7 @@ Represents call to:
 - `processId`: required string
 - `activityId`: required string
 - `variableMappingId`: required string
-- `body`: required object [VariableMapping](#model-variablemapping-%s)
+- `body`: required object [VariableMapping](#model-variablemapping)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1261,7 +1261,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `processId`: required string
-- `body`: required object [CazeColumn](#model-cazecolumn-%s)
+- `body`: required object [CazeColumn](#model-cazecolumn)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1291,7 +1291,7 @@ Represents call to:
 - `organizationKey`: required string
 - `processId`: required string
 - `columnId`: required string
-- `body`: required object [CazeColumn](#model-cazecolumn-%s)
+- `body`: required object [CazeColumn](#model-cazecolumn)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1340,7 +1340,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `processId`: required string
-- `body`: required object [Diagram](#model-diagram-%s)
+- `body`: required object [Diagram](#model-diagram)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1395,7 +1395,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `processId`: required string
-- `body`: required object [Transition](#model-transition-%s)
+- `body`: required object [Transition](#model-transition)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1442,7 +1442,7 @@ Represents call to:
 - `organizationKey`: required string
 - `processId`: required string
 - `transitionId`: required string
-- `body`: required object [Transition](#model-transition-%s)
+- `body`: required object [Transition](#model-transition)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1486,7 +1486,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `processId`: required string
-- `body`: required object [Trigger](#model-trigger-%s)
+- `body`: required object [Trigger](#model-trigger)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1522,7 +1522,7 @@ Represents call to:
 - `organizationKey`: required string
 - `processId`: required string
 - `activityId`: required string
-- `body`: required object [Form](#model-form-%s)
+- `body`: required object [Form](#model-form)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1553,7 +1553,7 @@ Represents call to:
 - `organizationKey`: required string
 - `processId`: required string
 - `activityId`: required string
-- `body`: required object [NewFormField](#model-newformfield-%s)
+- `body`: required object [NewFormField](#model-newformfield)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1603,7 +1603,7 @@ Represents call to:
 - `processId`: required string
 - `activityId`: required string
 - `fieldId`: required string
-- `body`: required object [FormField](#model-formfield-%s)
+- `body`: required object [FormField](#model-formfield)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1643,7 +1643,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `processId`: required string
-- `body`: required object [Variable](#model-variable-%s)
+- `body`: required object [Variable](#model-variable)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1690,7 +1690,7 @@ Represents call to:
 - `organizationKey`: required string
 - `processId`: required string
 - `variableId`: required string
-- `body`: required object [Variable](#model-variable-%s)
+- `body`: required object [Variable](#model-variable)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1708,7 +1708,7 @@ Represents call to:
 - `organizationKey`: required string
 - `processId`: required string
 - `variableId`: required string
-- `body`: required object [Type](#model-type-%s)
+- `body`: required object [Type](#model-type)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1853,7 +1853,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `serviceKey`: required string
-- `body`: required object [Account](#model-account-%s)
+- `body`: required object [Account](#model-account)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1889,7 +1889,7 @@ Represents call to:
 - `organizationKey`: required string
 - `serviceKey`: required string
 - `accountId`: required string
-- `body`: required object [Account](#model-account-%s)
+- `body`: required object [Account](#model-account)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1959,7 +1959,7 @@ Represents call to:
 **Arguments:**
 
 - `organizationKey`: required string
-- `body`: required object [OauthStartRequest](#model-oauthstartrequest-%s)
+- `body`: required object [OauthStartRequest](#model-oauthstartrequest)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1976,7 +1976,7 @@ Represents call to:
 
 - `organizationKey`: required string
 - `serviceKey`: required string
-- `body`: required object [ActionInstance](#model-actioninstance-%s)
+- `body`: required object [ActionInstance](#model-actioninstance)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -1994,7 +1994,7 @@ Represents call to:
 - `organizationKey`: required string
 - `serviceKey`: required string
 - `actionInstanceId`: required string
-- `body`: required object [ActionInstanceEnd](#model-actioninstanceend-%s)
+- `body`: required object [ActionInstanceEnd](#model-actioninstanceend)
 - `callback`: required func - function(err, resp, body)
 
 **Callback:**
@@ -2128,7 +2128,7 @@ Represents call to:
 - `organizationKey`: required string
 - `processId`: required string
 - `processInstanceId`: required string
-- `body`: required object [List](#model-list-%s)
+- `body`: required object [List](#model-list)
 - `callback`: required func - function(err, resp, body)
 
 # Models
@@ -2671,7 +2671,7 @@ Represents call to:
 - `to`: array
 
 **Used by:**
-[`Task.getTaskMails`](#task-gettaskmails)
+[`Task.getTaskMail`](#task-gettaskmail)
 
 ## Model NewProcess
 

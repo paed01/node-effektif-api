@@ -13,7 +13,9 @@ if (process.argv.length > 3) {
 
 var models = {};
 
-console.log('API\n===\nAuto-generated Api documentation');
+console.log('API');
+console.log('===');
+console.log('Auto-generated Api documentation.');
 
 function printToc() {
   console.log('**Table of contents:**');
@@ -83,7 +85,7 @@ function printSchema(schema, interfaceName, operation, padding, ignoreChildren) 
 
     if (originalType) {
       if (interfaceName) {
-        process.stdout.write(util.format(' [%s](#model-%s-%s)', originalType, originalType.toLowerCase()));
+        process.stdout.write(util.format(' [%s](#model-%s)', originalType, originalType.toLowerCase()));
       } else {
         process.stdout.write(util.format(' ref %s', originalType));
       }
