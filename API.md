@@ -144,10 +144,22 @@ Auto-generated Api documentation.
   - [`updateProcessInstancesVariables`](#processinstance-updateprocessinstancesvariables)
 
 # User
+**Constructor:**
+- `options`
 
+  - `credentials`: object - Default credentials
+    - `authorization`: string - Authorization token, will be set as Authorization http header
+    - `username`: string - Username
+    - `password`: string - Password
+  - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made
+  - `users`: object - Users instance
+    - `login`: required func - Login function
+  - `log`: func - Logging function, defaults to console.log
 ## User getAbout
 Represents call to:
 `GET /about`
+
 > Requires authorization
 
 **Arguments:**
@@ -327,6 +339,7 @@ Represents call to:
 ## User getUser
 Represents call to:
 `GET /{organizationKey}/users/{userId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -381,6 +394,7 @@ Represents call to:
 ## User getUsers
 Represents call to:
 `GET /{organizationKey}/users`
+
 > Requires authorization
 
 **Arguments:**
@@ -391,6 +405,7 @@ Represents call to:
 ## User createUserHandover
 Represents call to:
 `POST /{organizationKey}/users/{userId}/handover`
+
 > Requires authorization
 
 **Arguments:**
@@ -408,6 +423,7 @@ Represents call to:
 ## User getUserPicture
 Represents call to:
 `GET /{organizationKey}/users/{userId}/picture`
+
 > Requires authorization
 
 **Arguments:**
@@ -424,6 +440,7 @@ Represents call to:
 ## User updateUserPreferences
 Represents call to:
 `PUT /{workspaceKey}/users/{userId}/preferences`
+
 > Requires authorization
 
 **Arguments:**
@@ -432,10 +449,22 @@ Represents call to:
 - `callback`: required func - function(err, resp, body)
 
 # Task
+**Constructor:**
+- `options`
 
+  - `credentials`: object - Default credentials
+    - `authorization`: string - Authorization token, will be set as Authorization http header
+    - `username`: string - Username
+    - `password`: string - Password
+  - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made
+  - `users`: object - Users instance
+    - `login`: required func - Login function
+  - `log`: func - Logging function, defaults to console.log
 ## Task getCases
 Represents call to:
 `GET /{organizationKey}/cases`
+
 > Requires authorization
 
 **Arguments:**
@@ -448,6 +477,7 @@ Represents call to:
 ## Task getCasesInfo
 Represents call to:
 `GET /{organizationKey}/cases/info`
+
 > Requires authorization
 
 **Arguments:**
@@ -458,6 +488,7 @@ Represents call to:
 ## Task getProcessStartForm
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/startForm`
+
 > Requires authorization
 
 **Arguments:**
@@ -474,6 +505,7 @@ Represents call to:
 ## Task createProcessTaskname
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/taskname`
+
 > Requires authorization
 
 **Arguments:**
@@ -490,6 +522,7 @@ Represents call to:
 ## Task getTasks
 Represents call to:
 `GET /{organizationKey}/tasks`
+
 > Requires authorization
 
 **Arguments:**
@@ -504,6 +537,7 @@ Represents call to:
 ## Task headTasks
 Represents call to:
 `HEAD /{organizationKey}/tasks`
+
 > Requires authorization
 
 **Arguments:**
@@ -518,6 +552,7 @@ Represents call to:
 ## Task createTasks
 Represents call to:
 `POST /{organizationKey}/tasks`
+
 > Requires authorization
 
 **Arguments:**
@@ -534,6 +569,7 @@ Represents call to:
 ## Task getTasksFilterCounts
 Represents call to:
 `GET /{organizationKey}/tasks/filter/counts`
+
 > Requires authorization
 
 **Arguments:**
@@ -553,6 +589,7 @@ Represents call to:
 ## Task deleteTask
 Represents call to:
 `DELETE /{organizationKey}/tasks/{taskId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -564,6 +601,7 @@ Represents call to:
 ## Task getTask
 Represents call to:
 `GET /{organizationKey}/tasks/{taskId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -580,6 +618,7 @@ Represents call to:
 ## Task updateTask
 Represents call to:
 `PUT /{organizationKey}/tasks/{taskId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -597,6 +636,7 @@ Represents call to:
 ## Task createTaskDocuments
 Represents call to:
 `POST /{organizationKey}/tasks/{taskId}/documents`
+
 > Requires authorization
 
 **Arguments:**
@@ -639,6 +679,7 @@ Represents call to:
 ## Task deleteTaskDocument
 Represents call to:
 `DELETE /{organizationKey}/tasks/{taskId}/documents/{documentId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -651,6 +692,7 @@ Represents call to:
 ## Task getTaskDocumentStream
 Represents call to:
 `GET /{organizationKey}/tasks/{taskId}/documents/{documentId}/stream`
+
 > Requires authorization
 
 **Arguments:**
@@ -668,6 +710,7 @@ Represents call to:
 ## Task getTaskEvents
 Represents call to:
 `GET /{organizationKey}/tasks/{taskId}/events`
+
 > Requires authorization
 
 **Arguments:**
@@ -679,6 +722,7 @@ Represents call to:
 ## Task createTaskEvents
 Represents call to:
 `POST /{organizationKey}/tasks/{taskId}/events`
+
 > Requires authorization
 
 **Arguments:**
@@ -696,6 +740,7 @@ Represents call to:
 ## Task createTaskFile
 Represents call to:
 `POST /{organizationKey}/tasks/{taskId}/files/{fileId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -713,6 +758,7 @@ Represents call to:
 ## Task updateTaskFormField
 Represents call to:
 `PUT /{organizationKey}/tasks/{taskId}/form/fields/{fieldId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -731,6 +777,7 @@ Represents call to:
 ## Task getTaskMail
 Represents call to:
 `GET /{organizationKey}/tasks/{taskId}/mails/{mailId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -748,6 +795,7 @@ Represents call to:
 ## Task getTaskNext
 Represents call to:
 `GET /{organizationKey}/tasks/{taskId}/next`
+
 > Requires authorization
 
 **Arguments:**
@@ -759,6 +807,7 @@ Represents call to:
 ## Task createTaskSubtasks
 Represents call to:
 `POST /{organizationKey}/tasks/{taskId}/subtasks`
+
 > Requires authorization
 
 **Arguments:**
@@ -774,10 +823,22 @@ Represents call to:
 - `body`: [TaskXL](#model-taskxl)
 
 # Process
+**Constructor:**
+- `options`
 
+  - `credentials`: object - Default credentials
+    - `authorization`: string - Authorization token, will be set as Authorization http header
+    - `username`: string - Username
+    - `password`: string - Password
+  - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made
+  - `users`: object - Users instance
+    - `login`: required func - Login function
+  - `log`: func - Logging function, defaults to console.log
 ## Process getProcesses
 Represents call to:
 `GET /{organizationKey}/processes`
+
 > Requires authorization
 
 **Arguments:**
@@ -789,6 +850,7 @@ Represents call to:
 ## Process createProcesses
 Represents call to:
 `POST /{organizationKey}/processes`
+
 > Requires authorization
 
 **Arguments:**
@@ -805,6 +867,7 @@ Represents call to:
 ## Process createProcessesImport
 Represents call to:
 `POST /{organizationKey}/processes/import`
+
 > Requires authorization
 
 **Arguments:**
@@ -816,6 +879,7 @@ Represents call to:
 ## Process createProcessesImportJson
 Represents call to:
 `POST /{organizationKey}/processes/import/json`
+
 > Requires authorization
 
 **Arguments:**
@@ -832,6 +896,7 @@ Represents call to:
 ## Process deleteProcess
 Represents call to:
 `DELETE /{organizationKey}/processes/{processId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -844,6 +909,7 @@ Represents call to:
 ## Process getProcess
 Represents call to:
 `GET /{organizationKey}/processes/{processId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -861,6 +927,7 @@ Represents call to:
 ## Process updateProcess
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -878,6 +945,7 @@ Represents call to:
 ## Process getProcessActivities
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/activities`
+
 > Requires authorization
 
 **Arguments:**
@@ -889,6 +957,7 @@ Represents call to:
 ## Process createProcessActivities
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/activities`
+
 > Requires authorization
 
 **Arguments:**
@@ -906,6 +975,7 @@ Represents call to:
 ## Process deleteProcessActivity
 Represents call to:
 `DELETE /{organizationKey}/processes/{processId}/activities/{activityId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -918,6 +988,7 @@ Represents call to:
 ## Process getProcessActivity
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/activities/{activityId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -935,6 +1006,7 @@ Represents call to:
 ## Process updateProcessActivity
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/activities/{activityId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -953,6 +1025,7 @@ Represents call to:
 ## Process updateProcessActivityConfigurationField
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/activities/{activityId}/configuration/fields/{fieldId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -972,6 +1045,7 @@ Represents call to:
 ## Process getProcessActivityForm
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/activities/{activityId}/form`
+
 > Requires authorization
 
 **Arguments:**
@@ -990,6 +1064,7 @@ Represents call to:
 ## Process updateProcessActivityForm
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/activities/{activityId}/form`
+
 > Requires authorization
 
 **Arguments:**
@@ -1008,6 +1083,7 @@ Represents call to:
 ## Process getProcessActivityFormFields
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/activities/{activityId}/form/fields`
+
 > Requires authorization
 
 **Arguments:**
@@ -1021,6 +1097,7 @@ Represents call to:
 ## Process createProcessActivityFormFields
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/activities/{activityId}/form/fields`
+
 > Requires authorization
 
 **Arguments:**
@@ -1039,6 +1116,7 @@ Represents call to:
 ## Process deleteProcessActivityFormField
 Represents call to:
 `DELETE /{organizationKey}/processes/{processId}/activities/{activityId}/form/fields/{fieldId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1052,6 +1130,7 @@ Represents call to:
 ## Process getProcessActivityFormField
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/activities/{activityId}/form/fields/{fieldId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1070,6 +1149,7 @@ Represents call to:
 ## Process updateProcessActivityFormField
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/activities/{activityId}/form/fields/{fieldId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1089,6 +1169,7 @@ Represents call to:
 ## Process getProcessActivityParameters
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/activities/{activityId}/parameters`
+
 > Requires authorization
 
 **Arguments:**
@@ -1101,6 +1182,7 @@ Represents call to:
 ## Process updateProcessActivityParameter
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/activities/{activityId}/parameters/{parameterKey}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1120,6 +1202,7 @@ Represents call to:
 ## Process getProcessActivityParameterBindables
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/activities/{activityId}/parameters/{parameterKey}/bindables`
+
 > Requires authorization
 
 **Arguments:**
@@ -1133,6 +1216,7 @@ Represents call to:
 ## Process createProcessActivityParameterBindings
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/activities/{activityId}/parameters/{parameterKey}/bindings`
+
 > Requires authorization
 
 **Arguments:**
@@ -1152,6 +1236,7 @@ Represents call to:
 ## Process deleteProcessActivityParameterBinding
 Represents call to:
 `DELETE /{organizationKey}/processes/{processId}/activities/{activityId}/parameters/{parameterKey}/bindings/{bindingId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1166,6 +1251,7 @@ Represents call to:
 ## Process createProcessActivityTest
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/activities/{activityId}/test`
+
 > Requires authorization
 
 **Arguments:**
@@ -1183,6 +1269,7 @@ Represents call to:
 ## Process createProcessActivityVariableMappings
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/activities/{activityId}/variableMappings`
+
 > Requires authorization
 
 **Arguments:**
@@ -1201,6 +1288,7 @@ Represents call to:
 ## Process deleteProcessActivityVariableMappings
 Represents call to:
 `DELETE /{organizationKey}/processes/{processId}/activities/{activityId}/variableMappings/{variableMappingId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1214,6 +1302,7 @@ Represents call to:
 ## Process updateProcessActivityVariableMappings
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/activities/{activityId}/variableMappings/{variableMappingId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1233,6 +1322,7 @@ Represents call to:
 ## Process getProcessBindables
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/bindables`
+
 > Requires authorization
 
 **Arguments:**
@@ -1244,6 +1334,7 @@ Represents call to:
 ## Process getProcessCaseColumns
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/caseColumns`
+
 > Requires authorization
 
 **Arguments:**
@@ -1255,6 +1346,7 @@ Represents call to:
 ## Process createProcessCaseColumns
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/caseColumns`
+
 > Requires authorization
 
 **Arguments:**
@@ -1272,6 +1364,7 @@ Represents call to:
 ## Process deleteProcessCaseColumns
 Represents call to:
 `DELETE /{organizationKey}/processes/{processId}/caseColumns/{columnId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1284,6 +1377,7 @@ Represents call to:
 ## Process updateProcessCaseColumns
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/caseColumns/{columnId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1302,6 +1396,7 @@ Represents call to:
 ## Process createProcessCopy
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/copy`
+
 > Requires authorization
 
 **Arguments:**
@@ -1318,6 +1413,7 @@ Represents call to:
 ## Process getProcessDiagram
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/diagram`
+
 > Requires authorization
 
 **Arguments:**
@@ -1334,6 +1430,7 @@ Represents call to:
 ## Process updateProcessDiagram
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/diagram`
+
 > Requires authorization
 
 **Arguments:**
@@ -1351,6 +1448,7 @@ Represents call to:
 ## Process getProcessExport
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/export`
+
 > Requires authorization
 
 **Arguments:**
@@ -1362,6 +1460,7 @@ Represents call to:
 ## Process getProcessExportJson
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/export/json`
+
 > Requires authorization
 
 **Arguments:**
@@ -1378,6 +1477,7 @@ Represents call to:
 ## Process getProcessTransitions
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/transitions`
+
 > Requires authorization
 
 **Arguments:**
@@ -1389,6 +1489,7 @@ Represents call to:
 ## Process createProcessTransitions
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/transitions`
+
 > Requires authorization
 
 **Arguments:**
@@ -1406,6 +1507,7 @@ Represents call to:
 ## Process deleteProcessTransition
 Represents call to:
 `DELETE /{organizationKey}/processes/{processId}/transitions/{transitionId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1418,6 +1520,7 @@ Represents call to:
 ## Process getProcessTransition
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/transitions/{transitionId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1435,6 +1538,7 @@ Represents call to:
 ## Process updateProcessTransition
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/transitions/{transitionId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1453,6 +1557,7 @@ Represents call to:
 ## Process deleteProcessTrigger
 Represents call to:
 `DELETE /{organizationKey}/processes/{processId}/trigger`
+
 > Requires authorization
 
 **Arguments:**
@@ -1464,6 +1569,7 @@ Represents call to:
 ## Process getProcessTrigger
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/trigger`
+
 > Requires authorization
 
 **Arguments:**
@@ -1480,6 +1586,7 @@ Represents call to:
 ## Process updateProcessTrigger
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/trigger`
+
 > Requires authorization
 
 **Arguments:**
@@ -1497,6 +1604,7 @@ Represents call to:
 ## Process getProcessTriggerForm
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/trigger/form`
+
 > Requires authorization
 
 **Arguments:**
@@ -1515,6 +1623,7 @@ Represents call to:
 ## Process updateProcessTriggerForm
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/trigger/form`
+
 > Requires authorization
 
 **Arguments:**
@@ -1533,6 +1642,7 @@ Represents call to:
 ## Process getProcessTriggerFormFields
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/trigger/form/fields`
+
 > Requires authorization
 
 **Arguments:**
@@ -1546,6 +1656,7 @@ Represents call to:
 ## Process createProcessTriggerFormFields
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/trigger/form/fields`
+
 > Requires authorization
 
 **Arguments:**
@@ -1564,6 +1675,7 @@ Represents call to:
 ## Process deleteProcessTriggerFormField
 Represents call to:
 `DELETE /{organizationKey}/processes/{processId}/trigger/form/fields/{fieldId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1577,6 +1689,7 @@ Represents call to:
 ## Process getProcessTriggerFormField
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/trigger/form/fields/{fieldId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1595,6 +1708,7 @@ Represents call to:
 ## Process updateProcessTriggerFormField
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/trigger/form/fields/{fieldId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1614,6 +1728,7 @@ Represents call to:
 ## Process getProcessTriggerParameters
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/trigger/parameters`
+
 > Requires authorization
 
 **Arguments:**
@@ -1626,6 +1741,7 @@ Represents call to:
 ## Process getProcessVariables
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/variables`
+
 > Requires authorization
 
 **Arguments:**
@@ -1637,6 +1753,7 @@ Represents call to:
 ## Process createProcessVariables
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/variables`
+
 > Requires authorization
 
 **Arguments:**
@@ -1654,6 +1771,7 @@ Represents call to:
 ## Process deleteProcessVariable
 Represents call to:
 `DELETE /{organizationKey}/processes/{processId}/variables/{variableId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1666,6 +1784,7 @@ Represents call to:
 ## Process getProcessVariable
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/variables/{variableId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1683,6 +1802,7 @@ Represents call to:
 ## Process updateProcessVariable
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/variables/{variableId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1701,6 +1821,7 @@ Represents call to:
 ## Process updateProcessVariableType
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/variables/{variableId}/type`
+
 > Requires authorization
 
 **Arguments:**
@@ -1719,6 +1840,7 @@ Represents call to:
 ## Process getProcessVersions
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/versions`
+
 > Requires authorization
 
 **Arguments:**
@@ -1730,6 +1852,7 @@ Represents call to:
 ## Process createProcessVersions
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/versions`
+
 > Requires authorization
 
 **Arguments:**
@@ -1746,6 +1869,7 @@ Represents call to:
 ## Process createProcessVersionPublish
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/versions/{versionId}/publish`
+
 > Requires authorization
 
 **Arguments:**
@@ -1763,6 +1887,7 @@ Represents call to:
 ## Process createProcessVersionRestore
 Represents call to:
 `POST /{organizationKey}/processes/{processId}/versions/{versionId}/restore`
+
 > Requires authorization
 
 **Arguments:**
@@ -1780,6 +1905,7 @@ Represents call to:
 ## Process getProcessVersionTriggerForm
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/versions/{versionId}/trigger/form`
+
 > Requires authorization
 
 **Arguments:**
@@ -1798,6 +1924,7 @@ Represents call to:
 ## Process getProcessVersionTriggerFormFields
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/versions/{versionId}/trigger/form/fields`
+
 > Requires authorization
 
 **Arguments:**
@@ -1811,6 +1938,7 @@ Represents call to:
 ## Process getTemplates
 Represents call to:
 `GET /{organizationKey}/templates`
+
 > Requires authorization
 
 **Arguments:**
@@ -1820,7 +1948,18 @@ Represents call to:
 - `callback`: required func - function(err, resp, body)
 
 # Service
+**Constructor:**
+- `options`
 
+  - `credentials`: object - Default credentials
+    - `authorization`: string - Authorization token, will be set as Authorization http header
+    - `username`: string - Username
+    - `password`: string - Password
+  - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made
+  - `users`: object - Users instance
+    - `login`: required func - Login function
+  - `log`: func - Logging function, defaults to console.log
 ## Service getOauth_callback
 Represents call to:
 `GET /oauth_callback`
@@ -1835,6 +1974,7 @@ Represents call to:
 ## Service getServiceAccounts
 Represents call to:
 `GET /{organizationKey}/services/{serviceKey}/accounts`
+
 > Requires authorization
 
 **Arguments:**
@@ -1847,6 +1987,7 @@ Represents call to:
 ## Service createServiceAccounts
 Represents call to:
 `POST /{organizationKey}/services/{serviceKey}/accounts`
+
 > Requires authorization
 
 **Arguments:**
@@ -1864,6 +2005,7 @@ Represents call to:
 ## Service getServiceAccount
 Represents call to:
 `GET /{organizationKey}/services/{serviceKey}/accounts/{accountId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1882,6 +2024,7 @@ Represents call to:
 ## Service updateServiceAccount
 Represents call to:
 `PUT /{organizationKey}/services/{serviceKey}/accounts/{accountId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1900,6 +2043,7 @@ Represents call to:
 ## Service getServiceAccountOption
 Represents call to:
 `GET /{organizationKey}/services/{serviceKey}/accounts/{accountId}/options/{optionsKey}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1914,6 +2058,7 @@ Represents call to:
 ## Service getServiceAccountReferences
 Represents call to:
 `GET /{organizationKey}/services/{serviceKey}/accounts/{accountId}/references`
+
 > Requires authorization
 
 **Arguments:**
@@ -1930,6 +2075,7 @@ Represents call to:
 ## Service getServiceOption
 Represents call to:
 `GET /{organizationKey}/services/{serviceKey}/options/{optionsKey}`
+
 > Requires authorization
 
 **Arguments:**
@@ -1944,6 +2090,7 @@ Represents call to:
 ## Service getServices
 Represents call to:
 `GET /{organizationKey}/services`
+
 > Requires authorization
 
 **Arguments:**
@@ -1954,6 +2101,7 @@ Represents call to:
 ## Service createServicesOauthStart
 Represents call to:
 `POST /{organizationKey}/services/oauth/start`
+
 > Requires authorization
 
 **Arguments:**
@@ -1970,6 +2118,7 @@ Represents call to:
 ## Service createServiceActionInstancesLock
 Represents call to:
 `POST /{organizationKey}/services/{serviceKey}/actionInstances/lock`
+
 > Requires authorization
 
 **Arguments:**
@@ -1987,6 +2136,7 @@ Represents call to:
 ## Service createServiceActionInstancesEnd
 Represents call to:
 `POST /{organizationKey}/services/{serviceKey}/actionInstances/{actionInstanceId}/end`
+
 > Requires authorization
 
 **Arguments:**
@@ -2005,6 +2155,7 @@ Represents call to:
 ## Service getServiceIcon
 Represents call to:
 `GET /{organizationKey}/services/{serviceKey}/icon`
+
 > Requires authorization
 
 **Arguments:**
@@ -2019,10 +2170,22 @@ Represents call to:
 - `body`: [FileStream](#model-filestream)
 
 # Search
+**Constructor:**
+- `options`
 
+  - `credentials`: object - Default credentials
+    - `authorization`: string - Authorization token, will be set as Authorization http header
+    - `username`: string - Username
+    - `password`: string - Password
+  - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made
+  - `users`: object - Users instance
+    - `login`: required func - Login function
+  - `log`: func - Logging function, defaults to console.log
 ## Search getSearch
 Represents call to:
 `GET /{organizationKey}/search`
+
 > Requires authorization
 
 **Arguments:**
@@ -2037,7 +2200,18 @@ Represents call to:
 - `body`: [SearchResult](#model-searchresult)
 
 # File
+**Constructor:**
+- `options`
 
+  - `credentials`: object - Default credentials
+    - `authorization`: string - Authorization token, will be set as Authorization http header
+    - `username`: string - Username
+    - `password`: string - Password
+  - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made
+  - `users`: object - Users instance
+    - `login`: required func - Login function
+  - `log`: func - Logging function, defaults to console.log
 ## File createFiles
 Represents call to:
 `POST /{organizationKey}/files`
@@ -2055,6 +2229,7 @@ Represents call to:
 ## File deleteFile
 Represents call to:
 `DELETE /{organizationKey}/files/{fileId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -2066,6 +2241,7 @@ Represents call to:
 ## File getFile
 Represents call to:
 `GET /{organizationKey}/files/{fileId}`
+
 > Requires authorization
 
 **Arguments:**
@@ -2082,6 +2258,7 @@ Represents call to:
 ## File getFileStream
 Represents call to:
 `GET /{organizationKey}/files/{fileId}/stream`
+
 > Requires authorization
 
 **Arguments:**
@@ -2105,10 +2282,22 @@ Represents call to:
 - `callback`: required func - function(err, resp, body)
 
 # ProcessInstance
+**Constructor:**
+- `options`
 
+  - `credentials`: object - Default credentials
+    - `authorization`: string - Authorization token, will be set as Authorization http header
+    - `username`: string - Username
+    - `password`: string - Password
+  - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made
+  - `users`: object - Users instance
+    - `login`: required func - Login function
+  - `log`: func - Logging function, defaults to console.log
 ## ProcessInstance getProcessInstancesVariables
 Represents call to:
 `GET /{organizationKey}/processes/{processId}/instances/{processInstanceId}/variables`
+
 > Requires authorization
 
 **Arguments:**
@@ -2121,6 +2310,7 @@ Represents call to:
 ## ProcessInstance updateProcessInstancesVariables
 Represents call to:
 `PUT /{organizationKey}/processes/{processId}/instances/{processInstanceId}/variables`
+
 > Requires authorization
 
 **Arguments:**
