@@ -76,21 +76,23 @@ function printSchema(schema, interfaceName, operation, padding, ignoreChildren) 
     var originalType = child.label;
 
     if (originalType) addModel(originalType, interfaceName, operation);
+    var msg = '';
+    msg += util.format('%s- `%s`:', padding, name);
 
-    process.stdout.write(util.format('\n%s- `%s`:', padding, name));
+    if (required) msg += util.format(' required');
 
-    if (required) process.stdout.write(util.format(' required'));
-
-    process.stdout.write(util.format(' %s', child.type));
+    msg += util.format(' %s', child.type);
 
     if (originalType) {
       if (interfaceName) {
-        process.stdout.write(util.format(' [%s](#model-%s)', originalType, originalType.toLowerCase()));
+        msg += util.format(' [%s](#model-%s)', originalType, originalType.toLowerCase());
       } else {
-        process.stdout.write(util.format(' ref %s', originalType));
+        msg += util.format(' ref %s', originalType);
       }
     }
-    if (child.description) process.stdout.write(util.format(' - %s', child.description));
+    if (child.description) msg += util.format(' - %s', child.description);
+
+    console.log(msg);
 
     if (!ignoreChildren && child.children && Object.keys(child.children).length > 0) {
       printSchema(child, interfaceName, operation, padding + '  ');
@@ -109,7 +111,6 @@ function printFunctions() {
     console.log('**Constructor:**');
     console.log('- `options`');
     printSchema(Intfc.ctorSchema, null, null, '  ');
-    console.log('');
 
     // var inst = new Intfc();
     var protos = Object.keys(Intfc.prototype);
