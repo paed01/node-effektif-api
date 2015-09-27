@@ -73,7 +73,7 @@ function printSchema(schema, interfaceName, operation, padding, ignoreChildren) 
     }
 
     var required = (child.flags && child.flags.presence === 'required') || (meta && meta.path);
-    var originalType = child.label;
+    var originalType = meta && meta.originalType;
 
     if (originalType) addModel(originalType, interfaceName, operation);
     var msg = '';
@@ -87,7 +87,7 @@ function printSchema(schema, interfaceName, operation, padding, ignoreChildren) 
       if (interfaceName) {
         msg += util.format(' [%s](#model-%s)', originalType, originalType.toLowerCase());
       } else {
-        msg += util.format(' ref %s', originalType);
+        msg += util.format(' ref [%s](#model-%s)', originalType, originalType.toLowerCase());
       }
     }
     if (child.description) msg += util.format(' - %s', child.description);

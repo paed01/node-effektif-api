@@ -166,7 +166,7 @@ lab.experiment('Api exports', function() {
       var users = new Api.User();
       users.overridden = true;
 
-      var instance = new Api.Process({}, {
+      var instance = new Api.Process({
         users: users
       });
 

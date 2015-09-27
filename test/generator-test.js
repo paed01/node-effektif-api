@@ -94,39 +94,7 @@ lab.experiment('Generator', function() {
       done();
     });
 
-    lab.test('#applyDefaults retrieves headers from ctor options', function(done) {
-      var template = {
-        apis: [{
-          path: '/{organizationKey}/processes',
-          operations: [{
-            method: 'GET',
-            parameters: [{
-              name: 'Authorization',
-              paramType: 'header',
-              dataType: 'string'
-            }, {
-              name: 'organizationKey',
-              paramType: 'path',
-              dataType: 'string'
-            }]
-          }]
-        }],
-        models: {}
-      };
-      var Mock = Generator('Mock', template);
-      var mock = new Mock({
-        Authorization: 'token'
-      });
-
-      var args = mock._applyDefaults({
-        organizationKey: 'test'
-      }, Mock.schemas.getProcesses.input);
-      expect(args).to.include(['Authorization', 'organizationKey']);
-
-      done();
-    });
-
-    lab.test('#applyDefaults accepts header options in lowerCase', function(done) {
+    lab.test('#_applyDefaults retrieves headers from ctor options', function(done) {
       var template = {
         apis: [{
           path: '/{organizationKey}/processes',
@@ -155,6 +123,41 @@ lab.experiment('Generator', function() {
       }, Mock.schemas.getProcesses.input);
       expect(args).to.include(['Authorization', 'organizationKey']);
 
+      done();
+    });
+
+    lab.test('#_applyDefaults accepts header options in lowerCase', function(done) {
+      var template = {
+        apis: [{
+          path: '/{organizationKey}/processes',
+          operations: [{
+            method: 'GET',
+            parameters: [{
+              name: 'Authorization',
+              paramType: 'header',
+              dataType: 'string'
+            }, {
+              name: 'organizationKey',
+              paramType: 'path',
+              dataType: 'string'
+            }]
+          }]
+        }],
+        models: {}
+      };
+      var Mock = Generator('Mock', template);
+      var mock = new Mock();
+
+      // Set deafults
+      mock.defaults = {
+        Authorization: 'token'
+      };
+
+      var args = mock._applyDefaults({
+        organizationKey: 'test'
+      }, Mock.schemas.getProcesses.input);
+
+      expect(args).to.include(['Authorization', 'organizationKey']);
       done();
     });
   });
@@ -733,7 +736,7 @@ lab.experiment('Generator', function() {
         .reply(200, 'OK');
 
       var Mock = Generator('Mock', template);
-      var mock = new Mock({}, {
+      var mock = new Mock({
         log: log
       });
 
@@ -842,7 +845,7 @@ lab.experiment('Generator', function() {
     });
   });
 
-  lab.experiment('#getUserInstance', function() {
+  lab.experiment('#_getUserInstance', function() {
 
     lab.test('throws if not overridden by module', function(done) {
       var template = {
@@ -894,7 +897,7 @@ lab.experiment('Generator', function() {
       };
 
       var Mock = Generator('Mock', template);
-      var mock = new Mock({}, {
+      var mock = new Mock({
         users: users
       });
       expect(mock._getUserInstance(), 'getUserInstance').to.equal(users);
@@ -923,7 +926,7 @@ lab.experiment('Generator', function() {
       var Mock = Generator('Mock', template);
 
       expect(function() {
-        new Mock({}, {
+        new Mock({
           users: users
         });
       }).to.throw(/must be an object/i);
@@ -952,7 +955,7 @@ lab.experiment('Generator', function() {
       var Mock = Generator('Mock', template);
 
       expect(function() {
-        new Mock({}, {
+        new Mock({
           users: users
         });
       }).to.throw(/login/i);
@@ -991,8 +994,7 @@ lab.experiment('Generator', function() {
 
       var Mock = Generator('Mock', template);
       var mock = new Mock({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'a',
           password: 'b'

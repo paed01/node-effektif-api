@@ -146,8 +146,8 @@ Auto-generated Api documentation.
 # User
 **Constructor:**
 - `options`
+  - `authorization`: string - Authorization token, will be set as Authorization http header
   - `credentials`: object - Default credentials
-    - `authorization`: string - Authorization token, will be set as Authorization http header
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
@@ -176,7 +176,7 @@ Represents call to:
 `POST /login/{providerKey}`
 
 **Arguments:**
-- `providerKey`: required string
+- `providerKey`: required string [string](#model-string)
 - `body`: required object [ServiceLogin](#model-servicelogin)
 - `callback`: required func - function(err, resp, body)
 
@@ -191,11 +191,11 @@ Represents call to:
 `PUT /login/{providerKey}`
 
 **Arguments:**
-- `providerKey`: required string
-- `code`: string
-- `state`: string
-- `error`: string
-- `error_description`: string
+- `providerKey`: required string [string](#model-string)
+- `code`: string [string](#model-string)
+- `state`: string [string](#model-string)
+- `error`: string [string](#model-string)
+- `error_description`: string [string](#model-string)
 - `body`: required object [ServiceLogin](#model-servicelogin)
 - `callback`: required func - function(err, resp, body)
 
@@ -224,7 +224,7 @@ Represents call to:
 `GET /registrations/{code}`
 
 **Arguments:**
-- `code`: required string
+- `code`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -238,7 +238,7 @@ Represents call to:
 `POST /registrations/{code}/activate`
 
 **Arguments:**
-- `code`: required string
+- `code`: required string [string](#model-string)
 - `body`: required object [ActivationRequest](#model-activationrequest)
 - `callback`: required func - function(err, resp, body)
 
@@ -253,7 +253,7 @@ Represents call to:
 `GET /registrations/{code}/picture`
 
 **Arguments:**
-- `code`: required string
+- `code`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -267,7 +267,7 @@ Represents call to:
 `POST /registrations/{code}/picture`
 
 **Arguments:**
-- `code`: required string
+- `code`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -281,7 +281,7 @@ Represents call to:
 `POST /registrations/{code}/pictureiframe`
 
 **Arguments:**
-- `code`: required string
+- `code`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -343,8 +343,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `userId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `userId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -358,7 +358,7 @@ Represents call to:
 `PUT /{organizationKey}/users/{userId}`
 
 **Arguments:**
-- `userId`: required string
+- `userId`: required string [string](#model-string)
 - `body`: required object [User](#model-user)
 - `callback`: required func - function(err, resp, body)
 
@@ -373,7 +373,7 @@ Represents call to:
 `POST /{organizationKey}/users/{userId}/picture`
 
 **Arguments:**
-- `userId`: required string
+- `userId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -387,7 +387,7 @@ Represents call to:
 `POST /{organizationKey}/users/{userId}/pictureiframe`
 
 **Arguments:**
-- `userId`: required string
+- `userId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -398,7 +398,7 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
+- `organizationKey`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -409,8 +409,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `userId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `userId`: required string [string](#model-string)
 - `body`: required object [HandoverLogin](#model-handoverlogin)
 - `callback`: required func - function(err, resp, body)
 
@@ -427,8 +427,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `userId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `userId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -451,8 +451,8 @@ Represents call to:
 # Task
 **Constructor:**
 - `options`
+  - `authorization`: string - Authorization token, will be set as Authorization http header
   - `credentials`: object - Default credentials
-    - `authorization`: string - Authorization token, will be set as Authorization http header
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
@@ -468,9 +468,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `process`: string
-- `completed`: boolean
+- `organizationKey`: required string [string](#model-string)
+- `process`: string [string](#model-string)
+- `completed`: boolean [boolean](#model-boolean)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -481,7 +481,7 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
+- `organizationKey`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -492,8 +492,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -509,8 +509,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -526,11 +526,11 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `involvement`: array
-- `duedate`: array
-- `process`: string
-- `completed`: boolean
+- `organizationKey`: required string [string](#model-string)
+- `involvement`: array [array](#model-array)
+- `duedate`: array [array](#model-array)
+- `process`: string [string](#model-string)
+- `completed`: boolean [boolean](#model-boolean)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -541,11 +541,11 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `involvement`: array
-- `duedate`: array
-- `completed`: boolean
-- `processId`: string
+- `organizationKey`: required string [string](#model-string)
+- `involvement`: array [array](#model-array)
+- `duedate`: array [array](#model-array)
+- `completed`: boolean [boolean](#model-boolean)
+- `processId`: string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -556,7 +556,7 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
+- `organizationKey`: required string [string](#model-string)
 - `body`: required object [NewTask](#model-newtask)
 - `callback`: required func - function(err, resp, body)
 
@@ -573,11 +573,11 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `involvement`: array
-- `duedate`: array
-- `processId`: string
-- `completed`: boolean
+- `organizationKey`: required string [string](#model-string)
+- `involvement`: array [array](#model-array)
+- `duedate`: array [array](#model-array)
+- `processId`: string [string](#model-string)
+- `completed`: boolean [boolean](#model-boolean)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -593,8 +593,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -605,8 +605,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -622,8 +622,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
 - `body`: required object [Task](#model-task)
 - `callback`: required func - function(err, resp, body)
 
@@ -640,8 +640,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
 - `body`: required object [Document](#model-document)
 - `callback`: required func - function(err, resp, body)
 
@@ -656,8 +656,8 @@ Represents call to:
 `POST /{organizationKey}/tasks/{taskId}/documents/upload`
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -671,8 +671,8 @@ Represents call to:
 `POST /{organizationKey}/tasks/{taskId}/documents/uploadiframe`
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -683,9 +683,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
-- `documentId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
+- `documentId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -696,9 +696,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
-- `documentId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
+- `documentId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -714,8 +714,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -726,8 +726,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
 - `body`: required object [CommentRequest](#model-commentrequest)
 - `callback`: required func - function(err, resp, body)
 
@@ -744,9 +744,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
-- `fileId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
+- `fileId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -762,9 +762,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
-- `fieldId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
+- `fieldId`: required string [string](#model-string)
 - `body`: required object [FormField](#model-formfield)
 - `callback`: required func - function(err, resp, body)
 
@@ -781,9 +781,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
-- `mailId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
+- `mailId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -799,8 +799,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -811,8 +811,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `taskId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `taskId`: required string [string](#model-string)
 - `body`: required object [NewTask](#model-newtask)
 - `callback`: required func - function(err, resp, body)
 
@@ -825,8 +825,8 @@ Represents call to:
 # Process
 **Constructor:**
 - `options`
+  - `authorization`: string - Authorization token, will be set as Authorization http header
   - `credentials`: object - Default credentials
-    - `authorization`: string - Authorization token, will be set as Authorization http header
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
@@ -842,8 +842,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processIds`: array
+- `organizationKey`: required string [string](#model-string)
+- `processIds`: array [array](#model-array)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -854,7 +854,7 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
+- `organizationKey`: required string [string](#model-string)
 - `body`: required object [NewProcess](#model-newprocess)
 - `callback`: required func - function(err, resp, body)
 
@@ -871,7 +871,7 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
+- `organizationKey`: required string [string](#model-string)
 - `body`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
@@ -883,7 +883,7 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
+- `organizationKey`: required string [string](#model-string)
 - `body`: required object [Process](#model-process)
 - `callback`: required func - function(err, resp, body)
 
@@ -900,9 +900,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `cascade`: boolean
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `cascade`: boolean [boolean](#model-boolean)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -913,9 +913,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `include`: string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `include`: string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -931,8 +931,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `body`: required object [Process](#model-process)
 - `callback`: required func - function(err, resp, body)
 
@@ -949,8 +949,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -961,8 +961,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `body`: required object [Activity](#model-activity)
 - `callback`: required func - function(err, resp, body)
 
@@ -979,9 +979,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -992,9 +992,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1010,9 +1010,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `body`: required object [Activity](#model-activity)
 - `callback`: required func - function(err, resp, body)
 
@@ -1029,10 +1029,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
-- `fieldId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
+- `fieldId`: required string [string](#model-string)
 - `body`: required object [FormField](#model-formfield)
 - `callback`: required func - function(err, resp, body)
 
@@ -1049,10 +1049,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `versionId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `versionId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1068,9 +1068,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `body`: required object [Form](#model-form)
 - `callback`: required func - function(err, resp, body)
 
@@ -1087,10 +1087,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `versionId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `versionId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1101,9 +1101,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `body`: required object [NewFormField](#model-newformfield)
 - `callback`: required func - function(err, resp, body)
 
@@ -1120,10 +1120,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
-- `fieldId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
+- `fieldId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1134,10 +1134,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
-- `fieldId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
+- `fieldId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1153,10 +1153,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
-- `fieldId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
+- `fieldId`: required string [string](#model-string)
 - `body`: required object [FormField](#model-formfield)
 - `callback`: required func - function(err, resp, body)
 
@@ -1173,9 +1173,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1186,10 +1186,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
-- `parameterKey`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
+- `parameterKey`: required string [string](#model-string)
 - `body`: required object [Parameter](#model-parameter)
 - `callback`: required func - function(err, resp, body)
 
@@ -1206,10 +1206,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
-- `parameterKey`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
+- `parameterKey`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1220,10 +1220,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
-- `parameterKey`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
+- `parameterKey`: required string [string](#model-string)
 - `body`: required object [Binding](#model-binding)
 - `callback`: required func - function(err, resp, body)
 
@@ -1240,11 +1240,11 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
-- `parameterKey`: required string
-- `bindingId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
+- `parameterKey`: required string [string](#model-string)
+- `bindingId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1255,9 +1255,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1273,9 +1273,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `body`: required object [VariableMapping](#model-variablemapping)
 - `callback`: required func - function(err, resp, body)
 
@@ -1292,10 +1292,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
-- `variableMappingId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
+- `variableMappingId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1306,10 +1306,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
-- `variableMappingId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
+- `variableMappingId`: required string [string](#model-string)
 - `body`: required object [VariableMapping](#model-variablemapping)
 - `callback`: required func - function(err, resp, body)
 
@@ -1326,8 +1326,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1338,8 +1338,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1350,8 +1350,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `body`: required object [CazeColumn](#model-cazecolumn)
 - `callback`: required func - function(err, resp, body)
 
@@ -1368,9 +1368,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `columnId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `columnId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1381,9 +1381,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `columnId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `columnId`: required string [string](#model-string)
 - `body`: required object [CazeColumn](#model-cazecolumn)
 - `callback`: required func - function(err, resp, body)
 
@@ -1400,8 +1400,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1417,8 +1417,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1434,8 +1434,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `body`: required object [Diagram](#model-diagram)
 - `callback`: required func - function(err, resp, body)
 
@@ -1452,8 +1452,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1464,8 +1464,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1481,8 +1481,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1493,8 +1493,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `body`: required object [Transition](#model-transition)
 - `callback`: required func - function(err, resp, body)
 
@@ -1511,9 +1511,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `transitionId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `transitionId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1524,9 +1524,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `transitionId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `transitionId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1542,9 +1542,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `transitionId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `transitionId`: required string [string](#model-string)
 - `body`: required object [Transition](#model-transition)
 - `callback`: required func - function(err, resp, body)
 
@@ -1561,8 +1561,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1573,8 +1573,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1590,8 +1590,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `body`: required object [Trigger](#model-trigger)
 - `callback`: required func - function(err, resp, body)
 
@@ -1608,10 +1608,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `versionId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `versionId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1627,9 +1627,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `body`: required object [Form](#model-form)
 - `callback`: required func - function(err, resp, body)
 
@@ -1646,10 +1646,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `versionId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `versionId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1660,9 +1660,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `body`: required object [NewFormField](#model-newformfield)
 - `callback`: required func - function(err, resp, body)
 
@@ -1679,10 +1679,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
-- `fieldId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
+- `fieldId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1693,10 +1693,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
-- `fieldId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
+- `fieldId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1712,10 +1712,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
-- `fieldId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
+- `fieldId`: required string [string](#model-string)
 - `body`: required object [FormField](#model-formfield)
 - `callback`: required func - function(err, resp, body)
 
@@ -1732,9 +1732,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1745,8 +1745,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1757,8 +1757,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `body`: required object [Variable](#model-variable)
 - `callback`: required func - function(err, resp, body)
 
@@ -1775,9 +1775,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `variableId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `variableId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1788,9 +1788,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `variableId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `variableId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1806,9 +1806,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `variableId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `variableId`: required string [string](#model-string)
 - `body`: required object [Variable](#model-variable)
 - `callback`: required func - function(err, resp, body)
 
@@ -1825,9 +1825,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `variableId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `variableId`: required string [string](#model-string)
 - `body`: required object [Type](#model-type)
 - `callback`: required func - function(err, resp, body)
 
@@ -1844,8 +1844,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1856,8 +1856,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1873,9 +1873,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `versionId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `versionId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1891,9 +1891,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `versionId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `versionId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1909,10 +1909,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `versionId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `versionId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1928,10 +1928,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `versionId`: required string
-- `activityId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `versionId`: required string [string](#model-string)
+- `activityId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1942,16 +1942,16 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `category`: string
+- `organizationKey`: required string [string](#model-string)
+- `category`: string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
 # Service
 **Constructor:**
 - `options`
+  - `authorization`: string - Authorization token, will be set as Authorization http header
   - `credentials`: object - Default credentials
-    - `authorization`: string - Authorization token, will be set as Authorization http header
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
@@ -1965,9 +1965,9 @@ Represents call to:
 `GET /oauth_callback`
 
 **Arguments:**
-- `state`: string
-- `code`: string
-- `error`: string
+- `state`: string [string](#model-string)
+- `code`: string [string](#model-string)
+- `error`: string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1978,9 +1978,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `serviceKey`: required string
-- `excludeOwner`: string
+- `organizationKey`: required string [string](#model-string)
+- `serviceKey`: required string [string](#model-string)
+- `excludeOwner`: string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -1991,8 +1991,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `serviceKey`: required string
+- `organizationKey`: required string [string](#model-string)
+- `serviceKey`: required string [string](#model-string)
 - `body`: required object [Account](#model-account)
 - `callback`: required func - function(err, resp, body)
 
@@ -2009,10 +2009,10 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `serviceKey`: required string
-- `accountId`: required string
-- `excludeOwner`: string
+- `organizationKey`: required string [string](#model-string)
+- `serviceKey`: required string [string](#model-string)
+- `accountId`: required string [string](#model-string)
+- `excludeOwner`: string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -2028,9 +2028,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `serviceKey`: required string
-- `accountId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `serviceKey`: required string [string](#model-string)
+- `accountId`: required string [string](#model-string)
 - `body`: required object [Account](#model-account)
 - `callback`: required func - function(err, resp, body)
 
@@ -2047,11 +2047,11 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `serviceKey`: required string
-- `accountId`: required string
-- `optionsKey`: required string
-- `excludeOwner`: string
+- `organizationKey`: required string [string](#model-string)
+- `serviceKey`: required string [string](#model-string)
+- `accountId`: required string [string](#model-string)
+- `optionsKey`: required string [string](#model-string)
+- `excludeOwner`: string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -2062,13 +2062,13 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `serviceKey`: required string
-- `accountId`: required string
-- `q`: string
-- `parent`: string
-- `pathTo`: string
-- `excludeOwner`: string
+- `organizationKey`: required string [string](#model-string)
+- `serviceKey`: required string [string](#model-string)
+- `accountId`: required string [string](#model-string)
+- `q`: string [string](#model-string)
+- `parent`: string [string](#model-string)
+- `pathTo`: string [string](#model-string)
+- `excludeOwner`: string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -2079,11 +2079,11 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `serviceKey`: required string
-- `accountId`: required string
-- `optionsKey`: required string
-- `excludeOwner`: string
+- `organizationKey`: required string [string](#model-string)
+- `serviceKey`: required string [string](#model-string)
+- `accountId`: required string [string](#model-string)
+- `optionsKey`: required string [string](#model-string)
+- `excludeOwner`: string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -2094,7 +2094,7 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
+- `organizationKey`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -2105,7 +2105,7 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
+- `organizationKey`: required string [string](#model-string)
 - `body`: required object [OauthStartRequest](#model-oauthstartrequest)
 - `callback`: required func - function(err, resp, body)
 
@@ -2122,8 +2122,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `serviceKey`: required string
+- `organizationKey`: required string [string](#model-string)
+- `serviceKey`: required string [string](#model-string)
 - `body`: required object [ActionInstance](#model-actioninstance)
 - `callback`: required func - function(err, resp, body)
 
@@ -2140,9 +2140,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `serviceKey`: required string
-- `actionInstanceId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `serviceKey`: required string [string](#model-string)
+- `actionInstanceId`: required string [string](#model-string)
 - `body`: required object [ActionInstanceEnd](#model-actioninstanceend)
 - `callback`: required func - function(err, resp, body)
 
@@ -2159,8 +2159,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `serviceKey`: required string
+- `organizationKey`: required string [string](#model-string)
+- `serviceKey`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -2172,8 +2172,8 @@ Represents call to:
 # Search
 **Constructor:**
 - `options`
+  - `authorization`: string - Authorization token, will be set as Authorization http header
   - `credentials`: object - Default credentials
-    - `authorization`: string - Authorization token, will be set as Authorization http header
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
@@ -2189,8 +2189,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `query`: string
+- `organizationKey`: required string [string](#model-string)
+- `query`: string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -2202,8 +2202,8 @@ Represents call to:
 # File
 **Constructor:**
 - `options`
+  - `authorization`: string - Authorization token, will be set as Authorization http header
   - `credentials`: object - Default credentials
-    - `authorization`: string - Authorization token, will be set as Authorization http header
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
@@ -2217,7 +2217,7 @@ Represents call to:
 `POST /{organizationKey}/files`
 
 **Arguments:**
-- `organizationKey`: required string
+- `organizationKey`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -2233,8 +2233,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `fileId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `fileId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -2245,8 +2245,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `fileId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `fileId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -2262,8 +2262,8 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `fileId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `fileId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -2277,15 +2277,15 @@ Represents call to:
 `POST /{organizationKey}/filesiframe`
 
 **Arguments:**
-- `organizationKey`: required string
+- `organizationKey`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
 # ProcessInstance
 **Constructor:**
 - `options`
+  - `authorization`: string - Authorization token, will be set as Authorization http header
   - `credentials`: object - Default credentials
-    - `authorization`: string - Authorization token, will be set as Authorization http header
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
@@ -2301,9 +2301,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `processInstanceId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `processInstanceId`: required string [string](#model-string)
 - `callback`: required func - function(err, resp, body)
 
 
@@ -2314,9 +2314,9 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `organizationKey`: required string
-- `processId`: required string
-- `processInstanceId`: required string
+- `organizationKey`: required string [string](#model-string)
+- `processId`: required string [string](#model-string)
+- `processInstanceId`: required string [string](#model-string)
 - `body`: required object [List](#model-list)
 - `callback`: required func - function(err, resp, body)
 
@@ -2326,11 +2326,141 @@ Represents call to:
 ## Model About
 - `version`: string
 - `buildDate`: string
-- `latestCommits`: array
+- `latestCommits`: array ref [string](#model-string)
 
 
 **Used by:**
 [`User.getAbout`](#user-getabout)
+
+## Model string
+
+**Used by:**
+[`User.createLogin`](#user-createlogin)
+[`User.updateLogin`](#user-updatelogin)
+[`User.getRegistration`](#user-getregistration)
+[`User.activateRegistration`](#user-activateregistration)
+[`User.getRegistrationPicture`](#user-getregistrationpicture)
+[`User.createRegistrationPicture`](#user-createregistrationpicture)
+[`User.createRegistrationPictureiframe`](#user-createregistrationpictureiframe)
+[`User.getUser`](#user-getuser)
+[`User.updateUser`](#user-updateuser)
+[`User.createUserPicture`](#user-createuserpicture)
+[`User.createUserPictureiframe`](#user-createuserpictureiframe)
+[`User.getUsers`](#user-getusers)
+[`User.createUserHandover`](#user-createuserhandover)
+[`User.getUserPicture`](#user-getuserpicture)
+[`Task.getCases`](#task-getcases)
+[`Task.getCasesInfo`](#task-getcasesinfo)
+[`Task.getProcessStartForm`](#task-getprocessstartform)
+[`Task.createProcessTaskname`](#task-createprocesstaskname)
+[`Task.getTasks`](#task-gettasks)
+[`Task.headTasks`](#task-headtasks)
+[`Task.createTasks`](#task-createtasks)
+[`Task.getTasksFilterCounts`](#task-gettasksfiltercounts)
+[`Task.deleteTask`](#task-deletetask)
+[`Task.getTask`](#task-gettask)
+[`Task.updateTask`](#task-updatetask)
+[`Task.createTaskDocuments`](#task-createtaskdocuments)
+[`Task.createTaskDocumentsUpload`](#task-createtaskdocumentsupload)
+[`Task.createTaskDocumentsUploadiframe`](#task-createtaskdocumentsuploadiframe)
+[`Task.deleteTaskDocument`](#task-deletetaskdocument)
+[`Task.getTaskDocumentStream`](#task-gettaskdocumentstream)
+[`Task.getTaskEvents`](#task-gettaskevents)
+[`Task.createTaskEvents`](#task-createtaskevents)
+[`Task.createTaskFile`](#task-createtaskfile)
+[`Task.updateTaskFormField`](#task-updatetaskformfield)
+[`Task.getTaskMail`](#task-gettaskmail)
+[`Task.getTaskNext`](#task-gettasknext)
+[`Task.createTaskSubtasks`](#task-createtasksubtasks)
+[`Process.getProcesses`](#process-getprocesses)
+[`Process.createProcesses`](#process-createprocesses)
+[`Process.createProcessesImport`](#process-createprocessesimport)
+[`Process.createProcessesImportJson`](#process-createprocessesimportjson)
+[`Process.deleteProcess`](#process-deleteprocess)
+[`Process.getProcess`](#process-getprocess)
+[`Process.updateProcess`](#process-updateprocess)
+[`Process.getProcessActivities`](#process-getprocessactivities)
+[`Process.createProcessActivities`](#process-createprocessactivities)
+[`Process.deleteProcessActivity`](#process-deleteprocessactivity)
+[`Process.getProcessActivity`](#process-getprocessactivity)
+[`Process.updateProcessActivity`](#process-updateprocessactivity)
+[`Process.updateProcessActivityConfigurationField`](#process-updateprocessactivityconfigurationfield)
+[`Process.getProcessActivityForm`](#process-getprocessactivityform)
+[`Process.updateProcessActivityForm`](#process-updateprocessactivityform)
+[`Process.getProcessActivityFormFields`](#process-getprocessactivityformfields)
+[`Process.createProcessActivityFormFields`](#process-createprocessactivityformfields)
+[`Process.deleteProcessActivityFormField`](#process-deleteprocessactivityformfield)
+[`Process.getProcessActivityFormField`](#process-getprocessactivityformfield)
+[`Process.updateProcessActivityFormField`](#process-updateprocessactivityformfield)
+[`Process.getProcessActivityParameters`](#process-getprocessactivityparameters)
+[`Process.updateProcessActivityParameter`](#process-updateprocessactivityparameter)
+[`Process.getProcessActivityParameterBindables`](#process-getprocessactivityparameterbindables)
+[`Process.createProcessActivityParameterBindings`](#process-createprocessactivityparameterbindings)
+[`Process.deleteProcessActivityParameterBinding`](#process-deleteprocessactivityparameterbinding)
+[`Process.createProcessActivityTest`](#process-createprocessactivitytest)
+[`Process.createProcessActivityVariableMappings`](#process-createprocessactivityvariablemappings)
+[`Process.deleteProcessActivityVariableMappings`](#process-deleteprocessactivityvariablemappings)
+[`Process.updateProcessActivityVariableMappings`](#process-updateprocessactivityvariablemappings)
+[`Process.getProcessBindables`](#process-getprocessbindables)
+[`Process.getProcessCaseColumns`](#process-getprocesscasecolumns)
+[`Process.createProcessCaseColumns`](#process-createprocesscasecolumns)
+[`Process.deleteProcessCaseColumns`](#process-deleteprocesscasecolumns)
+[`Process.updateProcessCaseColumns`](#process-updateprocesscasecolumns)
+[`Process.createProcessCopy`](#process-createprocesscopy)
+[`Process.getProcessDiagram`](#process-getprocessdiagram)
+[`Process.updateProcessDiagram`](#process-updateprocessdiagram)
+[`Process.getProcessExport`](#process-getprocessexport)
+[`Process.getProcessExportJson`](#process-getprocessexportjson)
+[`Process.getProcessTransitions`](#process-getprocesstransitions)
+[`Process.createProcessTransitions`](#process-createprocesstransitions)
+[`Process.deleteProcessTransition`](#process-deleteprocesstransition)
+[`Process.getProcessTransition`](#process-getprocesstransition)
+[`Process.updateProcessTransition`](#process-updateprocesstransition)
+[`Process.deleteProcessTrigger`](#process-deleteprocesstrigger)
+[`Process.getProcessTrigger`](#process-getprocesstrigger)
+[`Process.updateProcessTrigger`](#process-updateprocesstrigger)
+[`Process.getProcessTriggerForm`](#process-getprocesstriggerform)
+[`Process.updateProcessTriggerForm`](#process-updateprocesstriggerform)
+[`Process.getProcessTriggerFormFields`](#process-getprocesstriggerformfields)
+[`Process.createProcessTriggerFormFields`](#process-createprocesstriggerformfields)
+[`Process.deleteProcessTriggerFormField`](#process-deleteprocesstriggerformfield)
+[`Process.getProcessTriggerFormField`](#process-getprocesstriggerformfield)
+[`Process.updateProcessTriggerFormField`](#process-updateprocesstriggerformfield)
+[`Process.getProcessTriggerParameters`](#process-getprocesstriggerparameters)
+[`Process.getProcessVariables`](#process-getprocessvariables)
+[`Process.createProcessVariables`](#process-createprocessvariables)
+[`Process.deleteProcessVariable`](#process-deleteprocessvariable)
+[`Process.getProcessVariable`](#process-getprocessvariable)
+[`Process.updateProcessVariable`](#process-updateprocessvariable)
+[`Process.updateProcessVariableType`](#process-updateprocessvariabletype)
+[`Process.getProcessVersions`](#process-getprocessversions)
+[`Process.createProcessVersions`](#process-createprocessversions)
+[`Process.createProcessVersionPublish`](#process-createprocessversionpublish)
+[`Process.createProcessVersionRestore`](#process-createprocessversionrestore)
+[`Process.getProcessVersionTriggerForm`](#process-getprocessversiontriggerform)
+[`Process.getProcessVersionTriggerFormFields`](#process-getprocessversiontriggerformfields)
+[`Process.getTemplates`](#process-gettemplates)
+[`Service.getOauth_callback`](#service-getoauth_callback)
+[`Service.getServiceAccounts`](#service-getserviceaccounts)
+[`Service.createServiceAccounts`](#service-createserviceaccounts)
+[`Service.getServiceAccount`](#service-getserviceaccount)
+[`Service.updateServiceAccount`](#service-updateserviceaccount)
+[`Service.getServiceAccountOption`](#service-getserviceaccountoption)
+[`Service.getServiceAccountReferences`](#service-getserviceaccountreferences)
+[`Service.getServiceOption`](#service-getserviceoption)
+[`Service.getServices`](#service-getservices)
+[`Service.createServicesOauthStart`](#service-createservicesoauthstart)
+[`Service.createServiceActionInstancesLock`](#service-createserviceactioninstanceslock)
+[`Service.createServiceActionInstancesEnd`](#service-createserviceactioninstancesend)
+[`Service.getServiceIcon`](#service-getserviceicon)
+[`Search.getSearch`](#search-getsearch)
+[`File.createFiles`](#file-createfiles)
+[`File.deleteFile`](#file-deletefile)
+[`File.getFile`](#file-getfile)
+[`File.getFileStream`](#file-getfilestream)
+[`File.createFilesiframe`](#file-createfilesiframe)
+[`ProcessInstance.getProcessInstancesVariables`](#processinstance-getprocessinstancesvariables)
+[`ProcessInstance.updateProcessInstancesVariables`](#processinstance-updateprocessinstancesvariables)
 
 ## Model ServiceLogin
 - `stateReference`: string
@@ -2376,13 +2506,13 @@ Represents call to:
   - `created`: date
   - `external`: boolean
   - `firstName`: string
-  - `groupIds`: array
+  - `groupIds`: array ref [string](#model-string)
   - `lastName`: string
   - `ldapDn`: string
   - `mailAddress`: string
-  - `licenses`: array
+  - `licenses`: array ref [License](#model-license)
   - `mailAddressLower`: string
-  - `organizationIds`: array
+  - `organizationIds`: array ref [string](#model-string)
   - `password`: string
   - `preferences`: object
   - `systemAdmin`: boolean
@@ -2412,18 +2542,18 @@ Represents call to:
   - `created`: date
   - `external`: boolean
   - `firstName`: string
-  - `groupIds`: array
+  - `groupIds`: array ref [string](#model-string)
   - `lastName`: string
   - `ldapDn`: string
   - `mailAddress`: string
-  - `licenses`: array
+  - `licenses`: array ref [License](#model-license)
   - `mailAddressLower`: string
-  - `organizationIds`: array
+  - `organizationIds`: array ref [string](#model-string)
   - `password`: string
   - `preferences`: object
   - `systemAdmin`: boolean
   - `systemUser`: boolean
-- `organizations`: array
+- `organizations`: array ref [Organization](#model-organization)
 
 
 **Used by:**
@@ -2489,13 +2619,13 @@ Represents call to:
 - `created`: date
 - `external`: boolean
 - `firstName`: string
-- `groupIds`: array
+- `groupIds`: array ref [string](#model-string)
 - `lastName`: string
 - `ldapDn`: string
 - `mailAddress`: string
-- `licenses`: array
+- `licenses`: array ref [License](#model-license)
 - `mailAddressLower`: string
-- `organizationIds`: array
+- `organizationIds`: array ref [string](#model-string)
 - `password`: string
 - `preferences`: object
 - `systemAdmin`: boolean
@@ -2512,14 +2642,23 @@ Represents call to:
 **Used by:**
 [`User.updateUserPreferences`](#user-updateuserpreferences)
 
+## Model boolean
+
+**Used by:**
+[`Task.getCases`](#task-getcases)
+[`Task.getTasks`](#task-gettasks)
+[`Task.headTasks`](#task-headtasks)
+[`Task.getTasksFilterCounts`](#task-gettasksfiltercounts)
+[`Process.deleteProcess`](#process-deleteprocess)
+
 ## Model Form
 - `id`: string
 - `activityId`: string
 - `button`: string
-- `buttons`: array
+- `buttons`: array ref [string](#model-string)
 - `description`: string
-- `fields`: array
-- `fieldsOrder`: array
+- `fields`: array ref [FormField](#model-formfield)
+- `fieldsOrder`: array ref [string](#model-string)
 - `organizationId`: string
 - `processId`: string
 
@@ -2538,22 +2677,22 @@ Represents call to:
 - `assigneeId`: string
 - `caze`: any
 - `cazeId`: string
-- `candidateIds`: array
-- `candidateGroupIds`: array
+- `candidateIds`: array ref [string](#model-string)
+- `candidateGroupIds`: array ref [string](#model-string)
 - `canceled`: boolean
 - `completed`: boolean
 - `createdBy`: string
 - `description`: string
-- `documentIds`: array
+- `documentIds`: array ref [string](#model-string)
 - `duedate`: date
 - `form`: object
   - `id`: string
   - `activityId`: string
   - `button`: string
-  - `buttons`: array
+  - `buttons`: array ref [string](#model-string)
   - `description`: string
-  - `fields`: array
-  - `fieldsOrder`: array
+  - `fields`: array ref [FormField](#model-formfield)
+  - `fieldsOrder`: array ref [string](#model-string)
   - `organizationId`: string
   - `processId`: string
 - `hasForm`: boolean
@@ -2563,16 +2702,24 @@ Represents call to:
 - `organizationId`: string
 - `parent`: any
 - `parentId`: string
-- `participantIds`: array
+- `participantIds`: array ref [string](#model-string)
 - `processId`: string
 - `sandbox`: boolean
-- `subtaskIds`: array
+- `subtaskIds`: array ref [string](#model-string)
 - `uncompletable`: boolean
 
 
 **Used by:**
 [`Task.createProcessTaskname`](#task-createprocesstaskname)
 [`Task.updateTask`](#task-updatetask)
+
+## Model array
+
+**Used by:**
+[`Task.getTasks`](#task-gettasks)
+[`Task.headTasks`](#task-headtasks)
+[`Task.getTasksFilterCounts`](#task-gettasksfiltercounts)
+[`Process.getProcesses`](#process-getprocesses)
 
 ## Model NewTask
 - `parentId`: string
@@ -2598,22 +2745,22 @@ Represents call to:
   - `assigneeId`: string
   - `caze`: any
   - `cazeId`: string
-  - `candidateIds`: array
-  - `candidateGroupIds`: array
+  - `candidateIds`: array ref [string](#model-string)
+  - `candidateGroupIds`: array ref [string](#model-string)
   - `canceled`: boolean
   - `completed`: boolean
   - `createdBy`: string
   - `description`: string
-  - `documentIds`: array
+  - `documentIds`: array ref [string](#model-string)
   - `duedate`: date
   - `form`: object
     - `id`: string
     - `activityId`: string
     - `button`: string
-    - `buttons`: array
+    - `buttons`: array ref [string](#model-string)
     - `description`: string
-    - `fields`: array
-    - `fieldsOrder`: array
+    - `fields`: array ref [FormField](#model-formfield)
+    - `fieldsOrder`: array ref [string](#model-string)
     - `organizationId`: string
     - `processId`: string
   - `hasForm`: boolean
@@ -2623,28 +2770,28 @@ Represents call to:
   - `organizationId`: string
   - `parent`: any
   - `parentId`: string
-  - `participantIds`: array
+  - `participantIds`: array ref [string](#model-string)
   - `processId`: string
   - `sandbox`: boolean
-  - `subtaskIds`: array
+  - `subtaskIds`: array ref [string](#model-string)
   - `uncompletable`: boolean
 - `cazeId`: string
-- `candidateIds`: array
-- `candidateGroupIds`: array
+- `candidateIds`: array ref [string](#model-string)
+- `candidateGroupIds`: array ref [string](#model-string)
 - `canceled`: boolean
 - `completed`: boolean
 - `createdBy`: string
 - `description`: string
-- `documentIds`: array
+- `documentIds`: array ref [string](#model-string)
 - `duedate`: date
 - `form`: object
   - `id`: string
   - `activityId`: string
   - `button`: string
-  - `buttons`: array
+  - `buttons`: array ref [string](#model-string)
   - `description`: string
-  - `fields`: array
-  - `fieldsOrder`: array
+  - `fields`: array ref [FormField](#model-formfield)
+  - `fieldsOrder`: array ref [string](#model-string)
   - `organizationId`: string
   - `processId`: string
 - `hasForm`: boolean
@@ -2658,22 +2805,22 @@ Represents call to:
   - `assigneeId`: string
   - `caze`: any
   - `cazeId`: string
-  - `candidateIds`: array
-  - `candidateGroupIds`: array
+  - `candidateIds`: array ref [string](#model-string)
+  - `candidateGroupIds`: array ref [string](#model-string)
   - `canceled`: boolean
   - `completed`: boolean
   - `createdBy`: string
   - `description`: string
-  - `documentIds`: array
+  - `documentIds`: array ref [string](#model-string)
   - `duedate`: date
   - `form`: object
     - `id`: string
     - `activityId`: string
     - `button`: string
-    - `buttons`: array
+    - `buttons`: array ref [string](#model-string)
     - `description`: string
-    - `fields`: array
-    - `fieldsOrder`: array
+    - `fields`: array ref [FormField](#model-formfield)
+    - `fieldsOrder`: array ref [string](#model-string)
     - `organizationId`: string
     - `processId`: string
   - `hasForm`: boolean
@@ -2683,16 +2830,16 @@ Represents call to:
   - `organizationId`: string
   - `parent`: any
   - `parentId`: string
-  - `participantIds`: array
+  - `participantIds`: array ref [string](#model-string)
   - `processId`: string
   - `sandbox`: boolean
-  - `subtaskIds`: array
+  - `subtaskIds`: array ref [string](#model-string)
   - `uncompletable`: boolean
 - `parentId`: string
-- `participantIds`: array
+- `participantIds`: array ref [string](#model-string)
 - `processId`: string
 - `sandbox`: boolean
-- `subtaskIds`: array
+- `subtaskIds`: array ref [string](#model-string)
 - `uncompletable`: boolean
 - `assignee`: object
   - `id`: string
@@ -2701,22 +2848,22 @@ Represents call to:
   - `created`: date
   - `external`: boolean
   - `firstName`: string
-  - `groupIds`: array
+  - `groupIds`: array ref [string](#model-string)
   - `lastName`: string
   - `ldapDn`: string
   - `mailAddress`: string
-  - `licenses`: array
+  - `licenses`: array ref [License](#model-license)
   - `mailAddressLower`: string
-  - `organizationIds`: array
+  - `organizationIds`: array ref [string](#model-string)
   - `password`: string
   - `preferences`: object
   - `systemAdmin`: boolean
   - `systemUser`: boolean
-- `participants`: array
-- `candidates`: array
-- `subtasks`: array
-- `documents`: array
-- `events`: array
+- `participants`: array ref [User](#model-user)
+- `candidates`: array ref [User](#model-user)
+- `subtasks`: array ref [Task](#model-task)
+- `documents`: array ref [Document](#model-document)
+- `events`: array ref [Event](#model-event)
 
 
 **Used by:**
@@ -2780,22 +2927,22 @@ Represents call to:
   - `assigneeId`: string
   - `caze`: any
   - `cazeId`: string
-  - `candidateIds`: array
-  - `candidateGroupIds`: array
+  - `candidateIds`: array ref [string](#model-string)
+  - `candidateGroupIds`: array ref [string](#model-string)
   - `canceled`: boolean
   - `completed`: boolean
   - `createdBy`: string
   - `description`: string
-  - `documentIds`: array
+  - `documentIds`: array ref [string](#model-string)
   - `duedate`: date
   - `form`: object
     - `id`: string
     - `activityId`: string
     - `button`: string
-    - `buttons`: array
+    - `buttons`: array ref [string](#model-string)
     - `description`: string
-    - `fields`: array
-    - `fieldsOrder`: array
+    - `fields`: array ref [FormField](#model-formfield)
+    - `fieldsOrder`: array ref [string](#model-string)
     - `organizationId`: string
     - `processId`: string
   - `hasForm`: boolean
@@ -2805,10 +2952,10 @@ Represents call to:
   - `organizationId`: string
   - `parent`: any
   - `parentId`: string
-  - `participantIds`: array
+  - `participantIds`: array ref [string](#model-string)
   - `processId`: string
   - `sandbox`: boolean
-  - `subtaskIds`: array
+  - `subtaskIds`: array ref [string](#model-string)
   - `uncompletable`: boolean
 - `taskId`: string
 - `time`: date
@@ -2823,7 +2970,7 @@ Represents call to:
 - `binding`: object
   - `id`: string
   - `converter`: string
-  - `fields`: array
+  - `fields`: array ref [string](#model-string)
   - `variableId`: string
 - `id`: string
 - `key`: string
@@ -2844,20 +2991,20 @@ Represents call to:
 
 ## Model Mail
 - `id`: string
-- `attachmentIds`: array
-- `bcc`: array
+- `attachmentIds`: array ref [string](#model-string)
+- `bcc`: array ref [string](#model-string)
 - `bodyText`: string
 - `bodyHtml`: string
-- `cc`: array
-- `from`: array
+- `cc`: array ref [string](#model-string)
+- `from`: array ref [string](#model-string)
 - `fromName`: string
 - `organizationId`: string
 - `preview`: string
-- `replyTo`: array
+- `replyTo`: array ref [string](#model-string)
 - `source`: string
 - `subject`: string
 - `sendDate`: date
-- `to`: array
+- `to`: array ref [string](#model-string)
 
 
 **Used by:**
@@ -2869,8 +3016,8 @@ Represents call to:
 - `trigger`: object
   - `id`: string
   - `access`: any
-  - `activities`: array
-  - `activitiesOrder`: array
+  - `activities`: array ref [Activity](#model-activity)
+  - `activitiesOrder`: array ref [string](#model-string)
   - `bpmnId`: string
   - `defaultTransitionId`: string
   - `description`: string
@@ -2879,10 +3026,10 @@ Represents call to:
   - `nameTemplate`: string
   - `organizationId`: string
   - `parentId`: string
-  - `parameters`: array
+  - `parameters`: array ref [Parameter](#model-parameter)
   - `processId`: string
-  - `transitions`: array
-  - `variables`: array
+  - `transitions`: array ref [Transition](#model-transition)
+  - `variables`: array ref [Variable](#model-variable)
 - `templateId`: string
 - `isPrivate`: boolean
 
@@ -2893,8 +3040,8 @@ Represents call to:
 ## Model Process
 - `id`: string
 - `access`: any
-- `activities`: array
-- `activitiesOrder`: array
+- `activities`: array ref [Activity](#model-activity)
+- `activitiesOrder`: array ref [string](#model-string)
 - `bpmnId`: string
 - `defaultTransitionId`: string
 - `description`: string
@@ -2903,17 +3050,17 @@ Represents call to:
 - `nameTemplate`: string
 - `organizationId`: string
 - `parentId`: string
-- `parameters`: array
+- `parameters`: array ref [Parameter](#model-parameter)
 - `processId`: string
-- `transitions`: array
-- `variables`: array
+- `transitions`: array ref [Transition](#model-transition)
+- `variables`: array ref [Variable](#model-variable)
 - `category`: string
-- `caseColumnsOrder`: array
+- `caseColumnsOrder`: array ref [string](#model-string)
 - `changed`: boolean
 - `diagram`: object
   - `id`: string
   - `canvas`: any
-  - `edges`: array
+  - `edges`: array ref [Edge](#model-edge)
   - `version`: number
 - `disabled`: boolean
 - `lastUpdated`: date
@@ -2924,8 +3071,8 @@ Represents call to:
 - `trigger`: object
   - `id`: string
   - `access`: any
-  - `activities`: array
-  - `activitiesOrder`: array
+  - `activities`: array ref [Activity](#model-activity)
+  - `activitiesOrder`: array ref [string](#model-string)
   - `bpmnId`: string
   - `defaultTransitionId`: string
   - `description`: string
@@ -2934,10 +3081,10 @@ Represents call to:
   - `nameTemplate`: string
   - `organizationId`: string
   - `parentId`: string
-  - `parameters`: array
+  - `parameters`: array ref [Parameter](#model-parameter)
   - `processId`: string
-  - `transitions`: array
-  - `variables`: array
+  - `transitions`: array ref [Transition](#model-transition)
+  - `variables`: array ref [Variable](#model-variable)
 
 
 **Used by:**
@@ -2949,16 +3096,11 @@ Represents call to:
 [`Process.getProcessExportJson`](#process-getprocessexportjson)
 [`Process.createProcessVersionRestore`](#process-createprocessversionrestore)
 
-## Model string
-
-**Used by:**
-[`Process.createProcessesImport`](#process-createprocessesimport)
-
 ## Model Activity
 - `id`: string
 - `access`: any
-- `activities`: array
-- `activitiesOrder`: array
+- `activities`: array ref [Activity](#model-activity)
+- `activitiesOrder`: array ref [string](#model-string)
 - `bpmnId`: string
 - `defaultTransitionId`: string
 - `description`: string
@@ -2967,10 +3109,10 @@ Represents call to:
 - `nameTemplate`: string
 - `organizationId`: string
 - `parentId`: string
-- `parameters`: array
+- `parameters`: array ref [Parameter](#model-parameter)
 - `processId`: string
-- `transitions`: array
-- `variables`: array
+- `transitions`: array ref [Transition](#model-transition)
+- `variables`: array ref [Variable](#model-variable)
 
 
 **Used by:**
@@ -2987,7 +3129,7 @@ Represents call to:
 - `binding`: object
   - `id`: string
   - `converter`: string
-  - `fields`: array
+  - `fields`: array ref [string](#model-string)
   - `variableId`: string
 
 
@@ -2999,9 +3141,9 @@ Represents call to:
 - `binding`: object
   - `id`: string
   - `converter`: string
-  - `fields`: array
+  - `fields`: array ref [string](#model-string)
   - `variableId`: string
-- `bindings`: array
+- `bindings`: array ref [Binding](#model-binding)
 - `fixed`: boolean
 - `key`: string
 - `list`: boolean
@@ -3022,7 +3164,7 @@ Represents call to:
 ## Model Binding
 - `id`: string
 - `converter`: string
-- `fields`: array
+- `fields`: array ref [string](#model-string)
 - `variableId`: string
 
 
@@ -3043,7 +3185,7 @@ Represents call to:
 - `binding`: object
   - `id`: string
   - `converter`: string
-  - `fields`: array
+  - `fields`: array ref [string](#model-string)
   - `variableId`: string
 - `scriptName`: string
 - `testValue`: any
@@ -3058,7 +3200,7 @@ Represents call to:
 - `binding`: object
   - `id`: string
   - `converter`: string
-  - `fields`: array
+  - `fields`: array ref [string](#model-string)
   - `variableId`: string
 - `custom`: boolean
 - `hidden`: boolean
@@ -3074,7 +3216,7 @@ Represents call to:
 ## Model Diagram
 - `id`: string
 - `canvas`: any
-- `edges`: array
+- `edges`: array ref [Edge](#model-edge)
 - `version`: number
 
 
@@ -3092,8 +3234,8 @@ Represents call to:
 - `from`: object
   - `id`: string
   - `access`: any
-  - `activities`: array
-  - `activitiesOrder`: array
+  - `activities`: array ref [Activity](#model-activity)
+  - `activitiesOrder`: array ref [string](#model-string)
   - `bpmnId`: string
   - `defaultTransitionId`: string
   - `description`: string
@@ -3102,10 +3244,10 @@ Represents call to:
   - `nameTemplate`: string
   - `organizationId`: string
   - `parentId`: string
-  - `parameters`: array
+  - `parameters`: array ref [Parameter](#model-parameter)
   - `processId`: string
-  - `transitions`: array
-  - `variables`: array
+  - `transitions`: array ref [Transition](#model-transition)
+  - `variables`: array ref [Variable](#model-variable)
 - `fromId`: string
 - `name`: string
 - `organizationId`: string
@@ -3114,8 +3256,8 @@ Represents call to:
 - `to`: object
   - `id`: string
   - `access`: any
-  - `activities`: array
-  - `activitiesOrder`: array
+  - `activities`: array ref [Activity](#model-activity)
+  - `activitiesOrder`: array ref [string](#model-string)
   - `bpmnId`: string
   - `defaultTransitionId`: string
   - `description`: string
@@ -3124,10 +3266,10 @@ Represents call to:
   - `nameTemplate`: string
   - `organizationId`: string
   - `parentId`: string
-  - `parameters`: array
+  - `parameters`: array ref [Parameter](#model-parameter)
   - `processId`: string
-  - `transitions`: array
-  - `variables`: array
+  - `transitions`: array ref [Transition](#model-transition)
+  - `variables`: array ref [Variable](#model-variable)
 - `toId`: string
 
 
@@ -3139,8 +3281,8 @@ Represents call to:
 ## Model Trigger
 - `id`: string
 - `access`: any
-- `activities`: array
-- `activitiesOrder`: array
+- `activities`: array ref [Activity](#model-activity)
+- `activitiesOrder`: array ref [string](#model-string)
 - `bpmnId`: string
 - `defaultTransitionId`: string
 - `description`: string
@@ -3149,10 +3291,10 @@ Represents call to:
 - `nameTemplate`: string
 - `organizationId`: string
 - `parentId`: string
-- `parameters`: array
+- `parameters`: array ref [Parameter](#model-parameter)
 - `processId`: string
-- `transitions`: array
-- `variables`: array
+- `transitions`: array ref [Transition](#model-transition)
+- `variables`: array ref [Variable](#model-variable)
 
 
 **Used by:**
@@ -3184,8 +3326,8 @@ Represents call to:
 ## Model ProcessDefinition
 - `id`: string
 - `access`: any
-- `activities`: array
-- `activitiesOrder`: array
+- `activities`: array ref [Activity](#model-activity)
+- `activitiesOrder`: array ref [string](#model-string)
 - `bpmnId`: string
 - `defaultTransitionId`: string
 - `description`: string
@@ -3194,15 +3336,15 @@ Represents call to:
 - `nameTemplate`: string
 - `organizationId`: string
 - `parentId`: string
-- `parameters`: array
+- `parameters`: array ref [Parameter](#model-parameter)
 - `processId`: string
-- `transitions`: array
-- `variables`: array
+- `transitions`: array ref [Transition](#model-transition)
+- `variables`: array ref [Variable](#model-variable)
 - `created`: date
 - `diagram`: object
   - `id`: string
   - `canvas`: any
-  - `edges`: array
+  - `edges`: array ref [Edge](#model-edge)
   - `version`: number
 - `ownerId`: string
 - `publisherId`: string
@@ -3210,8 +3352,8 @@ Represents call to:
 - `trigger`: object
   - `id`: string
   - `access`: any
-  - `activities`: array
-  - `activitiesOrder`: array
+  - `activities`: array ref [Activity](#model-activity)
+  - `activitiesOrder`: array ref [string](#model-string)
   - `bpmnId`: string
   - `defaultTransitionId`: string
   - `description`: string
@@ -3220,10 +3362,10 @@ Represents call to:
   - `nameTemplate`: string
   - `organizationId`: string
   - `parentId`: string
-  - `parameters`: array
+  - `parameters`: array ref [Parameter](#model-parameter)
   - `processId`: string
-  - `transitions`: array
-  - `variables`: array
+  - `transitions`: array ref [Transition](#model-transition)
+  - `variables`: array ref [Variable](#model-variable)
 
 
 **Used by:**
@@ -3282,8 +3424,8 @@ Represents call to:
 [`Service.createServiceActionInstancesEnd`](#service-createserviceactioninstancesend)
 
 ## Model SearchResult
-- `tasks`: array
-- `processes`: array
+- `tasks`: array ref [Task](#model-task)
+- `processes`: array ref [Process](#model-process)
 
 
 **Used by:**

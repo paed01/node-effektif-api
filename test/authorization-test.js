@@ -44,8 +44,7 @@ lab.experiment('Authorization', function() {
 
     lab.test('Issues new token if username and password are supplied', function(done) {
       var processes = new Processes({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -76,10 +75,8 @@ lab.experiment('Authorization', function() {
 
     lab.test('Saves new token to instance', function(done) {
       var processes = new Processes({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
-          authorization: 'token',
           username: 'effektif-user',
           password: 'effektif-passw0rd'
         }
@@ -110,8 +107,7 @@ lab.experiment('Authorization', function() {
 
     lab.test('Responds with 401 if wrong username and password are supplied', function(done) {
       var processes = new Processes({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -138,8 +134,7 @@ lab.experiment('Authorization', function() {
 
     lab.test('Repeated unauthorized calls only calls login once', function(done) {
       var processes = new Processes({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -174,8 +169,7 @@ lab.experiment('Authorization', function() {
 
     lab.test('Repeated unauthorized calls with different modules only calls login once', function(done) {
       var processes = new Processes({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -183,8 +177,7 @@ lab.experiment('Authorization', function() {
       });
 
       var tasks = new Tasks({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -232,8 +225,7 @@ lab.experiment('Authorization', function() {
 
     lab.test('Repeated unauthorized calls with different users only calls login once per user', function(done) {
       var processes = new Processes({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -241,8 +233,7 @@ lab.experiment('Authorization', function() {
       });
 
       var tasks = new Tasks({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'effektif-admin',
           password: '@dmin-passw0rd'
@@ -293,8 +284,7 @@ lab.experiment('Authorization', function() {
 
     lab.test('New login emits authorized event once per user', function(done) {
       var processes = new Processes({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -302,8 +292,7 @@ lab.experiment('Authorization', function() {
       });
 
       var tasks = new Tasks({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'effektif-admin',
           password: '@dmin-passw0rd'
@@ -366,8 +355,7 @@ lab.experiment('Authorization', function() {
 
     lab.test('Login error returns error in callback', function(done) {
       var processes = new Processes({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -392,8 +380,7 @@ lab.experiment('Authorization', function() {
 
     lab.test('return error in callback if body is missing from login call', function(done) {
       var processes = new Processes({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -418,8 +405,7 @@ lab.experiment('Authorization', function() {
 
     lab.test('return error in callback if body.token is missing from login call', function(done) {
       var processes = new Processes({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -443,8 +429,7 @@ lab.experiment('Authorization', function() {
 
     lab.test('sub-sequent calls use the same token', function(done) {
       var processes = new Processes({
-        authorization: 'token'
-      }, {
+        authorization: 'token',
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -482,7 +467,7 @@ lab.experiment('Authorization', function() {
   lab.experiment('No default authorization token', function() {
 
     lab.test('First call is login', function(done) {
-      var processes = new Processes({}, {
+      var processes = new Processes({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -508,7 +493,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('instance without credentials returns error', function(done) {
-      var processes = new Processes({}, {});
+      var processes = new Processes();
       processes.getProcesses('test-org', ['repeated', 'token'], function(err) {
         expect(err).to.be.instanceof(Error);
         expect(err.message).to.equal('Missing credentials');
@@ -526,7 +511,7 @@ lab.experiment('Authorization', function() {
         .matchHeader('authorization', 'custom-token')
         .reply(200, []);
 
-      var processes = new Processes({}, {
+      var processes = new Processes({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -550,7 +535,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Custom login return without body returns error', function(done) {
-      var processes = new Processes({}, {
+      var processes = new Processes({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -573,7 +558,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Custom login return without body.token returns error', function(done) {
-      var processes = new Processes({}, {
+      var processes = new Processes({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -596,7 +581,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Custom login with statusCode 401 returns error', function(done) {
-      var processes = new Processes({}, {
+      var processes = new Processes({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -619,7 +604,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Custom login error returns error', function(done) {
-      var processes = new Processes({}, {
+      var processes = new Processes({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -653,7 +638,7 @@ lab.experiment('Authorization', function() {
         .get('/test-org/processes?processIds=custom%2Clogin')
         .reply(200, []);
 
-      var processes = new Processes({}, {
+      var processes = new Processes({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
