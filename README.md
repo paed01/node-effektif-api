@@ -7,13 +7,14 @@ Unofficial node [effektif][1] [api][2] wrapper.
 
 **Table of contents**
 - [API](/API.md)
-- Interface
+- [Interface](#interface)
   - [Constructor](#constructor)
   - [Events](#events)
   - [Tasks](#tasks)
     - [`#getFormFieldByName`](#getformfieldbyname)
   - [Users](#users)
     - [`#login`](#login)
+- [Debug](#debug)
 
 # Introduction
 
@@ -21,15 +22,31 @@ The api is auto-generated from the effektif documentation [json-endpoint][3].
 
 # Interface
 
-All Api-endpoints are represented. Since most endpoints requires an authorization header the token is passed as an option when creating the endpoint handler.
+All [Api-endpoints](/API.md) are represented.
 
 ## Constructor
 
 The interface constructor takes an object with options.
 
+- `options`: Object with the following properties:
+  - `authorization`: optional string - Authorization token, will be set as Authorization http header
+  - `credentials`: optional object - Default credentials
+    - `username`: string - Username
+    - `password`: string - Password
+  - `basePath`: optional string - Effektif-api base url, defaults to api endpoint documentation basePath
+  - `baseRequest`: optional - Default [request][4]
+  - `log`: optional - Logging function, defaults to console.log
+  - `users`: optional - [Users](#users) instance
+
+Example:
+
 ```javascript
+var request = require('request');
+
 var Api = require('effektif-api');
 var Users = require('effektif-api').User;
+
+var baseRequest = request.defaults({'proxy':'http://localproxy.com'});
 
 var processes = new Api.Process({
   authorization: 'token',
@@ -37,18 +54,10 @@ var processes = new Api.Process({
     username: 'me@example.com',
     password: 'sup3rs3cr3t'
   },
-  users: new Users()
+  basePath: 'http://effektif-cluster.local/api'
+  baseRequest: baseRequest
 });
 ```
-
-Constructor argument:
-
-- `options`; Object with the following properties
-  - `authorization`: Optional. Authorization token to use for calls to the Api
-  - `credentials`: Optional. Credentials
-    - `username`: Username (emailadress)
-    - `password`: Password
-  - `users`: Optional. An `User` instance to use for log in
 
 ## Events
 
@@ -56,7 +65,7 @@ All interfaces inherit from EventEmitter.
 
 ### `authorized`
 
-Is emitted when a succesfull login was performed.
+The `authorized` event is emitted when a succesfull login was performed.
 
 The listener function will get `username` and `authorization`-token.
 
@@ -71,7 +80,7 @@ var processes = new Api.Process({
 });
 
 processes.on('authorized', function(result) {
-  console.log('Successfully logged in', result.username, 'and got token', result.authorization);  
+  console.log('A good place to store new token', result.authorization, 'for', result.username);
 });
 ```
 
@@ -231,7 +240,7 @@ processes.getProcesses('test-org', null, function(err, resp, body) {
 
 ## Function callback
 
-All functions takes a callback as final argument. The callback has the same signature as the [request-module](https://www.npmjs.com/package/request) callback, i.e:
+All functions takes a callback as final argument. The callback has the same signature as the [request-module][4] callback, i.e:
 
 ```javascript
 function(error, response, body) {
@@ -239,10 +248,11 @@ function(error, response, body) {
 }
 ```
 
-# Debugging
+# Debug
 
 The module uses [debug](github.com/visionmedia/debug) so run with environment variable `DEBUG=effektif-api*`.
 
 [1]: http://www.effektif.com/
 [2]: https://app.effektif.com/api-docs/index.html
 [3]: https://app.effektif.com/api/v1/docs
+[4]: https://www.npmjs.com/package/request

@@ -32,6 +32,12 @@ lab.experiment('Api exports', function() {
       expect(users._getUserInstance()).to.equal(users);
       done();
     });
+
+    lab.test('#createRegistrationsActivate is renamed to activateRegistration', function(done) {
+      var users = new Api.User();
+      expect(users.activateRegistration, 'activateRegistration').to.be.a.function();
+      done();
+    });
   });
 
   lab.experiment('Task', function() {

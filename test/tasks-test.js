@@ -21,15 +21,6 @@ lab.experiment('Tasks', function() {
     done();
   });
 
-  lab.test('emits error if no arguments is passed to function', function(done) {
-    tasks.once('error', function(err) {
-      expect(err).to.be.instanceof(Error);
-      done();
-    });
-
-    tasks.createTasks();
-  });
-
   lab.experiment('#getTask', function() {
     lab.before(function(done) {
       nock(Tasks.apiDoc.basePath)

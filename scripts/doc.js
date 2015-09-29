@@ -11,9 +11,11 @@ if (process.argv.length > 3) {
   fnameOnly = process.argv[3];
 }
 
+var pkge = require('../package.json');
+
 var models = {};
 
-console.log('API');
+console.log(util.format('%s API Reference', pkge.version));
 console.log('===');
 console.log('Auto-generated Api documentation.');
 
@@ -75,11 +77,14 @@ function printSchema(schema, interfaceName, operation, padding, ignoreChildren) 
     var required = (child.flags && child.flags.presence === 'required') || (meta && meta.path);
     var originalType = meta && meta.originalType;
 
-    if (originalType) addModel(originalType, interfaceName, operation);
+    if (originalType) {
+      addModel(originalType, interfaceName, operation);
+    }
+
     var msg = '';
     msg += util.format('%s- `%s`:', padding, name);
 
-    if (required) msg += util.format(' required');
+    if (required) msg += util.format(' **required**');
 
     msg += util.format(' %s', child.type);
 
@@ -91,6 +96,7 @@ function printSchema(schema, interfaceName, operation, padding, ignoreChildren) 
       }
     }
     if (child.description) msg += util.format(' - %s', child.description);
+    if (child.notes) msg += util.format('. %s', child.notes.join(', '));
 
     console.log(msg);
 

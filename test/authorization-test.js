@@ -101,6 +101,7 @@ lab.experiment('Authorization', function() {
         scope.done();
         expect(res.statusCode).to.equal(200);
         expect(processes.defaults.authorization).to.equal('newer-token');
+        expect(processes.options.authorization).to.equal('newer-token');
         done();
       });
     });
