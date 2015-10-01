@@ -62,9 +62,10 @@ lab.experiment('Process', function() {
           published: false
         }]);
 
-      processes.getProcesses('test-org', null, function(err, resp, body) {
+      processes.getProcesses('test-org', null, function(err, body, resp) {
         if (err) return done(err);
         expect(body).to.have.length(2);
+        expect(resp, 'HTTP response').to.exist();
         done();
       });
     });
@@ -84,9 +85,10 @@ lab.experiment('Process', function() {
           published: true
         }]);
 
-      processes.getProcesses('test-org', undefined, function(err, resp, body) {
+      processes.getProcesses('test-org', undefined, function(err, body, resp) {
         if (err) return done(err);
         expect(body).to.have.length(1);
+        expect(resp, 'HTTP response').to.exist();
         done();
       });
     });

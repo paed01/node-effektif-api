@@ -49,9 +49,10 @@ lab.experiment('Tasks', function() {
     });
 
     lab.test('returns body in callback that valides output schema', function(done) {
-      tasks.getTask('test-org', '1', function(err, resp, body) {
+      tasks.getTask('test-org', '1', function(err, body, resp) {
         expect(err).to.not.exist();
         expect(body).to.be.an.object();
+        expect(resp).to.be.an.object();
         Tasks.schemas.getTask.output.validate(body, done);
       });
     });

@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "make test-cov-lcov",
-    "doc": "node ./scripts/doc.js > API.md"
+    "doc": "node ./scripts/doc.js > ./docs/API.md"
   },
   "keywords": [
     "effektif",

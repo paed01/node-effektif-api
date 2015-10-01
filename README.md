@@ -6,7 +6,6 @@ node effektif api
 Unofficial node [effektif][1] [api][2] wrapper.
 
 **Table of contents**
-- [API](/API.md)
 - [Interface](#interface)
   - [Constructor](#constructor)
   - [Events](#events)
@@ -14,7 +13,12 @@ Unofficial node [effektif][1] [api][2] wrapper.
     - [`#getFormFieldByName`](#getformfieldbyname)
   - [Users](#users)
     - [`#login`](#login)
+- [API Generator](#api-generator)
+  - [Naming of operations](#naming-of-operations)
+  - [Operation callback](#operation-callback)
 - [Debug](#debug)
+- [API](/docs/API.md)
+- [Changelog](/CHANGELOG.md)
 
 # Introduction
 
@@ -37,6 +41,7 @@ The interface constructor takes an object with options.
   - `baseRequest`: optional - Default [request][4]
   - `log`: optional - Logging function, defaults to console.log
   - `users`: optional - [Users](#users) instance
+  - [`onUnauthorized`](#onunauthorized-option): optional function that will be called when an unauthorized call is made
 
 Example:
 
@@ -56,6 +61,40 @@ var processes = new Api.Process({
   },
   basePath: 'http://effektif-cluster.local/api'
   baseRequest: baseRequest
+});
+```
+
+### `onUnauthorized` option
+
+Optional function used to get user authorization token. The function is called when an unauthorized call was made. If a token is returned in callback the operation will be called with then new authorization token. The function is bound to the module instance on execution, i.e. `this` can be used to access module options.
+
+The function signature is:
+- `operationArguments`: The actual operation arguments
+- `callback`:
+  - `error`: Error if any
+  - `token`: The new authorization token to use
+
+Example:
+
+```javascript
+var db = require('database'); // Arbitrary database module
+
+function onUnauthorized(operationArgs, callback) {
+  db.findOne({
+    username: this.options.credentials.username
+  }).exec(function(err, doc) {
+    if (err) return callback(err);
+
+    // Return token in callback
+    return callback(null, doc.token);
+  });
+}
+
+var processes = new Api.Process({
+  onUnauthorized: onUnauthorized,
+  credentials: {
+    username: 'me@example.com'
+  }
 });
 ```
 
@@ -94,7 +133,7 @@ var tasks = new Tasks({
   authorization: 'token'
 });
 
-tasks.createTasks('test-org', { processId: '1' }, function(err, resp, body) {
+tasks.createTasks('test-org', { processId: '1' }, function(err, body, resp) {
   if (err) console.log(err);    
 });
 ```
@@ -118,7 +157,7 @@ tasks.getTaskNext('test-org', '1', function(err, resp, nextTask) {
 
   field.value = '123';
 
-  tasks.updateTaskFormField('test-org', nextTask.id, field.id, field, function(err, resp, res) {
+  tasks.updateTaskFormField('test-org', nextTask.id, field.id, field, function(err, body, resp) {
     console.log('success?', !!!err);
   });
 });
@@ -138,7 +177,7 @@ var tasks = new Tasks({
   }
 });
 
-tasks.createTasks('test-org', { processId: '1' }, function(err, resp, body) {
+tasks.createTasks('test-org', { processId: '1' }, function(err, body, resp) {
   if (err) console.log(err);    
 });
 ```
@@ -151,14 +190,18 @@ Utility function to perform user login.
 var Api = require('effektif-api');
 var users = new Api.User();
 
-users.login('me@example.com', 'superse3cret', function(err, resp, body) {
+users.login('me@example.com', 'superse3cret', function(err, body, resp) {
   console.log('new token', body.token);
 });
 ```
 
-# Naming
+# API Generator
 
-The module functions are generated from the api-endpoints. The name is composed of the http-operation and the api-endpoint.
+Module functions are generated from the api-endpoints. 
+
+## Naming of operations
+
+The name is composed of the http-operation and the api-endpoint.
 
 |HTTP-verb |function prefix|
 |----------|---------------|
@@ -177,7 +220,7 @@ var tasks = new Api.Task({authorization: 'token'});
 
 var newTask = {};
 
-tasks.createTasks(organizationKey, newTask, function(err, resp, body) {
+tasks.createTasks(organizationKey, newTask, function(err, body, resp) {
   console.log(err, body);  
 });
 ```
@@ -188,7 +231,7 @@ or `DELETE /{organizationKey}/processes/{processId}/activities/{activityId}`:
 var Api = require('effektif-api');
 var processes = new Api.Process({authorization: 'token'});
 
-processes.deleteProcessActivity(organizationKey, processId, activityId, function(err, resp, body) {
+processes.deleteProcessActivity(organizationKey, processId, activityId, function(err, body, resp) {
   console.log(err, body);  
 });
 ```
@@ -197,7 +240,24 @@ The plural ending is removed if the noun is immediately followed by a path param
 
 `DELETE /{organizationKey}/processes/{processId}` function name is `deleteProcess`.
 
-## Input Schemas
+### Path parameters
+
+The path parameters will build the method signature. They are considered required.
+
+### Query parameters
+
+The query parameters will also be appended to the method signature. They are considered optional but must be defined. Use `null` or `undefined`to leave them blank.
+
+```javascript
+var Api = require('effektif-api');
+var processes = new Api.Process({ authorization: 'token'});
+
+processes.getProcesses('test-org', null, function(err, body, resp) {
+  console.log('This should work and result in', body);
+});
+```
+
+### Input Schemas
 
 The operation schemas ([joi](https://github.com/hapijs/joi)) are stored with the module.
 
@@ -221,30 +281,17 @@ var processes = new Api.Process({ authorization: 'token'});
 console.log(processes.getProcesses.schemas.output.describe());
 ```
 
-### Path parameters
+## Operation callback
 
-The path parameters will build the method signature. They are considered required.
+All operations takes callback as final argument. The callback is required.
 
-### Query parameters
-
-The query parameters will also be appended to the method signature. They are considered optional but must be defined. Use `null` or `undefined`to leave them blank.
-
-```javascript
-var Api = require('effektif-api');
-var processes = new Api.Process({ authorization: 'token'});
-
-processes.getProcesses('test-org', null, function(err, resp, body) {
-  console.log('This should work and result in', body);
-});
-```
-
-## Function callback
-
-All functions takes a callback as final argument. The callback has the same signature as the [request-module][4] callback, i.e:
+- `error`: Error or null. Api-calls with a http response status code above 399 will be considered an error
+- `result`: Operation result
+- `httpResponse`: The HTTP response from the call to the actual api. Should be returned even if an error has occurred
 
 ```javascript
-function(error, response, body) {
-
+function(err, body, resp) {
+  console.log('call to', resp.request.path, 'responded with', resp.statusCode);
 }
 ```
 

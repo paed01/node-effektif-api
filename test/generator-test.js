@@ -636,17 +636,19 @@ lab.experiment('Generator', function() {
 
       var Mock = Generator('Mock', template);
       var mock = new Mock();
-      mock.getStatus('test-org', function(err, resp, body) {
+      mock.getStatus('test-org', function(err, body, resp) {
         expect(err).to.not.exist();
         expect(body).to.be.a.string();
         expect(body).to.equal('OK');
+        expect(resp).to.exist();
         done();
       });
     });
 
     lab.experiment('function callback response', function() {
-      lab.test('operation without return type but responds with content-type application/json returns json as body', function(done) {
-        var template = {
+      var Mock, template, scope;
+      lab.before(function(done) {
+        template = {
           basePath: 'http://testapi',
           apis: [{
             path: '/{organizationKey}/test',
@@ -661,11 +663,15 @@ lab.experiment('Generator', function() {
           }],
           models: {}
         };
+        Mock = Generator('Mock', template);
+        scope = nock(template.basePath);
+        done();
+      });
 
-        var Mock = Generator('Mock', template);
+      lab.test('operation without return type but responds with content-type application/json returns json as body', function(done) {
         var mock = new Mock();
 
-        nock(template.basePath)
+        scope
           .get('/test-org/test')
           .reply(200, {
             test: true
@@ -673,37 +679,21 @@ lab.experiment('Generator', function() {
             'content-type': 'application/json'
           });
 
-        mock.getTest('test-org', function(err, resp, body) {
+        mock.getTest('test-org', function(err, body, resp) {
           if (err) return done(err);
           expect(body).to.deep.equal({
             test: true
           });
+          scope.done();
           done();
         });
 
       });
 
       lab.test('operation responds with content-type application/json but bad json returns error', function(done) {
-        var template = {
-          basePath: 'http://testapi',
-          apis: [{
-            path: '/{organizationKey}/test',
-            operations: [{
-              method: 'GET',
-              parameters: [{
-                name: 'organizationKey',
-                paramType: 'path',
-                dataType: 'string'
-              }]
-            }]
-          }],
-          models: {}
-        };
-
-        var Mock = Generator('Mock', template);
         var mock = new Mock();
 
-        nock(template.basePath)
+        scope
           .get('/test-org/test')
           .reply(200, 'OK', {
             'content-type': 'application/json'
@@ -711,33 +701,71 @@ lab.experiment('Generator', function() {
 
         mock.getTest('test-org', function(err) {
           expect(err).to.exist();
+          scope.done();
           done();
         });
-
       });
 
       lab.test('operation failure returns error in callback', function(done) {
-        var template = {
-          basePath: 'http://testapi',
-          apis: [{
-            path: '/{organizationKey}/test',
-            operations: [{
-              method: 'GET',
-              parameters: [{
-                name: 'organizationKey',
-                paramType: 'path',
-                dataType: 'string'
-              }]
-            }]
-          }],
-          models: {}
-        };
-
-        var Mock = Generator('Mock', template);
         var mock = new Mock();
 
         mock.getTest('test-org', function(err) {
           expect(err).to.exist();
+          done();
+        });
+      });
+
+      lab.test('operation failure returns error with message in callback', function(done) {
+        var mock = new Mock();
+
+        scope
+          .get('/test-org/test')
+          .reply(405, 'Bad request');
+
+        mock.getTest('test-org', function(err) {
+          expect(err).to.be.instanceof(Error);
+          expect(err.message).to.equal('Call to effektif-api failed with 405: Bad request');
+          scope.done();
+          done();
+        });
+      });
+
+      lab.test('operation failure returns error with message in callback and the actual HTTP response', function(done) {
+        var mock = new Mock();
+
+        scope
+          .get('/test-org/test')
+          .reply(500, {
+            message: 'Serfer failed'
+          });
+
+        mock.getTest('test-org', function(err, body, resp) {
+          expect(err).to.be.instanceof(Error);
+          expect(err.message).to.equal('Serfer failed');
+
+          expect(resp, 'HTTP response').to.exist();
+          expect(resp.statusCode, 'HTTP response statusCode').to.equal(500);
+
+          scope.done();
+          done();
+        });
+      });
+
+      lab.test('operation failure without message returns actual body', function(done) {
+        var mock = new Mock();
+
+        scope
+          .get('/test-org/test')
+          .reply(500);
+
+        mock.getTest('test-org', function(err, body, resp) {
+          expect(err).to.be.instanceof(Error);
+          expect(err.message).to.equal('Call to effektif-api failed with 500');
+
+          expect(resp, 'HTTP response').to.exist();
+          expect(resp.statusCode, 'HTTP response statusCode').to.equal(500);
+
+          scope.done();
           done();
         });
       });
@@ -915,7 +943,7 @@ lab.experiment('Generator', function() {
             baseRequest: baseRequest
           });
 
-          mock.getStatus('test-org', function(err, resp, body) {
+          mock.getStatus('test-org', function(err, body, resp) {
             if (err) return done(err);
             expect(resp.statusCode).to.equal(200);
             scope.done();
@@ -942,7 +970,7 @@ lab.experiment('Generator', function() {
             baseRequest: baseRequest
           });
 
-          mock.getTest('test-org', function(err, resp, body) {
+          mock.getTest('test-org', function(err, body, resp) {
             if (err) return done(err);
             expect(resp.statusCode).to.equal(200);
             scope.done();

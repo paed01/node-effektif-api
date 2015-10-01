@@ -151,7 +151,7 @@ Auto-generated Api documentation.
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
-  - `onUnauthorized`: func - Excecuted when an unauthorized call was made. Receives operation arguments and callback
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made or authorization token is missing. Receives operation arguments and callback
   - `users`: object - Users instance
     - `login`: **required** func - Login function
   - `log`: func - Logging function, defaults to console.log
@@ -457,7 +457,7 @@ Represents call to:
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
-  - `onUnauthorized`: func - Excecuted when an unauthorized call was made. Receives operation arguments and callback
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made or authorization token is missing. Receives operation arguments and callback
   - `users`: object - Users instance
     - `login`: **required** func - Login function
   - `log`: func - Logging function, defaults to console.log
@@ -832,7 +832,7 @@ Represents call to:
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
-  - `onUnauthorized`: func - Excecuted when an unauthorized call was made. Receives operation arguments and callback
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made or authorization token is missing. Receives operation arguments and callback
   - `users`: object - Users instance
     - `login`: **required** func - Login function
   - `log`: func - Logging function, defaults to console.log
@@ -1958,7 +1958,7 @@ Represents call to:
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
-  - `onUnauthorized`: func - Excecuted when an unauthorized call was made. Receives operation arguments and callback
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made or authorization token is missing. Receives operation arguments and callback
   - `users`: object - Users instance
     - `login`: **required** func - Login function
   - `log`: func - Logging function, defaults to console.log
@@ -2181,7 +2181,7 @@ Represents call to:
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
-  - `onUnauthorized`: func - Excecuted when an unauthorized call was made. Receives operation arguments and callback
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made or authorization token is missing. Receives operation arguments and callback
   - `users`: object - Users instance
     - `login`: **required** func - Login function
   - `log`: func - Logging function, defaults to console.log
@@ -2212,7 +2212,7 @@ Represents call to:
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
-  - `onUnauthorized`: func - Excecuted when an unauthorized call was made. Receives operation arguments and callback
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made or authorization token is missing. Receives operation arguments and callback
   - `users`: object - Users instance
     - `login`: **required** func - Login function
   - `log`: func - Logging function, defaults to console.log
@@ -2295,7 +2295,7 @@ Represents call to:
     - `username`: string - Username
     - `password`: string - Password
   - `basePath`: string - Effektif-api base url, defaults to api endpoint documentation basePath
-  - `onUnauthorized`: func - Excecuted when an unauthorized call was made. Receives operation arguments and callback
+  - `onUnauthorized`: func - Excecuted when an unauthorized call was made or authorization token is missing. Receives operation arguments and callback
   - `users`: object - Users instance
     - `login`: **required** func - Login function
   - `log`: func - Logging function, defaults to console.log
