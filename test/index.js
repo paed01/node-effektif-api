@@ -1,4 +1,3 @@
-/* eslint func-style:0 */
 'use strict';
 
 var Lab = require('lab');
@@ -25,6 +24,18 @@ lab.experiment('Api exports', function() {
 
     lab.test('schemas', function(done) {
       expect(Api.User.schemas).to.be.an.object();
+      done();
+    });
+
+    lab.test('#getUserInstance returns current instance', function(done) {
+      var users = new Api.User();
+      expect(users._getUserInstance()).to.equal(users);
+      done();
+    });
+
+    lab.test('#createRegistrationsActivate is renamed to activateRegistration', function(done) {
+      var users = new Api.User();
+      expect(users.activateRegistration, 'activateRegistration').to.be.a.function();
       done();
     });
   });
@@ -55,6 +66,12 @@ lab.experiment('Api exports', function() {
 
     lab.test('have EventEmitter.on functions', function(done) {
       expect(Api.Task.prototype.on).to.be.a.function();
+      done();
+    });
+
+    lab.test('#getUserInstance returns new User instance', function(done) {
+      var instance = new Api.Task();
+      expect(instance._getUserInstance()).to.be.instanceOf(Api.User);
       done();
     });
   });
@@ -89,22 +106,79 @@ lab.experiment('Api exports', function() {
       expect(Api.Process.prototype.on).to.be.a.function();
       done();
     });
+
+    lab.test('#getUserInstance returns new User instance', function(done) {
+      var instance = new Api.Task();
+      expect(instance._getUserInstance()).to.be.instanceOf(Api.User);
+      done();
+    });
   });
 
-  lab.test('Service', function(done) {
-    expect(Api.Service).to.be.a.function();
-    done();
+  lab.experiment('Service', function() {
+    lab.test('function', function(done) {
+      expect(Api.Service).to.be.a.function();
+      done();
+    });
+
+    lab.test('#getUserInstance returns new User instance', function(done) {
+      var instance = new Api.Service();
+      expect(instance._getUserInstance()).to.be.instanceOf(Api.User);
+      done();
+    });
   });
-  lab.test('Search', function(done) {
-    expect(Api.Search).to.be.a.function();
-    done();
+
+  lab.experiment('Search', function() {
+    lab.test('function', function(done) {
+      expect(Api.Search).to.be.a.function();
+      done();
+    });
+
+    lab.test('#getUserInstance returns new User instance', function(done) {
+      var instance = new Api.Search();
+      expect(instance._getUserInstance()).to.be.instanceOf(Api.User);
+      done();
+    });
   });
-  lab.test('Service', function(done) {
-    expect(Api.User).to.be.a.function();
-    done();
+
+  lab.experiment('File', function() {
+    lab.test('function', function(done) {
+      expect(Api.File).to.be.a.function();
+      done();
+    });
+
+    lab.test('#getUserInstance returns new User instance', function(done) {
+      var instance = new Api.File();
+      expect(instance._getUserInstance()).to.be.instanceOf(Api.User);
+      done();
+    });
   });
-  lab.test('ProcessInstance', function(done) {
-    expect(Api.ProcessInstance).to.be.a.function();
-    done();
+
+  lab.experiment('ProcessInstance', function() {
+    lab.test('function', function(done) {
+      expect(Api.ProcessInstance).to.be.a.function();
+      done();
+    });
+
+    lab.test('#getUserInstance returns new User instance', function(done) {
+      var instance = new Api.ProcessInstance();
+      expect(instance._getUserInstance()).to.be.instanceOf(Api.User);
+      done();
+    });
   });
+
+  lab.experiment('Instance options', function() {
+
+    lab.test('#ctor takes options', function(done) {
+      var users = new Api.User();
+      users.overridden = true;
+
+      var instance = new Api.Process({
+        users: users
+      });
+
+      expect(instance._getUserInstance()).to.include('overridden', true);
+      done();
+    });
+  });
+
 });

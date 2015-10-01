@@ -1,11 +1,12 @@
 {
   "name": "effektif-api",
-  "version": "0.5.3",
+  "version": "1.0.0",
   "description": "Unofficial node effektif api wrapper",
   "repository": "git://github.com/paed01/node-effektif-api",
   "main": "index.js",
   "scripts": {
-    "test": "make test-cov-lcov"
+    "test": "make test-cov-lcov",
+    "doc": "node ./scripts/doc.js > ./docs/API.md"
   },
   "keywords": [
     "effektif",
@@ -13,23 +14,17 @@
   ],
   "author": "Pål Edman <pal.edman@outlook.com>",
   "dependencies": {
-    "async": "^0.9.0",
-    "debug": "^2.1.3",
-    "joi": "^6.0.4",
+    "async": "^1.4.2",
+    "debug": "^2.2.0",
+    "joi": "^6.7.1",
     "lodash": "^3.5.0",
-    "request": "^2.53.0"
+    "request": "^2.62.0"
   },
   "devDependencies": {
-    "code": "^1.3.0",
-    "coveralls": "^2.11.2",
-    "lab": "^5.4.0",
-    "nock": "^1.1.0"
+    "code": "^1.5.0",
+    "coveralls": "^2.11.4",
+    "lab": "^5.17.0",
+    "nock": "^2.13.0"
   },
-  "license": "BSD",
-  "licenses": [
-    {
-      "type": "BSD",
-      "url": "https://github.com/paed01/node-effektif-api/raw/master/LICENSE"
-    }
-  ]
+  "license": "BSD-3-Clause"
 }

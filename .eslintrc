@@ -8,6 +8,8 @@
     "quotes": [2, "single"],
     "strict": [2, "global"],
     "new-cap": 0,
-    "no-shadow": 0
+    "no-shadow": 0,
+    "no-unused-vars": [2, {"vars": "all", "args": "after-used"}],
+    "no-undef": 1
   }
 }

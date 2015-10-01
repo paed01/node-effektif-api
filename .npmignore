@@ -1,13 +1,9 @@
 ## just in .npmignore
-.jshint*
+.eslint*
 .jsbeautifyrc
 .jscs*
 .travis.yml
-CHANGELOG.md
-CONTRIBUTING.md
 docs/
-grunt/
-Gruntfile.js
 scripts/
 test/
 Makefile
