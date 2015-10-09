@@ -22,7 +22,7 @@ Unofficial node [effektif][1] [api][2] wrapper.
 
 # Introduction
 
-The api is auto-generated from the effektif documentation [json-endpoint][3].
+The module is auto-generated from the effektif documentation [json-endpoint][3].
 
 # Interface
 
@@ -98,6 +98,32 @@ var processes = new Api.Process({
 });
 ```
 
+## `#getUserInstance`
+
+A User instance is created with the same options as the module and this is the function to retrieve it.
+
+Example usage:
+
+```javascript
+var Api = require('effektif-api');
+
+function onUnauthorized(operationArgs, callback) {
+  var users = this.getUserInstance();
+
+  var loginOptions = {};
+  if (operationArgs.organizationKey) loginOptions.organizationKey = operationArgs.organizationKey;
+
+  users.login('me@example.com', 'sup3rs3cr3t', loginOptions, function(err, result) {
+    // Return token in callback
+    return callback(err, result && result.token);
+  });
+}
+
+var processes = new Api.Process({
+  basePath: 'https://effektif.local/api'
+});
+```
+
 ## Events
 
 All interfaces inherit from EventEmitter.
@@ -134,7 +160,7 @@ var tasks = new Tasks({
 });
 
 tasks.createTasks('test-org', { processId: '1' }, function(err, body, resp) {
-  if (err) console.log(err);    
+  if (err) console.log(err);
 });
 ```
 
@@ -178,7 +204,7 @@ var tasks = new Tasks({
 });
 
 tasks.createTasks('test-org', { processId: '1' }, function(err, body, resp) {
-  if (err) console.log(err);    
+  if (err) console.log(err);
 });
 ```
 
@@ -197,7 +223,7 @@ users.login('me@example.com', 'superse3cret', function(err, body, resp) {
 
 # API Generator
 
-Module functions are generated from the api-endpoints. 
+Module functions are generated from the api-endpoints.
 
 ## Naming of operations
 
@@ -221,7 +247,7 @@ var tasks = new Api.Task({authorization: 'token'});
 var newTask = {};
 
 tasks.createTasks(organizationKey, newTask, function(err, body, resp) {
-  console.log(err, body);  
+  console.log(err, body);
 });
 ```
 
@@ -232,7 +258,7 @@ var Api = require('effektif-api');
 var processes = new Api.Process({authorization: 'token'});
 
 processes.deleteProcessActivity(organizationKey, processId, activityId, function(err, body, resp) {
-  console.log(err, body);  
+  console.log(err, body);
 });
 ```
 

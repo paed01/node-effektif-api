@@ -121,6 +121,17 @@ lab.experiment('User', function() {
       }, done);
     });
 
+    lab.test('takes empty additional arguments', function(done) {
+      scope
+        .post('/users/login')
+        .reply(200, {
+          token: 'OK'
+        });
+
+      var userNoToken = new Users();
+      userNoToken.login('test@truntail.local', 'supers3cret', {}, done);
+    });
+
     lab.test('emits authorized event', function(done) {
       scope
         .post('/users/login')

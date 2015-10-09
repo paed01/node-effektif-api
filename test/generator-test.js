@@ -811,12 +811,12 @@ lab.experiment('Generator', function() {
       done();
     });
 
-    lab.experiment('#_getUserInstance', function() {
+    lab.experiment('#getUserInstance', function() {
       lab.test('throws if not overridden by module', function(done) {
         var mock = new Mock();
 
         expect(function() {
-          mock._getUserInstance();
+          mock.getUserInstance();
         }).to.throw('User interface is not loaded');
 
         done();
@@ -899,7 +899,7 @@ lab.experiment('Generator', function() {
           var mock = new Mock({
             users: users
           });
-          expect(mock._getUserInstance(), '_getUserInstance').to.equal(users);
+          expect(mock.getUserInstance(), 'getUserInstance').to.equal(users);
           done();
         });
 

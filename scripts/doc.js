@@ -2,6 +2,7 @@
 
 var Api = require('../');
 var util = require('util');
+var debug = require('debug')('effektif-api:doc');
 
 var nameOnly, fnameOnly;
 if (process.argv.length > 2) {
@@ -61,6 +62,19 @@ function addModel(model, interfaceName, operationName) {
   }
 }
 
+function getSchemaType(schemaDesc) {
+  if (schemaDesc.flags && schemaDesc.flags.func) return 'function';
+  return schemaDesc.type;
+}
+
+function getOriginalType(schemaDesc) {
+  var isModel = schemaDesc.tags && schemaDesc.tags.indexOf('model') > -1;
+  if (!isModel) return null;
+
+  var meta = schemaDesc.meta && schemaDesc.meta[0];
+  return meta && meta.originalType;
+}
+
 function printSchema(schema, interfaceName, operation, padding, ignoreChildren) {
   var descr = schema.describe ? schema.describe() : schema;
   var children = descr.children;
@@ -75,7 +89,7 @@ function printSchema(schema, interfaceName, operation, padding, ignoreChildren) 
     }
 
     var required = (child.flags && child.flags.presence === 'required') || (meta && meta.path);
-    var originalType = meta && meta.originalType;
+    var originalType =  getOriginalType(child);
 
     if (originalType) {
       addModel(originalType, interfaceName, operation);
@@ -86,7 +100,7 @@ function printSchema(schema, interfaceName, operation, padding, ignoreChildren) 
 
     if (required) msg += util.format(' **required**');
 
-    msg += util.format(' %s', child.type);
+    msg += util.format(' %s', getSchemaType(child));
 
     if (originalType) {
       if (interfaceName) {
@@ -138,6 +152,7 @@ function printFunctions() {
           console.log('> Requires authorization');
         }
         if (op.schemas) {
+          debug(fname, op.schemas.input.describe().children);
           console.log('\n**Arguments:**');
           printSchema(op.schemas.input, name, fname, '', true);
           console.log('');
@@ -145,7 +160,6 @@ function printFunctions() {
           if (op.schemas.output) {
             console.log('\n**Callback:**');
             console.log('- `error`: Error or null');
-            console.log('- `response`: Http response');
 
             var output = op.schemas.output.describe();
             var originalType = output.label;
@@ -156,8 +170,7 @@ function printFunctions() {
 
             console.log('- `body`:', '[' + output.label + '](' + '#model-' + output.label.toLowerCase() + ')');
 
-            // printSchema(op.schemas.output, name);
-            // console.log('');
+            console.log('- `resp`: Http response');
           }
         }
       }

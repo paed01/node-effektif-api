@@ -771,5 +771,34 @@ lab.experiment('Authorization', function() {
       });
     });
 
+    lab.test('requests with token specified in callback', function(done) {
+      var processes = new Processes({
+        onUnauthorized: function(opArgs, next) {
+          if (opArgs.organizationKey === 'test-org') return next(null, 'test-org-token');
+          return next(null, 'token');
+        }
+      });
+
+      var ids = ['different', 'expired', 'token'];
+      scope
+        .get('/test-org/processes?processIds=' + encodeURIComponent(ids.join(',')))
+        .matchHeader('authorization', 'test-org-token')
+        .reply(200, {})
+        .get('/other-org/processes?processIds=' + encodeURIComponent(ids.join(',')))
+        .matchHeader('authorization', 'token')
+        .reply(200, {});
+
+      processes.getProcesses('test-org', ids, function(err, body, res) {
+        if (err) return done(err);
+        expect(res.statusCode).to.equal(200);
+        processes.getProcesses('other-org', ids, function(err, body, res) {
+          if (err) return done(err);
+          scope.done();
+          expect(res.statusCode).to.equal(200);
+          done();
+        });
+      });
+    });
+
   });
 });

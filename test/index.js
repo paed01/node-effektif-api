@@ -29,7 +29,7 @@ lab.experiment('Api exports', function() {
 
     lab.test('#getUserInstance returns current instance', function(done) {
       var users = new Api.User();
-      expect(users._getUserInstance()).to.equal(users);
+      expect(users.getUserInstance()).to.equal(users);
       done();
     });
 
@@ -71,7 +71,7 @@ lab.experiment('Api exports', function() {
 
     lab.test('#getUserInstance returns new User instance', function(done) {
       var instance = new Api.Task();
-      expect(instance._getUserInstance()).to.be.instanceOf(Api.User);
+      expect(instance.getUserInstance()).to.be.instanceOf(Api.User);
       done();
     });
   });
@@ -109,7 +109,7 @@ lab.experiment('Api exports', function() {
 
     lab.test('#getUserInstance returns new User instance', function(done) {
       var instance = new Api.Task();
-      expect(instance._getUserInstance()).to.be.instanceOf(Api.User);
+      expect(instance.getUserInstance()).to.be.instanceOf(Api.User);
       done();
     });
   });
@@ -122,7 +122,7 @@ lab.experiment('Api exports', function() {
 
     lab.test('#getUserInstance returns new User instance', function(done) {
       var instance = new Api.Service();
-      expect(instance._getUserInstance()).to.be.instanceOf(Api.User);
+      expect(instance.getUserInstance()).to.be.instanceOf(Api.User);
       done();
     });
   });
@@ -135,7 +135,7 @@ lab.experiment('Api exports', function() {
 
     lab.test('#getUserInstance returns new User instance', function(done) {
       var instance = new Api.Search();
-      expect(instance._getUserInstance()).to.be.instanceOf(Api.User);
+      expect(instance.getUserInstance()).to.be.instanceOf(Api.User);
       done();
     });
   });
@@ -148,7 +148,7 @@ lab.experiment('Api exports', function() {
 
     lab.test('#getUserInstance returns new User instance', function(done) {
       var instance = new Api.File();
-      expect(instance._getUserInstance()).to.be.instanceOf(Api.User);
+      expect(instance.getUserInstance()).to.be.instanceOf(Api.User);
       done();
     });
   });
@@ -161,7 +161,7 @@ lab.experiment('Api exports', function() {
 
     lab.test('#getUserInstance returns new User instance', function(done) {
       var instance = new Api.ProcessInstance();
-      expect(instance._getUserInstance()).to.be.instanceOf(Api.User);
+      expect(instance.getUserInstance()).to.be.instanceOf(Api.User);
       done();
     });
   });
@@ -176,7 +176,7 @@ lab.experiment('Api exports', function() {
         users: users
       });
 
-      expect(instance._getUserInstance()).to.include('overridden', true);
+      expect(instance.getUserInstance()).to.include('overridden', true);
       done();
     });
   });
