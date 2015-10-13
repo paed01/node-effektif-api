@@ -62,17 +62,39 @@ function addModel(model, interfaceName, operationName) {
   }
 }
 
-function getSchemaType(schemaDesc) {
-  if (schemaDesc.flags && schemaDesc.flags.func) return 'function';
-  return schemaDesc.type;
-}
-
 function getOriginalType(schemaDesc) {
-  var isModel = schemaDesc.tags && schemaDesc.tags.indexOf('model') > -1;
+  var itemModel = schemaDesc;
+  if (schemaDesc.type === 'array' && schemaDesc.items && schemaDesc.items.length) {
+    itemModel = schemaDesc.items[0].type === 'object' ? schemaDesc.items[0] : schemaDesc;
+  }
+
+  var isModel = itemModel.tags && itemModel.tags.indexOf('model') > -1;
   if (!isModel) return null;
 
-  var meta = schemaDesc.meta && schemaDesc.meta[0];
+  var meta = itemModel.meta && itemModel.meta[0];
   return meta && meta.originalType;
+}
+
+function getSchemaType(schemaDesc) {
+  if (schemaDesc.flags && schemaDesc.flags.func) return 'function';
+
+  var originalType = getOriginalType(schemaDesc);
+  var type = schemaDesc.type;
+
+  switch (schemaDesc.type) {
+    case 'array':
+      if (originalType) {
+        return util.format('%s [%s](#model-%s)', schemaDesc.type, originalType, originalType.toLowerCase());
+      } else if (schemaDesc.items && schemaDesc.items.length) {
+        return util.format('%s %s', type, schemaDesc.items[0].type);
+      }
+    case 'object':
+      if (originalType) {
+        return util.format('%s [%s](#model-%s)', schemaDesc.type, originalType, originalType.toLowerCase());
+      }
+    default:
+      return schemaDesc.type;
+  }
 }
 
 function printSchema(schema, interfaceName, operation, padding, ignoreChildren) {
@@ -89,7 +111,7 @@ function printSchema(schema, interfaceName, operation, padding, ignoreChildren) 
     }
 
     var required = (child.flags && child.flags.presence === 'required') || (meta && meta.path);
-    var originalType =  getOriginalType(child);
+    var originalType = getOriginalType(child);
 
     if (originalType) {
       addModel(originalType, interfaceName, operation);
@@ -102,13 +124,13 @@ function printSchema(schema, interfaceName, operation, padding, ignoreChildren) 
 
     msg += util.format(' %s', getSchemaType(child));
 
-    if (originalType) {
-      if (interfaceName) {
-        msg += util.format(' [%s](#model-%s)', originalType, originalType.toLowerCase());
-      } else {
-        msg += util.format(' ref [%s](#model-%s)', originalType, originalType.toLowerCase());
-      }
-    }
+    // if (originalType) {
+    //   if (interfaceName) {
+    //     msg += util.format(' [%s](#model-%s)', originalType, originalType.toLowerCase());
+    //   } else {
+    //     msg += util.format(' ref [%s](#model-%s)', originalType, originalType.toLowerCase());
+    //   }
+    // }
     if (child.description) msg += util.format(' - %s', child.description);
     if (child.notes) msg += util.format('. %s', child.notes.join(', '));
 

@@ -2354,7 +2354,7 @@ Represents call to:
 ## Model About
 - `version`: string
 - `buildDate`: string
-- `latestCommits`: array
+- `latestCommits`: array string
 
 
 **Used by:**
@@ -2404,13 +2404,13 @@ Represents call to:
   - `created`: date
   - `external`: boolean
   - `firstName`: string
-  - `groupIds`: array
+  - `groupIds`: array string
   - `lastName`: string
   - `ldapDn`: string
   - `mailAddress`: string
-  - `licenses`: array
+  - `licenses`: array any
   - `mailAddressLower`: string
-  - `organizationIds`: array
+  - `organizationIds`: array string
   - `password`: string
   - `preferences`: object
   - `systemAdmin`: boolean
@@ -2440,18 +2440,18 @@ Represents call to:
   - `created`: date
   - `external`: boolean
   - `firstName`: string
-  - `groupIds`: array
+  - `groupIds`: array string
   - `lastName`: string
   - `ldapDn`: string
   - `mailAddress`: string
-  - `licenses`: array
+  - `licenses`: array any
   - `mailAddressLower`: string
-  - `organizationIds`: array
+  - `organizationIds`: array string
   - `password`: string
   - `preferences`: object
   - `systemAdmin`: boolean
   - `systemUser`: boolean
-- `organizations`: array
+- `organizations`: array object
 
 
 **Used by:**
@@ -2517,13 +2517,13 @@ Represents call to:
 - `created`: date
 - `external`: boolean
 - `firstName`: string
-- `groupIds`: array
+- `groupIds`: array string
 - `lastName`: string
 - `ldapDn`: string
 - `mailAddress`: string
-- `licenses`: array
+- `licenses`: array any
 - `mailAddressLower`: string
-- `organizationIds`: array
+- `organizationIds`: array string
 - `password`: string
 - `preferences`: object
 - `systemAdmin`: boolean
@@ -2544,10 +2544,10 @@ Represents call to:
 - `id`: string
 - `activityId`: string
 - `button`: string
-- `buttons`: array
+- `buttons`: array string
 - `description`: string
-- `fields`: array
-- `fieldsOrder`: array
+- `fields`: array object
+- `fieldsOrder`: array string
 - `organizationId`: string
 - `processId`: string
 
@@ -2566,22 +2566,22 @@ Represents call to:
 - `assigneeId`: string
 - `caze`: any
 - `cazeId`: string
-- `candidateIds`: array
-- `candidateGroupIds`: array
+- `candidateIds`: array string
+- `candidateGroupIds`: array string
 - `canceled`: boolean
 - `completed`: boolean
 - `createdBy`: string
 - `description`: string
-- `documentIds`: array
+- `documentIds`: array string
 - `duedate`: date
 - `form`: object
   - `id`: string
   - `activityId`: string
   - `button`: string
-  - `buttons`: array
+  - `buttons`: array string
   - `description`: string
-  - `fields`: array
-  - `fieldsOrder`: array
+  - `fields`: array object
+  - `fieldsOrder`: array string
   - `organizationId`: string
   - `processId`: string
 - `hasForm`: boolean
@@ -2591,10 +2591,10 @@ Represents call to:
 - `organizationId`: string
 - `parent`: any
 - `parentId`: string
-- `participantIds`: array
+- `participantIds`: array string
 - `processId`: string
 - `sandbox`: boolean
-- `subtaskIds`: array
+- `subtaskIds`: array string
 - `uncompletable`: boolean
 
 
@@ -2626,22 +2626,22 @@ Represents call to:
   - `assigneeId`: string
   - `caze`: any
   - `cazeId`: string
-  - `candidateIds`: array
-  - `candidateGroupIds`: array
+  - `candidateIds`: array string
+  - `candidateGroupIds`: array string
   - `canceled`: boolean
   - `completed`: boolean
   - `createdBy`: string
   - `description`: string
-  - `documentIds`: array
+  - `documentIds`: array string
   - `duedate`: date
   - `form`: object
     - `id`: string
     - `activityId`: string
     - `button`: string
-    - `buttons`: array
+    - `buttons`: array string
     - `description`: string
-    - `fields`: array
-    - `fieldsOrder`: array
+    - `fields`: array object
+    - `fieldsOrder`: array string
     - `organizationId`: string
     - `processId`: string
   - `hasForm`: boolean
@@ -2651,28 +2651,28 @@ Represents call to:
   - `organizationId`: string
   - `parent`: any
   - `parentId`: string
-  - `participantIds`: array
+  - `participantIds`: array string
   - `processId`: string
   - `sandbox`: boolean
-  - `subtaskIds`: array
+  - `subtaskIds`: array string
   - `uncompletable`: boolean
 - `cazeId`: string
-- `candidateIds`: array
-- `candidateGroupIds`: array
+- `candidateIds`: array string
+- `candidateGroupIds`: array string
 - `canceled`: boolean
 - `completed`: boolean
 - `createdBy`: string
 - `description`: string
-- `documentIds`: array
+- `documentIds`: array string
 - `duedate`: date
 - `form`: object
   - `id`: string
   - `activityId`: string
   - `button`: string
-  - `buttons`: array
+  - `buttons`: array string
   - `description`: string
-  - `fields`: array
-  - `fieldsOrder`: array
+  - `fields`: array object
+  - `fieldsOrder`: array string
   - `organizationId`: string
   - `processId`: string
 - `hasForm`: boolean
@@ -2686,22 +2686,22 @@ Represents call to:
   - `assigneeId`: string
   - `caze`: any
   - `cazeId`: string
-  - `candidateIds`: array
-  - `candidateGroupIds`: array
+  - `candidateIds`: array string
+  - `candidateGroupIds`: array string
   - `canceled`: boolean
   - `completed`: boolean
   - `createdBy`: string
   - `description`: string
-  - `documentIds`: array
+  - `documentIds`: array string
   - `duedate`: date
   - `form`: object
     - `id`: string
     - `activityId`: string
     - `button`: string
-    - `buttons`: array
+    - `buttons`: array string
     - `description`: string
-    - `fields`: array
-    - `fieldsOrder`: array
+    - `fields`: array object
+    - `fieldsOrder`: array string
     - `organizationId`: string
     - `processId`: string
   - `hasForm`: boolean
@@ -2711,16 +2711,16 @@ Represents call to:
   - `organizationId`: string
   - `parent`: any
   - `parentId`: string
-  - `participantIds`: array
+  - `participantIds`: array string
   - `processId`: string
   - `sandbox`: boolean
-  - `subtaskIds`: array
+  - `subtaskIds`: array string
   - `uncompletable`: boolean
 - `parentId`: string
-- `participantIds`: array
+- `participantIds`: array string
 - `processId`: string
 - `sandbox`: boolean
-- `subtaskIds`: array
+- `subtaskIds`: array string
 - `uncompletable`: boolean
 - `assignee`: object
   - `id`: string
@@ -2729,22 +2729,22 @@ Represents call to:
   - `created`: date
   - `external`: boolean
   - `firstName`: string
-  - `groupIds`: array
+  - `groupIds`: array string
   - `lastName`: string
   - `ldapDn`: string
   - `mailAddress`: string
-  - `licenses`: array
+  - `licenses`: array any
   - `mailAddressLower`: string
-  - `organizationIds`: array
+  - `organizationIds`: array string
   - `password`: string
   - `preferences`: object
   - `systemAdmin`: boolean
   - `systemUser`: boolean
-- `participants`: array
-- `candidates`: array
-- `subtasks`: array
-- `documents`: array
-- `events`: array
+- `participants`: array object
+- `candidates`: array object
+- `subtasks`: array object
+- `documents`: array object
+- `events`: array any
 
 
 **Used by:**
@@ -2808,22 +2808,22 @@ Represents call to:
   - `assigneeId`: string
   - `caze`: any
   - `cazeId`: string
-  - `candidateIds`: array
-  - `candidateGroupIds`: array
+  - `candidateIds`: array string
+  - `candidateGroupIds`: array string
   - `canceled`: boolean
   - `completed`: boolean
   - `createdBy`: string
   - `description`: string
-  - `documentIds`: array
+  - `documentIds`: array string
   - `duedate`: date
   - `form`: object
     - `id`: string
     - `activityId`: string
     - `button`: string
-    - `buttons`: array
+    - `buttons`: array string
     - `description`: string
-    - `fields`: array
-    - `fieldsOrder`: array
+    - `fields`: array object
+    - `fieldsOrder`: array string
     - `organizationId`: string
     - `processId`: string
   - `hasForm`: boolean
@@ -2833,10 +2833,10 @@ Represents call to:
   - `organizationId`: string
   - `parent`: any
   - `parentId`: string
-  - `participantIds`: array
+  - `participantIds`: array string
   - `processId`: string
   - `sandbox`: boolean
-  - `subtaskIds`: array
+  - `subtaskIds`: array string
   - `uncompletable`: boolean
 - `taskId`: string
 - `time`: date
@@ -2851,7 +2851,7 @@ Represents call to:
 - `binding`: object
   - `id`: string
   - `converter`: string
-  - `fields`: array
+  - `fields`: array string
   - `variableId`: string
 - `id`: string
 - `key`: string
@@ -2872,20 +2872,20 @@ Represents call to:
 
 ## Model Mail
 - `id`: string
-- `attachmentIds`: array
-- `bcc`: array
+- `attachmentIds`: array string
+- `bcc`: array string
 - `bodyText`: string
 - `bodyHtml`: string
-- `cc`: array
-- `from`: array
+- `cc`: array string
+- `from`: array string
 - `fromName`: string
 - `organizationId`: string
 - `preview`: string
-- `replyTo`: array
+- `replyTo`: array string
 - `source`: string
 - `subject`: string
 - `sendDate`: date
-- `to`: array
+- `to`: array string
 
 
 **Used by:**
@@ -2897,8 +2897,8 @@ Represents call to:
 - `trigger`: object
   - `id`: string
   - `access`: any
-  - `activities`: array
-  - `activitiesOrder`: array
+  - `activities`: array object
+  - `activitiesOrder`: array string
   - `bpmnId`: string
   - `defaultTransitionId`: string
   - `description`: string
@@ -2907,10 +2907,10 @@ Represents call to:
   - `nameTemplate`: string
   - `organizationId`: string
   - `parentId`: string
-  - `parameters`: array
+  - `parameters`: array [Parameter](#model-parameter)
   - `processId`: string
-  - `transitions`: array
-  - `variables`: array
+  - `transitions`: array [Transition](#model-transition)
+  - `variables`: array [Variable](#model-variable)
 - `templateId`: string
 - `isPrivate`: boolean
 
@@ -2921,8 +2921,8 @@ Represents call to:
 ## Model Process
 - `id`: string
 - `access`: any
-- `activities`: array
-- `activitiesOrder`: array
+- `activities`: array object
+- `activitiesOrder`: array string
 - `bpmnId`: string
 - `defaultTransitionId`: string
 - `description`: string
@@ -2931,17 +2931,17 @@ Represents call to:
 - `nameTemplate`: string
 - `organizationId`: string
 - `parentId`: string
-- `parameters`: array
+- `parameters`: array object
 - `processId`: string
-- `transitions`: array
-- `variables`: array
+- `transitions`: array object
+- `variables`: array object
 - `category`: string
-- `caseColumnsOrder`: array
+- `caseColumnsOrder`: array string
 - `changed`: boolean
 - `diagram`: object
   - `id`: string
   - `canvas`: any
-  - `edges`: array
+  - `edges`: array any
   - `version`: number
 - `disabled`: boolean
 - `lastUpdated`: date
@@ -2952,8 +2952,8 @@ Represents call to:
 - `trigger`: object
   - `id`: string
   - `access`: any
-  - `activities`: array
-  - `activitiesOrder`: array
+  - `activities`: array object
+  - `activitiesOrder`: array string
   - `bpmnId`: string
   - `defaultTransitionId`: string
   - `description`: string
@@ -2962,10 +2962,10 @@ Represents call to:
   - `nameTemplate`: string
   - `organizationId`: string
   - `parentId`: string
-  - `parameters`: array
+  - `parameters`: array [Parameter](#model-parameter)
   - `processId`: string
-  - `transitions`: array
-  - `variables`: array
+  - `transitions`: array [Transition](#model-transition)
+  - `variables`: array [Variable](#model-variable)
 
 
 **Used by:**
@@ -2980,8 +2980,8 @@ Represents call to:
 ## Model Activity
 - `id`: string
 - `access`: any
-- `activities`: array
-- `activitiesOrder`: array
+- `activities`: array [Activity](#model-activity)
+- `activitiesOrder`: array string
 - `bpmnId`: string
 - `defaultTransitionId`: string
 - `description`: string
@@ -2990,10 +2990,10 @@ Represents call to:
 - `nameTemplate`: string
 - `organizationId`: string
 - `parentId`: string
-- `parameters`: array
+- `parameters`: array object
 - `processId`: string
-- `transitions`: array
-- `variables`: array
+- `transitions`: array object
+- `variables`: array [Variable](#model-variable)
 
 
 **Used by:**
@@ -3010,7 +3010,7 @@ Represents call to:
 - `binding`: object
   - `id`: string
   - `converter`: string
-  - `fields`: array
+  - `fields`: array string
   - `variableId`: string
 
 
@@ -3022,9 +3022,9 @@ Represents call to:
 - `binding`: object
   - `id`: string
   - `converter`: string
-  - `fields`: array
+  - `fields`: array string
   - `variableId`: string
-- `bindings`: array
+- `bindings`: array [Binding](#model-binding)
 - `fixed`: boolean
 - `key`: string
 - `list`: boolean
@@ -3045,7 +3045,7 @@ Represents call to:
 ## Model Binding
 - `id`: string
 - `converter`: string
-- `fields`: array
+- `fields`: array string
 - `variableId`: string
 
 
@@ -3066,7 +3066,7 @@ Represents call to:
 - `binding`: object
   - `id`: string
   - `converter`: string
-  - `fields`: array
+  - `fields`: array string
   - `variableId`: string
 - `scriptName`: string
 - `testValue`: any
@@ -3081,7 +3081,7 @@ Represents call to:
 - `binding`: object
   - `id`: string
   - `converter`: string
-  - `fields`: array
+  - `fields`: array string
   - `variableId`: string
 - `custom`: boolean
 - `hidden`: boolean
@@ -3097,7 +3097,7 @@ Represents call to:
 ## Model Diagram
 - `id`: string
 - `canvas`: any
-- `edges`: array
+- `edges`: array any
 - `version`: number
 
 
@@ -3115,8 +3115,8 @@ Represents call to:
 - `from`: object
   - `id`: string
   - `access`: any
-  - `activities`: array
-  - `activitiesOrder`: array
+  - `activities`: array [Activity](#model-activity)
+  - `activitiesOrder`: array string
   - `bpmnId`: string
   - `defaultTransitionId`: string
   - `description`: string
@@ -3125,10 +3125,10 @@ Represents call to:
   - `nameTemplate`: string
   - `organizationId`: string
   - `parentId`: string
-  - `parameters`: array
+  - `parameters`: array [Parameter](#model-parameter)
   - `processId`: string
-  - `transitions`: array
-  - `variables`: array
+  - `transitions`: array [Transition](#model-transition)
+  - `variables`: array [Variable](#model-variable)
 - `fromId`: string
 - `name`: string
 - `organizationId`: string
@@ -3137,8 +3137,8 @@ Represents call to:
 - `to`: object
   - `id`: string
   - `access`: any
-  - `activities`: array
-  - `activitiesOrder`: array
+  - `activities`: array [Activity](#model-activity)
+  - `activitiesOrder`: array string
   - `bpmnId`: string
   - `defaultTransitionId`: string
   - `description`: string
@@ -3147,10 +3147,10 @@ Represents call to:
   - `nameTemplate`: string
   - `organizationId`: string
   - `parentId`: string
-  - `parameters`: array
+  - `parameters`: array [Parameter](#model-parameter)
   - `processId`: string
-  - `transitions`: array
-  - `variables`: array
+  - `transitions`: array [Transition](#model-transition)
+  - `variables`: array [Variable](#model-variable)
 - `toId`: string
 
 
@@ -3162,8 +3162,8 @@ Represents call to:
 ## Model Trigger
 - `id`: string
 - `access`: any
-- `activities`: array
-- `activitiesOrder`: array
+- `activities`: array object
+- `activitiesOrder`: array string
 - `bpmnId`: string
 - `defaultTransitionId`: string
 - `description`: string
@@ -3172,10 +3172,10 @@ Represents call to:
 - `nameTemplate`: string
 - `organizationId`: string
 - `parentId`: string
-- `parameters`: array
+- `parameters`: array [Parameter](#model-parameter)
 - `processId`: string
-- `transitions`: array
-- `variables`: array
+- `transitions`: array [Transition](#model-transition)
+- `variables`: array [Variable](#model-variable)
 
 
 **Used by:**
@@ -3207,8 +3207,8 @@ Represents call to:
 ## Model ProcessDefinition
 - `id`: string
 - `access`: any
-- `activities`: array
-- `activitiesOrder`: array
+- `activities`: array object
+- `activitiesOrder`: array string
 - `bpmnId`: string
 - `defaultTransitionId`: string
 - `description`: string
@@ -3217,15 +3217,15 @@ Represents call to:
 - `nameTemplate`: string
 - `organizationId`: string
 - `parentId`: string
-- `parameters`: array
+- `parameters`: array [Parameter](#model-parameter)
 - `processId`: string
-- `transitions`: array
-- `variables`: array
+- `transitions`: array [Transition](#model-transition)
+- `variables`: array [Variable](#model-variable)
 - `created`: date
 - `diagram`: object
   - `id`: string
   - `canvas`: any
-  - `edges`: array
+  - `edges`: array any
   - `version`: number
 - `ownerId`: string
 - `publisherId`: string
@@ -3233,8 +3233,8 @@ Represents call to:
 - `trigger`: object
   - `id`: string
   - `access`: any
-  - `activities`: array
-  - `activitiesOrder`: array
+  - `activities`: array object
+  - `activitiesOrder`: array string
   - `bpmnId`: string
   - `defaultTransitionId`: string
   - `description`: string
@@ -3243,10 +3243,10 @@ Represents call to:
   - `nameTemplate`: string
   - `organizationId`: string
   - `parentId`: string
-  - `parameters`: array
+  - `parameters`: array [Parameter](#model-parameter)
   - `processId`: string
-  - `transitions`: array
-  - `variables`: array
+  - `transitions`: array [Transition](#model-transition)
+  - `variables`: array [Variable](#model-variable)
 
 
 **Used by:**
@@ -3305,8 +3305,8 @@ Represents call to:
 [`Service.createServiceActionInstancesEnd`](#service-createserviceactioninstancesend)
 
 ## Model SearchResult
-- `tasks`: array
-- `processes`: array
+- `tasks`: array object
+- `processes`: array object
 
 
 **Used by:**
