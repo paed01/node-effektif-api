@@ -179,6 +179,15 @@ lab.experiment('Api exports', function() {
       expect(instance.getUserInstance()).to.include('overridden', true);
       done();
     });
+
+    lab.test('#ctor overrides basePath option', function(done) {
+      var instance = new Api.Process({
+        basePath: 'http://mylocal.effektif.api'
+      });
+
+      expect(instance.options.basePath).to.equal('http://mylocal.effektif.api');
+      done();
+    });
   });
 
 });
