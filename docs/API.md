@@ -1,4 +1,4 @@
-1.1.0 API Reference
+1.2.0 API Reference
 ===
 Auto-generated Api documentation.
 **Table of contents:**

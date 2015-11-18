@@ -4,6 +4,7 @@ var Lab = require('lab');
 var lab = exports.lab = Lab.script();
 var Code = require('code');
 var expect = Code.expect;
+var nock = require('nock');
 
 var Api = require('../.');
 
@@ -178,6 +179,31 @@ lab.experiment('Api exports', function() {
       expect(instance.getUserInstance()).to.be.instanceOf(Api.User);
       expect(instance.getUserInstance().options.basePath).to.equal(instance.options.basePath);
       done();
+    });
+
+    lab.test('shares basePath with user instance', function(done) {
+      var instance = new Api.Process({
+        basePath: 'http://test.api',
+        credentials: {
+          username: 'kalle',
+          password: 'anka'
+        }
+      });
+
+      var scope = nock(instance.options.basePath);
+      scope.post('/users/login')
+        .reply(200, {
+          token: 'new-token'
+        })
+        .get('/test-org/processes')
+        .matchHeader('Authorization', 'new-token')
+        .reply(200, []);
+
+      instance.getProcesses('test-org', function(err) {
+        if (err) return done(err);
+        scope.done();
+        done();
+      });
     });
   });
 

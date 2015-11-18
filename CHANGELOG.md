@@ -1,3 +1,9 @@
+1.2.0 / 2015-11-18
+==================
+
+  * Option `basePath` is now shared with user instance
+  * Operation query arguments considered optional
+
 1.1.0 / 2015-10-01
 ==================
 
