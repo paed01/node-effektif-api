@@ -16,16 +16,17 @@ Auto-generated Api documentation.
   - [`getUserInstance`](#case-getuserinstance)
   - [`getCases`](#case-getcases)
   - [`createCases`](#case-createcases)
-  - [`deleteCases`](#case-deletecases)
-  - [`updateCases`](#case-updatecases)
-  - [`createCasesCancel`](#case-createcasescancel)
-  - [`createCasesClose`](#case-createcasesclose)
-  - [`getCasesEvents`](#case-getcasesevents)
-  - [`createCasesEvents`](#case-createcasesevents)
-  - [`createCasesFiles`](#case-createcasesfiles)
-  - [`createCasesFile`](#case-createcasesfile)
-  - [`createCasesIframeFiles`](#case-createcasesiframefiles)
-  - [`getCasesTasks`](#case-getcasestasks)
+  - [`deleteCase`](#case-deletecase)
+  - [`getCase`](#case-getcase)
+  - [`updateCase`](#case-updatecase)
+  - [`createCaseCancel`](#case-createcasecancel)
+  - [`createCaseClose`](#case-createcaseclose)
+  - [`getCaseEvents`](#case-getcaseevents)
+  - [`createCaseEvents`](#case-createcaseevents)
+  - [`createCaseFiles`](#case-createcasefiles)
+  - [`createCaseFile`](#case-createcasefile)
+  - [`createCaseIframeFiles`](#case-createcaseiframefiles)
+  - [`getCaseTasks`](#case-getcasetasks)
   - [`getInfoCases`](#case-getinfocases)
 - [Task](#task)
   - [`getUserInstance`](#task-getuserinstance)
@@ -34,10 +35,10 @@ Auto-generated Api documentation.
   - [`deleteTask`](#task-deletetask)
   - [`getTask`](#task-gettask)
   - [`updateTask`](#task-updatetask)
-  - [`createTaskComplete`](#task-createtaskcomplete)
+  - [`completeTask`](#task-completetask)
   - [`updateTaskFormField`](#task-updatetaskformfield)
   - [`getTaskMail`](#task-gettaskmail)
-  - [`createTaskReopen`](#task-createtaskreopen)
+  - [`reopenTask`](#task-reopentask)
 - [Workflow](#workflow)
   - [`getUserInstance`](#workflow-getuserinstance)
   - [`getTemplates`](#workflow-gettemplates)
@@ -45,20 +46,21 @@ Auto-generated Api documentation.
   - [`createWorkflows`](#workflow-createworkflows)
   - [`createWorkflowsImportBpmn`](#workflow-createworkflowsimportbpmn)
   - [`createWorkflowsImportJson`](#workflow-createworkflowsimportjson)
-  - [`deleteWorkflows`](#workflow-deleteworkflows)
-  - [`updateWorkflows`](#workflow-updateworkflows)
-  - [`createWorkflowsActivityTest`](#workflow-createworkflowsactivitytest)
-  - [`createWorkflowsCopy`](#workflow-createworkflowscopy)
-  - [`getWorkflowsExportBpmn`](#workflow-getworkflowsexportbpmn)
-  - [`getWorkflowsExportJson`](#workflow-getworkflowsexportjson)
-  - [`createWorkflowsLock`](#workflow-createworkflowslock)
-  - [`getWorkflowsStartForm`](#workflow-getworkflowsstartform)
-  - [`createWorkflowsUnlock`](#workflow-createworkflowsunlock)
-  - [`updateWorkflowsUpdateBpmn`](#workflow-updateworkflowsupdatebpmn)
-  - [`getWorkflowsVersions`](#workflow-getworkflowsversions)
-  - [`createWorkflowsVersions`](#workflow-createworkflowsversions)
-  - [`createWorkflowsVersionRestore`](#workflow-createworkflowsversionrestore)
-  - [`createWorkflowsVersionPublish`](#workflow-createworkflowsversionpublish)
+  - [`deleteWorkflow`](#workflow-deleteworkflow)
+  - [`getWorkflow`](#workflow-getworkflow)
+  - [`updateWorkflow`](#workflow-updateworkflow)
+  - [`createWorkflowActivityTest`](#workflow-createworkflowactivitytest)
+  - [`createWorkflowCopy`](#workflow-createworkflowcopy)
+  - [`getWorkflowExportBpmn`](#workflow-getworkflowexportbpmn)
+  - [`getWorkflowExportJson`](#workflow-getworkflowexportjson)
+  - [`createWorkflowLock`](#workflow-createworkflowlock)
+  - [`getWorkflowStartForm`](#workflow-getworkflowstartform)
+  - [`createWorkflowUnlock`](#workflow-createworkflowunlock)
+  - [`updateWorkflowUpdateBpmn`](#workflow-updateworkflowupdatebpmn)
+  - [`getWorkflowVersions`](#workflow-getworkflowversions)
+  - [`createWorkflowVersions`](#workflow-createworkflowversions)
+  - [`createWorkflowVersionRestore`](#workflow-createworkflowversionrestore)
+  - [`createWorkflowVersionPublish`](#workflow-createworkflowversionpublish)
 - [WorkflowEngine](#workflowengine)
   - [`getUserInstance`](#workflowengine-getuserinstance)
   - [`createEngineWorkflowInstances`](#workflowengine-createengineworkflowinstances)
@@ -82,7 +84,8 @@ Auto-generated Api documentation.
   - [`getLdapUsers`](#organization-getldapusers)
   - [`createLicenseProfiles`](#organization-createlicenseprofiles)
   - [`getLicenses`](#organization-getlicenses)
-  - [`updateLicenses`](#organization-updatelicenses)
+  - [`getLicense`](#organization-getlicense)
+  - [`updateLicense`](#organization-updatelicense)
   - [`getOrganizations`](#organization-getorganizations)
   - [`createPurchase`](#organization-createpurchase)
   - [`createUsers`](#organization-createusers)
@@ -255,6 +258,51 @@ Represents call to:
 
 ## Case getCases
 Represents call to:
+`GET /{organizationKey}/cases`
+
+> Requires authorization
+
+**Arguments:**
+- `organizationKey`: **required** string
+- `editorWorkflowId`: string
+- `closed`: boolean
+- `canceled`: boolean
+- `sorting`: string
+- `workflowDeleted`: boolean
+- `callback`: **required** function - function(err, body, resp)
+
+
+## Case createCases
+Represents call to:
+`POST /{organizationKey}/cases`
+
+> Requires authorization
+
+**Arguments:**
+- `organizationKey`: **required** string
+- `newCase`: **required** object [NewCase](#model-newcase)
+- `callback`: **required** function - function(err, body, resp)
+
+
+**Callback:**
+- `error`: Error or null
+- `body`: [CaseDetail](#model-casedetail)
+- `resp`: Http response
+
+## Case deleteCase
+Represents call to:
+`DELETE /{organizationKey}/cases/{caseId}`
+
+> Requires authorization
+
+**Arguments:**
+- `organizationKey`: **required** string
+- `caseId`: **required** string
+- `callback`: **required** function - function(err, body, resp)
+
+
+## Case getCase
+Represents call to:
 `GET /{organizationKey}/cases/{caseId}`
 
 > Requires authorization
@@ -270,36 +318,7 @@ Represents call to:
 - `body`: [CaseDetail](#model-casedetail)
 - `resp`: Http response
 
-## Case createCases
-Represents call to:
-`POST /{organizationKey}/cases`
-
-> Requires authorization
-
-**Arguments:**
-- `organizationKey`: **required** string
-- `body`: **required** object [NewCase](#model-newcase)
-- `callback`: **required** function - function(err, body, resp)
-
-
-**Callback:**
-- `error`: Error or null
-- `body`: [CaseDetail](#model-casedetail)
-- `resp`: Http response
-
-## Case deleteCases
-Represents call to:
-`DELETE /{organizationKey}/cases/{caseId}`
-
-> Requires authorization
-
-**Arguments:**
-- `organizationKey`: **required** string
-- `caseId`: **required** string
-- `callback`: **required** function - function(err, body, resp)
-
-
-## Case updateCases
+## Case updateCase
 Represents call to:
 `PUT /{organizationKey}/cases/{caseId}`
 
@@ -308,7 +327,7 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `caseId`: **required** string
-- `body`: **required** object [Case](#model-case)
+- `case`: **required** object [Case](#model-case)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -317,7 +336,7 @@ Represents call to:
 - `body`: [CaseDetail](#model-casedetail)
 - `resp`: Http response
 
-## Case createCasesCancel
+## Case createCaseCancel
 Represents call to:
 `POST /{organizationKey}/cases/{caseId}/cancel`
 
@@ -334,7 +353,7 @@ Represents call to:
 - `body`: [CaseDetail](#model-casedetail)
 - `resp`: Http response
 
-## Case createCasesClose
+## Case createCaseClose
 Represents call to:
 `POST /{organizationKey}/cases/{caseId}/close`
 
@@ -351,7 +370,7 @@ Represents call to:
 - `body`: [CaseDetail](#model-casedetail)
 - `resp`: Http response
 
-## Case getCasesEvents
+## Case getCaseEvents
 Represents call to:
 `GET /{organizationKey}/cases/{caseId}/events`
 
@@ -367,7 +386,7 @@ Represents call to:
 - `callback`: **required** function - function(err, body, resp)
 
 
-## Case createCasesEvents
+## Case createCaseEvents
 Represents call to:
 `POST /{organizationKey}/cases/{caseId}/events`
 
@@ -376,7 +395,7 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `caseId`: **required** string
-- `body`: **required** object [Event](#model-event)
+- `event`: **required** object [Event](#model-event)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -385,7 +404,7 @@ Represents call to:
 - `body`: [Event](#model-event)
 - `resp`: Http response
 
-## Case createCasesFiles
+## Case createCaseFiles
 Represents call to:
 `POST /{organizationKey}/cases/{caseId}/files`
 
@@ -400,7 +419,7 @@ Represents call to:
 - `body`: [File](#model-file)
 - `resp`: Http response
 
-## Case createCasesFile
+## Case createCaseFile
 Represents call to:
 `POST /{organizationKey}/cases/{caseId}/files/{fileId}`
 
@@ -418,7 +437,7 @@ Represents call to:
 - `body`: [File](#model-file)
 - `resp`: Http response
 
-## Case createCasesIframeFiles
+## Case createCaseIframeFiles
 Represents call to:
 `POST /{organizationKey}/cases/{caseId}/iframe/files`
 
@@ -428,7 +447,7 @@ Represents call to:
 - `callback`: **required** function - function(err, body, resp)
 
 
-## Case getCasesTasks
+## Case getCaseTasks
 Represents call to:
 `GET /{organizationKey}/cases/{caseId}/tasks`
 
@@ -491,7 +510,7 @@ Represents call to:
 
 **Arguments:**
 - `organizationKey`: **required** string
-- `body`: **required** object [NewTask](#model-newtask)
+- `newTask`: **required** object [NewTask](#model-newtask)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -538,7 +557,7 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `taskId`: **required** string
-- `body`: **required** object [Task](#model-task)
+- `task`: **required** object [Task](#model-task)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -547,7 +566,7 @@ Represents call to:
 - `body`: [TaskDetail](#model-taskdetail)
 - `resp`: Http response
 
-## Task createTaskComplete
+## Task completeTask
 Represents call to:
 `POST /{organizationKey}/tasks/{taskId}/complete`
 
@@ -556,7 +575,7 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `taskId`: **required** string
-- `body`: array
+- `formInstanceFields`: array [FormInstanceField](#model-forminstancefield)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -575,7 +594,7 @@ Represents call to:
 - `organizationKey`: **required** string
 - `taskId`: **required** string
 - `fieldId`: **required** string
-- `body`: **required** object [FormInstanceField](#model-forminstancefield)
+- `formInstanceField`: **required** object [FormInstanceField](#model-forminstancefield)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -602,7 +621,7 @@ Represents call to:
 - `body`: [Email](#model-email)
 - `resp`: Http response
 
-## Task createTaskReopen
+## Task reopenTask
 Represents call to:
 `POST /{organizationKey}/tasks/{taskId}/reopen`
 
@@ -649,20 +668,17 @@ Represents call to:
 
 ## Workflow getWorkflows
 Represents call to:
-`GET /{organizationKey}/workflows/{editorWorkflowId}`
+`GET /{organizationKey}/workflows`
 
 > Requires authorization
 
 **Arguments:**
 - `organizationKey`: **required** string
-- `editorWorkflowId`: **required** string
+- `offset`: number
+- `pagesize`: number
+- `trigger`: string
 - `callback`: **required** function - function(err, body, resp)
 
-
-**Callback:**
-- `error`: Error or null
-- `body`: [EditorWorkflowDetail](#model-editorworkflowdetail)
-- `resp`: Http response
 
 ## Workflow createWorkflows
 Represents call to:
@@ -672,7 +688,7 @@ Represents call to:
 
 **Arguments:**
 - `organizationKey`: **required** string
-- `body`: **required** object [NewWorkflow](#model-newworkflow)
+- `newWorkflow`: **required** object [NewWorkflow](#model-newworkflow)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -706,7 +722,7 @@ Represents call to:
 
 **Arguments:**
 - `organizationKey`: **required** string
-- `body`: **required** object [EditorWorkflow](#model-editorworkflow)
+- `editorWorkflow`: **required** object [EditorWorkflow](#model-editorworkflow)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -715,7 +731,7 @@ Represents call to:
 - `body`: [EditorWorkflow](#model-editorworkflow)
 - `resp`: Http response
 
-## Workflow deleteWorkflows
+## Workflow deleteWorkflow
 Represents call to:
 `DELETE /{organizationKey}/workflows/{editorWorkflowId}`
 
@@ -728,16 +744,15 @@ Represents call to:
 - `callback`: **required** function - function(err, body, resp)
 
 
-## Workflow updateWorkflows
+## Workflow getWorkflow
 Represents call to:
-`PUT /{organizationKey}/workflows/{editorWorkflowId}`
+`GET /{organizationKey}/workflows/{editorWorkflowId}`
 
 > Requires authorization
 
 **Arguments:**
 - `organizationKey`: **required** string
 - `editorWorkflowId`: **required** string
-- `body`: **required** object [EditorWorkflow](#model-editorworkflow)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -746,7 +761,25 @@ Represents call to:
 - `body`: [EditorWorkflowDetail](#model-editorworkflowdetail)
 - `resp`: Http response
 
-## Workflow createWorkflowsActivityTest
+## Workflow updateWorkflow
+Represents call to:
+`PUT /{organizationKey}/workflows/{editorWorkflowId}`
+
+> Requires authorization
+
+**Arguments:**
+- `organizationKey`: **required** string
+- `editorWorkflowId`: **required** string
+- `editorWorkflow`: **required** object [EditorWorkflow](#model-editorworkflow)
+- `callback`: **required** function - function(err, body, resp)
+
+
+**Callback:**
+- `error`: Error or null
+- `body`: [EditorWorkflowDetail](#model-editorworkflowdetail)
+- `resp`: Http response
+
+## Workflow createWorkflowActivityTest
 Represents call to:
 `POST /{organizationKey}/workflows/{editorWorkflowId}/activities/{activityId}/test`
 
@@ -764,7 +797,7 @@ Represents call to:
 - `body`: [ScriptResult](#model-scriptresult)
 - `resp`: Http response
 
-## Workflow createWorkflowsCopy
+## Workflow createWorkflowCopy
 Represents call to:
 `POST /{organizationKey}/workflows/{editorWorkflowId}/copy`
 
@@ -781,7 +814,7 @@ Represents call to:
 - `body`: [EditorWorkflowDetail](#model-editorworkflowdetail)
 - `resp`: Http response
 
-## Workflow getWorkflowsExportBpmn
+## Workflow getWorkflowExportBpmn
 Represents call to:
 `GET /{organizationKey}/workflows/{editorWorkflowId}/export/bpmn/`
 
@@ -793,7 +826,7 @@ Represents call to:
 - `callback`: **required** function - function(err, body, resp)
 
 
-## Workflow getWorkflowsExportJson
+## Workflow getWorkflowExportJson
 Represents call to:
 `GET /{organizationKey}/workflows/{editorWorkflowId}/export/json`
 
@@ -810,7 +843,7 @@ Represents call to:
 - `body`: [EditorWorkflow](#model-editorworkflow)
 - `resp`: Http response
 
-## Workflow createWorkflowsLock
+## Workflow createWorkflowLock
 Represents call to:
 `POST /{organizationKey}/workflows/{editorWorkflowId}/lock`
 
@@ -827,7 +860,7 @@ Represents call to:
 - `body`: [EditorWorkflow](#model-editorworkflow)
 - `resp`: Http response
 
-## Workflow getWorkflowsStartForm
+## Workflow getWorkflowStartForm
 Represents call to:
 `GET /{organizationKey}/workflows/{editorWorkflowId}/startForm`
 
@@ -844,7 +877,7 @@ Represents call to:
 - `body`: [FormInstance](#model-forminstance)
 - `resp`: Http response
 
-## Workflow createWorkflowsUnlock
+## Workflow createWorkflowUnlock
 Represents call to:
 `POST /{organizationKey}/workflows/{editorWorkflowId}/unlock`
 
@@ -856,7 +889,7 @@ Represents call to:
 - `callback`: **required** function - function(err, body, resp)
 
 
-## Workflow updateWorkflowsUpdateBpmn
+## Workflow updateWorkflowUpdateBpmn
 Represents call to:
 `PUT /{organizationKey}/workflows/{editorWorkflowId}/update/bpmn`
 
@@ -874,7 +907,7 @@ Represents call to:
 - `body`: [EditorWorkflow](#model-editorworkflow)
 - `resp`: Http response
 
-## Workflow getWorkflowsVersions
+## Workflow getWorkflowVersions
 Represents call to:
 `GET /{organizationKey}/workflows/{editorWorkflowId}/versions`
 
@@ -888,7 +921,7 @@ Represents call to:
 - `callback`: **required** function - function(err, body, resp)
 
 
-## Workflow createWorkflowsVersions
+## Workflow createWorkflowVersions
 Represents call to:
 `POST /{organizationKey}/workflows/{editorWorkflowId}/versions`
 
@@ -897,7 +930,7 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `editorWorkflowId`: **required** string
-- `body`: **required** object [VersionRequest](#model-versionrequest)
+- `versionRequest`: **required** object [VersionRequest](#model-versionrequest)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -906,7 +939,7 @@ Represents call to:
 - `body`: [ExecutableWorkflow](#model-executableworkflow)
 - `resp`: Http response
 
-## Workflow createWorkflowsVersionRestore
+## Workflow createWorkflowVersionRestore
 Represents call to:
 `POST /{organizationKey}/workflows/{editorWorkflowId}/versions/{versionId}/restore`
 
@@ -924,7 +957,7 @@ Represents call to:
 - `body`: [EditorWorkflowDetail](#model-editorworkflowdetail)
 - `resp`: Http response
 
-## Workflow createWorkflowsVersionPublish
+## Workflow createWorkflowVersionPublish
 Represents call to:
 `POST /{organizationKey}/workflows/{workflowId}/versions/{versionId}/publish`
 
@@ -966,7 +999,7 @@ Represents call to:
 
 **Arguments:**
 - `organizationKey`: **required** string
-- `body`: **required** object [TriggerInstance](#model-triggerinstance)
+- `triggerInstance`: **required** object [TriggerInstance](#model-triggerinstance)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -996,7 +1029,7 @@ Represents call to:
 `POST /`
 
 **Arguments:**
-- `body`: **required** object [Organization](#model-organization)
+- `organization`: **required** object [Organization](#model-organization)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1051,7 +1084,7 @@ Represents call to:
 
 **Arguments:**
 - `organizationKey`: **required** string
-- `body`: **required** object [Organization](#model-organization)
+- `organization`: **required** object [Organization](#model-organization)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1096,7 +1129,7 @@ Represents call to:
 
 **Arguments:**
 - `organizationKey`: **required** string
-- `body`: **required** object [Group](#model-group)
+- `group`: **required** object [Group](#model-group)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1126,7 +1159,7 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `groupId`: **required** string
-- `body`: **required** object [Group](#model-group)
+- `group`: **required** object [Group](#model-group)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1176,7 +1209,7 @@ Represents call to:
 
 **Arguments:**
 - `organizationKey`: **required** string
-- `body`: **required** object [LdapGroup](#model-ldapgroup)
+- `ldapGroup`: **required** object [LdapGroup](#model-ldapgroup)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1223,6 +1256,17 @@ Represents call to:
 
 ## Organization getLicenses
 Represents call to:
+`GET /{organizationKey}/licenses`
+
+> Requires authorization
+
+**Arguments:**
+- `organizationKey`: **required** string
+- `callback`: **required** function - function(err, body, resp)
+
+
+## Organization getLicense
+Represents call to:
 `GET /{organizationKey}/licenses/{licenseId}`
 
 > Requires authorization
@@ -1238,7 +1282,7 @@ Represents call to:
 - `body`: [License](#model-license)
 - `resp`: Http response
 
-## Organization updateLicenses
+## Organization updateLicense
 Represents call to:
 `PUT /{organizationKey}/licenses/{licenseId}`
 
@@ -1247,7 +1291,7 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `licenseId`: **required** string
-- `body`: **required** object [License](#model-license)
+- `license`: **required** object [License](#model-license)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1276,7 +1320,7 @@ Represents call to:
 
 **Arguments:**
 - `organizationKey`: **required** string
-- `body`: **required** object [PurchaseOrder](#model-purchaseorder)
+- `purchaseOrder`: **required** object [PurchaseOrder](#model-purchaseorder)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1288,7 +1332,7 @@ Represents call to:
 
 **Arguments:**
 - `organizationKey`: **required** string
-- `body`: **required** object [NewUser](#model-newuser)
+- `newUser`: **required** object [NewUser](#model-newuser)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1353,7 +1397,7 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `serviceKey`: **required** string
-- `body`: **required** object [Account](#model-account)
+- `account`: **required** object [Account](#model-account)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1391,7 +1435,7 @@ Represents call to:
 - `organizationKey`: **required** string
 - `serviceKey`: **required** string
 - `accountId`: **required** string
-- `body`: **required** object [Account](#model-account)
+- `account`: **required** object [Account](#model-account)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1466,7 +1510,7 @@ Represents call to:
 
 **Arguments:**
 - `organizationKey`: **required** string
-- `body`: **required** object [OauthStartRequest](#model-oauthstartrequest)
+- `oauthStartRequest`: **required** object [OauthStartRequest](#model-oauthstartrequest)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1497,7 +1541,7 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `serviceKey`: **required** string
-- `body`: **required** object [ActionInstance](#model-actioninstance)
+- `actionInstance`: **required** object [ActionInstance](#model-actioninstance)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1516,7 +1560,7 @@ Represents call to:
 - `organizationKey`: **required** string
 - `serviceKey`: **required** string
 - `actionInstanceId`: **required** string
-- `body`: **required** object [ActionInstanceEnd](#model-actioninstanceend)
+- `actionInstanceEnd`: **required** object [ActionInstanceEnd](#model-actioninstanceend)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1579,7 +1623,7 @@ Represents call to:
 
 **Arguments:**
 - `providerKey`: **required** string
-- `body`: **required** object [ServiceLogin](#model-servicelogin)
+- `serviceLogin`: **required** object [ServiceLogin](#model-servicelogin)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1598,7 +1642,7 @@ Represents call to:
 - `state`: string
 - `error`: string
 - `error_description`: string
-- `body`: **required** object [ServiceLogin](#model-servicelogin)
+- `serviceLogin`: **required** object [ServiceLogin](#model-servicelogin)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1612,7 +1656,7 @@ Represents call to:
 `POST /registrations`
 
 **Arguments:**
-- `body`: **required** object [RegistrationRequest](#model-registrationrequest)
+- `registrationRequest`: **required** object [RegistrationRequest](#model-registrationrequest)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1641,7 +1685,7 @@ Represents call to:
 
 **Arguments:**
 - `code`: **required** string
-- `body`: **required** object [RegistrationRequest](#model-registrationrequest)
+- `registrationRequest`: **required** object [RegistrationRequest](#model-registrationrequest)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1692,7 +1736,7 @@ Represents call to:
 `POST /users/confirm`
 
 **Arguments:**
-- `body`: **required** object [PasswordResetConfirmation](#model-passwordresetconfirmation)
+- `passwordResetConfirmation`: **required** object [PasswordResetConfirmation](#model-passwordresetconfirmation)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1706,7 +1750,7 @@ Represents call to:
 `POST /users/login`
 
 **Arguments:**
-- `body`: **required** object [LoginRequest](#model-loginrequest)
+- `loginRequest`: **required** object [LoginRequest](#model-loginrequest)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1715,7 +1759,7 @@ Represents call to:
 `POST /users/login/handover`
 
 **Arguments:**
-- `body`: **required** object [HandoverLogin](#model-handoverlogin)
+- `handoverLogin`: **required** object [HandoverLogin](#model-handoverlogin)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1729,7 +1773,7 @@ Represents call to:
 `POST /users/reset`
 
 **Arguments:**
-- `body`: **required** object [UserMailAddress](#model-usermailaddress)
+- `userMailAddress`: **required** object [UserMailAddress](#model-usermailaddress)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1761,7 +1805,7 @@ Represents call to:
 
 **Arguments:**
 - `userId`: **required** string
-- `body`: **required** object [User](#model-user)
+- `user`: **required** object [User](#model-user)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1815,7 +1859,7 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `userId`: **required** string
-- `body`: **required** object [HandoverLogin](#model-handoverlogin)
+- `handoverLogin`: **required** object [HandoverLogin](#model-handoverlogin)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1833,7 +1877,7 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `userId`: **required** string
-- `body`: **required** object [LeaveRequest](#model-leaverequest)
+- `leaveRequest`: **required** object [LeaveRequest](#model-leaverequest)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1859,7 +1903,7 @@ Represents call to:
 > Requires authorization
 
 **Arguments:**
-- `body`: string
+- `put any json in here`: string
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -1882,8 +1926,8 @@ Represents call to:
 **Used by:**
 [`File.createFiles`](#file-createfiles)
 [`File.getFile`](#file-getfile)
-[`Case.createCasesFiles`](#case-createcasesfiles)
-[`Case.createCasesFile`](#case-createcasesfile)
+[`Case.createCaseFiles`](#case-createcasefiles)
+[`Case.createCaseFile`](#case-createcasefile)
 
 ## Model FileStream
 - `inputStream`: binary
@@ -1897,85 +1941,6 @@ Represents call to:
 [`Service.getServiceIcon`](#service-getserviceicon)
 [`User.getRegistrationPicture`](#user-getregistrationpicture)
 [`User.getUserPicture`](#user-getuserpicture)
-
-## Model CaseDetail
-- `properties`: any
-- `id`: string
-- `organizationId`: string
-- `name`: string
-- `nameLower`: string
-- `description`: string
-- `access`: any
-- `creatorId`: string
-- `createTime`: date
-- `dueDate`: date
-- `hasDueDate`: boolean
-- `priority`: number
-- `hasPriority`: boolean
-- `participantIds`: array string
-- `taskIds`: array string
-- `lastUpdated`: date
-- `canceled`: boolean
-- `closed`: boolean
-- `workflowInstanceId`: any
-- `sourceWorkflowId`: string
-- `workflowId`: string
-- `creator`: object
-  - `id`: string
-  - `admin`: boolean
-  - `color`: string
-  - `country`: string
-  - `created`: date
-  - `disabled`: boolean
-  - `external`: boolean
-  - `firstName`: string
-  - `groupIds`: array string
-  - `lastName`: string
-  - `ldapDn`: string
-  - `emailAddress`: string
-  - `licenses`: array object
-  - `organizationIds`: array string
-  - `organizations`: array [Organization](#model-organization)
-  - `password`: string
-  - `phone`: string
-  - `preferences`: any
-  - `systemAdmin`: boolean
-  - `systemUser`: boolean
-- `tasks`: array object
-- `events`: array object
-- `participants`: array object
-- `sourceWorkflow`: object
-  - `properties`: any
-  - `name`: string
-  - `description`: string
-  - `bpmn`: any
-  - `activities`: array any
-  - `transitions`: array any
-  - `variables`: array any
-  - `timers`: array any
-  - `id`: any
-  - `trigger`: any
-  - `enableCases`: boolean
-  - `diagram`: any
-  - `ownerId`: string
-  - `editorId`: string
-  - `editorLock`: date
-  - `lastUpdated`: date
-  - `category`: string
-  - `changed`: boolean
-  - `latestVersion`: string
-  - `caseColumns`: array any
-  - `template`: boolean
-  - `templateId`: string
-  - `nameLower`: string
-
-
-**Used by:**
-[`Case.getCases`](#case-getcases)
-[`Case.createCases`](#case-createcases)
-[`Case.updateCases`](#case-updatecases)
-[`Case.createCasesCancel`](#case-createcasescancel)
-[`Case.createCasesClose`](#case-createcasesclose)
 
 ## Model NewCase
 - `properties`: any
@@ -2013,6 +1978,85 @@ Represents call to:
 **Used by:**
 [`Case.createCases`](#case-createcases)
 
+## Model CaseDetail
+- `properties`: any
+- `id`: string
+- `organizationId`: string
+- `name`: string
+- `nameLower`: string
+- `description`: string
+- `access`: any
+- `creatorId`: string
+- `createTime`: date
+- `dueDate`: date
+- `hasDueDate`: boolean
+- `priority`: number
+- `hasPriority`: boolean
+- `participantIds`: array string
+- `taskIds`: array string
+- `lastUpdated`: date
+- `canceled`: boolean
+- `closed`: boolean
+- `workflowInstanceId`: any
+- `sourceWorkflowId`: string
+- `workflowId`: string
+- `creator`: object
+  - `id`: string
+  - `admin`: boolean
+  - `color`: string
+  - `country`: string
+  - `created`: date
+  - `disabled`: boolean
+  - `external`: boolean
+  - `firstName`: string
+  - `groupIds`: array string
+  - `lastName`: string
+  - `ldapDn`: string
+  - `emailAddress`: string
+  - `licenses`: array [License](#model-license)
+  - `organizationIds`: array string
+  - `organizations`: array [Organization](#model-organization)
+  - `password`: string
+  - `phone`: string
+  - `preferences`: any
+  - `systemAdmin`: boolean
+  - `systemUser`: boolean
+- `tasks`: array [TaskDetail](#model-taskdetail)
+- `events`: array [Event](#model-event)
+- `participants`: array [User](#model-user)
+- `sourceWorkflow`: object
+  - `properties`: any
+  - `name`: string
+  - `description`: string
+  - `bpmn`: any
+  - `activities`: array any
+  - `transitions`: array any
+  - `variables`: array any
+  - `timers`: array any
+  - `id`: any
+  - `trigger`: any
+  - `enableCases`: boolean
+  - `diagram`: any
+  - `ownerId`: string
+  - `editorId`: string
+  - `editorLock`: date
+  - `lastUpdated`: date
+  - `category`: string
+  - `changed`: boolean
+  - `latestVersion`: string
+  - `caseColumns`: array any
+  - `template`: boolean
+  - `templateId`: string
+  - `nameLower`: string
+
+
+**Used by:**
+[`Case.createCases`](#case-createcases)
+[`Case.getCase`](#case-getcase)
+[`Case.updateCase`](#case-updatecase)
+[`Case.createCaseCancel`](#case-createcasecancel)
+[`Case.createCaseClose`](#case-createcaseclose)
+
 ## Model Case
 - `properties`: any
 - `id`: string
@@ -2038,7 +2082,7 @@ Represents call to:
 
 
 **Used by:**
-[`Case.updateCases`](#case-updatecases)
+[`Case.updateCase`](#case-updatecase)
 
 ## Model Event
 - `id`: string
@@ -2074,7 +2118,7 @@ Represents call to:
   - `roleVariableId`: string
   - `form`: object
     - `description`: string
-    - `fields`: array object
+    - `fields`: array [FormInstanceField](#model-forminstancefield)
 - `taskId`: string
 - `time`: date
 - `user`: object
@@ -2090,7 +2134,7 @@ Represents call to:
   - `lastName`: string
   - `ldapDn`: string
   - `emailAddress`: string
-  - `licenses`: array object
+  - `licenses`: array [License](#model-license)
   - `organizationIds`: array string
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
@@ -2102,7 +2146,7 @@ Represents call to:
 
 
 **Used by:**
-[`Case.createCasesEvents`](#case-createcasesevents)
+[`Case.createCaseEvents`](#case-createcaseevents)
 
 ## Model NewTask
 - `properties`: any
@@ -2134,7 +2178,7 @@ Represents call to:
 - `roleVariableId`: string
 - `form`: object
   - `description`: string
-  - `fields`: array object
+  - `fields`: array [FormInstanceField](#model-forminstancefield)
 
 
 **Used by:**
@@ -2170,7 +2214,7 @@ Represents call to:
 - `roleVariableId`: string
 - `form`: object
   - `description`: string
-  - `fields`: array object
+  - `fields`: array [FormInstanceField](#model-forminstancefield)
 - `creator`: object
   - `id`: string
   - `admin`: boolean
@@ -2184,7 +2228,7 @@ Represents call to:
   - `lastName`: string
   - `ldapDn`: string
   - `emailAddress`: string
-  - `licenses`: array object
+  - `licenses`: array [License](#model-license)
   - `organizationIds`: array string
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
@@ -2205,7 +2249,7 @@ Represents call to:
   - `lastName`: string
   - `ldapDn`: string
   - `emailAddress`: string
-  - `licenses`: array object
+  - `licenses`: array [License](#model-license)
   - `organizationIds`: array string
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
@@ -2213,8 +2257,8 @@ Represents call to:
   - `preferences`: any
   - `systemAdmin`: boolean
   - `systemUser`: boolean
-- `candidates`: array object
-- `candidateGroups`: array object
+- `candidates`: array [User](#model-user)
+- `candidateGroups`: array [Group](#model-group)
 - `subtasks`: array [TaskDetail](#model-taskdetail)
 
 
@@ -2222,8 +2266,8 @@ Represents call to:
 [`Task.createTasks`](#task-createtasks)
 [`Task.getTask`](#task-gettask)
 [`Task.updateTask`](#task-updatetask)
-[`Task.createTaskComplete`](#task-createtaskcomplete)
-[`Task.createTaskReopen`](#task-createtaskreopen)
+[`Task.completeTask`](#task-completetask)
+[`Task.reopenTask`](#task-reopentask)
 
 ## Model Task
 - `properties`: any
@@ -2255,7 +2299,7 @@ Represents call to:
 - `roleVariableId`: string
 - `form`: object
   - `description`: string
-  - `fields`: array object
+  - `fields`: array [FormInstanceField](#model-forminstancefield)
 
 
 **Used by:**
@@ -2275,6 +2319,7 @@ Represents call to:
 
 
 **Used by:**
+[`Task.completeTask`](#task-completetask)
 [`Task.updateTaskFormField`](#task-updatetaskformfield)
 
 ## Model Email
@@ -2298,6 +2343,36 @@ Represents call to:
 
 **Used by:**
 [`Task.getTaskMail`](#task-gettaskmail)
+
+## Model NewWorkflow
+- `properties`: any
+- `name`: string
+- `description`: string
+- `bpmn`: any
+- `activities`: array any
+- `transitions`: array any
+- `variables`: array any
+- `timers`: array any
+- `id`: any
+- `trigger`: any
+- `enableCases`: boolean
+- `diagram`: any
+- `ownerId`: string
+- `editorId`: string
+- `editorLock`: date
+- `lastUpdated`: date
+- `category`: string
+- `changed`: boolean
+- `latestVersion`: string
+- `caseColumns`: array any
+- `template`: boolean
+- `templateId`: string
+- `nameLower`: string
+- `isPrivate`: boolean
+
+
+**Used by:**
+[`Workflow.createWorkflows`](#workflow-createworkflows)
 
 ## Model EditorWorkflowDetail
 - `properties`: any
@@ -2336,7 +2411,7 @@ Represents call to:
   - `lastName`: string
   - `ldapDn`: string
   - `emailAddress`: string
-  - `licenses`: array object
+  - `licenses`: array [License](#model-license)
   - `organizationIds`: array string
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
@@ -2357,7 +2432,7 @@ Represents call to:
   - `lastName`: string
   - `ldapDn`: string
   - `emailAddress`: string
-  - `licenses`: array object
+  - `licenses`: array [License](#model-license)
   - `organizationIds`: array string
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
@@ -2368,41 +2443,11 @@ Represents call to:
 
 
 **Used by:**
-[`Workflow.getWorkflows`](#workflow-getworkflows)
 [`Workflow.createWorkflows`](#workflow-createworkflows)
-[`Workflow.updateWorkflows`](#workflow-updateworkflows)
-[`Workflow.createWorkflowsCopy`](#workflow-createworkflowscopy)
-[`Workflow.createWorkflowsVersionRestore`](#workflow-createworkflowsversionrestore)
-
-## Model NewWorkflow
-- `properties`: any
-- `name`: string
-- `description`: string
-- `bpmn`: any
-- `activities`: array any
-- `transitions`: array any
-- `variables`: array any
-- `timers`: array any
-- `id`: any
-- `trigger`: any
-- `enableCases`: boolean
-- `diagram`: any
-- `ownerId`: string
-- `editorId`: string
-- `editorLock`: date
-- `lastUpdated`: date
-- `category`: string
-- `changed`: boolean
-- `latestVersion`: string
-- `caseColumns`: array any
-- `template`: boolean
-- `templateId`: string
-- `nameLower`: string
-- `isPrivate`: boolean
-
-
-**Used by:**
-[`Workflow.createWorkflows`](#workflow-createworkflows)
+[`Workflow.getWorkflow`](#workflow-getworkflow)
+[`Workflow.updateWorkflow`](#workflow-updateworkflow)
+[`Workflow.createWorkflowCopy`](#workflow-createworkflowcopy)
+[`Workflow.createWorkflowVersionRestore`](#workflow-createworkflowversionrestore)
 
 ## Model AbstractWorkflow
 - `properties`: any
@@ -2450,10 +2495,10 @@ Represents call to:
 
 **Used by:**
 [`Workflow.createWorkflowsImportJson`](#workflow-createworkflowsimportjson)
-[`Workflow.updateWorkflows`](#workflow-updateworkflows)
-[`Workflow.getWorkflowsExportJson`](#workflow-getworkflowsexportjson)
-[`Workflow.createWorkflowsLock`](#workflow-createworkflowslock)
-[`Workflow.updateWorkflowsUpdateBpmn`](#workflow-updateworkflowsupdatebpmn)
+[`Workflow.updateWorkflow`](#workflow-updateworkflow)
+[`Workflow.getWorkflowExportJson`](#workflow-getworkflowexportjson)
+[`Workflow.createWorkflowLock`](#workflow-createworkflowlock)
+[`Workflow.updateWorkflowUpdateBpmn`](#workflow-updateworkflowupdatebpmn)
 
 ## Model ScriptResult
 - `result`: any
@@ -2463,22 +2508,22 @@ Represents call to:
 
 
 **Used by:**
-[`Workflow.createWorkflowsActivityTest`](#workflow-createworkflowsactivitytest)
+[`Workflow.createWorkflowActivityTest`](#workflow-createworkflowactivitytest)
 
 ## Model FormInstance
 - `description`: string
-- `fields`: array object
+- `fields`: array [FormInstanceField](#model-forminstancefield)
 
 
 **Used by:**
-[`Workflow.getWorkflowsStartForm`](#workflow-getworkflowsstartform)
+[`Workflow.getWorkflowStartForm`](#workflow-getworkflowstartform)
 
 ## Model VersionRequest
 - `commitMessage`: string
 
 
 **Used by:**
-[`Workflow.createWorkflowsVersions`](#workflow-createworkflowsversions)
+[`Workflow.createWorkflowVersions`](#workflow-createworkflowversions)
 
 ## Model ExecutableWorkflow
 - `properties`: any
@@ -2499,8 +2544,8 @@ Represents call to:
 
 
 **Used by:**
-[`Workflow.createWorkflowsVersions`](#workflow-createworkflowsversions)
-[`Workflow.createWorkflowsVersionPublish`](#workflow-createworkflowsversionpublish)
+[`Workflow.createWorkflowVersions`](#workflow-createworkflowversions)
+[`Workflow.createWorkflowVersionPublish`](#workflow-createworkflowversionpublish)
 
 ## Model TriggerInstance
 - `data`: any
@@ -2649,8 +2694,8 @@ Represents call to:
 
 
 **Used by:**
-[`Organization.getLicenses`](#organization-getlicenses)
-[`Organization.updateLicenses`](#organization-updatelicenses)
+[`Organization.getLicense`](#organization-getlicense)
+[`Organization.updateLicense`](#organization-updatelicense)
 
 ## Model PurchaseOrder
 - `id`: string
@@ -2670,7 +2715,7 @@ Represents call to:
   - `lastName`: string
   - `ldapDn`: string
   - `emailAddress`: string
-  - `licenses`: array object
+  - `licenses`: array [License](#model-license)
   - `organizationIds`: array string
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
@@ -2699,7 +2744,7 @@ Represents call to:
   - `lastName`: string
   - `ldapDn`: string
   - `emailAddress`: string
-  - `licenses`: array object
+  - `licenses`: array [License](#model-license)
   - `organizationIds`: array string
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
@@ -2892,7 +2937,7 @@ Represents call to:
   - `lastName`: string
   - `ldapDn`: string
   - `emailAddress`: string
-  - `licenses`: array object
+  - `licenses`: array [License](#model-license)
   - `organizationIds`: array string
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
@@ -2920,7 +2965,7 @@ Represents call to:
   - `lastName`: string
   - `ldapDn`: string
   - `emailAddress`: string
-  - `licenses`: array object
+  - `licenses`: array [License](#model-license)
   - `organizationIds`: array string
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
@@ -2928,7 +2973,7 @@ Represents call to:
   - `preferences`: any
   - `systemAdmin`: boolean
   - `systemUser`: boolean
-- `organizations`: array object
+- `organizations`: array [Organization](#model-organization)
 
 
 **Used by:**
@@ -2986,7 +3031,7 @@ Represents call to:
 - `lastName`: string
 - `ldapDn`: string
 - `emailAddress`: string
-- `licenses`: array object
+- `licenses`: array [License](#model-license)
 - `organizationIds`: array string
 - `organizations`: array [Organization](#model-organization)
 - `password`: string
