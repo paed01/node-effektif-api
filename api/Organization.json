@@ -3,115 +3,61 @@
   "swaggerVersion" : "1.2",
   "basePath" : "https://app.effektif.com/api/v1",
   "apis" : [ {
-    "path" : "/{organizationKey}/tasks",
+    "path" : "/",
     "operations" : [ {
-      "method" : "GET",
-      "nickname" : "/{organizationKey}/tasks",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "involvement",
-        "dataType" : "array",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "dueDate",
-        "dataType" : "array",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "process",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "completed",
-        "dataType" : "boolean",
-        "required" : true
-      } ]
-    }, {
       "method" : "POST",
-      "nickname" : "/{organizationKey}/tasks",
-      "type" : "TaskDetail",
+      "nickname" : "/",
+      "type" : "Organization",
       "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
         "paramType" : "body",
-        "name" : "newTask",
-        "dataType" : "NewTask",
+        "name" : "organization",
+        "dataType" : "Organization",
         "required" : true
       } ]
     } ]
   }, {
-    "path" : "/{organizationKey}/tasks/{taskId}",
+    "path" : "/systemconfiguration",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "/systemconfiguration",
+      "type" : "SystemConfiguration",
+      "parameters" : [ ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}",
     "operations" : [ {
       "method" : "DELETE",
-      "nickname" : "/{organizationKey}/tasks/{taskId}",
+      "nickname" : "/{organizationKey}",
       "parameters" : [ {
         "paramType" : "header",
         "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
         "dataType" : "string",
         "required" : true
       }, {
         "paramType" : "path",
         "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "taskId",
         "dataType" : "string",
         "required" : true
       } ]
     }, {
       "method" : "GET",
-      "nickname" : "/{organizationKey}/tasks/{taskId}",
-      "type" : "TaskDetail",
+      "nickname" : "/{organizationKey}",
+      "type" : "Organization",
       "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
         "paramType" : "path",
         "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "taskId",
         "dataType" : "string",
         "required" : true
       } ]
     }, {
       "method" : "PUT",
-      "nickname" : "/{organizationKey}/tasks/{taskId}",
-      "type" : "TaskDetail",
+      "nickname" : "/{organizationKey}",
+      "type" : "Organization",
       "parameters" : [ {
         "paramType" : "header",
         "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
         "dataType" : "string",
         "required" : true
       }, {
@@ -120,85 +66,17 @@
         "dataType" : "string",
         "required" : true
       }, {
-        "paramType" : "path",
-        "name" : "taskId",
-        "dataType" : "string",
-        "required" : true
-      }, {
         "paramType" : "body",
-        "name" : "task",
-        "dataType" : "Task",
+        "name" : "organization",
+        "dataType" : "Organization",
         "required" : true
       } ]
     } ]
   }, {
-    "path" : "/{organizationKey}/tasks/{taskId}/complete",
-    "operations" : [ {
-      "method" : "POST",
-      "nickname" : "/{organizationKey}/tasks/{taskId}/complete",
-      "type" : "TaskDetail",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "taskId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "body",
-        "name" : "array of FormInstanceFields",
-        "dataType" : "array"
-      } ]
-    } ]
-  }, {
-    "path" : "/{organizationKey}/tasks/{taskId}/form/fields/{fieldId}",
-    "operations" : [ {
-      "method" : "PUT",
-      "nickname" : "/{organizationKey}/tasks/{taskId}/form/fields/{fieldId}",
-      "type" : "FormInstanceField",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "taskId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "fieldId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "body",
-        "name" : "formInstanceField",
-        "dataType" : "FormInstanceField",
-        "required" : true
-      } ]
-    } ]
-  }, {
-    "path" : "/{organizationKey}/tasks/{taskId}/mails/{mailId}",
+    "path" : "/{organizationKey}/features",
     "operations" : [ {
       "method" : "GET",
-      "nickname" : "/{organizationKey}/tasks/{taskId}/mails/{mailId}",
-      "type" : "Email",
+      "nickname" : "/{organizationKey}/features",
       "parameters" : [ {
         "paramType" : "header",
         "name" : "Authorization",
@@ -208,30 +86,52 @@
       }, {
         "paramType" : "path",
         "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "taskId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "mailId",
         "dataType" : "string",
         "required" : true
       } ]
     } ]
   }, {
-    "path" : "/{organizationKey}/tasks/{taskId}/reopen",
+    "path" : "/{organizationKey}/groups",
     "operations" : [ {
+      "method" : "GET",
+      "nickname" : "/{organizationKey}/groups",
+      "parameters" : [ {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    }, {
       "method" : "POST",
-      "nickname" : "/{organizationKey}/tasks/{taskId}/reopen",
-      "type" : "TaskDetail",
+      "nickname" : "/{organizationKey}/groups",
+      "type" : "Group",
       "parameters" : [ {
         "paramType" : "header",
         "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "body",
+        "name" : "group",
+        "dataType" : "Group",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/groups/{groupId}",
+    "operations" : [ {
+      "method" : "DELETE",
+      "nickname" : "/{organizationKey}/groups/{groupId}",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
         "dataType" : "string",
         "required" : true
       }, {
@@ -241,7 +141,349 @@
         "required" : true
       }, {
         "paramType" : "path",
-        "name" : "taskId",
+        "name" : "groupId",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    }, {
+      "method" : "GET",
+      "nickname" : "/{organizationKey}/groups/{groupId}",
+      "type" : "Group",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "groupId",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    }, {
+      "method" : "PUT",
+      "nickname" : "/{organizationKey}/groups/{groupId}",
+      "type" : "Group",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "groupId",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "body",
+        "name" : "group",
+        "dataType" : "Group",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/info/licenses",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "/{organizationKey}/info/licenses",
+      "parameters" : [ {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/invitations/{inviteeMailAddress}",
+    "operations" : [ {
+      "method" : "DELETE",
+      "nickname" : "/{organizationKey}/invitations/{inviteeMailAddress}",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "inviteeMailAddress",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/invitations/{inviteeMailAddress}/resend",
+    "operations" : [ {
+      "method" : "POST",
+      "nickname" : "/{organizationKey}/invitations/{inviteeMailAddress}/resend",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "inviteeMailAddress",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/ldap/groupMembers",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "/{organizationKey}/ldap/groupMembers",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "body",
+        "name" : "ldapGroup",
+        "dataType" : "LdapGroup",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/ldap/groups",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "/{organizationKey}/ldap/groups",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "query",
+        "name" : "exclude",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/ldap/users",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "/{organizationKey}/ldap/users",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "query",
+        "name" : "exclude",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/licenseProfiles/{profile}",
+    "operations" : [ {
+      "method" : "POST",
+      "nickname" : "/{organizationKey}/licenseProfiles/{profile}",
+      "type" : "Organization",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "profile",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/licenses",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "/{organizationKey}/licenses",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/licenses/{licenseId}",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "/{organizationKey}/licenses/{licenseId}",
+      "type" : "License",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "licenseId",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    }, {
+      "method" : "PUT",
+      "nickname" : "/{organizationKey}/licenses/{licenseId}",
+      "type" : "License",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "licenseId",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "body",
+        "name" : "license",
+        "dataType" : "License",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/organizations",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "/{organizationKey}/organizations",
+      "type" : "Organization",
+      "parameters" : [ {
+        "paramType" : "query",
+        "name" : "name",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/purchase",
+    "operations" : [ {
+      "method" : "POST",
+      "nickname" : "/{organizationKey}/purchase",
+      "parameters" : [ {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "body",
+        "name" : "purchaseOrder",
+        "dataType" : "PurchaseOrder",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/users",
+    "operations" : [ {
+      "method" : "POST",
+      "nickname" : "/{organizationKey}/users",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "body",
+        "name" : "newUser",
+        "dataType" : "NewUser",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/users/{userId}",
+    "operations" : [ {
+      "method" : "DELETE",
+      "nickname" : "/{organizationKey}/users/{userId}",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "userId",
         "dataType" : "string",
         "required" : true
       } ]

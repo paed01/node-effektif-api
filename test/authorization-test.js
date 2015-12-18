@@ -7,11 +7,11 @@ var Code = require('code');
 var expect = Code.expect;
 var EventEmitter = require('events').EventEmitter;
 var nock = require('nock');
-var Processes = require('../.').Process;
+var Workflow = require('../.').Workflow;
 var Tasks = require('../.').Task;
 
 lab.experiment('Authorization', function() {
-  var scope = nock(Processes.apiDoc.basePath);
+  var scope = nock(Workflow.apiDoc.basePath);
 
   lab.before(function(done) {
     nock.disableNetConnect();
@@ -25,17 +25,17 @@ lab.experiment('Authorization', function() {
   lab.experiment('Expired token', function() {
 
     lab.test('Returns 401 in response', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         authorization: 'token'
       });
 
-      scope.get('/test-org/processes?processIds=1%2C2')
+      scope.get('/test-org/workflows')
         .matchHeader('authorization', 'token')
         .reply(401, {
           message: 'Unauthorized'
         });
 
-      processes.getProcesses('test-org', ['1', '2'], function(err) {
+      instance.getWorkflows('test-org', function(err) {
         expect(err).to.be.instanceof(Error, /missing credentials/i);
         scope.done();
         done();
@@ -43,7 +43,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Issues new token if username and password are supplied', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         authorization: 'token',
         credentials: {
           username: 'effektif-user',
@@ -52,7 +52,7 @@ lab.experiment('Authorization', function() {
       });
 
       scope
-        .get('/test-org/processes?processIds=3%2C4')
+        .get('/test-org/workflows')
         .matchHeader('authorization', 'token')
         .reply(401, {
           message: 'Unauthorized'
@@ -61,11 +61,11 @@ lab.experiment('Authorization', function() {
         .reply(200, {
           token: 'new-token'
         })
-        .get('/test-org/processes?processIds=3%2C4')
+        .get('/test-org/workflows')
         .matchHeader('authorization', 'new-token')
         .reply(200, []);
 
-      processes.getProcesses('test-org', ['3', '4'], function(err, body, res) {
+      instance.getWorkflows('test-org', function(err, body, res) {
         if (err) return done(err);
         scope.done();
         expect(res.statusCode).to.equal(200);
@@ -74,7 +74,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Saves new token to instance', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         authorization: 'token',
         credentials: {
           username: 'effektif-user',
@@ -83,7 +83,7 @@ lab.experiment('Authorization', function() {
       });
 
       scope
-        .get('/test-org/processes?processIds=new%2Ctoken')
+        .get('/test-org/workflows')
         .matchHeader('authorization', 'token')
         .reply(401, {
           message: 'Unauthorized'
@@ -92,22 +92,22 @@ lab.experiment('Authorization', function() {
         .reply(200, {
           token: 'newer-token'
         })
-        .get('/test-org/processes?processIds=new%2Ctoken')
+        .get('/test-org/workflows')
         .matchHeader('authorization', 'newer-token')
         .reply(200, []);
 
-      processes.getProcesses('test-org', ['new', 'token'], function(err, body, res) {
+      instance.getWorkflows('test-org', function(err, body, res) {
         if (err) return done(err);
         scope.done();
         expect(res.statusCode).to.equal(200);
-        expect(processes.defaults.authorization).to.equal('newer-token');
-        expect(processes.options.authorization).to.equal('newer-token');
+        expect(instance.defaults.authorization).to.equal('newer-token');
+        expect(instance.options.authorization).to.equal('newer-token');
         done();
       });
     });
 
     lab.test('Responds with 401 error if wrong username and password are supplied', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         authorization: 'token',
         credentials: {
           username: 'effektif-user',
@@ -115,7 +115,7 @@ lab.experiment('Authorization', function() {
         }
       });
 
-      scope.get('/test-org/processes?processIds=5%2C6')
+      scope.get('/test-org/workflows')
         .matchHeader('authorization', 'token')
         .reply(401, {
           message: 'Unauthorized'
@@ -125,7 +125,7 @@ lab.experiment('Authorization', function() {
           message: 'Unauthorized'
         });
 
-      processes.getProcesses('test-org', ['5', '6'], function(err) {
+      instance.getWorkflows('test-org', function(err) {
         expect(err).to.be.instanceof(Error, /401/i);
         scope.done();
         done();
@@ -133,7 +133,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Repeated unauthorized calls only calls login once', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         authorization: 'token',
         credentials: {
           username: 'effektif-user',
@@ -142,7 +142,7 @@ lab.experiment('Authorization', function() {
       });
 
       scope
-        .get('/test-org/processes?processIds=repeated%2Ctoken')
+        .get('/test-org/workflows')
         .matchHeader('authorization', 'token')
         .times(4)
         .reply(401, {
@@ -153,13 +153,13 @@ lab.experiment('Authorization', function() {
         .reply(200, {
           token: 'repeat-new-token'
         })
-        .get('/test-org/processes?processIds=repeated%2Ctoken')
+        .get('/test-org/workflows')
         .matchHeader('authorization', 'repeat-new-token')
         .times(4)
         .reply(200, []);
 
       async.times(4, function(n, next) {
-        processes.getProcesses('test-org', ['repeated', 'token'], next);
+        instance.getWorkflows('test-org', next);
       }, function(err) {
         if (err) return done(err);
         scope.done();
@@ -168,7 +168,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Repeated unauthorized calls with different modules only calls login once', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         authorization: 'token',
         credentials: {
           username: 'effektif-user',
@@ -185,7 +185,7 @@ lab.experiment('Authorization', function() {
       });
 
       scope
-        .get('/test-org/processes?processIds=repeated%2Ctoken')
+        .get('/test-org/workflows')
         .times(2)
         .reply(401, {
           message: 'Unauthorized'
@@ -200,7 +200,7 @@ lab.experiment('Authorization', function() {
         .reply(200, {
           token: 'module-new-token'
         })
-        .get('/test-org/processes?processIds=repeated%2Ctoken')
+        .get('/test-org/workflows')
         .times(2)
         .reply(200, [])
         .get('/test-org/tasks/1')
@@ -210,13 +210,13 @@ lab.experiment('Authorization', function() {
         });
 
       async.times(4, function(n, next) {
-        if (n % 2) return processes.getProcesses('test-org', ['repeated', 'token'], next);
+        if (n % 2) return instance.getWorkflows('test-org', next);
         return tasks.getTask('test-org', '1', next);
       }, function(err) {
         if (err) return done(err);
         scope.done();
 
-        expect(processes.defaults.authorization, 'processes token').to.equal('module-new-token');
+        expect(instance.defaults.authorization, 'processes token').to.equal('module-new-token');
         expect(tasks.defaults.authorization, 'tasks token').to.equal('module-new-token');
 
         done();
@@ -224,7 +224,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Repeated unauthorized calls with different users only calls login once per user', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         authorization: 'token',
         credentials: {
           username: 'effektif-user',
@@ -241,41 +241,45 @@ lab.experiment('Authorization', function() {
       });
 
       scope
-        .get('/test-org/processes?processIds=repeated%2Ctoken')
+        .get('/test-org/workflows/wf1')
         .times(2)
         .reply(401, {
           message: 'Unauthorized'
         })
-        .get('/test-org/tasks/1')
+        .get('/test-org/tasks/t1')
         .times(2)
         .reply(401, {
           message: 'Unauthorized'
         })
         .post('/users/login').times(2)
         .delay(200)
-        .reply(function(uri, requestBody) {
+        .reply(200, function(uri, requestBody) {
+          if (!requestBody) {
+            return [401, JSON.stringify({
+              message: 'No credentials'
+            })];
+          }
+
           var token = (/effektif-user/.test(requestBody) ? 'process-new-token' : 'tasks-new-token');
-          return [200, JSON.stringify({
+          return JSON.stringify({
             token: token
-          })];
+          });
         })
-        .get('/test-org/processes?processIds=repeated%2Ctoken')
+        .get('/test-org/workflows/wf1')
         .times(2)
-        .reply(200, [])
-        .get('/test-org/tasks/1')
+        .reply(200, {})
+        .get('/test-org/tasks/t1')
         .times(2)
-        .reply(200, {
-          id: 'unique-id'
-        });
+        .reply(200, {});
 
       async.times(4, function(n, next) {
-        if (n % 2) return processes.getProcesses('test-org', ['repeated', 'token'], next);
-        return tasks.getTask('test-org', '1', next);
+        if (n % 2) return instance.getWorkflow('test-org', 'wf1', next);
+        return tasks.getTask('test-org', 't1', next);
       }, function(err) {
         if (err) return done(err);
         scope.done();
 
-        expect(processes.defaults.authorization, 'processes token').to.equal('process-new-token');
+        expect(instance.defaults.authorization, 'processes token').to.equal('process-new-token');
         expect(tasks.defaults.authorization, 'tasks token').to.equal('tasks-new-token');
 
         done();
@@ -283,7 +287,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('New login emits authorized event once per user', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         authorization: 'token',
         credentials: {
           username: 'effektif-user',
@@ -300,7 +304,7 @@ lab.experiment('Authorization', function() {
       });
 
       scope
-        .get('/test-org/processes?processIds=repeated%2Ctoken')
+        .get('/test-org/workflows')
         .times(2)
         .reply(401, {
           message: 'Unauthorized'
@@ -318,7 +322,7 @@ lab.experiment('Authorization', function() {
             token: token
           })];
         })
-        .get('/test-org/processes?processIds=repeated%2Ctoken')
+        .get('/test-org/workflows')
         .times(2)
         .reply(200, [])
         .get('/test-org/tasks/1')
@@ -331,20 +335,20 @@ lab.experiment('Authorization', function() {
       var pushToken = function(user) {
         tokens.push(user);
       };
-      processes.on('authorized', pushToken);
+      instance.on('authorized', pushToken);
       tasks.on('authorized', pushToken);
 
       async.times(4, function(n, next) {
-        if (n % 2) return processes.getProcesses('test-org', ['repeated', 'token'], next);
+        if (n % 2) return instance.getWorkflows('test-org', next);
         return tasks.getTask('test-org', '1', next);
       }, function(err) {
         if (err) return done(err);
         scope.done();
 
-        processes.removeListener('authorized', pushToken);
+        instance.removeListener('authorized', pushToken);
         tasks.removeListener('authorized', pushToken);
 
-        expect(processes.defaults.authorization, 'processes token').to.equal('process-event-token');
+        expect(instance.defaults.authorization, 'processes token').to.equal('process-event-token');
         expect(tasks.defaults.authorization, 'tasks token').to.equal('tasks-event-token');
 
         expect(tokens, 'authorized events').to.have.length(4);
@@ -354,7 +358,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Login error returns error in callback', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         authorization: 'token',
         credentials: {
           username: 'effektif-user',
@@ -363,14 +367,14 @@ lab.experiment('Authorization', function() {
       });
 
       scope
-        .get('/test-org/processes?processIds=repeated%2Ctoken')
+        .get('/test-org/workflows')
         .times(4)
         .reply(401, {
           message: 'Unauthorized'
         });
 
       async.times(4, function(n, next) {
-        processes.getProcesses('test-org', ['repeated', 'token'], next);
+        instance.getWorkflows('test-org', next);
       }, function(err) {
         expect(err).to.exist();
         scope.done();
@@ -379,7 +383,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('return error in callback if body is missing from login call', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         authorization: 'token',
         credentials: {
           username: 'effektif-user',
@@ -387,7 +391,7 @@ lab.experiment('Authorization', function() {
         }
       });
 
-      scope.get('/test-org/processes?processIds=5%2C6')
+      scope.get('/test-org/workflows')
         .reply(401, {
           message: 'Unauthorized'
         })
@@ -395,7 +399,7 @@ lab.experiment('Authorization', function() {
         .delay(200)
         .reply(200);
 
-      processes.getProcesses('test-org', ['5', '6'], function(err) {
+      instance.getWorkflows('test-org', function(err) {
         expect(err).to.be.instanceof(Error);
         expect(err.message).to.equal('No authorization token');
         scope.done();
@@ -404,7 +408,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('return error in callback if body.token is missing from login call', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         authorization: 'token',
         credentials: {
           username: 'effektif-user',
@@ -412,14 +416,14 @@ lab.experiment('Authorization', function() {
         }
       });
 
-      scope.get('/test-org/processes?processIds=5%2C6')
+      scope.get('/test-org/workflows')
         .reply(401, {
           message: 'Unauthorized'
         })
         .post('/users/login')
         .reply(200, {});
 
-      processes.getProcesses('test-org', ['5', '6'], function(err) {
+      instance.getWorkflows('test-org', function(err) {
         expect(err).to.be.instanceof(Error);
         expect(err.message).to.equal('No authorization token');
         scope.done();
@@ -428,7 +432,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('sub-sequent calls use the same token', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         authorization: 'token',
         credentials: {
           username: 'effektif-user',
@@ -436,7 +440,7 @@ lab.experiment('Authorization', function() {
         }
       });
 
-      scope.get('/test-org/processes?processIds=5%2C6')
+      scope.get('/test-org/workflows')
         .matchHeader('authorization', 'token')
         .reply(401, {
           message: 'Unauthorized'
@@ -445,17 +449,17 @@ lab.experiment('Authorization', function() {
         .reply(200, {
           token: 'brand-new-token'
         })
-        .get('/test-org/processes?processIds=5%2C6')
+        .get('/test-org/workflows')
         .matchHeader('authorization', 'brand-new-token')
         .reply(200, {})
-        .get('/test-org/processes?processIds=7%2C8')
+        .get('/test-org/workflows')
         .matchHeader('authorization', 'brand-new-token')
         .reply(200, {});
 
-      processes.getProcesses('test-org', ['5', '6'], function(err) {
-        if (err) return done(err);
-        processes.getProcesses('test-org', ['7', '8'], function(err) {
-          if (err) return done(err);
+      instance.getWorkflows('test-org', function(err1) {
+        if (err1) return done(err1);
+        instance.getWorkflows('test-org', function(err2) {
+          if (err2) return done(err2);
           scope.done();
           done();
         });
@@ -467,7 +471,7 @@ lab.experiment('Authorization', function() {
   lab.experiment('No default authorization token', function() {
 
     lab.test('First call is login', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -479,12 +483,12 @@ lab.experiment('Authorization', function() {
         .reply(200, {
           token: 'brand-new-token'
         })
-        .get('/test-org/processes?processIds=repeated%2Ctoken')
+        .get('/no-default-org/workflows')
         .times(4)
         .reply(200, []);
 
       async.times(4, function(n, next) {
-        processes.getProcesses('test-org', ['repeated', 'token'], next);
+        instance.getWorkflows('no-default-org', next);
       }, function(err) {
         if (err) return done(err);
         scope.done();
@@ -493,8 +497,8 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('instance without credentials returns error', function(done) {
-      var processes = new Processes();
-      processes.getProcesses('test-org', ['repeated', 'token'], function(err) {
+      var instance = new Workflow();
+      instance.getWorkflows('test-org', function(err) {
         expect(err).to.be.instanceof(Error);
         expect(err.message).to.equal('Missing credentials');
         done();
@@ -507,11 +511,11 @@ lab.experiment('Authorization', function() {
 
     lab.test('not inherited by EventEmitter works to', function(done) {
       scope
-        .get('/test-org/processes?processIds=custom%2Clogin')
+        .get('/test-org/workflows')
         .matchHeader('authorization', 'custom-token')
         .reply(200, []);
 
-      var processes = new Processes({
+      var instance = new Workflow({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -527,7 +531,7 @@ lab.experiment('Authorization', function() {
         }
       });
 
-      processes.getProcesses('test-org', ['custom', 'login'], function(err) {
+      instance.getWorkflows('test-org', function(err) {
         if (err) return done(err);
         scope.done();
         done();
@@ -535,7 +539,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Custom login return without body returns error', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -549,7 +553,7 @@ lab.experiment('Authorization', function() {
         }
       });
 
-      processes.getProcesses('test-org', ['custom', 'login'], function(err) {
+      instance.getWorkflows('test-org', function(err) {
         expect(err).to.be.instanceof(Error);
         expect(err.message).to.equal('No authorization token');
         scope.done();
@@ -558,7 +562,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Custom login return without body.token returns error', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -572,7 +576,7 @@ lab.experiment('Authorization', function() {
         }
       });
 
-      processes.getProcesses('test-org', ['custom', 'login'], function(err) {
+      instance.getWorkflows('test-org', function(err) {
         expect(err).to.be.instanceof(Error);
         expect(err.message).to.equal('No authorization token');
         scope.done();
@@ -581,7 +585,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Custom login with statusCode 401 returns error', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -595,7 +599,7 @@ lab.experiment('Authorization', function() {
         }
       });
 
-      processes.getProcesses('test-org', ['custom', 'login'], function(err) {
+      instance.getWorkflows('test-org', function(err) {
         expect(err).to.be.instanceof(Error);
         expect(err.message).to.equal('Login failed with 401');
         scope.done();
@@ -604,7 +608,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('Custom login error returns error', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -616,7 +620,7 @@ lab.experiment('Authorization', function() {
         }
       });
 
-      processes.getProcesses('test-org', ['custom', 'login'], function(err) {
+      instance.getWorkflows('test-org', function(err) {
         expect(err).to.be.instanceof(Error);
         expect(err.message).to.equal('Custom error');
         done();
@@ -634,10 +638,10 @@ lab.experiment('Authorization', function() {
       };
 
       scope
-        .get('/test-org/processes?processIds=custom%2Clogin')
+        .get('/custom-login-20-org/workflows')
         .reply(200, []);
 
-      var processes = new Processes({
+      var instance = new Workflow({
         credentials: {
           username: 'effektif-user',
           password: 'effektif-passw0rd'
@@ -645,11 +649,11 @@ lab.experiment('Authorization', function() {
         users: users
       });
 
-      processes.once('authorized', function() {
+      instance.once('authorized', function() {
         done();
       });
 
-      processes.getProcesses('test-org', ['custom', 'login'], function(err) {
+      instance.getWorkflows('custom-login-20-org', function(err) {
         if (err) return done(err);
         scope.done();
       });
@@ -659,18 +663,17 @@ lab.experiment('Authorization', function() {
   lab.experiment('option #onUnauthorized', function() {
 
     lab.test('makes call with callback token', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         onUnauthorized: function(opArgs, callback) {
           return callback(null, 'token');
         }
       });
 
-      var ids = ['onunauthorized', '1', 'token'];
-      scope.get('/test-org/processes?processIds=' + encodeURIComponent(ids.join(',')))
+      scope.get('/onunauthorized-org/workflows')
         .matchHeader('authorization', 'token')
         .reply(200, {});
 
-      processes.getProcesses('test-org', ids, function(err, body, res) {
+      instance.getWorkflows('onunauthorized-org', function(err, body, res) {
         if (err) return done(err);
         expect(res.statusCode).to.equal(200);
         scope.done();
@@ -679,7 +682,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('has access to options.credentials', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         credentials: {
           username: 'me@example.com'
         },
@@ -688,12 +691,11 @@ lab.experiment('Authorization', function() {
         }
       });
 
-      var ids = ['onunauthorized', '2', 'token'];
-      scope.get('/test-org/processes?processIds=' + encodeURIComponent(ids.join(',')))
+      scope.get('/test-org/workflows')
         .matchHeader('authorization', 'me@example.com')
         .reply(200, {});
 
-      processes.getProcesses('test-org', ids, function(err, body, res) {
+      instance.getWorkflows('test-org', function(err, body, res) {
         if (err) return done(err);
         expect(res.statusCode).to.equal(200);
         scope.done();
@@ -702,7 +704,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('returns error in callback', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         onUnauthorized: function(opArgs, callback) {
           return callback(new Error('Custom error'));
         }
@@ -710,7 +712,7 @@ lab.experiment('Authorization', function() {
 
       var ids = ['onunauthorized', 'err', 'token'];
 
-      processes.getProcesses('test-org', ids, function(err) {
+      instance.getWorkflows('test-org', ids, function(err) {
         expect(err).to.be.instanceof(Error);
         expect(err.message).to.match(/custom error/i);
         done();
@@ -718,15 +720,13 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('returns error in callback if no token is returned', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         onUnauthorized: function(opArgs, callback) {
           return callback();
         }
       });
 
-      var ids = ['onunauthorized', 'no', 'token'];
-
-      processes.getProcesses('test-org', ids, function(err) {
+      instance.getWorkflows('test-org', function(err) {
         expect(err).to.be.instanceof(Error);
         expect(err.message).to.match(/missing authorization token/i);
         done();
@@ -734,7 +734,7 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('returns error in callback if token not a string', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         onUnauthorized: function(opArgs, callback) {
           return callback(null, {});
         }
@@ -742,7 +742,7 @@ lab.experiment('Authorization', function() {
 
       var ids = ['onunauthorized', 'object', 'token'];
 
-      processes.getProcesses('test-org', ids, function(err) {
+      instance.getWorkflows('test-org', ids, function(err) {
         expect(err).to.be.instanceof(Error);
         expect(err.message).to.match(/missing authorization token/i);
         done();
@@ -750,20 +750,19 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('returns 401 if token has expired', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         onUnauthorized: function(opArgs, callback) {
           return callback(null, 'token');
         }
       });
 
-      var ids = ['onunauthorized', 'expired', 'token'];
-      scope.get('/test-org/processes?processIds=' + encodeURIComponent(ids.join(',')))
+      scope.get('/test-org/workflows')
         .matchHeader('authorization', 'token')
         .reply(401, {
           message: 'Unauthorized'
         });
 
-      processes.getProcesses('test-org', ids, function(err, body, res) {
+      instance.getWorkflows('test-org', function(err, body, res) {
         scope.done();
         expect(err).to.be.instanceof(Error);
         expect(res.statusCode).to.equal(401);
@@ -772,29 +771,28 @@ lab.experiment('Authorization', function() {
     });
 
     lab.test('requests with token specified in callback', function(done) {
-      var processes = new Processes({
+      var instance = new Workflow({
         onUnauthorized: function(opArgs, next) {
           if (opArgs.organizationKey === 'test-org') return next(null, 'test-org-token');
           return next(null, 'token');
         }
       });
 
-      var ids = ['different', 'expired', 'token'];
       scope
-        .get('/test-org/processes?processIds=' + encodeURIComponent(ids.join(',')))
+        .get('/test-org/workflows')
         .matchHeader('authorization', 'test-org-token')
         .reply(200, {})
-        .get('/other-org/processes?processIds=' + encodeURIComponent(ids.join(',')))
+        .get('/other-org/workflows')
         .matchHeader('authorization', 'token')
         .reply(200, {});
 
-      processes.getProcesses('test-org', ids, function(err, body, res) {
+      instance.getWorkflows('test-org', function(err, body, res) {
         if (err) return done(err);
         expect(res.statusCode).to.equal(200);
-        processes.getProcesses('other-org', ids, function(err, body, res) {
-          if (err) return done(err);
+        instance.getWorkflows('other-org', function(err2, body2, res2) {
+          if (err2) return done(err2);
           scope.done();
-          expect(res.statusCode).to.equal(200);
+          expect(res2.statusCode).to.equal(200);
           done();
         });
       });

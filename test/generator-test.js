@@ -1,4 +1,4 @@
-/* eslint no-underscore-dangle:0 curly:0 */
+/* eslint no-underscore-dangle:0, curly:0, no-new:0 */
 'use strict';
 
 var Lab = require('lab');
@@ -94,6 +94,23 @@ lab.experiment('Generator', function() {
       expect(mock.getProcesses.schemas.output).to.be.an.object();
       done();
     });
+
+    lab.test('returns Module without input if parameters are not passed', function(done) {
+      var template = {
+        apis: [{
+          path: '/info',
+          operations: [{
+            method: 'GET'
+          }]
+        }],
+        models: {}
+      };
+      var Mock = Generator('Mock', template);
+      expect(Mock).to.be.a.function();
+      expect(Mock.prototype).to.be.an.object();
+      done();
+    });
+
 
     lab.test('#_applyDefaults retrieves headers from ctor options', function(done) {
       var template = {
@@ -338,7 +355,7 @@ lab.experiment('Generator', function() {
         done();
       });
 
-      lab.test('with undefined Joi type throws', function(done) {
+      lab.test('with undefined Joi sets type to any', function(done) {
         var template = {
           apis: [{
             path: '/{organizationKey}/processes',
@@ -364,10 +381,9 @@ lab.experiment('Generator', function() {
           }
         };
 
-        function fn() {
-          Generator('Mock', template);
-        }
-        expect(fn).to.throw(Error, 'Joi type "_undefined-type" not found');
+        var Mock = Generator('Mock', template);
+        expect(Mock.schemas.getProcesses.output).to.be.an.object();
+        expect(Mock.schemas.getProcesses.output.describe().children.name.type).to.equal('any');
         done();
       });
 
@@ -863,7 +879,6 @@ lab.experiment('Generator', function() {
           var log = function() {
             return 'weee';
           };
-
           var MockLog = Generator('Mock', template, {
             log: log
           });

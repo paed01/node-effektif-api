@@ -1,3 +1,8 @@
+2.0.0 / 2015-12-18
+==================
+
+  * Support for New Effektif API (3.0), though API verson hasn´t changed.
+
 1.2.0 / 2015-11-18
 ==================
 

@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+
+/* eslint no-console:0 */
 'use strict';
 
 var Api = require('../');
@@ -16,9 +19,10 @@ var pkge = require('../package.json');
 
 var models = {};
 
-console.log(util.format('%s API Reference', pkge.version));
+console.log(util.format('%s API Reference (v%s)', pkge.version, Api.Task.version));
 console.log('===');
 console.log('Auto-generated Api documentation.');
+console.log('Base path: %s', Api.Task.basePath);
 
 function printToc() {
   console.log('**Table of contents:**');
@@ -198,7 +202,7 @@ function printFunctions() {
       }
     });
   });
-};
+}
 
 function printModels() {
   console.log('\n# Models');
