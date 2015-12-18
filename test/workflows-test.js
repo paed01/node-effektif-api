@@ -7,13 +7,13 @@ var Code = require('code');
 var expect = Code.expect;
 var nock = require('nock');
 
-var Processes = require('../.').Process;
-var processes = new Processes({
+var Workflow = require('../.').Workflow;
+var workflows = new Workflow({
   authorization: 'token'
 });
 
-lab.experiment('Process', function() {
-  var scope = nock(Processes.apiDoc.basePath);
+lab.experiment('Workflow', function() {
+  var scope = nock(Workflow.apiDoc.basePath);
   lab.before(function(done) {
     nock.disableNetConnect();
     done();
@@ -23,71 +23,37 @@ lab.experiment('Process', function() {
     done();
   });
 
-  lab.experiment('#getProcesses', function() {
-    lab.test('takes organizationKey and processIds as argument', function(done) {
-      scope.get('/test-org/processes?processIds=1%2C2')
+  lab.experiment('#getWorkflow', function() {
+    lab.test('takes organizationKey and offset as argument', function(done) {
+      scope.get('/test-org/workflows?offset=1')
         .reply(200, []);
-      processes.getProcesses('test-org', ['1', '2'], done);
+      workflows.getWorkflows('test-org', 1, done);
     });
-    lab.test('returns error in callback if processIds is not an array', function(done) {
-      processes.getProcesses('test-org', 1, function(err) {
+
+    lab.test('returns error in callback if offset is not a number', function(done) {
+      workflows.getWorkflows('test-org', 'off', function(err) {
         expect(err).to.exist();
         done();
       });
     });
 
-    lab.test('takes null as processIds since query strings are considered optional', function(done) {
-      scope.get('/test-org/processes')
-        .reply(200, [{
-          id: 'f15',
-          activitiesOrder: ['f19'],
-          name: 'Test effektif API 1',
-          organizationId: 'f34',
-          processId: 'f15',
-          caseColumnsOrder: ['f27', 'f28', 'f29', 'f2a'],
-          diagram: {},
-          lastUpdated: '2015-04-01T22:25:38.125Z',
-          ownerId: 'f35',
-          published: true
-        }, {
-          id: 'f82',
-          activitiesOrder: ['f83'],
-          name: 'Test effektif API 2',
-          organizationId: 'f34',
-          processId: 'f82',
-          changed: true,
-          diagram: {},
-          lastUpdated: '2015-01-10T10:26:00.738Z',
-          ownerId: 'f35',
-          published: false
-        }]);
+    lab.test('takes null as offset since query strings are considered optional', function(done) {
+      scope.get('/test-org/workflows')
+        .reply(200, {});
 
-      processes.getProcesses('test-org', null, function(err, body, resp) {
+      workflows.getWorkflows('test-org', null, function(err, body, resp) {
         if (err) return done(err);
-        expect(body).to.have.length(2);
         expect(resp, 'HTTP response').to.exist();
         done();
       });
     });
 
-    lab.test('takes undefined as processIds since query strings are considered optional', function(done) {
-      scope.get('/test-org/processes')
-        .reply(200, [{
-          id: 'f15',
-          activitiesOrder: ['f19'],
-          name: 'Test effektif API 1',
-          organizationId: 'f34',
-          processId: 'f15',
-          caseColumnsOrder: ['f27', 'f28', 'f29', 'f2a'],
-          diagram: {},
-          lastUpdated: '2015-04-01T22:25:38.125Z',
-          ownerId: 'f35',
-          published: true
-        }]);
+    lab.test('takes undefined as offset since query strings are considered optional', function(done) {
+      scope.get('/test-org/workflows')
+        .reply(200, {});
 
-      processes.getProcesses('test-org', undefined, function(err, body, resp) {
+      workflows.getWorkflows('test-org', undefined, function(err, body, resp) {
         if (err) return done(err);
-        expect(body).to.have.length(1);
         expect(resp, 'HTTP response').to.exist();
         done();
       });

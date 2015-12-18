@@ -6,6 +6,8 @@ var Code = require('code');
 var expect = Code.expect;
 var nock = require('nock');
 
+var Generator = require('../lib/generator');
+
 var Tasks = require('../.').Task;
 var tasks = new Tasks({
   authorization: 'token'
@@ -58,31 +60,9 @@ lab.experiment('Tasks', function() {
     });
   });
 
-  lab.experiment('#getTaskNext', function() {
-    lab.before(function(done) {
-      nock(Tasks.apiDoc.basePath)
-        .get('/test-org/tasks/1/next')
-        .reply(200, 'OK');
-      done();
-    });
-
-    lab.test('takes organizationKey and taskId as argument', function(done) {
-      tasks.getTaskNext('test-org', '1', done);
-    });
-    lab.test('returns error in callback if taskId is not a string', function(done) {
-      tasks.getTaskNext('test-org', {}, function(err) {
-        expect(err).to.exist();
-        done();
-      });
-    });
-  });
-
   lab.experiment('#createTasks', function() {
     lab.before(function(done) {
       nock(Tasks.apiDoc.basePath)
-        .filteringRequestBody(function() {
-          return '*';
-        })
         .post('/test-org/tasks')
         .reply(200, 'OK');
       done();
@@ -90,13 +70,13 @@ lab.experiment('Tasks', function() {
 
     lab.test('takes organizationKey and task as argument', function(done) {
       tasks.createTasks('test-org', {
-        processId: '1'
+        workflowId: '1'
       }, done);
     });
 
-    lab.test('returns error in callback if task.isPrivate is not a boolean', function(done) {
+    lab.test('returns error in callback if task.canceled is not a boolean', function(done) {
       tasks.createTasks('test-org', {
-        isPrivate: 'nej'
+        canceled: 'nej'
       }, function(err) {
         expect(err).to.exist();
         done();
@@ -105,32 +85,26 @@ lab.experiment('Tasks', function() {
   });
 
   lab.experiment('#updateTaskFormField', function() {
-    lab.test('FormField schema complete', function(done) {
+    lab.test('FormInstanceField schema complete', function(done) {
       var input = {
         id: '23',
-        binding: {
-          converter: 'mu'
-        },
         value: 'new name',
         type: {}
       };
 
-      Tasks.models.FormField.validate(input, done);
+      Tasks.models.FormInstanceField.validate(input, done);
     });
 
-    lab.test('FormField schema value only', function(done) {
+    lab.test('FormInstanceField schema value only', function(done) {
       var input = {
         value: 'new name'
       };
 
-      Tasks.models.FormField.validate(input, done);
+      Tasks.models.FormInstanceField.validate(input, done);
     });
 
-    lab.before(function(done) {
+    lab.test('takes organizationKey, taskId, and fieldId as argument', function(done) {
       nock(Tasks.apiDoc.basePath)
-        .filteringRequestBody(function() {
-          return '*';
-        })
         .put('/test-org/tasks/1/form/fields/23')
         .reply(200, {
           form: {
@@ -142,15 +116,9 @@ lab.experiment('Tasks', function() {
             }]
           }
         });
-      done();
-    });
 
-    lab.test('takes organizationKey, taskId, and fieldId as argument', function(done) {
       tasks.updateTaskFormField('test-org', '1', '23', {
         id: '23',
-        binding: {
-          converter: 'mu'
-        },
         value: 'new name',
         type: {}
       }, done);
@@ -185,6 +153,39 @@ lab.experiment('Tasks', function() {
     lab.test('returns null if task.form is undefined', function(done) {
       var f = tasks.getFormFieldByName({}, 'no');
       expect(f).to.equal(null);
+      done();
+    });
+  });
+
+  lab.experiment('override', function() {
+    var taskTemplate = {
+      apis: [{
+        path: '/{organizationKey}/tasks/{taskId}/complete',
+        operations: [{
+          method: 'POST',
+          type: 'Simple',
+          parameters: [{
+            name: 'organizationKey',
+            paramType: 'path',
+            dataType: 'string'
+          }]
+        }]
+      }],
+      models: {
+        Simple: {
+          id: 'Simple',
+          properties: {
+            name: {
+              type: 'string'
+            }
+          }
+        }
+      }
+    };
+
+    lab.test('/{organizationKey}/tasks/{taskId}/complete is named completeTask', function(done) {
+      var Task = Generator('Task', taskTemplate);
+      expect(Task.prototype.completeTask).to.exist();
       done();
     });
   });

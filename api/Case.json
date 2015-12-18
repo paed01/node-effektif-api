@@ -3,32 +3,10 @@
   "swaggerVersion" : "1.2",
   "basePath" : "https://app.effektif.com/api/v1",
   "apis" : [ {
-    "path" : "/oauth_callback",
+    "path" : "/{organizationKey}/cases",
     "operations" : [ {
       "method" : "GET",
-      "nickname" : "/oauth_callback",
-      "parameters" : [ {
-        "paramType" : "query",
-        "name" : "state",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "code",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "error",
-        "dataType" : "string",
-        "required" : true
-      } ]
-    } ]
-  }, {
-    "path" : "/services/{serviceKey}/accounts",
-    "operations" : [ {
-      "method" : "GET",
-      "nickname" : "/services/{serviceKey}/accounts",
+      "nickname" : "/{organizationKey}/cases",
       "parameters" : [ {
         "paramType" : "header",
         "name" : "Authorization",
@@ -41,256 +19,35 @@
         "dataType" : "string",
         "required" : true
       }, {
-        "paramType" : "path",
-        "name" : "serviceKey",
+        "paramType" : "query",
+        "name" : "editorWorkflowId",
         "dataType" : "string",
         "required" : true
       }, {
         "paramType" : "query",
-        "name" : "excludeOwner",
+        "name" : "closed",
+        "dataType" : "boolean",
+        "required" : true
+      }, {
+        "paramType" : "query",
+        "name" : "canceled",
+        "dataType" : "boolean",
+        "required" : true
+      }, {
+        "paramType" : "query",
+        "name" : "sorting",
         "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "query",
+        "name" : "workflowDeleted",
+        "dataType" : "boolean",
         "required" : true
       } ]
     }, {
       "method" : "POST",
-      "nickname" : "/services/{serviceKey}/accounts",
-      "type" : "Account",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "body",
-        "name" : "account",
-        "dataType" : "Account",
-        "required" : true
-      } ]
-    } ]
-  }, {
-    "path" : "/services/{serviceKey}/accounts/{accountId}",
-    "operations" : [ {
-      "method" : "GET",
-      "nickname" : "/services/{serviceKey}/accounts/{accountId}",
-      "type" : "Account",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "accountId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "excludeOwner",
-        "dataType" : "string",
-        "required" : true
-      } ]
-    }, {
-      "method" : "PUT",
-      "nickname" : "/services/{serviceKey}/accounts/{accountId}",
-      "type" : "Account",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "accountId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "body",
-        "name" : "account",
-        "dataType" : "Account",
-        "required" : true
-      } ]
-    } ]
-  }, {
-    "path" : "/services/{serviceKey}/accounts/{accountId}/options/{optionsKey}",
-    "operations" : [ {
-      "method" : "GET",
-      "nickname" : "/services/{serviceKey}/accounts/{accountId}/options/{optionsKey}",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "accountId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "optionsKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "excludeOwner",
-        "dataType" : "string",
-        "required" : true
-      } ]
-    } ]
-  }, {
-    "path" : "/services/{serviceKey}/accounts/{accountId}/references",
-    "operations" : [ {
-      "method" : "GET",
-      "nickname" : "/services/{serviceKey}/accounts/{accountId}/references",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "accountId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "q",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "parent",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "pathTo",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "excludeOwner",
-        "dataType" : "string",
-        "required" : true
-      } ]
-    } ]
-  }, {
-    "path" : "/services/{serviceKey}/options/{optionsKey}",
-    "operations" : [ {
-      "method" : "GET",
-      "nickname" : "/services/{serviceKey}/options/{optionsKey}",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "accountId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "optionsKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "excludeOwner",
-        "dataType" : "string",
-        "required" : true
-      } ]
-    } ]
-  }, {
-    "path" : "/{organizationKey}/services",
-    "operations" : [ {
-      "method" : "GET",
-      "nickname" : "/{organizationKey}/services",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      } ]
-    } ]
-  }, {
-    "path" : "/{organizationKey}/services/oauth/start",
-    "operations" : [ {
-      "method" : "POST",
-      "nickname" : "/{organizationKey}/services/oauth/start",
-      "type" : "OauthStartResponse",
+      "nickname" : "/{organizationKey}/cases",
+      "type" : "CaseDetail",
       "parameters" : [ {
         "paramType" : "header",
         "name" : "Authorization",
@@ -304,70 +61,16 @@
         "required" : true
       }, {
         "paramType" : "body",
-        "name" : "oauthStartRequest",
-        "dataType" : "OauthStartRequest",
+        "name" : "newCase",
+        "dataType" : "NewCase",
         "required" : true
       } ]
     } ]
   }, {
-    "path" : "/{organizationKey}/services/{serviceKey}/accounts",
-    "operations" : [ {
-      "method" : "GET",
-      "nickname" : "/{organizationKey}/services/{serviceKey}/accounts",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "excludeOwner",
-        "dataType" : "string",
-        "required" : true
-      } ]
-    }, {
-      "method" : "POST",
-      "nickname" : "/{organizationKey}/services/{serviceKey}/accounts",
-      "type" : "Account",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token must belong to an admin of the organization admin. The token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "body",
-        "name" : "account",
-        "dataType" : "Account",
-        "required" : true
-      } ]
-    } ]
-  }, {
-    "path" : "/{organizationKey}/services/{serviceKey}/accounts/{accountId}",
+    "path" : "/{organizationKey}/cases/{caseId}",
     "operations" : [ {
       "method" : "DELETE",
-      "nickname" : "/{organizationKey}/services/{serviceKey}/accounts/{accountId}",
+      "nickname" : "/{organizationKey}/cases/{caseId}",
       "parameters" : [ {
         "paramType" : "header",
         "name" : "Authorization",
@@ -381,19 +84,14 @@
         "required" : true
       }, {
         "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "accountId",
+        "name" : "caseId",
         "dataType" : "string",
         "required" : true
       } ]
     }, {
       "method" : "GET",
-      "nickname" : "/{organizationKey}/services/{serviceKey}/accounts/{accountId}",
-      "type" : "Account",
+      "nickname" : "/{organizationKey}/cases/{caseId}",
+      "type" : "CaseDetail",
       "parameters" : [ {
         "paramType" : "header",
         "name" : "Authorization",
@@ -407,24 +105,14 @@
         "required" : true
       }, {
         "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "accountId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "excludeOwner",
+        "name" : "caseId",
         "dataType" : "string",
         "required" : true
       } ]
     }, {
       "method" : "PUT",
-      "nickname" : "/{organizationKey}/services/{serviceKey}/accounts/{accountId}",
-      "type" : "Account",
+      "nickname" : "/{organizationKey}/cases/{caseId}",
+      "type" : "CaseDetail",
       "parameters" : [ {
         "paramType" : "header",
         "name" : "Authorization",
@@ -438,113 +126,22 @@
         "required" : true
       }, {
         "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "accountId",
+        "name" : "caseId",
         "dataType" : "string",
         "required" : true
       }, {
         "paramType" : "body",
-        "name" : "account",
-        "dataType" : "Account",
+        "name" : "case",
+        "dataType" : "Case",
         "required" : true
       } ]
     } ]
   }, {
-    "path" : "/{organizationKey}/services/{serviceKey}/accounts/{accountId}/options/{optionsKey}",
-    "operations" : [ {
-      "method" : "GET",
-      "nickname" : "/{organizationKey}/services/{serviceKey}/accounts/{accountId}/options/{optionsKey}",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "accountId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "optionsKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "excludeOwner",
-        "dataType" : "string",
-        "required" : true
-      } ]
-    } ]
-  }, {
-    "path" : "/{organizationKey}/services/{serviceKey}/accounts/{accountId}/references",
-    "operations" : [ {
-      "method" : "GET",
-      "nickname" : "/{organizationKey}/services/{serviceKey}/accounts/{accountId}/references",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "accountId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "q",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "parent",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "pathTo",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "query",
-        "name" : "excludeOwner",
-        "dataType" : "string",
-        "required" : true
-      } ]
-    } ]
-  }, {
-    "path" : "/{organizationKey}/services/{serviceKey}/actionInstances/lock",
+    "path" : "/{organizationKey}/cases/{caseId}/cancel",
     "operations" : [ {
       "method" : "POST",
-      "nickname" : "/{organizationKey}/services/{serviceKey}/actionInstances/lock",
-      "type" : "ActionInstance",
+      "nickname" : "/{organizationKey}/cases/{caseId}/cancel",
+      "type" : "CaseDetail",
       "parameters" : [ {
         "paramType" : "header",
         "name" : "Authorization",
@@ -558,22 +155,17 @@
         "required" : true
       }, {
         "paramType" : "path",
-        "name" : "serviceKey",
+        "name" : "caseId",
         "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "body",
-        "name" : "actionInstance",
-        "dataType" : "ActionInstance",
         "required" : true
       } ]
     } ]
   }, {
-    "path" : "/{organizationKey}/services/{serviceKey}/actionInstances/{actionInstanceId}/end",
+    "path" : "/{organizationKey}/cases/{caseId}/close",
     "operations" : [ {
       "method" : "POST",
-      "nickname" : "/{organizationKey}/services/{serviceKey}/actionInstances/{actionInstanceId}/end",
-      "type" : "EmptyObject",
+      "nickname" : "/{organizationKey}/cases/{caseId}/close",
+      "type" : "CaseDetail",
       "parameters" : [ {
         "paramType" : "header",
         "name" : "Authorization",
@@ -587,50 +179,16 @@
         "required" : true
       }, {
         "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "actionInstanceId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "body",
-        "name" : "actionInstanceEnd",
-        "dataType" : "ActionInstanceEnd",
-        "required" : true
-      } ]
-    } ]
-  }, {
-    "path" : "/{organizationKey}/services/{serviceKey}/icon",
-    "operations" : [ {
-      "method" : "GET",
-      "nickname" : "/{organizationKey}/services/{serviceKey}/icon",
-      "type" : "FileStream",
-      "parameters" : [ {
-        "paramType" : "header",
-        "name" : "Authorization",
-        "description" : "The authentication token can be obtained from /users/login.",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "organizationKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "serviceKey",
+        "name" : "caseId",
         "dataType" : "string",
         "required" : true
       } ]
     } ]
   }, {
-    "path" : "/{organizationKey}/services/{serviceKey}/options/{optionsKey}",
+    "path" : "/{organizationKey}/cases/{caseId}/events",
     "operations" : [ {
       "method" : "GET",
-      "nickname" : "/{organizationKey}/services/{serviceKey}/options/{optionsKey}",
+      "nickname" : "/{organizationKey}/cases/{caseId}/events",
       "parameters" : [ {
         "paramType" : "header",
         "name" : "Authorization",
@@ -644,22 +202,163 @@
         "required" : true
       }, {
         "paramType" : "path",
-        "name" : "serviceKey",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "accountId",
-        "dataType" : "string",
-        "required" : true
-      }, {
-        "paramType" : "path",
-        "name" : "optionsKey",
+        "name" : "caseId",
         "dataType" : "string",
         "required" : true
       }, {
         "paramType" : "query",
-        "name" : "excludeOwner",
+        "name" : "taskId",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "query",
+        "name" : "type",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "query",
+        "name" : "offset",
+        "dataType" : "integer",
+        "required" : true
+      }, {
+        "paramType" : "query",
+        "name" : "pagesize",
+        "dataType" : "integer",
+        "required" : true
+      } ]
+    }, {
+      "method" : "POST",
+      "nickname" : "/{organizationKey}/cases/{caseId}/events",
+      "type" : "Event",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "caseId",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "body",
+        "name" : "event",
+        "dataType" : "Event",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/cases/{caseId}/files",
+    "operations" : [ {
+      "method" : "POST",
+      "nickname" : "/{organizationKey}/cases/{caseId}/files",
+      "type" : "File",
+      "parameters" : [ {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "caseId",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/cases/{caseId}/files/{fileId}",
+    "operations" : [ {
+      "method" : "POST",
+      "nickname" : "/{organizationKey}/cases/{caseId}/files/{fileId}",
+      "type" : "File",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "caseId",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "fileId",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/cases/{caseId}/iframe/files",
+    "operations" : [ {
+      "method" : "POST",
+      "nickname" : "/{organizationKey}/cases/{caseId}/iframe/files",
+      "parameters" : [ {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "caseId",
+        "dataType" : "string",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/cases/{caseId}/tasks",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "/{organizationKey}/cases/{caseId}/tasks",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "caseId",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "query",
+        "name" : "completed",
+        "dataType" : "boolean",
+        "required" : true
+      } ]
+    } ]
+  }, {
+    "path" : "/{organizationKey}/info/cases",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "/{organizationKey}/info/cases",
+      "parameters" : [ {
+        "paramType" : "header",
+        "name" : "Authorization",
+        "description" : "The authentication token can be obtained from /users/login.",
+        "dataType" : "string",
+        "required" : true
+      }, {
+        "paramType" : "path",
+        "name" : "organizationKey",
         "dataType" : "string",
         "required" : true
       } ]

@@ -6,32 +6,40 @@
     "description" : "This documentation describes how to use the Effektif REST API."
   },
   "apis" : [ {
-    "path" : "/User",
-    "description" : "manage users, registrations and organizations",
+    "path" : "/File",
+    "description" : "Files",
+    "operations" : [ ]
+  }, {
+    "path" : "/Mail",
+    "description" : "Email",
+    "operations" : [ ]
+  }, {
+    "path" : "/Case",
+    "description" : "Cases",
     "operations" : [ ]
   }, {
     "path" : "/Task",
-    "description" : "manage ad-hoc tasks and start processes",
+    "description" : "Ad-hoc tasks and workflows",
     "operations" : [ ]
   }, {
-    "path" : "/Process",
-    "description" : "manage processes",
+    "path" : "/Workflow",
+    "description" : "Workflows",
+    "operations" : [ ]
+  }, {
+    "path" : "/WorkflowEngine",
+    "description" : "The workflow engine",
+    "operations" : [ ]
+  }, {
+    "path" : "/Organization",
+    "description" : "Organizations",
     "operations" : [ ]
   }, {
     "path" : "/Service",
-    "description" : "manage services",
+    "description" : "Services",
     "operations" : [ ]
   }, {
-    "path" : "/Search",
-    "description" : "full text search",
-    "operations" : [ ]
-  }, {
-    "path" : "/File",
-    "description" : "manage files",
-    "operations" : [ ]
-  }, {
-    "path" : "/ProcessInstance",
-    "description" : "manage process instances",
+    "path" : "/User",
+    "description" : "Users and registrations",
     "operations" : [ ]
   } ],
   "models" : { }

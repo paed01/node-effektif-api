@@ -63,7 +63,7 @@ lab.experiment('User', function() {
         .reply(200, 'OK');
 
       users.createUsersLogin({
-        mailAddress: 'test@truntail.local',
+        emailAddress: 'test@truntail.local',
         password: 'supers3cret'
       }, done);
     });
@@ -75,7 +75,7 @@ lab.experiment('User', function() {
 
       var userNoToken = new Users();
       userNoToken.createUsersLogin({
-        mailAddress: 'test@truntail.local',
+        emailAddress: 'test@truntail.local',
         password: 'supers3cret'
       }, done);
     });

@@ -97,59 +97,400 @@
     } ]
   } ],
   "models" : {
-    "Type" : {
-      "id" : "Type",
-      "properties" : { }
+    "WorkflowInstance" : {
+      "id" : "WorkflowInstance",
+      "properties" : {
+        "properties" : {
+          "type" : "Map"
+        },
+        "start" : {
+          "type" : "LocalDateTime"
+        },
+        "end" : {
+          "type" : "LocalDateTime"
+        },
+        "endState" : {
+          "type" : "string"
+        },
+        "duration" : {
+          "type" : "Long"
+        },
+        "activityInstances" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "ActivityInstance"
+          }
+        },
+        "variableInstances" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "VariableInstance"
+          }
+        },
+        "timerInstances" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "TimerInstance"
+          }
+        },
+        "id" : {
+          "type" : "WorkflowInstanceId"
+        },
+        "workflowId" : {
+          "type" : "WorkflowId"
+        },
+        "businessKey" : {
+          "type" : "string"
+        },
+        "creatorId" : {
+          "type" : "string"
+        },
+        "callerWorkflowInstanceId" : {
+          "type" : "WorkflowInstanceId"
+        },
+        "callerActivityInstanceId" : {
+          "type" : "string"
+        },
+        "caseId" : {
+          "type" : "string"
+        }
+      }
     },
-    "CommentAddEvent" : {
-      "id" : "CommentAddEvent",
+    "AbstractWorkflow" : {
+      "id" : "AbstractWorkflow",
+      "properties" : {
+        "properties" : {
+          "type" : "Map"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "bpmn" : {
+          "type" : "XmlElement"
+        },
+        "activities" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Activity"
+          }
+        },
+        "transitions" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Transition"
+          }
+        },
+        "variables" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Variable"
+          }
+        },
+        "timers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Timer"
+          }
+        },
+        "id" : {
+          "type" : "WorkflowId"
+        },
+        "trigger" : {
+          "type" : "Trigger"
+        },
+        "enableCases" : {
+          "type" : "boolean"
+        },
+        "diagram" : {
+          "type" : "Diagram"
+        }
+      }
+    },
+    "ScriptResult" : {
+      "id" : "ScriptResult",
+      "properties" : {
+        "result" : {
+          "type" : "Object"
+        },
+        "error" : {
+          "type" : "string"
+        },
+        "log" : {
+          "type" : "string"
+        },
+        "variableUpdates" : {
+          "type" : "Map"
+        }
+      }
+    },
+    "File" : {
+      "id" : "File",
+      "properties" : {
+        "contentType" : {
+          "type" : "string"
+        },
+        "created" : {
+          "type" : "LocalDateTime"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "object-id"
+        },
+        "mailId" : {
+          "type" : "object-id"
+        },
+        "organizationId" : {
+          "type" : "object-id"
+        },
+        "ownerId" : {
+          "type" : "object-id"
+        },
+        "pictureRegistrationId" : {
+          "type" : "string"
+        },
+        "sizeInBytes" : {
+          "type" : "Long"
+        },
+        "caseId" : {
+          "type" : "object-id"
+        },
+        "userId" : {
+          "type" : "object-id"
+        }
+      }
+    },
+    "TriggerInstance" : {
+      "id" : "TriggerInstance",
+      "properties" : {
+        "data" : {
+          "type" : "Map"
+        },
+        "workflowInstanceId" : {
+          "type" : "WorkflowInstanceId"
+        },
+        "workflowId" : {
+          "type" : "WorkflowId"
+        },
+        "sourceWorkflowId" : {
+          "type" : "string"
+        },
+        "startActivityIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "businessKey" : {
+          "type" : "string"
+        },
+        "callerWorkflowInstanceId" : {
+          "type" : "WorkflowInstanceId"
+        },
+        "callerActivityInstanceId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "License" : {
+      "id" : "License",
       "properties" : {
         "id" : {
           "type" : "object-id",
           "description" : "This property is not updatable in PUT operations"
         },
-        "cazeId" : {
+        "creationDate" : {
+          "type" : "LocalDateTime"
+        },
+        "expirationDate" : {
+          "type" : "LocalDateTime"
+        },
+        "generatedById" : {
           "type" : "object-id"
         },
-        "name" : {
+        "invitee" : {
           "type" : "string"
         },
-        "task" : {
-          "type" : "Task",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "taskId" : {
+        "organizationId" : {
           "type" : "object-id"
         },
-        "time" : {
-          "type" : "LocalDateTime"
+        "organization" : {
+          "type" : "Organization",
+          "description" : "This property is not updatable in PUT operations"
+        },
+        "packages" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "type" : {
+          "type" : "string"
         },
         "userId" : {
           "type" : "object-id"
         },
-        "message" : {
+        "user" : {
+          "type" : "User",
+          "description" : "This property is not updatable in PUT operations"
+        }
+      }
+    },
+    "LdapGroup" : {
+      "id" : "LdapGroup",
+      "properties" : {
+        "name" : {
           "type" : "string"
+        },
+        "memberCount" : {
+          "type" : "Integer"
+        },
+        "dn" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Group" : {
+      "id" : "Group",
+      "properties" : {
+        "id" : {
+          "type" : "object-id",
+          "description" : "This property is not updatable in PUT operations"
+        },
+        "ldapDn" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "organizationId" : {
+          "type" : "object-id"
+        },
+        "userIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        }
+      }
+    },
+    "User" : {
+      "id" : "User",
+      "properties" : {
+        "id" : {
+          "type" : "object-id",
+          "description" : "This property is not updatable in PUT operations"
+        },
+        "admin" : {
+          "type" : "boolean",
+          "description" : "This property is not updatable in PUT operations"
+        },
+        "color" : {
+          "type" : "string"
+        },
+        "country" : {
+          "type" : "string"
+        },
+        "created" : {
+          "type" : "LocalDateTime"
+        },
+        "disabled" : {
+          "type" : "boolean"
+        },
+        "external" : {
+          "type" : "boolean"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "groupIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "ldapDn" : {
+          "type" : "string"
+        },
+        "emailAddress" : {
+          "type" : "string"
+        },
+        "licenses" : {
+          "type" : "array",
+          "description" : "This property is not updatable in PUT operations",
+          "items" : {
+            "$ref" : "License"
+          }
+        },
+        "organizationIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "organizations" : {
+          "type" : "array",
+          "description" : "This property is not updatable in PUT operations",
+          "items" : {
+            "$ref" : "Organization"
+          }
+        },
+        "password" : {
+          "type" : "string",
+          "description" : "This property is not updatable in PUT operations"
+        },
+        "phone" : {
+          "type" : "string"
+        },
+        "preferences" : {
+          "type" : "Map"
+        },
+        "systemAdmin" : {
+          "type" : "boolean"
+        },
+        "systemUser" : {
+          "type" : "boolean"
         }
       }
     },
     "Task" : {
       "id" : "Task",
       "properties" : {
+        "properties" : {
+          "type" : "Map"
+        },
         "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
+          "type" : "object-id"
+        },
+        "organizationId" : {
+          "type" : "object-id"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "nameLower" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
         },
         "access" : {
           "type" : "AccessControlList"
         },
-        "assigneeId" : {
+        "creatorId" : {
           "type" : "object-id"
         },
-        "caze" : {
-          "type" : "Task",
-          "description" : "This property is not updatable in PUT operations"
+        "createTime" : {
+          "type" : "LocalDateTime"
         },
-        "cazeId" : {
+        "assigneeId" : {
           "type" : "object-id"
         },
         "candidateIds" : {
@@ -164,333 +505,68 @@
             "$ref" : "string"
           }
         },
+        "caseId" : {
+          "type" : "object-id"
+        },
+        "parentId" : {
+          "type" : "object-id"
+        },
+        "subtaskIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "dueDate" : {
+          "type" : "LocalDateTime"
+        },
+        "lastUpdated" : {
+          "type" : "LocalDateTime"
+        },
         "canceled" : {
           "type" : "boolean"
         },
         "completed" : {
           "type" : "boolean"
         },
-        "createdBy" : {
-          "type" : "object-id"
-        },
-        "description" : {
+        "activityId" : {
           "type" : "string"
         },
-        "documentIds" : {
-          "type" : "array",
-          "description" : "This property is not updatable in PUT operations",
-          "items" : {
-            "$ref" : "string"
-          }
+        "activityInstanceId" : {
+          "type" : "string"
         },
-        "duedate" : {
-          "type" : "LocalDateTime"
-        },
-        "form" : {
-          "type" : "Form"
+        "activityInstanceMessage" : {
+          "type" : "boolean"
         },
         "hasForm" : {
           "type" : "boolean"
         },
-        "lastUpdated" : {
-          "type" : "LocalDateTime"
+        "workflowInstanceId" : {
+          "type" : "WorkflowInstanceId"
         },
-        "lock" : {
-          "type" : "LocalDateTime"
-        },
-        "name" : {
+        "sourceWorkflowId" : {
           "type" : "string"
         },
-        "organizationId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
+        "workflowId" : {
+          "type" : "WorkflowId"
         },
-        "parent" : {
-          "type" : "Task",
-          "description" : "This property is not updatable in PUT operations"
+        "roleVariableId" : {
+          "type" : "string"
         },
-        "parentId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "participantIds" : {
-          "type" : "array",
-          "description" : "This property is not updatable in PUT operations",
-          "items" : {
-            "$ref" : "string"
-          }
-        },
-        "processId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "sandbox" : {
-          "type" : "boolean",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "subtaskIds" : {
-          "type" : "array",
-          "description" : "This property is not updatable in PUT operations",
-          "items" : {
-            "$ref" : "string"
-          }
-        },
-        "uncompletable" : {
-          "type" : "boolean",
-          "description" : "This property is not updatable in PUT operations"
+        "form" : {
+          "type" : "FormInstance"
         }
       }
     },
-    "NewTask" : {
-      "id" : "NewTask",
-      "properties" : {
-        "parentId" : {
-          "type" : "object-id"
-        },
-        "assigneeId" : {
-          "type" : "object-id"
-        },
-        "processId" : {
-          "type" : "object-id"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "triggerData" : {
-          "type" : "Object"
-        },
-        "sandbox" : {
-          "type" : "boolean"
-        },
-        "isPrivate" : {
-          "type" : "boolean"
-        }
-      }
-    },
-    "OauthStartResponse" : {
-      "id" : "OauthStartResponse",
-      "properties" : {
-        "authorizationUrl" : {
-          "type" : "string"
-        }
-      }
-    },
-    "Diagram" : {
-      "id" : "Diagram",
+    "Email" : {
+      "id" : "Email",
       "properties" : {
         "id" : {
           "type" : "object-id",
           "description" : "This property is not updatable in PUT operations"
         },
-        "canvas" : {
-          "type" : "Node"
-        },
-        "edges" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Edge"
-          }
-        },
-        "version" : {
-          "type" : "Long"
-        }
-      }
-    },
-    "Activity" : {
-      "id" : "Activity",
-      "properties" : {
-        "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "access" : {
-          "type" : "AccessControlList"
-        },
-        "activities" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Activity"
-          }
-        },
-        "activitiesOrder" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "string"
-          }
-        },
-        "bpmnId" : {
-          "type" : "string"
-        },
-        "defaultTransitionId" : {
-          "type" : "object-id"
-        },
-        "description" : {
-          "type" : "string"
-        },
-        "di" : {
+        "headers" : {
           "type" : "Map"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "nameTemplate" : {
-          "type" : "string"
-        },
-        "organizationId" : {
-          "type" : "object-id"
-        },
-        "parentId" : {
-          "type" : "object-id"
-        },
-        "parameters" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Parameter"
-          }
-        },
-        "processId" : {
-          "type" : "object-id"
-        },
-        "transitions" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Transition"
-          }
-        },
-        "variables" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Variable"
-          }
-        }
-      }
-    },
-    "ActionInstance" : {
-      "id" : "ActionInstance",
-      "properties" : {
-        "actionData" : {
-          "type" : "Map",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "actionKey" : {
-          "type" : "string"
-        },
-        "activityInstanceId" : {
-          "type" : "object-id"
-        },
-        "id" : {
-          "type" : "object-id"
-        },
-        "configuration" : {
-          "type" : "Map",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "organizationId" : {
-          "type" : "object-id"
-        },
-        "processId" : {
-          "type" : "object-id"
-        },
-        "processInstanceId" : {
-          "type" : "object-id"
-        },
-        "taskId" : {
-          "type" : "object-id"
-        },
-        "serviceKey" : {
-          "type" : "string"
-        }
-      }
-    },
-    "DocumentFile" : {
-      "id" : "DocumentFile",
-      "properties" : {
-        "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "created" : {
-          "type" : "LocalDateTime",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "organizationId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "ownerId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "taskId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "url" : {
-          "type" : "string"
-        },
-        "mimeType" : {
-          "type" : "string"
-        }
-      }
-    },
-    "Account" : {
-      "id" : "Account",
-      "properties" : {
-        "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "access" : {
-          "type" : "AccessControlList"
-        },
-        "restricted" : {
-          "type" : "boolean",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "serviceKey" : {
-          "type" : "string"
-        },
-        "userId" : {
-          "type" : "object-id"
-        }
-      }
-    },
-    "Parameter" : {
-      "id" : "Parameter",
-      "properties" : {
-        "binding" : {
-          "type" : "Binding"
-        },
-        "bindings" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Binding"
-          }
-        },
-        "fixed" : {
-          "type" : "boolean"
-        },
-        "key" : {
-          "type" : "string"
-        },
-        "list" : {
-          "type" : "boolean"
-        },
-        "variable" : {
-          "type" : "Variable",
-          "description" : "This property is not updatable in PUT operations"
-        }
-      }
-    },
-    "Mail" : {
-      "id" : "Mail",
-      "properties" : {
-        "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
         },
         "attachmentIds" : {
           "type" : "array",
@@ -554,173 +630,610 @@
         }
       }
     },
-    "Map" : {
-      "id" : "Map",
-      "properties" : { }
-    },
-    "VariableMapping" : {
-      "id" : "VariableMapping",
+    "RegistrationRequest" : {
+      "id" : "RegistrationRequest",
       "properties" : {
-        "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "binding" : {
-          "type" : "Binding"
-        },
-        "scriptName" : {
+        "emailAddress" : {
           "type" : "string"
         },
-        "testValue" : {
-          "type" : "Object"
+        "password" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "phone" : {
+          "type" : "string"
+        },
+        "organizationName" : {
+          "type" : "string"
+        },
+        "color" : {
+          "type" : "string"
+        },
+        "newsletter" : {
+          "type" : "boolean"
+        },
+        "country" : {
+          "type" : "string"
+        },
+        "language" : {
+          "type" : "string"
+        },
+        "edition" : {
+          "type" : "string"
+        },
+        "timeZone" : {
+          "type" : "string"
         }
       }
     },
-    "User" : {
-      "id" : "User",
+    "OauthStartRequest" : {
+      "id" : "OauthStartRequest",
+      "properties" : {
+        "path" : {
+          "type" : "string"
+        },
+        "serviceKey" : {
+          "type" : "string"
+        },
+        "accountId" : {
+          "type" : "object-id"
+        }
+      }
+    },
+    "Organization" : {
+      "id" : "Organization",
       "properties" : {
         "id" : {
           "type" : "object-id",
           "description" : "This property is not updatable in PUT operations"
+        },
+        "key" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "createdBy" : {
+          "type" : "object-id"
+        },
+        "customCSS" : {
+          "type" : "string"
+        },
+        "disabled" : {
+          "type" : "boolean"
+        },
+        "licenseProfileIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "licenseRequired" : {
+          "type" : "boolean",
+          "description" : "This property is not updatable in PUT operations"
+        },
+        "licenseType" : {
+          "type" : "string"
         },
         "admin" : {
           "type" : "boolean",
           "description" : "This property is not updatable in PUT operations"
         },
-        "color" : {
-          "type" : "string"
-        },
-        "created" : {
-          "type" : "LocalDateTime"
-        },
-        "external" : {
-          "type" : "boolean"
-        },
-        "firstName" : {
-          "type" : "string"
-        },
-        "groupIds" : {
+        "adminIds" : {
           "type" : "array",
           "items" : {
             "$ref" : "string"
           }
         },
-        "lastName" : {
-          "type" : "string"
-        },
-        "ldapDn" : {
-          "type" : "string"
-        },
-        "mailAddress" : {
-          "type" : "string"
-        },
-        "licenses" : {
+        "admins" : {
           "type" : "array",
           "description" : "This property is not updatable in PUT operations",
           "items" : {
-            "$ref" : "License"
+            "$ref" : "User"
           }
         },
-        "mailAddressLower" : {
-          "type" : "string"
-        },
-        "organizationIds" : {
+        "memberIds" : {
           "type" : "array",
           "items" : {
             "$ref" : "string"
           }
         },
-        "password" : {
-          "type" : "string",
-          "description" : "This property is not updatable in PUT operations"
+        "systemUserIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
         },
-        "preferences" : {
+        "systemUsers" : {
+          "type" : "array",
+          "description" : "This property is not updatable in PUT operations",
+          "items" : {
+            "$ref" : "User"
+          }
+        },
+        "invitations" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "ldapConnector" : {
+          "type" : "LdapConnector"
+        },
+        "timeZone" : {
+          "type" : "string"
+        }
+      }
+    },
+    "NewTask" : {
+      "id" : "NewTask",
+      "properties" : {
+        "properties" : {
           "type" : "Map"
         },
-        "systemAdmin" : {
+        "id" : {
+          "type" : "object-id"
+        },
+        "organizationId" : {
+          "type" : "object-id"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "nameLower" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "access" : {
+          "type" : "AccessControlList"
+        },
+        "creatorId" : {
+          "type" : "object-id"
+        },
+        "createTime" : {
+          "type" : "LocalDateTime"
+        },
+        "assigneeId" : {
+          "type" : "object-id"
+        },
+        "candidateIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "candidateGroupIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "caseId" : {
+          "type" : "object-id"
+        },
+        "parentId" : {
+          "type" : "object-id"
+        },
+        "subtaskIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "dueDate" : {
+          "type" : "LocalDateTime"
+        },
+        "lastUpdated" : {
+          "type" : "LocalDateTime"
+        },
+        "canceled" : {
           "type" : "boolean"
         },
-        "systemUser" : {
+        "completed" : {
+          "type" : "boolean"
+        },
+        "activityId" : {
+          "type" : "string"
+        },
+        "activityInstanceId" : {
+          "type" : "string"
+        },
+        "activityInstanceMessage" : {
+          "type" : "boolean"
+        },
+        "hasForm" : {
+          "type" : "boolean"
+        },
+        "workflowInstanceId" : {
+          "type" : "WorkflowInstanceId"
+        },
+        "sourceWorkflowId" : {
+          "type" : "string"
+        },
+        "workflowId" : {
+          "type" : "WorkflowId"
+        },
+        "roleVariableId" : {
+          "type" : "string"
+        },
+        "form" : {
+          "type" : "FormInstance"
+        }
+      }
+    },
+    "EditorWorkflow" : {
+      "id" : "EditorWorkflow",
+      "properties" : {
+        "properties" : {
+          "type" : "Map"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "bpmn" : {
+          "type" : "XmlElement"
+        },
+        "activities" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Activity"
+          }
+        },
+        "transitions" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Transition"
+          }
+        },
+        "variables" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Variable"
+          }
+        },
+        "timers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Timer"
+          }
+        },
+        "id" : {
+          "type" : "WorkflowId"
+        },
+        "trigger" : {
+          "type" : "Trigger"
+        },
+        "enableCases" : {
+          "type" : "boolean"
+        },
+        "diagram" : {
+          "type" : "Diagram"
+        },
+        "ownerId" : {
+          "type" : "object-id"
+        },
+        "editorId" : {
+          "type" : "object-id"
+        },
+        "editorLock" : {
+          "type" : "LocalDateTime"
+        },
+        "lastUpdated" : {
+          "type" : "LocalDateTime"
+        },
+        "category" : {
+          "type" : "string"
+        },
+        "changed" : {
+          "type" : "boolean"
+        },
+        "latestVersion" : {
+          "type" : "object-id"
+        },
+        "caseColumns" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "CaseColumn"
+          }
+        },
+        "template" : {
+          "type" : "boolean"
+        },
+        "templateId" : {
+          "type" : "object-id"
+        },
+        "nameLower" : {
+          "type" : "string"
+        }
+      }
+    },
+    "NewWorkflow" : {
+      "id" : "NewWorkflow",
+      "properties" : {
+        "properties" : {
+          "type" : "Map"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "bpmn" : {
+          "type" : "XmlElement"
+        },
+        "activities" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Activity"
+          }
+        },
+        "transitions" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Transition"
+          }
+        },
+        "variables" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Variable"
+          }
+        },
+        "timers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Timer"
+          }
+        },
+        "id" : {
+          "type" : "WorkflowId"
+        },
+        "trigger" : {
+          "type" : "Trigger"
+        },
+        "enableCases" : {
+          "type" : "boolean"
+        },
+        "diagram" : {
+          "type" : "Diagram"
+        },
+        "ownerId" : {
+          "type" : "object-id"
+        },
+        "editorId" : {
+          "type" : "object-id"
+        },
+        "editorLock" : {
+          "type" : "LocalDateTime"
+        },
+        "lastUpdated" : {
+          "type" : "LocalDateTime"
+        },
+        "category" : {
+          "type" : "string"
+        },
+        "changed" : {
+          "type" : "boolean"
+        },
+        "latestVersion" : {
+          "type" : "object-id"
+        },
+        "caseColumns" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "CaseColumn"
+          }
+        },
+        "template" : {
+          "type" : "boolean"
+        },
+        "templateId" : {
+          "type" : "object-id"
+        },
+        "nameLower" : {
+          "type" : "string"
+        },
+        "isPrivate" : {
           "type" : "boolean"
         }
       }
     },
-    "Binding" : {
-      "id" : "Binding",
+    "EmptyObject" : {
+      "id" : "EmptyObject",
+      "properties" : { }
+    },
+    "FormInstance" : {
+      "id" : "FormInstance",
       "properties" : {
-        "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "converter" : {
+        "description" : {
           "type" : "string"
         },
         "fields" : {
           "type" : "array",
           "items" : {
-            "$ref" : "string"
+            "$ref" : "FormInstanceField"
           }
-        },
-        "variableId" : {
-          "type" : "object-id"
         }
       }
     },
-    "CazeColumn" : {
-      "id" : "CazeColumn",
+    "SystemConfiguration" : {
+      "id" : "SystemConfiguration",
+      "properties" : {
+        "registrationEnabled" : {
+          "type" : "boolean"
+        },
+        "authenticationProviders" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "licenseTypes" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "LicenseType"
+          }
+        }
+      }
+    },
+    "FileStream" : {
+      "id" : "FileStream",
+      "properties" : {
+        "inputStream" : {
+          "type" : "InputStream"
+        },
+        "contentType" : {
+          "type" : "string"
+        },
+        "contentDispositionInlineFileName" : {
+          "type" : "string"
+        },
+        "cacheControlMaxAgeInMillis" : {
+          "type" : "Long"
+        }
+      }
+    },
+    "Registration" : {
+      "id" : "Registration",
       "properties" : {
         "id" : {
           "type" : "object-id",
           "description" : "This property is not updatable in PUT operations"
         },
-        "binding" : {
-          "type" : "Binding"
+        "code" : {
+          "type" : "string",
+          "description" : "This property is not updatable in PUT operations"
         },
-        "custom" : {
-          "type" : "boolean"
+        "created" : {
+          "type" : "LocalDateTime"
         },
-        "hidden" : {
-          "type" : "boolean"
-        },
-        "name" : {
+        "edition" : {
           "type" : "string"
+        },
+        "newsletter" : {
+          "type" : "boolean"
+        },
+        "organization" : {
+          "type" : "Organization",
+          "description" : "This property is not updatable in PUT operations"
         },
         "organizationId" : {
           "type" : "object-id"
         },
-        "processId" : {
-          "type" : "object-id"
+        "token" : {
+          "type" : "string"
+        },
+        "user" : {
+          "type" : "User"
         }
       }
     },
-    "SearchResult" : {
-      "id" : "SearchResult",
+    "CaseDetail" : {
+      "id" : "CaseDetail",
       "properties" : {
+        "properties" : {
+          "type" : "Map"
+        },
+        "id" : {
+          "type" : "object-id"
+        },
+        "organizationId" : {
+          "type" : "object-id"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "nameLower" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "access" : {
+          "type" : "AccessControlList"
+        },
+        "creatorId" : {
+          "type" : "object-id"
+        },
+        "createTime" : {
+          "type" : "LocalDateTime"
+        },
+        "dueDate" : {
+          "type" : "LocalDateTime"
+        },
+        "hasDueDate" : {
+          "type" : "boolean"
+        },
+        "priority" : {
+          "type" : "Long"
+        },
+        "hasPriority" : {
+          "type" : "boolean"
+        },
+        "participantIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "taskIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "lastUpdated" : {
+          "type" : "LocalDateTime"
+        },
+        "canceled" : {
+          "type" : "boolean"
+        },
+        "closed" : {
+          "type" : "boolean"
+        },
+        "workflowInstanceId" : {
+          "type" : "WorkflowInstanceId"
+        },
+        "sourceWorkflowId" : {
+          "type" : "string"
+        },
+        "workflowId" : {
+          "type" : "object-id"
+        },
+        "creator" : {
+          "type" : "User"
+        },
         "tasks" : {
           "type" : "array",
           "items" : {
-            "$ref" : "Task"
+            "$ref" : "TaskDetail"
           }
         },
-        "processes" : {
+        "events" : {
           "type" : "array",
           "items" : {
-            "$ref" : "Process"
+            "$ref" : "Event"
           }
-        }
-      }
-    },
-    "JavaScriptResponse" : {
-      "id" : "JavaScriptResponse",
-      "properties" : {
-        "variableUpdates" : {
-          "type" : "Map"
         },
-        "logs" : {
-          "type" : "string"
+        "participants" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "User"
+          }
         },
-        "error" : {
-          "type" : "boolean"
+        "sourceWorkflow" : {
+          "type" : "EditorWorkflow"
         }
       }
     },
@@ -744,268 +1257,115 @@
         }
       }
     },
-    "CommentRequest" : {
-      "id" : "CommentRequest",
+    "UserMailAddress" : {
+      "id" : "UserMailAddress",
       "properties" : {
-        "cazeId" : {
-          "type" : "object-id"
-        },
-        "message" : {
+        "emailAddress" : {
           "type" : "string"
-        },
-        "taskId" : {
-          "type" : "object-id"
         }
       }
     },
-    "File" : {
-      "id" : "File",
+    "Event" : {
+      "id" : "Event",
       "properties" : {
-        "contentType" : {
-          "type" : "string"
-        },
-        "created" : {
-          "type" : "LocalDateTime"
-        },
-        "fileName" : {
-          "type" : "string"
-        },
         "id" : {
+          "type" : "object-id",
+          "description" : "This property is not updatable in PUT operations"
+        },
+        "caseId" : {
           "type" : "object-id"
         },
-        "mailId" : {
-          "type" : "object-id"
-        },
-        "organizationId" : {
-          "type" : "object-id"
-        },
-        "ownerId" : {
-          "type" : "object-id"
-        },
-        "pictureRegistrationId" : {
+        "name" : {
           "type" : "string"
         },
-        "sizeInBytes" : {
-          "type" : "Long"
+        "task" : {
+          "type" : "Task",
+          "description" : "This property is not updatable in PUT operations"
         },
         "taskId" : {
           "type" : "object-id"
+        },
+        "time" : {
+          "type" : "LocalDateTime"
+        },
+        "user" : {
+          "type" : "User",
+          "description" : "This property is not updatable in PUT operations"
         },
         "userId" : {
           "type" : "object-id"
         }
       }
     },
-    "Transition" : {
-      "id" : "Transition",
+    "LeaveRequest" : {
+      "id" : "LeaveRequest",
       "properties" : {
-        "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "bpmnId" : {
-          "type" : "string"
-        },
-        "button" : {
-          "type" : "string"
-        },
-        "condition" : {
-          "type" : "string"
-        },
-        "conditionExpression" : {
-          "type" : "ConditionExpression"
-        },
-        "di" : {
-          "type" : "Map"
-        },
-        "from" : {
-          "type" : "Activity",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "fromId" : {
+        "organizationId" : {
           "type" : "object-id"
+        }
+      }
+    },
+    "NewUser" : {
+      "id" : "NewUser",
+      "properties" : {
+        "emailAddress" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "color" : {
+          "type" : "string"
+        },
+        "systemUser" : {
+          "type" : "boolean"
+        },
+        "external" : {
+          "type" : "boolean"
+        },
+        "token" : {
+          "type" : "string"
+        },
+        "organizationIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "license" : {
+          "type" : "object-id"
+        },
+        "licenseInfo" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ExecutableWorkflow" : {
+      "id" : "ExecutableWorkflow",
+      "properties" : {
+        "properties" : {
+          "type" : "Map"
         },
         "name" : {
           "type" : "string"
         },
-        "organizationId" : {
-          "type" : "object-id"
-        },
-        "parentId" : {
-          "type" : "object-id"
-        },
-        "processId" : {
-          "type" : "object-id"
-        },
-        "to" : {
-          "type" : "Activity",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "toId" : {
-          "type" : "object-id"
-        }
-      }
-    },
-    "List" : {
-      "id" : "List",
-      "properties" : { }
-    },
-    "Form" : {
-      "id" : "Form",
-      "properties" : {
-        "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "activityId" : {
-          "type" : "object-id"
-        },
-        "button" : {
-          "type" : "string"
-        },
-        "buttons" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "string"
-          }
-        },
         "description" : {
           "type" : "string"
         },
-        "fields" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "FormField"
-          }
-        },
-        "fieldsOrder" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "string"
-          }
-        },
-        "organizationId" : {
-          "type" : "object-id"
-        },
-        "processId" : {
-          "type" : "object-id"
-        }
-      }
-    },
-    "PasswordResetConfirmation" : {
-      "id" : "PasswordResetConfirmation",
-      "properties" : {
-        "code" : {
-          "type" : "string"
-        },
-        "password" : {
-          "type" : "string"
-        }
-      }
-    },
-    "LoginRequest" : {
-      "id" : "LoginRequest",
-      "properties" : {
-        "mailAddress" : {
-          "type" : "string"
-        },
-        "password" : {
-          "type" : "string"
-        },
-        "token" : {
-          "type" : "string"
-        },
-        "hostname" : {
-          "type" : "string"
-        },
-        "path" : {
-          "type" : "string"
-        },
-        "organizationKey" : {
-          "type" : "string"
-        }
-      }
-    },
-    "Registration" : {
-      "id" : "Registration",
-      "properties" : {
-        "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "code" : {
-          "type" : "string",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "organization" : {
-          "type" : "Organization",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "organizationId" : {
-          "type" : "object-id"
-        },
-        "token" : {
-          "type" : "string"
-        },
-        "user" : {
-          "type" : "User"
-        }
-      }
-    },
-    "Process" : {
-      "id" : "Process",
-      "properties" : {
-        "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "access" : {
-          "type" : "AccessControlList"
+        "bpmn" : {
+          "type" : "XmlElement"
         },
         "activities" : {
           "type" : "array",
           "items" : {
             "$ref" : "Activity"
           }
-        },
-        "activitiesOrder" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "string"
-          }
-        },
-        "bpmnId" : {
-          "type" : "string"
-        },
-        "defaultTransitionId" : {
-          "type" : "object-id"
-        },
-        "description" : {
-          "type" : "string"
-        },
-        "di" : {
-          "type" : "Map"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "nameTemplate" : {
-          "type" : "string"
-        },
-        "organizationId" : {
-          "type" : "object-id"
-        },
-        "parentId" : {
-          "type" : "object-id"
-        },
-        "parameters" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Parameter"
-          }
-        },
-        "processId" : {
-          "type" : "object-id"
         },
         "transitions" : {
           "type" : "array",
@@ -1019,141 +1379,225 @@
             "$ref" : "Variable"
           }
         },
-        "category" : {
-          "type" : "string"
-        },
-        "caseColumnsOrder" : {
+        "timers" : {
           "type" : "array",
           "items" : {
-            "$ref" : "string"
+            "$ref" : "Timer"
           }
         },
-        "changed" : {
+        "id" : {
+          "type" : "WorkflowId"
+        },
+        "trigger" : {
+          "type" : "Trigger"
+        },
+        "enableCases" : {
           "type" : "boolean"
         },
         "diagram" : {
           "type" : "Diagram"
         },
-        "disabled" : {
-          "type" : "boolean"
+        "sourceWorkflowId" : {
+          "type" : "string"
         },
-        "lastUpdated" : {
+        "createTime" : {
           "type" : "LocalDateTime"
         },
-        "ownerId" : {
-          "type" : "object-id"
-        },
-        "published" : {
-          "type" : "boolean",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "template" : {
-          "type" : "boolean"
-        },
-        "templateId" : {
-          "type" : "object-id"
-        },
-        "trigger" : {
-          "type" : "Trigger"
+        "creatorId" : {
+          "type" : "string"
         }
       }
     },
-    "EmptyObject" : {
-      "id" : "EmptyObject",
-      "properties" : { }
-    },
-    "TaskCounts" : {
-      "id" : "TaskCounts",
+    "TaskDetail" : {
+      "id" : "TaskDetail",
       "properties" : {
-        "involvementCount" : {
-          "type" : "AssignmentCount"
-        },
-        "processCount" : {
+        "properties" : {
           "type" : "Map"
-        }
-      }
-    },
-    "NewFormField" : {
-      "id" : "NewFormField",
-      "properties" : {
+        },
         "id" : {
           "type" : "object-id"
-        },
-        "key" : {
-          "type" : "string"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "readOnly" : {
-          "type" : "boolean"
-        },
-        "required" : {
-          "type" : "boolean"
-        },
-        "binding" : {
-          "type" : "NewBinding"
-        }
-      }
-    },
-    "Variable" : {
-      "id" : "Variable",
-      "properties" : {
-        "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "bpmnId" : {
-          "type" : "string"
-        },
-        "defaultValue" : {
-          "type" : "Object"
-        },
-        "name" : {
-          "type" : "string"
         },
         "organizationId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
+          "type" : "object-id"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "nameLower" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "access" : {
+          "type" : "AccessControlList"
+        },
+        "creatorId" : {
+          "type" : "object-id"
+        },
+        "createTime" : {
+          "type" : "LocalDateTime"
+        },
+        "assigneeId" : {
+          "type" : "object-id"
+        },
+        "candidateIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "candidateGroupIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "caseId" : {
+          "type" : "object-id"
         },
         "parentId" : {
           "type" : "object-id"
         },
-        "processId" : {
-          "type" : "object-id"
+        "subtaskIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
         },
-        "type" : {
-          "type" : "Type"
+        "dueDate" : {
+          "type" : "LocalDateTime"
+        },
+        "lastUpdated" : {
+          "type" : "LocalDateTime"
+        },
+        "canceled" : {
+          "type" : "boolean"
+        },
+        "completed" : {
+          "type" : "boolean"
+        },
+        "activityId" : {
+          "type" : "string"
+        },
+        "activityInstanceId" : {
+          "type" : "string"
+        },
+        "activityInstanceMessage" : {
+          "type" : "boolean"
+        },
+        "hasForm" : {
+          "type" : "boolean"
+        },
+        "workflowInstanceId" : {
+          "type" : "WorkflowInstanceId"
+        },
+        "sourceWorkflowId" : {
+          "type" : "string"
+        },
+        "workflowId" : {
+          "type" : "WorkflowId"
+        },
+        "roleVariableId" : {
+          "type" : "string"
+        },
+        "form" : {
+          "type" : "FormInstance"
+        },
+        "creator" : {
+          "type" : "User"
+        },
+        "assignee" : {
+          "type" : "User"
+        },
+        "candidates" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "User"
+          }
+        },
+        "candidateGroups" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Group"
+          }
+        },
+        "subtasks" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "TaskDetail"
+          }
         }
       }
     },
-    "FormField" : {
-      "id" : "FormField",
+    "PurchaseOrder" : {
+      "id" : "PurchaseOrder",
       "properties" : {
-        "binding" : {
-          "type" : "Binding"
-        },
         "id" : {
+          "type" : "object-id",
+          "description" : "This property is not updatable in PUT operations"
+        },
+        "billingType" : {
+          "type" : "string"
+        },
+        "completed" : {
+          "type" : "boolean"
+        },
+        "completedById" : {
           "type" : "object-id"
         },
-        "key" : {
-          "type" : "string"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "readOnly" : {
-          "type" : "boolean"
-        },
-        "required" : {
-          "type" : "boolean"
-        },
-        "type" : {
-          "type" : "Type"
-        },
-        "value" : {
-          "type" : "Object",
+        "completedBy" : {
+          "type" : "User",
           "description" : "This property is not updatable in PUT operations"
+        },
+        "count" : {
+          "type" : "Long"
+        },
+        "created" : {
+          "type" : "LocalDateTime"
+        },
+        "generatorIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "licenseIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "licenseType" : {
+          "type" : "string"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "muted" : {
+          "type" : "boolean"
+        },
+        "orderedById" : {
+          "type" : "object-id"
+        },
+        "orderedBy" : {
+          "type" : "User",
+          "description" : "This property is not updatable in PUT operations"
+        },
+        "organizationId" : {
+          "type" : "object-id"
+        },
+        "organization" : {
+          "type" : "Organization",
+          "description" : "This property is not updatable in PUT operations"
+        }
+      }
+    },
+    "OauthStartResponse" : {
+      "id" : "OauthStartResponse",
+      "properties" : {
+        "authorizationUrl" : {
+          "type" : "string"
         }
       }
     },
@@ -1174,67 +1618,234 @@
         }
       }
     },
-    "OauthStartRequest" : {
-      "id" : "OauthStartRequest",
+    "NewCase" : {
+      "id" : "NewCase",
       "properties" : {
-        "path" : {
-          "type" : "string"
+        "properties" : {
+          "type" : "Map"
         },
-        "serviceKey" : {
-          "type" : "string"
-        }
-      }
-    },
-    "Document" : {
-      "id" : "Document",
-      "properties" : {
         "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
+          "type" : "object-id"
         },
-        "created" : {
-          "type" : "LocalDateTime",
-          "description" : "This property is not updatable in PUT operations"
+        "organizationId" : {
+          "type" : "object-id"
         },
         "name" : {
           "type" : "string"
         },
+        "nameLower" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "access" : {
+          "type" : "AccessControlList"
+        },
+        "creatorId" : {
+          "type" : "object-id"
+        },
+        "createTime" : {
+          "type" : "LocalDateTime"
+        },
+        "dueDate" : {
+          "type" : "LocalDateTime"
+        },
+        "hasDueDate" : {
+          "type" : "boolean"
+        },
+        "priority" : {
+          "type" : "Long"
+        },
+        "hasPriority" : {
+          "type" : "boolean"
+        },
+        "participantIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "taskIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "lastUpdated" : {
+          "type" : "LocalDateTime"
+        },
+        "canceled" : {
+          "type" : "boolean"
+        },
+        "closed" : {
+          "type" : "boolean"
+        },
+        "workflowInstanceId" : {
+          "type" : "WorkflowInstanceId"
+        },
+        "sourceWorkflowId" : {
+          "type" : "string"
+        },
+        "workflowId" : {
+          "type" : "object-id"
+        },
+        "triggerInstance" : {
+          "type" : "TriggerInstance"
+        }
+      }
+    },
+    "ActionInstance" : {
+      "id" : "ActionInstance",
+      "properties" : {
+        "id" : {
+          "type" : "object-id"
+        },
         "organizationId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
+          "type" : "object-id"
         },
-        "ownerId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
+        "serviceKey" : {
+          "type" : "string"
         },
-        "taskId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
+        "actionKey" : {
+          "type" : "string"
         },
-        "url" : {
+        "editorWorkflowId" : {
+          "type" : "object-id"
+        },
+        "caseId" : {
+          "type" : "object-id"
+        },
+        "workflowInstanceId" : {
+          "type" : "object-id"
+        },
+        "activityInstanceId" : {
+          "type" : "string"
+        },
+        "configuration" : {
+          "type" : "Map"
+        },
+        "inputValues" : {
+          "type" : "Map"
+        },
+        "lock" : {
+          "type" : "LocalDateTime"
+        }
+      }
+    },
+    "LoginRequest" : {
+      "id" : "LoginRequest",
+      "properties" : {
+        "emailAddress" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "token" : {
+          "type" : "string"
+        },
+        "hostname" : {
+          "type" : "string"
+        },
+        "path" : {
+          "type" : "string"
+        },
+        "organizationKey" : {
           "type" : "string"
         }
       }
     },
-    "UserMailAddress" : {
-      "id" : "UserMailAddress",
+    "PasswordResetConfirmation" : {
+      "id" : "PasswordResetConfirmation",
       "properties" : {
-        "mailAddress" : {
+        "code" : {
+          "type" : "string"
+        },
+        "password" : {
           "type" : "string"
         }
       }
     },
-    "NewRegistration" : {
-      "id" : "NewRegistration",
+    "ActionInstanceEnd" : {
+      "id" : "ActionInstanceEnd",
       "properties" : {
-        "mailAddress" : {
+        "outputValues" : {
+          "type" : "Map"
+        }
+      }
+    },
+    "Case" : {
+      "id" : "Case",
+      "properties" : {
+        "properties" : {
+          "type" : "Map"
+        },
+        "id" : {
+          "type" : "object-id"
+        },
+        "organizationId" : {
+          "type" : "object-id"
+        },
+        "name" : {
           "type" : "string"
         },
-        "firstName" : {
+        "nameLower" : {
           "type" : "string"
         },
-        "lastName" : {
+        "description" : {
           "type" : "string"
+        },
+        "access" : {
+          "type" : "AccessControlList"
+        },
+        "creatorId" : {
+          "type" : "object-id"
+        },
+        "createTime" : {
+          "type" : "LocalDateTime"
+        },
+        "dueDate" : {
+          "type" : "LocalDateTime"
+        },
+        "hasDueDate" : {
+          "type" : "boolean"
+        },
+        "priority" : {
+          "type" : "Long"
+        },
+        "hasPriority" : {
+          "type" : "boolean"
+        },
+        "participantIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "taskIds" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "string"
+          }
+        },
+        "lastUpdated" : {
+          "type" : "LocalDateTime"
+        },
+        "canceled" : {
+          "type" : "boolean"
+        },
+        "closed" : {
+          "type" : "boolean"
+        },
+        "workflowInstanceId" : {
+          "type" : "WorkflowInstanceId"
+        },
+        "sourceWorkflowId" : {
+          "type" : "string"
+        },
+        "workflowId" : {
+          "type" : "object-id"
         }
       }
     },
@@ -1255,129 +1866,46 @@
         }
       }
     },
-    "Trigger" : {
-      "id" : "Trigger",
+    "Account" : {
+      "id" : "Account",
       "properties" : {
         "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
+          "type" : "object-id"
+        },
+        "serviceKey" : {
+          "type" : "string"
+        },
+        "userId" : {
+          "type" : "object-id"
         },
         "access" : {
           "type" : "AccessControlList"
         },
-        "activities" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Activity"
-          }
-        },
-        "activitiesOrder" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "string"
-          }
-        },
-        "bpmnId" : {
-          "type" : "string"
-        },
-        "defaultTransitionId" : {
-          "type" : "object-id"
-        },
-        "description" : {
-          "type" : "string"
-        },
-        "di" : {
-          "type" : "Map"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "nameTemplate" : {
-          "type" : "string"
-        },
-        "organizationId" : {
-          "type" : "object-id"
-        },
-        "parentId" : {
-          "type" : "object-id"
-        },
-        "parameters" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Parameter"
-          }
-        },
-        "processId" : {
-          "type" : "object-id"
-        },
-        "transitions" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Transition"
-          }
-        },
-        "variables" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Variable"
-          }
+        "restricted" : {
+          "type" : "boolean"
         }
       }
     },
-    "ProcessDefinition" : {
-      "id" : "ProcessDefinition",
+    "EditorWorkflowDetail" : {
+      "id" : "EditorWorkflowDetail",
       "properties" : {
-        "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
+        "properties" : {
+          "type" : "Map"
         },
-        "access" : {
-          "type" : "AccessControlList"
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "bpmn" : {
+          "type" : "XmlElement"
         },
         "activities" : {
           "type" : "array",
           "items" : {
             "$ref" : "Activity"
           }
-        },
-        "activitiesOrder" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "string"
-          }
-        },
-        "bpmnId" : {
-          "type" : "string"
-        },
-        "defaultTransitionId" : {
-          "type" : "object-id"
-        },
-        "description" : {
-          "type" : "string"
-        },
-        "di" : {
-          "type" : "Map"
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "nameTemplate" : {
-          "type" : "string"
-        },
-        "organizationId" : {
-          "type" : "object-id"
-        },
-        "parentId" : {
-          "type" : "object-id"
-        },
-        "parameters" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Parameter"
-          }
-        },
-        "processId" : {
-          "type" : "object-id"
         },
         "transitions" : {
           "type" : "array",
@@ -1391,27 +1919,65 @@
             "$ref" : "Variable"
           }
         },
-        "created" : {
-          "type" : "LocalDateTime",
-          "description" : "This property is not updatable in PUT operations"
+        "timers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "Timer"
+          }
         },
-        "diagram" : {
-          "type" : "Diagram",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "ownerId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "publisherId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "sandbox" : {
-          "type" : "boolean"
+        "id" : {
+          "type" : "WorkflowId"
         },
         "trigger" : {
           "type" : "Trigger"
+        },
+        "enableCases" : {
+          "type" : "boolean"
+        },
+        "diagram" : {
+          "type" : "Diagram"
+        },
+        "ownerId" : {
+          "type" : "object-id"
+        },
+        "editorId" : {
+          "type" : "object-id"
+        },
+        "editorLock" : {
+          "type" : "LocalDateTime"
+        },
+        "lastUpdated" : {
+          "type" : "LocalDateTime"
+        },
+        "category" : {
+          "type" : "string"
+        },
+        "changed" : {
+          "type" : "boolean"
+        },
+        "latestVersion" : {
+          "type" : "object-id"
+        },
+        "caseColumns" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "CaseColumn"
+          }
+        },
+        "template" : {
+          "type" : "boolean"
+        },
+        "templateId" : {
+          "type" : "object-id"
+        },
+        "nameLower" : {
+          "type" : "string"
+        },
+        "editor" : {
+          "type" : "User"
+        },
+        "owner" : {
+          "type" : "User"
         }
       }
     },
@@ -1432,210 +1998,46 @@
         }
       }
     },
-    "NewProcess" : {
-      "id" : "NewProcess",
+    "FormInstanceField" : {
+      "id" : "FormInstanceField",
       "properties" : {
+        "properties" : {
+          "type" : "Map"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "key" : {
+          "type" : "string"
+        },
         "name" : {
           "type" : "string"
-        },
-        "category" : {
-          "type" : "string"
-        },
-        "trigger" : {
-          "type" : "Trigger"
-        },
-        "templateId" : {
-          "type" : "object-id"
-        },
-        "isPrivate" : {
-          "type" : "boolean"
-        }
-      }
-    },
-    "FileStream" : {
-      "id" : "FileStream",
-      "properties" : {
-        "inputStream" : {
-          "type" : "InputStream"
-        },
-        "contentType" : {
-          "type" : "string"
-        },
-        "contentDispositionInlineFileName" : {
-          "type" : "string"
-        },
-        "cacheControlMaxAgeInMillis" : {
-          "type" : "Long"
-        }
-      }
-    },
-    "ActionInstanceEnd" : {
-      "id" : "ActionInstanceEnd",
-      "properties" : {
-        "parameters" : {
-          "type" : "Map"
-        }
-      }
-    },
-    "ActivationRequest" : {
-      "id" : "ActivationRequest",
-      "properties" : {
-        "password" : {
-          "type" : "string"
-        },
-        "firstName" : {
-          "type" : "string"
-        },
-        "lastName" : {
-          "type" : "string"
-        },
-        "organizationName" : {
-          "type" : "string"
-        },
-        "color" : {
-          "type" : "string"
-        }
-      }
-    },
-    "TaskXL" : {
-      "id" : "TaskXL",
-      "properties" : {
-        "id" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "access" : {
-          "type" : "AccessControlList"
-        },
-        "assigneeId" : {
-          "type" : "object-id"
-        },
-        "caze" : {
-          "type" : "Task",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "cazeId" : {
-          "type" : "object-id"
-        },
-        "candidateIds" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "string"
-          }
-        },
-        "candidateGroupIds" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "string"
-          }
-        },
-        "canceled" : {
-          "type" : "boolean"
-        },
-        "completed" : {
-          "type" : "boolean"
-        },
-        "createdBy" : {
-          "type" : "object-id"
         },
         "description" : {
           "type" : "string"
         },
-        "documentIds" : {
-          "type" : "array",
-          "description" : "This property is not updatable in PUT operations",
-          "items" : {
-            "$ref" : "string"
-          }
+        "type" : {
+          "type" : "DataType"
         },
-        "duedate" : {
-          "type" : "LocalDateTime"
-        },
-        "form" : {
-          "type" : "Form"
-        },
-        "hasForm" : {
+        "readOnly" : {
           "type" : "boolean"
         },
-        "lastUpdated" : {
-          "type" : "LocalDateTime"
+        "required" : {
+          "type" : "boolean"
         },
-        "lock" : {
-          "type" : "LocalDateTime"
+        "asButtons" : {
+          "type" : "boolean"
         },
-        "name" : {
+        "value" : {
+          "type" : "Object"
+        }
+      }
+    },
+    "VersionRequest" : {
+      "id" : "VersionRequest",
+      "properties" : {
+        "commitMessage" : {
           "type" : "string"
-        },
-        "organizationId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "parent" : {
-          "type" : "Task",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "parentId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "participantIds" : {
-          "type" : "array",
-          "description" : "This property is not updatable in PUT operations",
-          "items" : {
-            "$ref" : "string"
-          }
-        },
-        "processId" : {
-          "type" : "object-id",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "sandbox" : {
-          "type" : "boolean",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "subtaskIds" : {
-          "type" : "array",
-          "description" : "This property is not updatable in PUT operations",
-          "items" : {
-            "$ref" : "string"
-          }
-        },
-        "uncompletable" : {
-          "type" : "boolean",
-          "description" : "This property is not updatable in PUT operations"
-        },
-        "assignee" : {
-          "type" : "User"
-        },
-        "participants" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "User"
-          }
-        },
-        "candidates" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "User"
-          }
-        },
-        "subtasks" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Task"
-          }
-        },
-        "documents" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Document"
-          }
-        },
-        "events" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "Event"
-          }
         }
       }
     }
