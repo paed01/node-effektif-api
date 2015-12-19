@@ -82,7 +82,7 @@ function getOriginalType(schemaDesc) {
 function formatUnknownType(itemType, apiItemType) {
   if (!apiItemType) return '';
   if (apiItemType.toLowerCase() === itemType) return '';
-  return ' ***api type ' + apiItemType + '***';
+  return ' _api type ' + apiItemType + '_';
 }
 
 function getSchemaType(schemaDesc) {

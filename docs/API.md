@@ -496,8 +496,8 @@ Represents call to:
 
 **Arguments:**
 - `organizationKey`: **required** string
-- `involvement`: array ***api type array***
-- `dueDate`: array ***api type array***
+- `involvement`: array _api type array_
+- `dueDate`: array _api type array_
 - `process`: string
 - `completed`: boolean
 - `callback`: **required** function - function(err, body, resp)
@@ -1944,13 +1944,13 @@ Represents call to:
 [`User.getUserPicture`](#user-getuserpicture)
 
 ## Model NewCase
-- `properties`: any ***api type Map***
+- `properties`: any _api type Map_
 - `id`: string
 - `organizationId`: string
 - `name`: string
 - `nameLower`: string
 - `description`: string
-- `access`: any ***api type AccessControlList***
+- `access`: any _api type AccessControlList_
 - `creatorId`: string
 - `createTime`: date
 - `dueDate`: date
@@ -1962,17 +1962,17 @@ Represents call to:
 - `lastUpdated`: date
 - `canceled`: boolean
 - `closed`: boolean
-- `workflowInstanceId`: any ***api type WorkflowInstanceId***
+- `workflowInstanceId`: any _api type WorkflowInstanceId_
 - `sourceWorkflowId`: string
 - `workflowId`: string
 - `triggerInstance`: object
-  - `data`: any ***api type Map***
-  - `workflowInstanceId`: any ***api type WorkflowInstanceId***
-  - `workflowId`: any ***api type WorkflowId***
+  - `data`: any _api type Map_
+  - `workflowInstanceId`: any _api type WorkflowInstanceId_
+  - `workflowId`: any _api type WorkflowId_
   - `sourceWorkflowId`: string
   - `startActivityIds`: array string
   - `businessKey`: string
-  - `callerWorkflowInstanceId`: any ***api type WorkflowInstanceId***
+  - `callerWorkflowInstanceId`: any _api type WorkflowInstanceId_
   - `callerActivityInstanceId`: string
 
 
@@ -1980,13 +1980,13 @@ Represents call to:
 [`Case.createCases`](#case-createcases)
 
 ## Model CaseDetail
-- `properties`: any ***api type Map***
+- `properties`: any _api type Map_
 - `id`: string
 - `organizationId`: string
 - `name`: string
 - `nameLower`: string
 - `description`: string
-- `access`: any ***api type AccessControlList***
+- `access`: any _api type AccessControlList_
 - `creatorId`: string
 - `createTime`: date
 - `dueDate`: date
@@ -1998,7 +1998,7 @@ Represents call to:
 - `lastUpdated`: date
 - `canceled`: boolean
 - `closed`: boolean
-- `workflowInstanceId`: any ***api type WorkflowInstanceId***
+- `workflowInstanceId`: any _api type WorkflowInstanceId_
 - `sourceWorkflowId`: string
 - `workflowId`: string
 - `creator`: object
@@ -2019,25 +2019,25 @@ Represents call to:
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
   - `phone`: string
-  - `preferences`: any ***api type Map***
+  - `preferences`: any _api type Map_
   - `systemAdmin`: boolean
   - `systemUser`: boolean
 - `tasks`: array [TaskDetail](#model-taskdetail)
 - `events`: array [Event](#model-event)
 - `participants`: array [User](#model-user)
 - `sourceWorkflow`: object
-  - `properties`: any ***api type Map***
+  - `properties`: any _api type Map_
   - `name`: string
   - `description`: string
-  - `bpmn`: any ***api type XmlElement***
-  - `activities`: array any ***api type Activity***
-  - `transitions`: array any ***api type Transition***
-  - `variables`: array any ***api type Variable***
-  - `timers`: array any ***api type Timer***
-  - `id`: any ***api type WorkflowId***
-  - `trigger`: any ***api type Trigger***
+  - `bpmn`: any _api type XmlElement_
+  - `activities`: array any _api type Activity_
+  - `transitions`: array any _api type Transition_
+  - `variables`: array any _api type Variable_
+  - `timers`: array any _api type Timer_
+  - `id`: any _api type WorkflowId_
+  - `trigger`: any _api type Trigger_
   - `enableCases`: boolean
-  - `diagram`: any ***api type Diagram***
+  - `diagram`: any _api type Diagram_
   - `ownerId`: string
   - `editorId`: string
   - `editorLock`: date
@@ -2045,7 +2045,7 @@ Represents call to:
   - `category`: string
   - `changed`: boolean
   - `latestVersion`: string
-  - `caseColumns`: array any ***api type CaseColumn***
+  - `caseColumns`: array any _api type CaseColumn_
   - `template`: boolean
   - `templateId`: string
   - `nameLower`: string
@@ -2059,13 +2059,13 @@ Represents call to:
 [`Case.createCaseClose`](#case-createcaseclose)
 
 ## Model Case
-- `properties`: any ***api type Map***
+- `properties`: any _api type Map_
 - `id`: string
 - `organizationId`: string
 - `name`: string
 - `nameLower`: string
 - `description`: string
-- `access`: any ***api type AccessControlList***
+- `access`: any _api type AccessControlList_
 - `creatorId`: string
 - `createTime`: date
 - `dueDate`: date
@@ -2077,7 +2077,7 @@ Represents call to:
 - `lastUpdated`: date
 - `canceled`: boolean
 - `closed`: boolean
-- `workflowInstanceId`: any ***api type WorkflowInstanceId***
+- `workflowInstanceId`: any _api type WorkflowInstanceId_
 - `sourceWorkflowId`: string
 - `workflowId`: string
 
@@ -2090,13 +2090,13 @@ Represents call to:
 - `caseId`: string
 - `name`: string
 - `task`: object
-  - `properties`: any ***api type Map***
+  - `properties`: any _api type Map_
   - `id`: string
   - `organizationId`: string
   - `name`: string
   - `nameLower`: string
   - `description`: string
-  - `access`: any ***api type AccessControlList***
+  - `access`: any _api type AccessControlList_
   - `creatorId`: string
   - `createTime`: date
   - `assigneeId`: string
@@ -2113,9 +2113,9 @@ Represents call to:
   - `activityInstanceId`: string
   - `activityInstanceMessage`: boolean
   - `hasForm`: boolean
-  - `workflowInstanceId`: any ***api type WorkflowInstanceId***
+  - `workflowInstanceId`: any _api type WorkflowInstanceId_
   - `sourceWorkflowId`: string
-  - `workflowId`: any ***api type WorkflowId***
+  - `workflowId`: any _api type WorkflowId_
   - `roleVariableId`: string
   - `form`: object
     - `description`: string
@@ -2140,7 +2140,7 @@ Represents call to:
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
   - `phone`: string
-  - `preferences`: any ***api type Map***
+  - `preferences`: any _api type Map_
   - `systemAdmin`: boolean
   - `systemUser`: boolean
 - `userId`: string
@@ -2150,13 +2150,13 @@ Represents call to:
 [`Case.createCaseEvents`](#case-createcaseevents)
 
 ## Model NewTask
-- `properties`: any ***api type Map***
+- `properties`: any _api type Map_
 - `id`: string
 - `organizationId`: string
 - `name`: string
 - `nameLower`: string
 - `description`: string
-- `access`: any ***api type AccessControlList***
+- `access`: any _api type AccessControlList_
 - `creatorId`: string
 - `createTime`: date
 - `assigneeId`: string
@@ -2173,9 +2173,9 @@ Represents call to:
 - `activityInstanceId`: string
 - `activityInstanceMessage`: boolean
 - `hasForm`: boolean
-- `workflowInstanceId`: any ***api type WorkflowInstanceId***
+- `workflowInstanceId`: any _api type WorkflowInstanceId_
 - `sourceWorkflowId`: string
-- `workflowId`: any ***api type WorkflowId***
+- `workflowId`: any _api type WorkflowId_
 - `roleVariableId`: string
 - `form`: object
   - `description`: string
@@ -2186,13 +2186,13 @@ Represents call to:
 [`Task.createTasks`](#task-createtasks)
 
 ## Model TaskDetail
-- `properties`: any ***api type Map***
+- `properties`: any _api type Map_
 - `id`: string
 - `organizationId`: string
 - `name`: string
 - `nameLower`: string
 - `description`: string
-- `access`: any ***api type AccessControlList***
+- `access`: any _api type AccessControlList_
 - `creatorId`: string
 - `createTime`: date
 - `assigneeId`: string
@@ -2209,9 +2209,9 @@ Represents call to:
 - `activityInstanceId`: string
 - `activityInstanceMessage`: boolean
 - `hasForm`: boolean
-- `workflowInstanceId`: any ***api type WorkflowInstanceId***
+- `workflowInstanceId`: any _api type WorkflowInstanceId_
 - `sourceWorkflowId`: string
-- `workflowId`: any ***api type WorkflowId***
+- `workflowId`: any _api type WorkflowId_
 - `roleVariableId`: string
 - `form`: object
   - `description`: string
@@ -2234,7 +2234,7 @@ Represents call to:
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
   - `phone`: string
-  - `preferences`: any ***api type Map***
+  - `preferences`: any _api type Map_
   - `systemAdmin`: boolean
   - `systemUser`: boolean
 - `assignee`: object
@@ -2255,7 +2255,7 @@ Represents call to:
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
   - `phone`: string
-  - `preferences`: any ***api type Map***
+  - `preferences`: any _api type Map_
   - `systemAdmin`: boolean
   - `systemUser`: boolean
 - `candidates`: array [User](#model-user)
@@ -2271,13 +2271,13 @@ Represents call to:
 [`Task.reopenTask`](#task-reopentask)
 
 ## Model Task
-- `properties`: any ***api type Map***
+- `properties`: any _api type Map_
 - `id`: string
 - `organizationId`: string
 - `name`: string
 - `nameLower`: string
 - `description`: string
-- `access`: any ***api type AccessControlList***
+- `access`: any _api type AccessControlList_
 - `creatorId`: string
 - `createTime`: date
 - `assigneeId`: string
@@ -2294,9 +2294,9 @@ Represents call to:
 - `activityInstanceId`: string
 - `activityInstanceMessage`: boolean
 - `hasForm`: boolean
-- `workflowInstanceId`: any ***api type WorkflowInstanceId***
+- `workflowInstanceId`: any _api type WorkflowInstanceId_
 - `sourceWorkflowId`: string
-- `workflowId`: any ***api type WorkflowId***
+- `workflowId`: any _api type WorkflowId_
 - `roleVariableId`: string
 - `form`: object
   - `description`: string
@@ -2307,16 +2307,16 @@ Represents call to:
 [`Task.updateTask`](#task-updatetask)
 
 ## Model FormInstanceField
-- `properties`: any ***api type Map***
+- `properties`: any _api type Map_
 - `id`: string
 - `key`: string
 - `name`: string
 - `description`: string
-- `type`: any ***api type DataType***
+- `type`: any _api type DataType_
 - `readOnly`: boolean
 - `required`: boolean
 - `asButtons`: boolean
-- `value`: any ***api type Object***
+- `value`: any _api type Object_
 
 
 **Used by:**
@@ -2325,7 +2325,7 @@ Represents call to:
 
 ## Model Email
 - `id`: string
-- `headers`: any ***api type Map***
+- `headers`: any _api type Map_
 - `attachmentIds`: array string
 - `bcc`: array string
 - `bodyText`: string
@@ -2346,18 +2346,18 @@ Represents call to:
 [`Task.getTaskMail`](#task-gettaskmail)
 
 ## Model NewWorkflow
-- `properties`: any ***api type Map***
+- `properties`: any _api type Map_
 - `name`: string
 - `description`: string
-- `bpmn`: any ***api type XmlElement***
-- `activities`: array any ***api type Activity***
-- `transitions`: array any ***api type Transition***
-- `variables`: array any ***api type Variable***
-- `timers`: array any ***api type Timer***
-- `id`: any ***api type WorkflowId***
-- `trigger`: any ***api type Trigger***
+- `bpmn`: any _api type XmlElement_
+- `activities`: array any _api type Activity_
+- `transitions`: array any _api type Transition_
+- `variables`: array any _api type Variable_
+- `timers`: array any _api type Timer_
+- `id`: any _api type WorkflowId_
+- `trigger`: any _api type Trigger_
 - `enableCases`: boolean
-- `diagram`: any ***api type Diagram***
+- `diagram`: any _api type Diagram_
 - `ownerId`: string
 - `editorId`: string
 - `editorLock`: date
@@ -2365,7 +2365,7 @@ Represents call to:
 - `category`: string
 - `changed`: boolean
 - `latestVersion`: string
-- `caseColumns`: array any ***api type CaseColumn***
+- `caseColumns`: array any _api type CaseColumn_
 - `template`: boolean
 - `templateId`: string
 - `nameLower`: string
@@ -2376,18 +2376,18 @@ Represents call to:
 [`Workflow.createWorkflows`](#workflow-createworkflows)
 
 ## Model EditorWorkflowDetail
-- `properties`: any ***api type Map***
+- `properties`: any _api type Map_
 - `name`: string
 - `description`: string
-- `bpmn`: any ***api type XmlElement***
-- `activities`: array any ***api type Activity***
-- `transitions`: array any ***api type Transition***
-- `variables`: array any ***api type Variable***
-- `timers`: array any ***api type Timer***
-- `id`: any ***api type WorkflowId***
-- `trigger`: any ***api type Trigger***
+- `bpmn`: any _api type XmlElement_
+- `activities`: array any _api type Activity_
+- `transitions`: array any _api type Transition_
+- `variables`: array any _api type Variable_
+- `timers`: array any _api type Timer_
+- `id`: any _api type WorkflowId_
+- `trigger`: any _api type Trigger_
 - `enableCases`: boolean
-- `diagram`: any ***api type Diagram***
+- `diagram`: any _api type Diagram_
 - `ownerId`: string
 - `editorId`: string
 - `editorLock`: date
@@ -2395,7 +2395,7 @@ Represents call to:
 - `category`: string
 - `changed`: boolean
 - `latestVersion`: string
-- `caseColumns`: array any ***api type CaseColumn***
+- `caseColumns`: array any _api type CaseColumn_
 - `template`: boolean
 - `templateId`: string
 - `nameLower`: string
@@ -2417,7 +2417,7 @@ Represents call to:
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
   - `phone`: string
-  - `preferences`: any ***api type Map***
+  - `preferences`: any _api type Map_
   - `systemAdmin`: boolean
   - `systemUser`: boolean
 - `owner`: object
@@ -2438,7 +2438,7 @@ Represents call to:
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
   - `phone`: string
-  - `preferences`: any ***api type Map***
+  - `preferences`: any _api type Map_
   - `systemAdmin`: boolean
   - `systemUser`: boolean
 
@@ -2451,36 +2451,36 @@ Represents call to:
 [`Workflow.createWorkflowVersionRestore`](#workflow-createworkflowversionrestore)
 
 ## Model AbstractWorkflow
-- `properties`: any ***api type Map***
+- `properties`: any _api type Map_
 - `name`: string
 - `description`: string
-- `bpmn`: any ***api type XmlElement***
-- `activities`: array any ***api type Activity***
-- `transitions`: array any ***api type Transition***
-- `variables`: array any ***api type Variable***
-- `timers`: array any ***api type Timer***
-- `id`: any ***api type WorkflowId***
-- `trigger`: any ***api type Trigger***
+- `bpmn`: any _api type XmlElement_
+- `activities`: array any _api type Activity_
+- `transitions`: array any _api type Transition_
+- `variables`: array any _api type Variable_
+- `timers`: array any _api type Timer_
+- `id`: any _api type WorkflowId_
+- `trigger`: any _api type Trigger_
 - `enableCases`: boolean
-- `diagram`: any ***api type Diagram***
+- `diagram`: any _api type Diagram_
 
 
 **Used by:**
 [`Workflow.createWorkflowsImportBpmn`](#workflow-createworkflowsimportbpmn)
 
 ## Model EditorWorkflow
-- `properties`: any ***api type Map***
+- `properties`: any _api type Map_
 - `name`: string
 - `description`: string
-- `bpmn`: any ***api type XmlElement***
-- `activities`: array any ***api type Activity***
-- `transitions`: array any ***api type Transition***
-- `variables`: array any ***api type Variable***
-- `timers`: array any ***api type Timer***
-- `id`: any ***api type WorkflowId***
-- `trigger`: any ***api type Trigger***
+- `bpmn`: any _api type XmlElement_
+- `activities`: array any _api type Activity_
+- `transitions`: array any _api type Transition_
+- `variables`: array any _api type Variable_
+- `timers`: array any _api type Timer_
+- `id`: any _api type WorkflowId_
+- `trigger`: any _api type Trigger_
 - `enableCases`: boolean
-- `diagram`: any ***api type Diagram***
+- `diagram`: any _api type Diagram_
 - `ownerId`: string
 - `editorId`: string
 - `editorLock`: date
@@ -2488,7 +2488,7 @@ Represents call to:
 - `category`: string
 - `changed`: boolean
 - `latestVersion`: string
-- `caseColumns`: array any ***api type CaseColumn***
+- `caseColumns`: array any _api type CaseColumn_
 - `template`: boolean
 - `templateId`: string
 - `nameLower`: string
@@ -2502,10 +2502,10 @@ Represents call to:
 [`Workflow.updateWorkflowUpdateBpmn`](#workflow-updateworkflowupdatebpmn)
 
 ## Model ScriptResult
-- `result`: any ***api type Object***
+- `result`: any _api type Object_
 - `error`: string
 - `log`: string
-- `variableUpdates`: any ***api type Map***
+- `variableUpdates`: any _api type Map_
 
 
 **Used by:**
@@ -2527,18 +2527,18 @@ Represents call to:
 [`Workflow.createWorkflowVersions`](#workflow-createworkflowversions)
 
 ## Model ExecutableWorkflow
-- `properties`: any ***api type Map***
+- `properties`: any _api type Map_
 - `name`: string
 - `description`: string
-- `bpmn`: any ***api type XmlElement***
-- `activities`: array any ***api type Activity***
-- `transitions`: array any ***api type Transition***
-- `variables`: array any ***api type Variable***
-- `timers`: array any ***api type Timer***
-- `id`: any ***api type WorkflowId***
-- `trigger`: any ***api type Trigger***
+- `bpmn`: any _api type XmlElement_
+- `activities`: array any _api type Activity_
+- `transitions`: array any _api type Transition_
+- `variables`: array any _api type Variable_
+- `timers`: array any _api type Timer_
+- `id`: any _api type WorkflowId_
+- `trigger`: any _api type Trigger_
 - `enableCases`: boolean
-- `diagram`: any ***api type Diagram***
+- `diagram`: any _api type Diagram_
 - `sourceWorkflowId`: string
 - `createTime`: date
 - `creatorId`: string
@@ -2549,13 +2549,13 @@ Represents call to:
 [`Workflow.createWorkflowVersionPublish`](#workflow-createworkflowversionpublish)
 
 ## Model TriggerInstance
-- `data`: any ***api type Map***
-- `workflowInstanceId`: any ***api type WorkflowInstanceId***
-- `workflowId`: any ***api type WorkflowId***
+- `data`: any _api type Map_
+- `workflowInstanceId`: any _api type WorkflowInstanceId_
+- `workflowId`: any _api type WorkflowId_
 - `sourceWorkflowId`: string
 - `startActivityIds`: array string
 - `businessKey`: string
-- `callerWorkflowInstanceId`: any ***api type WorkflowInstanceId***
+- `callerWorkflowInstanceId`: any _api type WorkflowInstanceId_
 - `callerActivityInstanceId`: string
 
 
@@ -2563,19 +2563,19 @@ Represents call to:
 [`WorkflowEngine.createEngineWorkflowInstances`](#workflowengine-createengineworkflowinstances)
 
 ## Model WorkflowInstance
-- `properties`: any ***api type Map***
+- `properties`: any _api type Map_
 - `start`: date
 - `end`: date
 - `endState`: string
 - `duration`: number
-- `activityInstances`: array any ***api type ActivityInstance***
-- `variableInstances`: array any ***api type VariableInstance***
-- `timerInstances`: array any ***api type TimerInstance***
-- `id`: any ***api type WorkflowInstanceId***
-- `workflowId`: any ***api type WorkflowId***
+- `activityInstances`: array any _api type ActivityInstance_
+- `variableInstances`: array any _api type VariableInstance_
+- `timerInstances`: array any _api type TimerInstance_
+- `id`: any _api type WorkflowInstanceId_
+- `workflowId`: any _api type WorkflowId_
 - `businessKey`: string
 - `creatorId`: string
-- `callerWorkflowInstanceId`: any ***api type WorkflowInstanceId***
+- `callerWorkflowInstanceId`: any _api type WorkflowInstanceId_
 - `callerActivityInstanceId`: string
 - `caseId`: string
 
@@ -2600,7 +2600,7 @@ Represents call to:
 - `systemUserIds`: array string
 - `systemUsers`: array [User](#model-user)
 - `invitations`: array string
-- `ldapConnector`: any ***api type LdapConnector***
+- `ldapConnector`: any _api type LdapConnector_
 - `timeZone`: string
 
 
@@ -2614,7 +2614,7 @@ Represents call to:
 ## Model SystemConfiguration
 - `registrationEnabled`: boolean
 - `authenticationProviders`: array string
-- `licenseTypes`: array any ***api type LicenseType***
+- `licenseTypes`: array any _api type LicenseType_
 
 
 **Used by:**
@@ -2635,7 +2635,7 @@ Represents call to:
 
 ## Model LdapGroup
 - `name`: string
-- `memberCount`: any ***api type Integer***
+- `memberCount`: any _api type Integer_
 - `dn`: string
 
 
@@ -2666,7 +2666,7 @@ Represents call to:
   - `systemUserIds`: array string
   - `systemUsers`: array [User](#model-user)
   - `invitations`: array string
-  - `ldapConnector`: any ***api type LdapConnector***
+  - `ldapConnector`: any _api type LdapConnector_
   - `timeZone`: string
 - `packages`: array string
 - `type`: string
@@ -2689,7 +2689,7 @@ Represents call to:
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
   - `phone`: string
-  - `preferences`: any ***api type Map***
+  - `preferences`: any _api type Map_
   - `systemAdmin`: boolean
   - `systemUser`: boolean
 
@@ -2721,7 +2721,7 @@ Represents call to:
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
   - `phone`: string
-  - `preferences`: any ***api type Map***
+  - `preferences`: any _api type Map_
   - `systemAdmin`: boolean
   - `systemUser`: boolean
 - `count`: number
@@ -2750,7 +2750,7 @@ Represents call to:
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
   - `phone`: string
-  - `preferences`: any ***api type Map***
+  - `preferences`: any _api type Map_
   - `systemAdmin`: boolean
   - `systemUser`: boolean
 - `organizationId`: string
@@ -2771,7 +2771,7 @@ Represents call to:
   - `systemUserIds`: array string
   - `systemUsers`: array [User](#model-user)
   - `invitations`: array string
-  - `ldapConnector`: any ***api type LdapConnector***
+  - `ldapConnector`: any _api type LdapConnector_
   - `timeZone`: string
 
 
@@ -2799,7 +2799,7 @@ Represents call to:
 - `id`: string
 - `serviceKey`: string
 - `userId`: string
-- `access`: any ***api type AccessControlList***
+- `access`: any _api type AccessControlList_
 - `restricted`: boolean
 
 
@@ -2833,8 +2833,8 @@ Represents call to:
 - `caseId`: string
 - `workflowInstanceId`: string
 - `activityInstanceId`: string
-- `configuration`: any ***api type Map***
-- `inputValues`: any ***api type Map***
+- `configuration`: any _api type Map_
+- `inputValues`: any _api type Map_
 - `lock`: date
 
 
@@ -2842,7 +2842,7 @@ Represents call to:
 [`Service.createServiceActionInstancesLock`](#service-createserviceactioninstanceslock)
 
 ## Model ActionInstanceEnd
-- `outputValues`: any ***api type Map***
+- `outputValues`: any _api type Map_
 
 
 **Used by:**
@@ -2921,7 +2921,7 @@ Represents call to:
   - `systemUserIds`: array string
   - `systemUsers`: array [User](#model-user)
   - `invitations`: array string
-  - `ldapConnector`: any ***api type LdapConnector***
+  - `ldapConnector`: any _api type LdapConnector_
   - `timeZone`: string
 - `organizationId`: string
 - `token`: string
@@ -2943,7 +2943,7 @@ Represents call to:
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
   - `phone`: string
-  - `preferences`: any ***api type Map***
+  - `preferences`: any _api type Map_
   - `systemAdmin`: boolean
   - `systemUser`: boolean
 
@@ -2971,7 +2971,7 @@ Represents call to:
   - `organizations`: array [Organization](#model-organization)
   - `password`: string
   - `phone`: string
-  - `preferences`: any ***api type Map***
+  - `preferences`: any _api type Map_
   - `systemAdmin`: boolean
   - `systemUser`: boolean
 - `organizations`: array [Organization](#model-organization)
@@ -3037,7 +3037,7 @@ Represents call to:
 - `organizations`: array [Organization](#model-organization)
 - `password`: string
 - `phone`: string
-- `preferences`: any ***api type Map***
+- `preferences`: any _api type Map_
 - `systemAdmin`: boolean
 - `systemUser`: boolean
 
