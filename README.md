@@ -53,7 +53,7 @@ var Users = require('effektif-api').User;
 
 var baseRequest = request.defaults({'proxy':'http://localproxy.com'});
 
-var processes = new Api.Process({
+var workflows = new Api.Workflow({
   authorization: 'token',
   credentials: {
     username: 'me@example.com',
@@ -90,7 +90,7 @@ function onUnauthorized(operationArgs, callback) {
   });
 }
 
-var processes = new Api.Process({
+var workflows = new Api.Workflow({
   onUnauthorized: onUnauthorized,
   credentials: {
     username: 'me@example.com'
@@ -119,7 +119,7 @@ function onUnauthorized(operationArgs, callback) {
   });
 }
 
-var processes = new Api.Process({
+var workflows = new Api.Workflow({
   basePath: 'https://effektif.local/api'
 });
 ```
@@ -137,14 +137,14 @@ The listener function will get `username` and `authorization`-token.
 ```javascript
 var Api = require('effektif-api');
 
-var processes = new Api.Process({
+var workflows = new Api.Workflow({
   credentials: {
     username: 'me@example.com',
     password: 'sup3rs3cr3t'
   }
 });
 
-processes.on('authorized', function(result) {
+workflows.on('authorized', function(result) {
   console.log('A good place to store new token', result.authorization, 'for', result.username);
 });
 ```
@@ -159,7 +159,7 @@ var tasks = new Tasks({
   authorization: 'token'
 });
 
-tasks.createTasks('test-org', { processId: '1' }, function(err, body, resp) {
+tasks.createTasks('test-org', { workflowId: '1' }, function(err, body, resp) {
   if (err) console.log(err);
 });
 ```
@@ -176,14 +176,14 @@ var tasks = new Tasks({
   authorization: 'token'
 });
 
-tasks.getTaskNext('test-org', '1', function(err, resp, nextTask) {
+tasks.getTask('test-org', '1', function(err, resp, task1) {
   if (err) return console.log(err);
 
-  var field = nextTask.getFormFieldByName(task, 'myField');
+  var field = task1.getFormFieldByName(task, 'myField');
 
   field.value = '123';
 
-  tasks.updateTaskFormField('test-org', nextTask.id, field.id, field, function(err, body, resp) {
+  tasks.updateTaskFormField('test-org', task1.id, field.id, field, function(err, body, resp) {
     console.log('success?', !!!err);
   });
 });
@@ -203,7 +203,7 @@ var tasks = new Tasks({
   }
 });
 
-tasks.createTasks('test-org', { processId: '1' }, function(err, body, resp) {
+tasks.createTasks('test-org', { workflowId: '1' }, function(err, body, resp) {
   if (err) console.log(err);
 });
 ```
@@ -251,20 +251,18 @@ tasks.createTasks(organizationKey, newTask, function(err, body, resp) {
 });
 ```
 
-or `DELETE /{organizationKey}/processes/{processId}/activities/{activityId}`:
+or `DELETE /{organizationKey}/workflows/{editorWorkflowId}`:
 
 ```javascript
 var Api = require('effektif-api');
-var processes = new Api.Process({authorization: 'token'});
+var workflows = new Api.Workflow({authorization: 'token'});
 
-processes.deleteProcessActivity(organizationKey, processId, activityId, function(err, body, resp) {
+workflows.deleteWorkflow(organizationKey, workflowId, function(err, body, resp) {
   console.log(err, body);
 });
 ```
 
-The plural ending is removed if the noun is immediately followed by a path parameter, e.g:
-
-`DELETE /{organizationKey}/processes/{processId}` function name is `deleteProcess`.
+The plural ending is removed if the noun is immediately followed by a path parameter.
 
 ### Path parameters
 
@@ -272,16 +270,18 @@ The path parameters will build the method signature. They are considered require
 
 ### Query parameters
 
-The query parameters will also be appended to the method signature. They are considered optional but must be defined. Use `null` or `undefined`to leave them blank.
+The query parameters will also be appended to the method signature. All query parametes are considered optional in get-operations.
 
 ```javascript
 var Api = require('effektif-api');
-var processes = new Api.Process({ authorization: 'token'});
+var workflows = new Api.Workflow({ authorization: 'token'});
 
-processes.getProcesses('test-org', null, function(err, body, resp) {
+workflows.getWorkflows('test-org', function(err, body, resp) {
   console.log('This should work and result in', body);
 });
 ```
+
+If a body is expected, the query parameters must be defined. Since they are optional, a `null` value is accepted.
 
 ### Input Schemas
 
@@ -289,22 +289,22 @@ The operation schemas ([joi](https://github.com/hapijs/joi)) are stored with the
 
 ```javascript
 var Api = require('effektif-api');
-var getProcessInputSchema = Api.Process.schemas.getProcess.input;
+var inputSchema = Api.Workflow.schemas.getWorkflow.input;
 
-console.log("#getProcess input", getProcessInputSchema.describe());
+console.log("#getWorkflow input", inputSchema.describe());
 
-var getProcessOutputSchema = Api.Process.schemas.getProcess.output;
+var outputSchema = Api.Workflow.schemas.getWorkflow.output;
 
-console.log("#getProcess output", getProcessOutputSchema.describe());
+console.log("#getWorkflow output", outputSchema.describe());
 ```
 
 The schemas are also stored with the instance methods.
 
 ```javascript
 var Api = require('effektif-api');
-var processes = new Api.Process({ authorization: 'token'});
+var workflows = new Api.Workflow({ authorization: 'token'});
 
-console.log(processes.getProcesses.schemas.output.describe());
+console.log(workflows.getWorkflows.schemas.output.describe());
 ```
 
 ## Operation callback

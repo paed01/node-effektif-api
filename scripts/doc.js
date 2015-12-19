@@ -3,6 +3,7 @@
 /* eslint no-console:0 */
 'use strict';
 
+var _ = require('lodash');
 var Api = require('../');
 var util = require('util');
 var debug = require('debug')('effektif-api:doc');
@@ -68,15 +69,20 @@ function addModel(model, interfaceName, operationName) {
 
 function getOriginalType(schemaDesc) {
   var itemModel = schemaDesc;
-  if (schemaDesc.type === 'array' && schemaDesc.items && schemaDesc.items.length) {
+  if (schemaDesc.type === 'array' && _.get(schemaDesc, 'items.length') > 0) {
     itemModel = schemaDesc.items[0].type === 'object' ? schemaDesc.items[0] : schemaDesc;
   }
 
   var isModel = itemModel.tags && itemModel.tags.indexOf('model') > -1;
   if (!isModel) return null;
 
-  var meta = itemModel.meta && itemModel.meta[0];
-  return meta && meta.originalType;
+  return _.get(itemModel, 'meta[0].originalType');
+}
+
+function formatUnknownType(itemType, apiItemType) {
+  if (!apiItemType) return '';
+  if (apiItemType.toLowerCase() === itemType) return '';
+  return ' ***api type ' + apiItemType + '***';
 }
 
 function getSchemaType(schemaDesc) {
@@ -84,18 +90,25 @@ function getSchemaType(schemaDesc) {
 
   var originalType = getOriginalType(schemaDesc);
   var type = schemaDesc.type;
+  var apiItemType;
 
   switch (schemaDesc.type) {
     case 'array':
       if (originalType) {
         return util.format('%s [%s](#model-%s)', schemaDesc.type, originalType, originalType.toLowerCase());
       } else if (schemaDesc.items && schemaDesc.items.length) {
-        return util.format('%s %s', type, schemaDesc.items[0].type);
+        var itemType = _.get(schemaDesc, 'items[0].type');
+        apiItemType = formatUnknownType(itemType, _.get(schemaDesc, 'items[0].meta[0].originalType'));
+
+        return util.format('%s %s%s', type, itemType, apiItemType);
       }
     case 'object':
       if (originalType) {
         return util.format('%s [%s](#model-%s)', schemaDesc.type, originalType, originalType.toLowerCase());
       }
+    case 'any':
+      apiItemType = formatUnknownType(itemType, _.get(schemaDesc, 'meta[0].originalType'));
+      return util.format('%s%s', schemaDesc.type, apiItemType);
     default:
       return schemaDesc.type;
   }
@@ -128,13 +141,6 @@ function printSchema(schema, interfaceName, operation, padding, ignoreChildren) 
 
     msg += util.format(' %s', getSchemaType(child));
 
-    // if (originalType) {
-    //   if (interfaceName) {
-    //     msg += util.format(' [%s](#model-%s)', originalType, originalType.toLowerCase());
-    //   } else {
-    //     msg += util.format(' ref [%s](#model-%s)', originalType, originalType.toLowerCase());
-    //   }
-    // }
     if (child.description) msg += util.format(' - %s', child.description);
     if (child.notes) msg += util.format('. %s', child.notes.join(', '));
 
