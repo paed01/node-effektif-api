@@ -8,29 +8,23 @@ var expect = Code.expect;
 var nock = require('nock');
 
 lab.experiment('Logging', function() {
+  var debugEnv;
   lab.before(function(done) {
+    debugEnv = process.env.DEBUG || false;
     delete require.cache[require.resolve('debug')];
     nock.disableNetConnect();
     done();
   });
   lab.after(function(done) {
+    process.env.DEBUG = debugEnv;
+    delete require.cache[require.resolve('debug')];
     nock.cleanAll();
     done();
   });
 
   lab.experiment('DEBUG', function() {
-    var debugEnv;
     lab.before(function(done) {
-      debugEnv = process.env.DEBUG;
       process.env.DEBUG = 'effektif-api:mock*';
-      done();
-    });
-    lab.after(function(done) {
-      if (debugEnv) {
-        process.env.DEBUG = debugEnv;
-      } else {
-        delete process.env.DEBUG;
-      }
       done();
     });
 
