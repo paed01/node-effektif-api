@@ -1,4 +1,4 @@
-2.2.0 API Reference (v1)
+2.4.0 API Reference (v1)
 ===
 Auto-generated Api documentation.
 Base path: https://app.effektif.com/api/v1

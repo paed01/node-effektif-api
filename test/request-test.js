@@ -11,7 +11,7 @@ var Generator = require('../lib/generator');
 
 nock.disableNetConnect();
 
-lab.experiment('Generator', function() {
+lab.experiment('Requests', function() {
   lab.test('GET that returns 400 with non-object returns error with 400', function(done) {
     var template = {
       basePath: 'http://testapi',
@@ -31,7 +31,9 @@ lab.experiment('Generator', function() {
 
     nock(template.basePath)
       .get('/test-org/status')
-      .reply(401, 'Unauthorized', {
+      .reply(401, {
+        message: 'Unauthorized'
+      }, {
         'Content-Type': 'application/json'
       });
 

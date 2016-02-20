@@ -253,17 +253,18 @@ lab.experiment('Authorization', function() {
         })
         .post('/users/login').times(2)
         .delay(200)
-        .reply(200, function(uri, requestBody) {
+        .reply(200, function(uri, requestBody, cb) {
           if (!requestBody) {
-            return [401, JSON.stringify({
+            return cb(null, [401, JSON.stringify({
               message: 'No credentials'
-            })];
+            })]);
           }
 
-          var token = (/effektif-user/.test(requestBody) ? 'process-new-token' : 'tasks-new-token');
-          return JSON.stringify({
-            token: token
-          });
+          var respBody = {
+            token: requestBody.emailAddress === 'effektif-user' ? 'process-new-token' : 'tasks-new-token'
+          };
+
+          return cb(null, [200, JSON.stringify(respBody)]);
         })
         .get('/test-org/workflows/wf1')
         .times(2)
@@ -316,11 +317,18 @@ lab.experiment('Authorization', function() {
         })
         .post('/users/login').times(2)
         .delay(200)
-        .reply(function(uri, requestBody) {
-          var token = (/effektif-user/.test(requestBody) ? 'process-event-token' : 'tasks-event-token');
-          return [200, JSON.stringify({
-            token: token
-          })];
+        .reply(function(uri, requestBody, cb) {
+          if (!requestBody) {
+            return cb(null, [401, JSON.stringify({
+              message: 'No credentials'
+            })]);
+          }
+
+          var respBody = {
+            token: requestBody.emailAddress === 'effektif-user' ? 'process-event-token' : 'tasks-event-token'
+          };
+
+          return cb(null, [200, JSON.stringify(respBody)]);
         })
         .get('/test-org/workflows')
         .times(2)
