@@ -1,10 +1,11 @@
-2.0.1 API Reference (v1)
+2.2.0 API Reference (v1)
 ===
 Auto-generated Api documentation.
 Base path: https://app.effektif.com/api/v1
 **Table of contents:**
 - [File](#file)
   - [`getUserInstance`](#file-getuserinstance)
+  - [`proxy`](#file-proxy)
   - [`createFiles`](#file-createfiles)
   - [`deleteFile`](#file-deletefile)
   - [`getFile`](#file-getfile)
@@ -12,9 +13,11 @@ Base path: https://app.effektif.com/api/v1
   - [`createFilesiframe`](#file-createfilesiframe)
 - [Mail](#mail)
   - [`getUserInstance`](#mail-getuserinstance)
+  - [`proxy`](#mail-proxy)
   - [`createMailIncoming`](#mail-createmailincoming)
 - [Case](#case)
   - [`getUserInstance`](#case-getuserinstance)
+  - [`proxy`](#case-proxy)
   - [`getCases`](#case-getcases)
   - [`createCases`](#case-createcases)
   - [`deleteCase`](#case-deletecase)
@@ -31,6 +34,7 @@ Base path: https://app.effektif.com/api/v1
   - [`getInfoCases`](#case-getinfocases)
 - [Task](#task)
   - [`getUserInstance`](#task-getuserinstance)
+  - [`proxy`](#task-proxy)
   - [`getTasks`](#task-gettasks)
   - [`createTasks`](#task-createtasks)
   - [`deleteTask`](#task-deletetask)
@@ -42,6 +46,7 @@ Base path: https://app.effektif.com/api/v1
   - [`reopenTask`](#task-reopentask)
 - [Workflow](#workflow)
   - [`getUserInstance`](#workflow-getuserinstance)
+  - [`proxy`](#workflow-proxy)
   - [`getTemplates`](#workflow-gettemplates)
   - [`getWorkflows`](#workflow-getworkflows)
   - [`createWorkflows`](#workflow-createworkflows)
@@ -64,9 +69,11 @@ Base path: https://app.effektif.com/api/v1
   - [`createWorkflowVersionPublish`](#workflow-createworkflowversionpublish)
 - [WorkflowEngine](#workflowengine)
   - [`getUserInstance`](#workflowengine-getuserinstance)
+  - [`proxy`](#workflowengine-proxy)
   - [`createEngineWorkflowInstances`](#workflowengine-createengineworkflowinstances)
 - [Organization](#organization)
   - [`getUserInstance`](#organization-getuserinstance)
+  - [`proxy`](#organization-proxy)
   - [`create`](#organization-create)
   - [`getSystemconfiguration`](#organization-getsystemconfiguration)
   - [`delete`](#organization-delete)
@@ -93,6 +100,7 @@ Base path: https://app.effektif.com/api/v1
   - [`deleteUser`](#organization-deleteuser)
 - [Service](#service)
   - [`getUserInstance`](#service-getuserinstance)
+  - [`proxy`](#service-proxy)
   - [`getOauth_callback`](#service-getoauth_callback)
   - [`getServiceAccounts`](#service-getserviceaccounts)
   - [`createServiceAccounts`](#service-createserviceaccounts)
@@ -109,6 +117,7 @@ Base path: https://app.effektif.com/api/v1
   - [`getServiceIcon`](#service-getserviceicon)
 - [User](#user)
   - [`getUserInstance`](#user-getuserinstance)
+  - [`proxy`](#user-proxy)
   - [`getAbout`](#user-getabout)
   - [`createLogin`](#user-createlogin)
   - [`updateLogin`](#user-updatelogin)
@@ -147,6 +156,8 @@ Base path: https://app.effektif.com/api/v1
   - `baseRequest`: function - Default request
 
 ## File getUserInstance
+
+## File proxy
 
 ## File createFiles
 Represents call to:
@@ -233,6 +244,8 @@ Represents call to:
 
 ## Mail getUserInstance
 
+## Mail proxy
+
 ## Mail createMailIncoming
 Represents call to:
 `POST /mail/incoming`
@@ -256,6 +269,8 @@ Represents call to:
   - `baseRequest`: function - Default request
 
 ## Case getUserInstance
+
+## Case proxy
 
 ## Case getCases
 Represents call to:
@@ -488,6 +503,8 @@ Represents call to:
 
 ## Task getUserInstance
 
+## Task proxy
+
 ## Task getTasks
 Represents call to:
 `GET /{organizationKey}/tasks`
@@ -576,7 +593,7 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `taskId`: **required** string
-- `formInstanceFields`: array [FormInstanceField](#model-forminstancefield)
+- `task`: **required** object [Task](#model-task)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -654,6 +671,8 @@ Represents call to:
   - `baseRequest`: function - Default request
 
 ## Workflow getUserInstance
+
+## Workflow proxy
 
 ## Workflow getTemplates
 Represents call to:
@@ -992,6 +1011,8 @@ Represents call to:
 
 ## WorkflowEngine getUserInstance
 
+## WorkflowEngine proxy
+
 ## WorkflowEngine createEngineWorkflowInstances
 Represents call to:
 `POST /{organizationKey}/engine/workflow/instances`
@@ -1024,6 +1045,8 @@ Represents call to:
   - `baseRequest`: function - Default request
 
 ## Organization getUserInstance
+
+## Organization proxy
 
 ## Organization create
 Represents call to:
@@ -1365,6 +1388,8 @@ Represents call to:
 
 ## Service getUserInstance
 
+## Service proxy
+
 ## Service getOauth_callback
 Represents call to:
 `GET /oauth_callback`
@@ -1602,6 +1627,8 @@ Represents call to:
   - `baseRequest`: function - Default request
 
 ## User getUserInstance
+
+## User proxy
 
 ## User getAbout
 Represents call to:
@@ -2305,6 +2332,7 @@ Represents call to:
 
 **Used by:**
 [`Task.updateTask`](#task-updatetask)
+[`Task.completeTask`](#task-completetask)
 
 ## Model FormInstanceField
 - `properties`: any _api type Map_
@@ -2320,7 +2348,6 @@ Represents call to:
 
 
 **Used by:**
-[`Task.completeTask`](#task-completetask)
 [`Task.updateTaskFormField`](#task-updatetaskformfield)
 
 ## Model Email
