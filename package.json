@@ -1,6 +1,6 @@
 {
   "name": "effektif-api",
-  "version": "2.4.0",
+  "version": "3.0.0",
   "description": "Unofficial node effektif api wrapper",
   "repository": "git://github.com/paed01/node-effektif-api",
   "main": "index.js",
@@ -16,14 +16,14 @@
   "dependencies": {
     "async": "^1.5.2",
     "debug": "^2.2.0",
-    "joi": "^6.9.0",
+    "joi": "^8.0.2",
     "lodash": "^4.5.0",
     "request": "^2.69.0"
   },
   "devDependencies": {
-    "code": "^1.5.0",
-    "coveralls": "^2.11.4",
-    "lab": "^6.2.0",
+    "code": "^2.1.0",
+    "coveralls": "^2.11.6",
+    "lab": "^9.0.0",
     "nock": "^7.2.2"
   },
   "license": "BSD-3-Clause"

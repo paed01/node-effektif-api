@@ -189,4 +189,53 @@ lab.experiment('Tasks', function() {
       done();
     });
   });
+
+  lab.experiment('#completeTask', function() {
+    lab.test('accepts object with form', function(done) {
+      nock(Tasks.apiDoc.basePath)
+        .post('/test-org-1/tasks/task-1/complete')
+        .reply(200, {});
+
+      tasks.completeTask('test-org-1', 'task-1', {
+        form: {
+          fields: [{
+            id: '11',
+            value: 'test'
+          }]
+        }
+      }, done);
+    });
+
+    lab.test('accepts empty body properties', function(done) {
+      nock(Tasks.apiDoc.basePath)
+        .post('/test-org-1/tasks/task-1/complete')
+        .reply(200, {});
+
+      tasks.completeTask('test-org-1', 'task-1', {
+        description: '',
+        form: {
+          fields: [{
+            id: '11',
+            value: 'test'
+          }]
+        }
+      }, done);
+    });
+
+    lab.test('accepts body properties not defined', function(done) {
+      nock(Tasks.apiDoc.basePath)
+        .post('/test-org-1/tasks/task-1/complete')
+        .reply(200, {});
+
+      tasks.completeTask('test-org-1', 'task-1', {
+        candidateGroups: [],
+        form: {
+          fields: [{
+            id: '11',
+            value: 'test'
+          }]
+        }
+      }, done);
+    });
+  });
 });
