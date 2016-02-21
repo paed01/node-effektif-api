@@ -1,3 +1,9 @@
+3.0.3 / 2016-02-21
+==================
+
+  * Renamed function `Case.caseCreateCancel` to `Case.cancel`
+  * Renamed function `Case.caseCreateClose` to `Case.close`
+
 3.0.0 / 2016-02-21
 ==================
 

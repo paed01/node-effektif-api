@@ -1,4 +1,4 @@
-3.0.1 API Reference (v1)
+3.0.3 API Reference (v1)
 ===
 Auto-generated Api documentation.
 Base path: https://app.effektif.com/api/v1
@@ -23,8 +23,8 @@ Base path: https://app.effektif.com/api/v1
   - [`deleteCase`](#case-deletecase)
   - [`getCase`](#case-getcase)
   - [`updateCase`](#case-updatecase)
-  - [`createCaseCancel`](#case-createcasecancel)
-  - [`createCaseClose`](#case-createcaseclose)
+  - [`cancel`](#case-cancel)
+  - [`close`](#case-close)
   - [`getCaseEvents`](#case-getcaseevents)
   - [`createCaseEvents`](#case-createcaseevents)
   - [`createCaseFiles`](#case-createcasefiles)
@@ -352,7 +352,7 @@ Represents call to:
 - `body`: [CaseDetail](#model-casedetail)
 - `resp`: Http response
 
-## Case createCaseCancel
+## Case cancel
 Represents call to:
 `POST /{organizationKey}/cases/{caseId}/cancel`
 
@@ -369,7 +369,7 @@ Represents call to:
 - `body`: [CaseDetail](#model-casedetail)
 - `resp`: Http response
 
-## Case createCaseClose
+## Case close
 Represents call to:
 `POST /{organizationKey}/cases/{caseId}/close`
 
@@ -593,6 +593,7 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `taskId`: **required** string
+- `fields`: **required** array [FormInstanceField](#model-forminstancefield)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -2081,8 +2082,8 @@ Represents call to:
 [`Case.createCases`](#case-createcases)
 [`Case.getCase`](#case-getcase)
 [`Case.updateCase`](#case-updatecase)
-[`Case.createCaseCancel`](#case-createcasecancel)
-[`Case.createCaseClose`](#case-createcaseclose)
+[`Case.cancel`](#case-cancel)
+[`Case.close`](#case-close)
 
 ## Model Case
 - `properties`: any _api type Map_
@@ -2346,6 +2347,7 @@ Represents call to:
 
 
 **Used by:**
+[`Task.completeTask`](#task-completetask)
 [`Task.updateTaskFormField`](#task-updatetaskformfield)
 
 ## Model Email
