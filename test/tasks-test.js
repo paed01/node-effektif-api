@@ -191,19 +191,15 @@ lab.experiment('Tasks', function() {
   });
 
   lab.experiment('#completeTask', function() {
-    lab.test('accepts object with form', function(done) {
+    lab.test('accepts array of form instance fields', function(done) {
       nock(Tasks.apiDoc.basePath)
         .post('/test-org-1/tasks/task-1/complete')
         .reply(200, {});
 
-      tasks.completeTask('test-org-1', 'task-1', {
-        form: {
-          fields: [{
-            id: '11',
-            value: 'test'
-          }]
-        }
-      }, done);
+      tasks.completeTask('test-org-1', 'task-1', [{
+        id: '11',
+        value: 'test'
+      }], done);
     });
 
     lab.test('accepts empty body properties', function(done) {
@@ -211,15 +207,11 @@ lab.experiment('Tasks', function() {
         .post('/test-org-1/tasks/task-1/complete')
         .reply(200, {});
 
-      tasks.completeTask('test-org-1', 'task-1', {
+      tasks.completeTask('test-org-1', 'task-1', [{
         description: '',
-        form: {
-          fields: [{
-            id: '11',
-            value: 'test'
-          }]
-        }
-      }, done);
+        id: '11',
+        value: 'test'
+      }], done);
     });
 
     lab.test('accepts body properties not defined', function(done) {
@@ -227,15 +219,12 @@ lab.experiment('Tasks', function() {
         .post('/test-org-1/tasks/task-1/complete')
         .reply(200, {});
 
-      tasks.completeTask('test-org-1', 'task-1', {
-        candidateGroups: [],
-        form: {
-          fields: [{
-            id: '11',
-            value: 'test'
-          }]
-        }
-      }, done);
+      tasks.completeTask('test-org-1', 'task-1', [{
+        description: '',
+        id: '11',
+        value: 'test',
+        additionalProp: []
+      }], done);
     });
   });
 });

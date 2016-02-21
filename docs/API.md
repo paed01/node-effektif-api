@@ -1,4 +1,4 @@
-2.4.0 API Reference (v1)
+3.0.1 API Reference (v1)
 ===
 Auto-generated Api documentation.
 Base path: https://app.effektif.com/api/v1
@@ -593,7 +593,6 @@ Represents call to:
 **Arguments:**
 - `organizationKey`: **required** string
 - `taskId`: **required** string
-- `task`: **required** object [Task](#model-task)
 - `callback`: **required** function - function(err, body, resp)
 
 
@@ -2332,7 +2331,6 @@ Represents call to:
 
 **Used by:**
 [`Task.updateTask`](#task-updatetask)
-[`Task.completeTask`](#task-completetask)
 
 ## Model FormInstanceField
 - `properties`: any _api type Map_

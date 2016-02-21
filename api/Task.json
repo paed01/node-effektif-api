@@ -155,8 +155,11 @@
         "required" : true
       }, {
         "paramType" : "body",
-        "name" : "task",
-        "dataType" : "Task",
+        "name" : "fields",
+        "dataType" : "array",
+        "items" : {
+          "$ref" : "FormInstanceField"
+        },
         "required" : true
       } ]
     } ]
