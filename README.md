@@ -46,14 +46,14 @@ The interface constructor takes an object with options.
 Example:
 
 ```javascript
-var request = require('request');
+const request = require('request');
 
-var Api = require('effektif-api');
-var Users = require('effektif-api').User;
+const Api = require('effektif-api');
+const Users = require('effektif-api').User;
 
-var baseRequest = request.defaults({'proxy':'http://localproxy.com'});
+const baseRequest = request.defaults({'proxy':'http://localproxy.com'});
 
-var workflows = new Api.Workflow({
+const workflows = new Api.Workflow({
   authorization: 'token',
   credentials: {
     username: 'me@example.com',
@@ -77,12 +77,12 @@ The function signature is:
 Example:
 
 ```javascript
-var db = require('database'); // Arbitrary database module
+const db = require('database'); // Arbitrary database module
 
 function onUnauthorized(operationArgs, callback) {
   db.findOne({
     username: this.options.credentials.username
-  }).exec(function(err, doc) {
+  }).exec((err, doc) => {
     if (err) return callback(err);
 
     // Return token in callback
@@ -90,7 +90,7 @@ function onUnauthorized(operationArgs, callback) {
   });
 }
 
-var workflows = new Api.Workflow({
+let workflows = new Api.Workflow({
   onUnauthorized: onUnauthorized,
   credentials: {
     username: 'me@example.com'
@@ -105,21 +105,21 @@ A User instance is created with the same options as the module and this is the f
 Example usage:
 
 ```javascript
-var Api = require('effektif-api');
+const Api = require('effektif-api');
 
 function onUnauthorized(operationArgs, callback) {
-  var users = this.getUserInstance();
+  let users = this.getUserInstance();
 
-  var loginOptions = {};
+  let loginOptions = {};
   if (operationArgs.organizationKey) loginOptions.organizationKey = operationArgs.organizationKey;
 
-  users.login('me@example.com', 'sup3rs3cr3t', loginOptions, function(err, result) {
+  users.login('me@example.com', 'sup3rs3cr3t', loginOptions, (err, result) => {
     // Return token in callback
     return callback(err, result && result.token);
   });
 }
 
-var workflows = new Api.Workflow({
+const workflows = new Api.Workflow({
   basePath: 'https://effektif.local/api'
 });
 ```
@@ -135,16 +135,16 @@ The `authorized` event is emitted when a succesfull login was performed.
 The listener function will get `username` and `authorization`-token.
 
 ```javascript
-var Api = require('effektif-api');
+const Api = require('effektif-api');
 
-var workflows = new Api.Workflow({
+let workflows = new Api.Workflow({
   credentials: {
     username: 'me@example.com',
     password: 'sup3rs3cr3t'
   }
 });
 
-workflows.on('authorized', function(result) {
+workflows.on('authorized', (result) => {
   console.log('A good place to store new token', result.authorization, 'for', result.username);
 });
 ```
@@ -152,14 +152,14 @@ workflows.on('authorized', function(result) {
 ## Tasks
 
 ```javascript
-var Api = require('effektif-api');
+const Api = require('effektif-api');
 
-var Tasks = Api.Task;
-var tasks = new Tasks({
+const Tasks = Api.Task;
+const tasks = new Tasks({
   authorization: 'token'
 });
 
-tasks.createTasks('test-org', { workflowId: '1' }, function(err, body, resp) {
+tasks.createTasks('test-org', { workflowId: '1' }, (err, body, resp) => {
   if (err) console.log(err);
 });
 ```
@@ -169,21 +169,21 @@ tasks.createTasks('test-org', { workflowId: '1' }, function(err, body, resp) {
 Utility function to get FormField by name from task data.
 
 ```javascript
-var Api = require('effektif-api');
+const Api = require('effektif-api');
 
-var Tasks = Api.Task;
-var tasks = new Tasks({
+const Tasks = Api.Task;
+const tasks = new Tasks({
   authorization: 'token'
 });
 
-tasks.getTask('test-org', '1', function(err, resp, task1) {
+tasks.getTask('test-org', '1', (err, resp, task1) => {
   if (err) return console.log(err);
 
-  var field = task1.getFormFieldByName(task, 'myField');
+  let field = task1.getFormFieldByName(task, 'myField');
 
   field.value = '123';
 
-  tasks.updateTaskFormField('test-org', task1.id, field.id, field, function(err, body, resp) {
+  tasks.updateTaskFormField('test-org', task1.id, field.id, field, (err) => {
     console.log('success?', !!!err);
   });
 });
@@ -192,10 +192,10 @@ tasks.getTask('test-org', '1', function(err, resp, task1) {
 ## Users
 
 ```javascript
-var Api = require('effektif-api');
+const Api = require('effektif-api');
 
-var Tasks = Api.Task;
-var tasks = new Tasks({
+const Tasks = Api.Task;
+const tasks = new Tasks({
   authorization: 'token',
   credentials: {
     username: 'me@example.com',
@@ -203,7 +203,7 @@ var tasks = new Tasks({
   }
 });
 
-tasks.createTasks('test-org', { workflowId: '1' }, function(err, body, resp) {
+tasks.createTasks('test-org', { workflowId: '1' }, (err, body, resp) => {
   if (err) console.log(err);
 });
 ```
@@ -213,10 +213,10 @@ tasks.createTasks('test-org', { workflowId: '1' }, function(err, body, resp) {
 Utility function to perform user login.
 
 ```javascript
-var Api = require('effektif-api');
-var users = new Api.User();
+const Api = require('effektif-api');
+const users = new Api.User();
 
-users.login('me@example.com', 'superse3cret', function(err, body, resp) {
+users.login('me@example.com', 'superse3cret', (err, body) => {
   console.log('new token', body.token);
 });
 ```
@@ -241,12 +241,12 @@ Examples:
 To call `POST /{organizationKey}/tasks`:
 
 ```javascript
-var Api = require('effektif-api');
-var tasks = new Api.Task({authorization: 'token'});
+const Api = require('effektif-api');
+const tasks = new Api.Task({authorization: 'token'});
 
-var newTask = {};
+let newTask = {};
 
-tasks.createTasks(organizationKey, newTask, function(err, body, resp) {
+tasks.createTasks(organizationKey, newTask, (err, body) => {
   console.log(err, body);
 });
 ```
@@ -254,10 +254,10 @@ tasks.createTasks(organizationKey, newTask, function(err, body, resp) {
 or `DELETE /{organizationKey}/workflows/{editorWorkflowId}`:
 
 ```javascript
-var Api = require('effektif-api');
-var workflows = new Api.Workflow({authorization: 'token'});
+const Api = require('effektif-api');
+const workflows = new Api.Workflow({authorization: 'token'});
 
-workflows.deleteWorkflow(organizationKey, workflowId, function(err, body, resp) {
+workflows.deleteWorkflow(organizationKey, workflowId, (err, body) => {
   console.log(err, body);
 });
 ```
@@ -273,10 +273,10 @@ The path parameters will build the method signature. They are considered require
 The query parameters will also be appended to the method signature. All query parametes are considered optional in get-operations.
 
 ```javascript
-var Api = require('effektif-api');
-var workflows = new Api.Workflow({ authorization: 'token'});
+const Api = require('effektif-api');
+const workflows = new Api.Workflow({ authorization: 'token'});
 
-workflows.getWorkflows('test-org', function(err, body, resp) {
+workflows.getWorkflows('test-org', (err, body) => {
   console.log('This should work and result in', body);
 });
 ```
@@ -288,12 +288,12 @@ If a body is expected, the query parameters must be defined. Since they are opti
 The operation schemas ([joi](https://github.com/hapijs/joi)) are stored with the module.
 
 ```javascript
-var Api = require('effektif-api');
-var inputSchema = Api.Workflow.schemas.getWorkflow.input;
+const Api = require('effektif-api');
+const inputSchema = Api.Workflow.schemas.getWorkflow.input;
 
 console.log("#getWorkflow input", inputSchema.describe());
 
-var outputSchema = Api.Workflow.schemas.getWorkflow.output;
+const outputSchema = Api.Workflow.schemas.getWorkflow.output;
 
 console.log("#getWorkflow output", outputSchema.describe());
 ```
@@ -301,8 +301,8 @@ console.log("#getWorkflow output", outputSchema.describe());
 The schemas are also stored with the instance methods.
 
 ```javascript
-var Api = require('effektif-api');
-var workflows = new Api.Workflow({ authorization: 'token'});
+const Api = require('effektif-api');
+const workflows = new Api.Workflow({ authorization: 'token'});
 
 console.log(workflows.getWorkflows.schemas.output.describe());
 ```
@@ -314,12 +314,6 @@ All operations takes callback as final argument. The callback is required.
 - `error`: Error or null. Api-calls with a http response status code above 399 will be considered an error
 - `result`: Operation result
 - `httpResponse`: The HTTP response from the call to the actual api. Should be returned even if an error has occurred
-
-```javascript
-function(err, body, resp) {
-  console.log('call to', resp.request.path, 'responded with', resp.statusCode);
-}
-```
 
 # Debug
 

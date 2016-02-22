@@ -1,22 +1,22 @@
-/* eslint no-underscore-dangle:0, curly:0, no-new:0 */
+/* eslint no-new:0 */
 'use strict';
 
-var Lab = require('lab');
-var lab = exports.lab = Lab.script();
-var Code = require('code');
-var expect = Code.expect;
-var nock = require('nock');
-var request = require('request');
+const Lab = require('lab');
+const lab = exports.lab = Lab.script();
+const Code = require('code');
+const expect = Code.expect;
+const nock = require('nock');
+const request = require('request');
 
-var Generator = require('../lib/generator');
+const Generator = require('../lib/generator');
 
 nock.disableNetConnect();
 
-lab.experiment('Generator', function() {
+lab.experiment('Generator', () => {
 
-  lab.experiment('#generate', function() {
-    lab.test('returns Module', function(done) {
-      var template = {
+  lab.experiment('#generate', () => {
+    lab.test('returns Module', (done) => {
+      let template = {
         apis: [{
           path: '/{organizationKey}/processes',
           operations: [{
@@ -30,15 +30,15 @@ lab.experiment('Generator', function() {
         }],
         models: {}
       };
-      var Mock = Generator('Mock', template);
+      let Mock = Generator('Mock', template);
       expect(Mock).to.be.a.function();
       expect(Mock.prototype).to.be.an.object();
       expect(Mock.prototype.getProcesses).to.be.an.function();
       done();
     });
 
-    lab.test('returns Module with function applyDefaults', function(done) {
-      var template = {
+    lab.test('returns Module with function applyDefaults', (done) => {
+      let template = {
         apis: [{
           path: '/{organizationKey}/processes',
           operations: [{
@@ -52,15 +52,15 @@ lab.experiment('Generator', function() {
         }],
         models: {}
       };
-      var Mock = Generator('Mock', template);
+      let Mock = Generator('Mock', template);
       expect(Mock).to.be.a.function();
       expect(Mock.prototype).to.be.an.object();
       expect(Mock.prototype._applyDefaults).to.be.a.function();
       done();
     });
 
-    lab.test('returns Module with function that contains input and output schema', function(done) {
-      var template = {
+    lab.test('returns Module with function that contains input and output schema', (done) => {
+      let template = {
         apis: [{
           path: '/{organizationKey}/processes',
           operations: [{
@@ -84,9 +84,9 @@ lab.experiment('Generator', function() {
           }
         }
       };
-      var Mock = Generator('Mock', template);
+      let Mock = Generator('Mock', template);
       expect(Mock.prototype.getProcesses).to.be.an.function();
-      var mock = new Mock();
+      let mock = new Mock();
 
       expect(mock.getProcesses).to.be.a.function();
       expect(mock.getProcesses.schemas).to.be.an.object();
@@ -95,8 +95,8 @@ lab.experiment('Generator', function() {
       done();
     });
 
-    lab.test('returns Module without input if parameters are not passed', function(done) {
-      var template = {
+    lab.test('returns Module without input if parameters are not passed', (done) => {
+      let template = {
         apis: [{
           path: '/info',
           operations: [{
@@ -105,15 +105,15 @@ lab.experiment('Generator', function() {
         }],
         models: {}
       };
-      var Mock = Generator('Mock', template);
+      let Mock = Generator('Mock', template);
       expect(Mock).to.be.a.function();
       expect(Mock.prototype).to.be.an.object();
       done();
     });
 
 
-    lab.test('#_applyDefaults retrieves headers from ctor options', function(done) {
-      var template = {
+    lab.test('#_applyDefaults retrieves headers from ctor options', (done) => {
+      let template = {
         apis: [{
           path: '/{organizationKey}/processes',
           operations: [{
@@ -131,12 +131,12 @@ lab.experiment('Generator', function() {
         }],
         models: {}
       };
-      var Mock = Generator('Mock', template);
-      var mock = new Mock({
+      let Mock = Generator('Mock', template);
+      let mock = new Mock({
         authorization: 'token'
       });
 
-      var args = mock._applyDefaults({
+      let args = mock._applyDefaults({
         organizationKey: 'test'
       }, Mock.schemas.getProcesses.input);
       expect(args).to.include(['Authorization', 'organizationKey']);
@@ -144,8 +144,8 @@ lab.experiment('Generator', function() {
       done();
     });
 
-    lab.test('#_applyDefaults accepts header options in lowerCase', function(done) {
-      var template = {
+    lab.test('#_applyDefaults accepts header options in lowerCase', (done) => {
+      let template = {
         apis: [{
           path: '/{organizationKey}/processes',
           operations: [{
@@ -163,15 +163,15 @@ lab.experiment('Generator', function() {
         }],
         models: {}
       };
-      var Mock = Generator('Mock', template);
-      var mock = new Mock();
+      let Mock = Generator('Mock', template);
+      let mock = new Mock();
 
       // Set deafults
       mock.defaults = {
         Authorization: 'token'
       };
 
-      var args = mock._applyDefaults({
+      let args = mock._applyDefaults({
         organizationKey: 'test'
       }, Mock.schemas.getProcesses.input);
 
@@ -179,10 +179,10 @@ lab.experiment('Generator', function() {
       done();
     });
 
-    lab.experiment('function names', function() {
+    lab.experiment('function names', () => {
 
-      lab.test('returns second endpoint part with capitalized letter', function(done) {
-        var template = {
+      lab.test('returns second endpoint part with capitalized letter', (done) => {
+        let template = {
           apis: [{
             path: '/{organizationKey}/processes/{processId}/tasks',
             operations: [{
@@ -200,13 +200,13 @@ lab.experiment('Generator', function() {
           }],
           models: {}
         };
-        var Mock = Generator('Mock', template);
+        let Mock = Generator('Mock', template);
         expect(Mock.prototype.getProcessTasks).to.be.an.function();
         done();
       });
 
-      lab.test('endpoint with empty section part is ignored', function(done) {
-        var template = {
+      lab.test('endpoint with empty section part is ignored', (done) => {
+        let template = {
           apis: [{
             path: '/bad//path',
             operations: [{
@@ -224,15 +224,15 @@ lab.experiment('Generator', function() {
           }],
           models: {}
         };
-        var Mock = Generator('Mock', template);
+        let Mock = Generator('Mock', template);
         expect(Mock.prototype.getBadPath).to.be.an.function();
         done();
       });
     });
 
-    lab.experiment('function arguments', function() {
-      lab.test('ignores argument type if not a header, path, or body', function(done) {
-        var template = {
+    lab.experiment('function arguments', () => {
+      lab.test('ignores argument type if not a header, path, or body', (done) => {
+        let template = {
           apis: [{
             path: '/{organizationKey}/processes/{processId}/tasks',
             operations: [{
@@ -254,8 +254,8 @@ lab.experiment('Generator', function() {
           }],
           models: {}
         };
-        var Mock = Generator('Mock', template);
-        var inputSchema = Mock.schemas.getProcessTasks.input.describe();
+        let Mock = Generator('Mock', template);
+        let inputSchema = Mock.schemas.getProcessTasks.input.describe();
 
         expect(Object.keys(inputSchema.children).length).to.equal(3);
         expect(inputSchema.children).to.include(['organizationKey', 'processId', 'callback']);
@@ -264,10 +264,10 @@ lab.experiment('Generator', function() {
       });
     });
 
-    lab.experiment('Models', function() {
+    lab.experiment('Models', () => {
 
-      lab.test('with properties returns Joi.object with children', function(done) {
-        var template = {
+      lab.test('with properties returns Joi.object with children', (done) => {
+        let template = {
           apis: [{
             path: '/{organizationKey}/processes',
             operations: [{
@@ -291,13 +291,13 @@ lab.experiment('Generator', function() {
             }
           }
         };
-        var Mock = Generator('Mock', template);
+        let Mock = Generator('Mock', template);
         expect(Mock.schemas.getProcesses.output.describe().children).to.be.an.object();
         done();
       });
 
-      lab.test('with Authorization header returns schema with requiresAuthorization tag', function(done) {
-        var template = {
+      lab.test('with Authorization header returns schema with requiresAuthorization tag', (done) => {
+        let template = {
           apis: [{
             path: '/{organizationKey}/processes',
             operations: [{
@@ -325,13 +325,13 @@ lab.experiment('Generator', function() {
             }
           }
         };
-        var Mock = Generator('Mock', template);
+        let Mock = Generator('Mock', template);
         expect(Mock.schemas.getProcesses.output.describe().children).to.be.an.object();
         done();
       });
 
-      lab.test('without properties returns Joi.object', function(done) {
-        var template = {
+      lab.test('without properties returns Joi.object', (done) => {
+        let template = {
           apis: [{
             path: '/{organizationKey}/processes',
             operations: [{
@@ -350,13 +350,13 @@ lab.experiment('Generator', function() {
             }
           }
         };
-        var Mock = Generator('Mock', template);
+        let Mock = Generator('Mock', template);
         expect(Mock.schemas.getProcesses.output).to.be.an.object();
         done();
       });
 
-      lab.test('with undefined Joi sets type to any', function(done) {
-        var template = {
+      lab.test('with undefined Joi sets type to any', (done) => {
+        let template = {
           apis: [{
             path: '/{organizationKey}/processes',
             operations: [{
@@ -381,16 +381,16 @@ lab.experiment('Generator', function() {
           }
         };
 
-        var Mock = Generator('Mock', template);
+        let Mock = Generator('Mock', template);
         expect(Mock.schemas.getProcesses.output).to.be.an.object();
         expect(Mock.schemas.getProcesses.output.describe().children.name.type).to.equal('any');
         done();
       });
 
-      lab.describe('array', function() {
+      lab.describe('array', () => {
 
-        lab.test('item type is validated', function(done) {
-          var template = {
+        lab.test('item type is validated', (done) => {
+          let template = {
             apis: [{
               path: '/{organizationKey}/processes',
               operations: [{
@@ -417,15 +417,15 @@ lab.experiment('Generator', function() {
               }
             }
           };
-          var Mock = Generator('Mock', template);
+          let Mock = Generator('Mock', template);
 
           Mock.schemas.getProcesses.output.validate({
             a: ['test']
           }, done);
         });
 
-        lab.test('with invalid item type returns error', function(done) {
-          var template = {
+        lab.test('with invalid item type returns error', (done) => {
+          let template = {
             apis: [{
               path: '/{organizationKey}/processes',
               operations: [{
@@ -452,17 +452,17 @@ lab.experiment('Generator', function() {
               }
             }
           };
-          var Mock = Generator('Mock', template);
+          let Mock = Generator('Mock', template);
           Mock.schemas.getProcesses.output.validate({
             a: [{}]
-          }, function(err) {
+          }, (err) => {
             expect(err).to.exist();
             done();
           });
         });
 
-        lab.test('without item type validates to any', function(done) {
-          var template = {
+        lab.test('without item type validates to any', (done) => {
+          let template = {
             apis: [{
               path: '/{organizationKey}/processes',
               operations: [{
@@ -486,14 +486,14 @@ lab.experiment('Generator', function() {
               }
             }
           };
-          var Mock = Generator('Mock', template);
+          let Mock = Generator('Mock', template);
           Mock.schemas.getProcesses.output.validate({
             a: [{}]
           }, done);
         });
 
-        lab.test('with complex item type validates', function(done) {
-          var template = {
+        lab.test('with complex item type validates', (done) => {
+          let template = {
             apis: [{
               path: '/{organizationKey}/processes',
               operations: [{
@@ -528,7 +528,7 @@ lab.experiment('Generator', function() {
               }
             }
           };
-          var Mock = Generator('Mock', template);
+          let Mock = Generator('Mock', template);
           Mock.schemas.getProcesses.output.validate({
             a: [{
               b: 1
@@ -536,8 +536,8 @@ lab.experiment('Generator', function() {
           }, done);
         });
 
-        lab.test('with complex item type validation returns error if incorrect', function(done) {
-          var template = {
+        lab.test('with complex item type validation returns error if incorrect', (done) => {
+          let template = {
             apis: [{
               path: '/{organizationKey}/processes',
               operations: [{
@@ -572,19 +572,19 @@ lab.experiment('Generator', function() {
               }
             }
           };
-          var Mock = Generator('Mock', template);
+          let Mock = Generator('Mock', template);
           Mock.schemas.getProcesses.output.validate({
             a: [{
               b: 'NaN'
             }]
-          }, function(err) {
+          }, (err) => {
             expect(err).to.exist();
             done();
           });
         });
 
-        lab.test('with circular complex item type validates any (TODO: not optimal)', function(done) {
-          var template = {
+        lab.test('with circular complex item type validates any (TODO: not optimal)', (done) => {
+          let template = {
             apis: [{
               path: '/{organizationKey}/processes',
               operations: [{
@@ -619,10 +619,10 @@ lab.experiment('Generator', function() {
               }
             }
           };
-          var Mock = Generator('Mock', template);
+          let Mock = Generator('Mock', template);
           Mock.schemas.getProcesses.output.validate({
             a: [{
-              children: [{}, function() {}]
+              children: [{}, () => {}]
             }]
           }, done);
         });
@@ -630,8 +630,8 @@ lab.experiment('Generator', function() {
       });
     });
 
-    lab.test('GET that returns non-object returns body un-altered', function(done) {
-      var template = {
+    lab.test('GET that returns non-object returns body un-altered', (done) => {
+      let template = {
         basePath: 'http://testapi',
         apis: [{
           path: '/{organizationKey}/status',
@@ -650,9 +650,9 @@ lab.experiment('Generator', function() {
         .get('/test-org/status')
         .reply(200, 'OK');
 
-      var Mock = Generator('Mock', template);
-      var mock = new Mock();
-      mock.getStatus('test-org', function(err, body, resp) {
+      let Mock = Generator('Mock', template);
+      let mock = new Mock();
+      mock.getStatus('test-org', (err, body, resp) => {
         expect(err).to.not.exist();
         expect(body).to.be.a.string();
         expect(body).to.equal('OK');
@@ -661,9 +661,9 @@ lab.experiment('Generator', function() {
       });
     });
 
-    lab.experiment('function callback response', function() {
-      var Mock, template, scope;
-      lab.before(function(done) {
+    lab.experiment('function callback response', () => {
+      let Mock, template, scope;
+      lab.before((done) => {
         template = {
           basePath: 'http://testapi',
           apis: [{
@@ -684,8 +684,8 @@ lab.experiment('Generator', function() {
         done();
       });
 
-      lab.test('operation without return type but responds with content-type application/json returns json as body', function(done) {
-        var mock = new Mock();
+      lab.test('operation without return type but responds with content-type application/json returns json as body', (done) => {
+        let mock = new Mock();
 
         scope
           .get('/test-org/test')
@@ -695,7 +695,7 @@ lab.experiment('Generator', function() {
             'content-type': 'application/json'
           });
 
-        mock.getTest('test-org', function(err, body, resp) {
+        mock.getTest('test-org', (err, body, resp) => {
           if (err) return done(err);
           expect(body).to.deep.equal({
             test: true
@@ -706,8 +706,8 @@ lab.experiment('Generator', function() {
 
       });
 
-      lab.test('operation responds with content-type application/json but bad json returns error', function(done) {
-        var mock = new Mock();
+      lab.test('operation responds with content-type application/json but bad json returns error', (done) => {
+        let mock = new Mock();
 
         scope
           .get('/test-org/test')
@@ -715,30 +715,30 @@ lab.experiment('Generator', function() {
             'content-type': 'application/json'
           });
 
-        mock.getTest('test-org', function(err) {
+        mock.getTest('test-org', (err) => {
           expect(err).to.exist();
           scope.done();
           done();
         });
       });
 
-      lab.test('operation failure returns error in callback', function(done) {
-        var mock = new Mock();
+      lab.test('operation failure returns error in callback', (done) => {
+        let mock = new Mock();
 
-        mock.getTest('test-org', function(err) {
+        mock.getTest('test-org', (err) => {
           expect(err).to.exist();
           done();
         });
       });
 
-      lab.test('operation failure returns error with message in callback', function(done) {
-        var mock = new Mock();
+      lab.test('operation failure returns error with message in callback', (done) => {
+        let mock = new Mock();
 
         scope
           .get('/test-org/test')
           .reply(405, 'Bad request');
 
-        mock.getTest('test-org', function(err) {
+        mock.getTest('test-org', (err) => {
           expect(err).to.be.instanceof(Error);
           expect(err.message).to.equal('Call to effektif-api failed with 405: Bad request');
           scope.done();
@@ -746,8 +746,8 @@ lab.experiment('Generator', function() {
         });
       });
 
-      lab.test('operation failure returns error with message in callback and the actual HTTP response', function(done) {
-        var mock = new Mock();
+      lab.test('operation failure returns error with message in callback and the actual HTTP response', (done) => {
+        let mock = new Mock();
 
         scope
           .get('/test-org/test')
@@ -755,7 +755,7 @@ lab.experiment('Generator', function() {
             message: 'Serfer failed'
           });
 
-        mock.getTest('test-org', function(err, body, resp) {
+        mock.getTest('test-org', (err, body, resp) => {
           expect(err).to.be.instanceof(Error);
           expect(err.message).to.equal('Serfer failed');
 
@@ -767,14 +767,14 @@ lab.experiment('Generator', function() {
         });
       });
 
-      lab.test('operation failure without message returns actual body', function(done) {
-        var mock = new Mock();
+      lab.test('operation failure without message returns actual body', (done) => {
+        let mock = new Mock();
 
         scope
           .get('/test-org/test')
           .reply(500);
 
-        mock.getTest('test-org', function(err, body, resp) {
+        mock.getTest('test-org', (err, body, resp) => {
           expect(err).to.be.instanceof(Error);
           expect(err.message).to.equal('Call to effektif-api failed with 500');
 
@@ -788,9 +788,9 @@ lab.experiment('Generator', function() {
     });
   });
 
-  lab.experiment('instance', function() {
-    var Mock, template;
-    lab.before(function(done) {
+  lab.experiment('instance', () => {
+    let Mock, template;
+    lab.before((done) => {
       template = {
         basePath: 'http://testapi',
         apis: [{
@@ -827,11 +827,11 @@ lab.experiment('Generator', function() {
       done();
     });
 
-    lab.experiment('#getUserInstance', function() {
-      lab.test('throws if not overridden by module', function(done) {
-        var mock = new Mock();
+    lab.experiment('#getUserInstance', () => {
+      lab.test('throws if not overridden by module', (done) => {
+        let mock = new Mock();
 
-        expect(function() {
+        expect(() => {
           mock.getUserInstance();
         }).to.throw('User interface is not loaded');
 
@@ -839,25 +839,25 @@ lab.experiment('Generator', function() {
       });
     });
 
-    lab.describe('#ctor options', function() {
+    lab.describe('#ctor options', () => {
 
-      lab.experiment('#onUnauthorized', function() {
+      lab.experiment('#onUnauthorized', () => {
 
-        lab.test('override instance function', function(done) {
+        lab.test('override instance function', (done) => {
           nock(template.basePath)
             .get('/test-org/test')
             .reply(401, 'OK');
 
-          var mock = new Mock({
+          let mock = new Mock({
             authorization: 'token',
             credentials: {
               username: 'a',
               password: 'b'
             },
             users: {
-              login: function() {}
+              login: () => {}
             },
-            onUnauthorized: function(reqOpt, callback) {
+            onUnauthorized: (reqOpt, callback) => {
               done();
             }
           });
@@ -866,35 +866,35 @@ lab.experiment('Generator', function() {
         });
       });
 
-      lab.describe('log', function() {
+      lab.describe('log', () => {
 
-        lab.test('uses console if not defined', function(done) {
+        lab.test('uses console if not defined', (done) => {
           /* eslint no-unused-vars:0 */
-          var mock = new Mock({});
+          let mock = new Mock({});
           // expect(mock.log).to.equal(console);
           done();
         });
 
-        lab.test('sets log function on generated interface', function(done) {
-          var log = function() {
+        lab.test('sets log function on generated interface', (done) => {
+          function log() {
             return 'weee';
-          };
-          var MockLog = Generator('Mock', template, {
+          }
+          let MockLog = Generator('Mock', template, {
             log: log
           });
-          var mock = new MockLog();
+          let mock = new MockLog();
 
           expect(mock._debug.log()).to.equal('weee');
           expect(mock._debugError.log()).to.equal('weee');
           done();
         });
 
-        lab.test('can be passed to generated interface via options', function(done) {
-          var log = function() {
+        lab.test('can be passed to generated interface via options', (done) => {
+          function log() {
             return 'true that';
-          };
+          }
 
-          var mock = new Mock({
+          let mock = new Mock({
             log: log
           });
 
@@ -904,32 +904,32 @@ lab.experiment('Generator', function() {
         });
       });
 
-      lab.describe('users', function() {
-        lab.test('takes options.users', function(done) {
-          var users = {
+      lab.describe('users', () => {
+        lab.test('takes options.users', (done) => {
+          let users = {
             name: 'overridden users',
-            login: function() {}
+            login: () => {}
           };
 
-          var mock = new Mock({
+          let mock = new Mock({
             users: users
           });
           expect(mock.getUserInstance(), 'getUserInstance').to.equal(users);
           done();
         });
 
-        lab.test('throws if options.users is not an object', function(done) {
-          expect(function() {
+        lab.test('throws if options.users is not an object', (done) => {
+          expect(() => {
             new Mock({
-              users: function() {}
+              users: () => {}
             });
           }).to.throw(/must be an object/i);
           done();
         });
 
-        lab.test('throws if options.users is missing login function', function(done) {
-          var users = {};
-          expect(function() {
+        lab.test('throws if options.users is missing login function', (done) => {
+          let users = {};
+          expect(() => {
             new Mock({
               users: users
             });
@@ -938,27 +938,27 @@ lab.experiment('Generator', function() {
         });
       });
 
-      lab.describe('baseRequest', function() {
+      lab.describe('baseRequest', () => {
 
-        lab.test('can be passed to override request', function(done) {
-          var scope = nock(template.basePath);
+        lab.test('can be passed to override request', (done) => {
+          const scope = nock(template.basePath);
           scope
             .get('/test-org/status')
             .matchHeader('x-testing-effektif-api', 'yep')
             .reply(200, {});
 
-          var baseRequest = request.defaults({
+          let baseRequest = request.defaults({
             headers: {
               'x-testing-effektif-api': 'yep'
             }
           });
 
-          var mock = new Mock({
+          let mock = new Mock({
             authorization: 'token',
             baseRequest: baseRequest
           });
 
-          mock.getStatus('test-org', function(err, body, resp) {
+          mock.getStatus('test-org', (err, body, resp) => {
             if (err) return done(err);
             expect(resp.statusCode).to.equal(200);
             scope.done();
@@ -966,26 +966,26 @@ lab.experiment('Generator', function() {
           });
         });
 
-        lab.test('can be passed to override authorized request', function(done) {
-          var scope = nock(template.basePath);
+        lab.test('can be passed to override authorized request', (done) => {
+          const scope = nock(template.basePath);
           scope
             .get('/test-org/test')
             .matchHeader('x-testing-effektif-api', 'yep')
             .matchHeader('authorization', 'token')
             .reply(200, {});
 
-          var baseRequest = request.defaults({
+          let baseRequest = request.defaults({
             headers: {
               'x-testing-effektif-api': 'yep'
             }
           });
 
-          var mock = new Mock({
+          let mock = new Mock({
             authorization: 'token',
             baseRequest: baseRequest
           });
 
-          mock.getTest('test-org', function(err, body, resp) {
+          mock.getTest('test-org', (err, body, resp) => {
             if (err) return done(err);
             expect(resp.statusCode).to.equal(200);
             scope.done();
@@ -996,10 +996,10 @@ lab.experiment('Generator', function() {
       });
     });
 
-    lab.experiment('operation', function() {
+    lab.experiment('operation', () => {
 
-      lab.test('throws if no arguments are passed to function', function(done) {
-        var mock = new Mock();
+      lab.test('throws if no arguments are passed to function', (done) => {
+        let mock = new Mock();
 
         function fn() {
           mock.getTest();

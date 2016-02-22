@@ -3,12 +3,13 @@
 /* eslint no-console:0 */
 'use strict';
 
-var _ = require('lodash');
-var Api = require('../');
-var util = require('util');
-var debug = require('debug')('effektif-api:doc');
+const _ = require('lodash');
+const Api = require('../');
+const util = require('util');
+const debug = require('debug')('effektif-api:doc');
+const pkge = require('../package.json');
 
-var nameOnly, fnameOnly;
+let nameOnly, fnameOnly;
 if (process.argv.length > 2) {
   nameOnly = process.argv[2];
 }
@@ -16,9 +17,7 @@ if (process.argv.length > 3) {
   fnameOnly = process.argv[3];
 }
 
-var pkge = require('../package.json');
-
-var models = {};
+let models = {};
 
 console.log(util.format('%s API Reference (v%s)', pkge.version, Api.Task.version));
 console.log('===');
@@ -28,17 +27,17 @@ console.log('Base path: %s', Api.Task.basePath);
 function printToc() {
   console.log('**Table of contents:**');
 
-  Object.keys(Api).forEach(function(name) {
+  Object.keys(Api).forEach((name) => {
     if (nameOnly && name !== nameOnly) return;
 
-    var Intfc = Api[name];
+    let Intfc = Api[name];
 
     console.log('-', '[' + name + '](#' + name.toLowerCase() + ')');
 
     // var inst = new Intfc();
-    var protos = Object.keys(Intfc.prototype);
+    let protos = Object.keys(Intfc.prototype);
 
-    protos.forEach(function(fname) {
+    protos.forEach((fname) => {
       if (fname !== 'log' && fname.indexOf('_') !== 0) {
         console.log('  -', '[`' + fname + '`](#' + name.toLowerCase() + '-' + fname.toLowerCase() + ')');
       }
@@ -49,7 +48,7 @@ function printToc() {
 function addModel(model, interfaceName, operationName) {
   if (!interfaceName) return;
 
-  var title = 'Model ' + model;
+  let title = 'Model ' + model;
 
   if (!models[title]) {
     models[title] = {
@@ -68,12 +67,12 @@ function addModel(model, interfaceName, operationName) {
 }
 
 function getOriginalType(schemaDesc) {
-  var itemModel = schemaDesc;
+  let itemModel = schemaDesc;
   if (schemaDesc.type === 'array' && _.get(schemaDesc, 'items.length') > 0) {
     itemModel = schemaDesc.items[0].type === 'object' ? schemaDesc.items[0] : schemaDesc;
   }
 
-  var isModel = itemModel.tags && itemModel.tags.indexOf('model') > -1;
+  let isModel = itemModel.tags && itemModel.tags.indexOf('model') > -1;
   if (!isModel) return null;
 
   return _.get(itemModel, 'meta[0].originalType');
@@ -88,16 +87,16 @@ function formatUnknownType(itemType, apiItemType) {
 function getSchemaType(schemaDesc) {
   if (schemaDesc.flags && schemaDesc.flags.func) return 'function';
 
-  var originalType = getOriginalType(schemaDesc);
-  var type = schemaDesc.type;
-  var apiItemType;
+  let originalType = getOriginalType(schemaDesc);
+  let type = schemaDesc.type;
+  let apiItemType, itemType;
 
   switch (schemaDesc.type) {
     case 'array':
       if (originalType) {
         return util.format('%s [%s](#model-%s)', schemaDesc.type, originalType, originalType.toLowerCase());
       } else if (schemaDesc.items && schemaDesc.items.length) {
-        var itemType = _.get(schemaDesc, 'items[0].type');
+        itemType = _.get(schemaDesc, 'items[0].type');
         apiItemType = formatUnknownType(itemType, _.get(schemaDesc, 'items[0].meta[0].originalType'));
 
         return util.format('%s %s%s', type, itemType, apiItemType);
@@ -115,26 +114,26 @@ function getSchemaType(schemaDesc) {
 }
 
 function printSchema(schema, interfaceName, operation, padding, ignoreChildren) {
-  var descr = schema.describe ? schema.describe() : schema;
-  var children = descr.children;
+  let descr = schema.describe ? schema.describe() : schema;
+  let children = descr.children;
   if (!padding) padding = '';
 
-  Object.keys(children).forEach(function(name) {
-    var child = children[name];
-    var meta = child.meta && child.meta[0];
+  Object.keys(children).forEach((name) => {
+    let child = children[name];
+    let meta = child.meta && child.meta[0];
 
     if (meta && meta.header) {
       return;
     }
 
-    var required = (child.flags && child.flags.presence === 'required') || (meta && meta.path);
-    var originalType = getOriginalType(child);
+    let required = (child.flags && child.flags.presence === 'required') || (meta && meta.path);
+    let originalType = getOriginalType(child);
 
     if (originalType) {
       addModel(originalType, interfaceName, operation);
     }
 
-    var msg = '';
+    let msg = '';
     msg += util.format('%s- `%s`:', padding, name);
 
     if (required) msg += util.format(' **required**');
@@ -153,24 +152,24 @@ function printSchema(schema, interfaceName, operation, padding, ignoreChildren) 
 }
 
 function printFunctions() {
-  Object.keys(Api).forEach(function(name) {
+  Object.keys(Api).forEach((name) => {
     if (nameOnly && name !== nameOnly) return;
 
     console.log('\n#', name);
 
-    var Intfc = Api[name];
+    let Intfc = Api[name];
 
     console.log('**Constructor:**');
     console.log('- `options`');
     printSchema(Intfc.ctorSchema, null, null, '  ');
 
     // var inst = new Intfc();
-    var protos = Object.keys(Intfc.prototype);
+    let protos = Object.keys(Intfc.prototype);
 
-    protos.forEach(function(fname) {
+    protos.forEach((fname) => {
       if (fnameOnly && fname !== fnameOnly) return;
 
-      var op = Intfc.prototype[fname];
+      let op = Intfc.prototype[fname];
 
       if (fname !== 'log' && fname.indexOf('_') !== 0) {
         console.log('\n##', name, fname);
@@ -193,8 +192,8 @@ function printFunctions() {
             console.log('\n**Callback:**');
             console.log('- `error`: Error or null');
 
-            var output = op.schemas.output.describe();
-            var originalType = output.label;
+            let output = op.schemas.output.describe();
+            let originalType = output.label;
 
             if (originalType) {
               addModel(originalType, name, fname);
@@ -213,11 +212,11 @@ function printFunctions() {
 function printModels() {
   console.log('\n# Models');
 
-  Object.keys(models).forEach(function(title) {
-    var model = models[title];
+  Object.keys(models).forEach((title) => {
+    let model = models[title];
 
-    var Intfc = Api[model.interfaceName];
-    var modelSchema = Intfc.models[model.name];
+    let Intfc = Api[model.interfaceName];
+    let modelSchema = Intfc.models[model.name];
 
     console.log('\n##', title);
 
@@ -226,11 +225,11 @@ function printModels() {
       console.log('');
     }
 
-    var operations = Object.keys(model.operations);
+    let operations = Object.keys(model.operations);
     if (operations.length > 0) {
       console.log('\n**Used by:**');
-      operations.forEach(function(opTitle) {
-        var op = model.operations[opTitle];
+      operations.forEach((opTitle) => {
+        let op = model.operations[opTitle];
         console.log(util.format('[`%s`](#%s-%s)', opTitle, op.interface.toLowerCase(), op.operation.toLowerCase()));
       });
     }

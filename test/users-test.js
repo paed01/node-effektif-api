@@ -1,35 +1,35 @@
 'use strict';
 
-var Lab = require('lab');
-var lab = exports.lab = Lab.script();
-var Code = require('code');
-var expect = Code.expect;
-var nock = require('nock');
+const Lab = require('lab');
+const lab = exports.lab = Lab.script();
+const Code = require('code');
+const expect = Code.expect;
+const nock = require('nock');
 
-var Users = require('../.').User;
-var users = new Users({
+const Users = require('../.').User;
+const users = new Users({
   authorization: 'token'
 });
 
-lab.experiment('User', function() {
-  var scope = nock(Users.apiDoc.basePath);
+lab.experiment('User', () => {
+  const scope = nock(Users.apiDoc.basePath);
 
-  lab.before(function(done) {
+  lab.before((done) => {
     nock.disableNetConnect();
     done();
   });
-  lab.after(function(done) {
+  lab.after((done) => {
     nock.cleanAll();
     done();
   });
 
-  lab.experiment('#createLogin', function() {
-    lab.after(function(done) {
+  lab.experiment('#createLogin', () => {
+    lab.after((done) => {
       scope.done();
       done();
     });
 
-    lab.test('takes providerKey as argument', function(done) {
+    lab.test('takes providerKey as argument', (done) => {
       scope
         .post('/login/provider-key-1')
         .reply(200, 'OK');
@@ -39,25 +39,25 @@ lab.experiment('User', function() {
       }, done);
     });
 
-    lab.test('does not require authentication token in header', function(done) {
+    lab.test('does not require authentication token in header', (done) => {
       scope
         .post('/login/provider-key-2')
         .reply(200, 'OK');
 
-      var userNoToken = new Users();
+      let userNoToken = new Users();
       userNoToken.createLogin('provider-key-2', {
         token: users.options.token
       }, done);
     });
   });
 
-  lab.experiment('#createUsersLogin', function() {
-    lab.after(function(done) {
+  lab.experiment('#createUsersLogin', () => {
+    lab.after((done) => {
       scope.done();
       done();
     });
 
-    lab.test('takes providerKey as argument', function(done) {
+    lab.test('takes providerKey as argument', (done) => {
       scope
         .post('/users/login')
         .reply(200, 'OK');
@@ -68,12 +68,12 @@ lab.experiment('User', function() {
       }, done);
     });
 
-    lab.test('does not require authentication token in header', function(done) {
+    lab.test('does not require authentication token in header', (done) => {
       scope
         .post('/users/login')
         .reply(200, 'OK');
 
-      var userNoToken = new Users();
+      let userNoToken = new Users();
       userNoToken.createUsersLogin({
         emailAddress: 'test@truntail.local',
         password: 'supers3cret'
@@ -81,13 +81,13 @@ lab.experiment('User', function() {
     });
   });
 
-  lab.experiment('#login', function() {
-    lab.after(function(done) {
+  lab.experiment('#login', () => {
+    lab.after((done) => {
       scope.done();
       done();
     });
 
-    lab.test('takes username and password as argument', function(done) {
+    lab.test('takes username and password as argument', (done) => {
       scope
         .post('/users/login')
         .reply(200, {
@@ -97,68 +97,68 @@ lab.experiment('User', function() {
       users.login('test@truntail.local', 'supers3cret', done);
     });
 
-    lab.test('does not require authentication token in header', function(done) {
+    lab.test('does not require authentication token in header', (done) => {
       scope
         .post('/users/login')
         .reply(200, {
           token: 'OK'
         });
 
-      var userNoToken = new Users();
+      let userNoToken = new Users();
       userNoToken.login('test@truntail.local', 'supers3cret', done);
     });
 
-    lab.test('takes additional arguments', function(done) {
+    lab.test('takes additional arguments', (done) => {
       scope
         .post('/users/login')
         .reply(200, {
           token: 'OK'
         });
 
-      var userNoToken = new Users();
+      let userNoToken = new Users();
       userNoToken.login('test@truntail.local', 'supers3cret', {
         organizationKey: 'truntail'
       }, done);
     });
 
-    lab.test('takes empty additional arguments', function(done) {
+    lab.test('takes empty additional arguments', (done) => {
       scope
         .post('/users/login')
         .reply(200, {
           token: 'OK'
         });
 
-      var userNoToken = new Users();
+      let userNoToken = new Users();
       userNoToken.login('test@truntail.local', 'supers3cret', {}, done);
     });
 
-    lab.test('emits authorized event', function(done) {
+    lab.test('emits authorized event', (done) => {
       scope
         .post('/users/login')
         .reply(200, {
           token: 'OK'
         });
 
-      var userNoToken = new Users();
-      userNoToken.once('authorized', function() {
+      let userNoToken = new Users();
+      userNoToken.once('authorized', () => {
         done();
       });
       userNoToken.login('test@truntail.local', 'supers3cret', {
         organizationKey: 'truntail'
-      }, function() {});
+      }, () => {});
     });
 
-    lab.test('returns error in callback if unsuccessfull', function(done) {
+    lab.test('returns error in callback if unsuccessfull', (done) => {
       scope
         .post('/users/login')
         .reply(404, {
           message: 'Not found'
         });
 
-      var userNoToken = new Users();
+      let userNoToken = new Users();
       userNoToken.login('test@truntail.local', 'supers3cret', {
         organizationKey: 'truntail'
-      }, function(err, body, resp) {
+      }, (err, body, resp) => {
         expect(err).to.be.instanceof(Error);
         expect(resp, 'HTTP response').to.exist();
         expect(resp.statusCode).to.equal(404);

@@ -1,6 +1,6 @@
 {
   "name": "effektif-api",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Unofficial node effektif api wrapper",
   "repository": "git://github.com/paed01/node-effektif-api",
   "main": "index.js",
@@ -23,7 +23,7 @@
   "devDependencies": {
     "code": "^2.1.0",
     "coveralls": "^2.11.6",
-    "lab": "^9.0.0",
+    "lab": "^9.1.0",
     "nock": "^7.2.2"
   },
   "license": "BSD-3-Clause"

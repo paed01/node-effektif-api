@@ -1,37 +1,40 @@
 /* eslint no-console:0 */
 'use strict';
 
-var Lab = require('lab');
-var lab = exports.lab = Lab.script();
-var Code = require('code');
-var expect = Code.expect;
-var nock = require('nock');
+const Lab = require('lab');
+const lab = exports.lab = Lab.script();
+const expect = require('code').expect;
+const nock = require('nock');
 
-lab.experiment('Logging', function() {
-  var debugEnv;
-  lab.before(function(done) {
+lab.experiment('Logging', () => {
+  let debugEnv = false;
+  lab.before((done) => {
     debugEnv = process.env.DEBUG || false;
     delete require.cache[require.resolve('debug')];
     nock.disableNetConnect();
     done();
   });
-  lab.after(function(done) {
-    process.env.DEBUG = debugEnv;
+  lab.after((done) => {
+    if (debugEnv) {
+      process.env.DEBUG = debugEnv;
+    } else {
+      delete process.env.DEBUG;
+    }
     delete require.cache[require.resolve('debug')];
     nock.cleanAll();
     done();
   });
 
-  lab.experiment('DEBUG', function() {
-    lab.before(function(done) {
+  lab.experiment('DEBUG', () => {
+    lab.before((done) => {
       process.env.DEBUG = 'effektif-api:mock*';
       done();
     });
 
-    lab.experiment('options log', function() {
-      lab.test('outputs debug information to log function', function(done) {
-        var Generator = require('../lib/generator');
-        var template = {
+    lab.experiment('options log', () => {
+      lab.test('outputs debug information to log function', (done) => {
+        const Generator = require('../lib/generator');
+        let template = {
           basePath: 'http://api.example.com',
           apis: [{
             path: '/{organizationKey}/processes',
@@ -49,32 +52,32 @@ lab.experiment('Logging', function() {
 
         nock(template.basePath).get('/test-org/processes').reply(200);
 
-        var msgs = [];
-        var Mock = Generator('Mock', template, {
+        let msgs = [];
+        let Mock = Generator('Mock', template, {
           log: function(msg) {
             msgs.push(msg);
           }
         });
 
-        var mock = new Mock();
+        let mock = new Mock();
 
-        mock.getProcesses('test-org', function() {
+        mock.getProcesses('test-org', () => {
           expect(msgs.length).to.be.above(1, 'No messages');
           done();
         });
       });
     });
 
-    lab.test('utilizes console.log if no log function is passed in options', function(done) {
-      var consoleLog = console.log;
+    lab.test('utilizes console.log if no log function is passed in options', (done) => {
+      let consoleLog = console.log;
 
-      var msgs = [];
+      let msgs = [];
       console.log = function(msg) {
         msgs.push(msg);
       };
 
-      var Generator = require('../lib/generator');
-      var template = {
+      const Generator = require('../lib/generator');
+      let template = {
         basePath: 'http://api.example.com',
         apis: [{
           path: '/{organizationKey}/processes',
@@ -91,10 +94,10 @@ lab.experiment('Logging', function() {
       };
 
       nock(template.basePath).get('/test-org/processes').reply(200);
-      var Mock = Generator('Mock', template);
-      var mock = new Mock();
+      let Mock = Generator('Mock', template);
+      let mock = new Mock();
 
-      mock.getProcesses('test-org', function() {
+      mock.getProcesses('test-org', () => {
         expect(msgs.length).to.be.above(1, 'No messages');
         console.log = consoleLog;
         done();

@@ -1,19 +1,19 @@
-/* eslint no-underscore-dangle:0, curly:0, no-new:0 */
+/* eslint no-new:0 */
 'use strict';
 
-var Lab = require('lab');
-var lab = exports.lab = Lab.script();
-var Code = require('code');
-var expect = Code.expect;
-var nock = require('nock');
+const Lab = require('lab');
+const lab = exports.lab = Lab.script();
+const Code = require('code');
+const expect = Code.expect;
+const nock = require('nock');
 
-var Generator = require('../lib/generator');
+const Generator = require('../lib/generator');
 
 nock.disableNetConnect();
 
-lab.experiment('Requests', function() {
-  lab.test('GET that returns 400 with non-object returns error with 400', function(done) {
-    var template = {
+lab.experiment('Requests', () => {
+  lab.test('GET that returns 400 with non-object returns error with 400', (done) => {
+    let template = {
       basePath: 'http://testapi',
       apis: [{
         path: '/{organizationKey}/status',
@@ -37,9 +37,9 @@ lab.experiment('Requests', function() {
         'Content-Type': 'application/json'
       });
 
-    var Mock = Generator('Mock', template);
-    var mock = new Mock();
-    mock.getStatus('test-org', function(err, body, resp) {
+    let Mock = Generator('Mock', template);
+    let mock = new Mock();
+    mock.getStatus('test-org', (err, body, resp) => {
       expect(err).to.exist();
       expect(err.message).to.contain('Unauthorized');
       expect(resp.statusCode).to.equal(401);

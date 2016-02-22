@@ -1,21 +1,21 @@
 'use strict';
 
-var Lab = require('lab');
-var lab = exports.lab = Lab.script();
-var Code = require('code');
-var expect = Code.expect;
+const Lab = require('lab');
+const lab = exports.lab = Lab.script();
+const Code = require('code');
+const expect = Code.expect;
 
-var Api = require('../.');
+const Api = require('../.');
 
-lab.experiment('Api exports', function() {
-  Object.keys(Api).forEach(function(api) {
-    lab.experiment(api, function() {
-      lab.test('functions', function(done) {
+lab.experiment('Api exports', () => {
+  Object.keys(Api).forEach((api) => {
+    lab.experiment(api, () => {
+      lab.test('functions', (done) => {
         expect(Api[api]).to.be.a.function();
         done();
       });
 
-      lab.test('ctor throws if not instantiated with new', function(done) {
+      lab.test('ctor throws if not instantiated with new', (done) => {
         function ctor() {
           Api[api]();
         }
@@ -23,18 +23,18 @@ lab.experiment('Api exports', function() {
         done();
       });
 
-      lab.test('schemas', function(done) {
+      lab.test('schemas', (done) => {
         expect(Api[api].schemas).to.be.an.object();
         done();
       });
 
-      lab.test('have EventEmitter.on functions', function(done) {
+      lab.test('have EventEmitter.on functions', (done) => {
         expect(Api[api].prototype.on).to.be.a.function();
         done();
       });
 
-      lab.test('#getUserInstance returns new User instance', function(done) {
-        var instance = new Api[api]();
+      lab.test('#getUserInstance returns new User instance', (done) => {
+        const instance = new Api[api]();
         expect(instance.getUserInstance()).to.be.instanceOf(Api.User);
         expect(instance.getUserInstance().options.basePath, 'basePath').to.equal(instance.options.basePath);
         done();

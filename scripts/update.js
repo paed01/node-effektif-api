@@ -3,43 +3,43 @@
 /* eslint no-console:0 */
 'use strict';
 
-var async = require('async');
-var fs = require('fs');
-var path = require('path');
-var request = require('request');
+const async = require('async');
+const fs = require('fs');
+const path = require('path');
+const request = require('request');
 
-var baseDir = path.dirname(process.argv[1]);
-var destinationDir = path.join(baseDir, '../tmp');
+const baseDir = path.dirname(process.argv[1]);
+let destinationDir = path.join(baseDir, '../tmp');
 
 if (process.argv.length > 2) {
   destinationDir = path.join(baseDir, process.argv[2]);
 }
 
-var docUri = 'https://app.effektif.com/api/v1/docs';
+let docUri = 'https://app.effektif.com/api/v1/docs';
 
 function update() {
-  getDocs(function() {
+  getDocs(() => {
     console.log('docs completed');
 
-    var docs = require(path.join(destinationDir, 'docs.json'));
+    let docs = require(path.join(destinationDir, 'docs.json'));
     console.log('docs version is v%s', docs.apiVersion);
 
-    getApis(docs, function() {
+    getApis(docs, () => {
       console.log('completed!');
     });
   });
 }
 
 function getDocs(callback) {
-  fs.mkdir(destinationDir, function() {
-    var docsFile = path.join(destinationDir, 'docs.json');
-    var ws = fs.createWriteStream(docsFile);
+  fs.mkdir(destinationDir, () => {
+    let docsFile = path.join(destinationDir, 'docs.json');
+    let ws = fs.createWriteStream(docsFile);
 
     console.log('getting docs at %s to %s', docUri, docsFile);
 
     request
       .get(docUri)
-      .on('error', function(err) {
+      .on('error', (err) => {
         console.log(err);
         return callback(err);
       })
@@ -54,14 +54,14 @@ function getApis(docs, callback) {
 }
 
 function getApi(api, callback) {
-  var ws = fs.createWriteStream(path.join(destinationDir, api.path + '.json'));
-  var apiUri = docUri + api.path;
+  let ws = fs.createWriteStream(path.join(destinationDir, `${api.path}.json`));
+  let apiUri = docUri + api.path;
 
   console.log('getting api docs at', apiUri);
 
   request
     .get(apiUri)
-    .on('error', function(err) {
+    .on('error', (err) => {
       console.log(err);
       return callback(err);
     })

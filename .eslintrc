@@ -43,7 +43,7 @@
     "no-undef-init": 2,
     "no-underscore-dangle": 0,
     "no-unused-expressions": 2,
-    "no-use-before-define": [2, "nofunc"],
+    "no-use-before-define": 0,
     "no-with": 2,
     "brace-style": [2, "1tbs", { "allowSingleLine": false }],
     "camelcase": 2,
