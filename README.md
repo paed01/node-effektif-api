@@ -1,6 +1,10 @@
 node effektif api
 =================
 
+[![Project Status: Inactive - The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](http://www.repostatus.org/badges/latest/inactive.svg)](http://www.repostatus.org/#inactive)
+
+This project is **inactive**. Effektif was accuired by Signavio so the project has moved to [signavio-api](https://github.com/paed01/node-signavio-api).
+
 [![Build Status](https://secure.travis-ci.org/paed01/node-effektif-api.png)](http://travis-ci.org/paed01/node-effektif-api)[![Coverage Status](https://coveralls.io/repos/paed01/node-effektif-api/badge.svg?branch=master)](https://coveralls.io/r/paed01/node-effektif-api?branch=master)
 
 Unofficial node [effektif][1] [api][2] wrapper.
