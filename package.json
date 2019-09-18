@@ -1,6 +1,6 @@
 {
   "name": "effektif-api",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "description": "Unofficial node effektif api wrapper",
   "repository": "git://github.com/paed01/node-effektif-api",
   "main": "index.js",
@@ -12,7 +12,10 @@
     "effektif",
     "api"
   ],
-  "author": "Pål Edman <pal.edman@outlook.com>",
+  "author": {
+    "name": "Pål Edman",
+    "url": "https://github.com/paed01"
+  },
   "dependencies": {
     "async": "^2.0.0-rc.3",
     "debug": "^2.2.0",
